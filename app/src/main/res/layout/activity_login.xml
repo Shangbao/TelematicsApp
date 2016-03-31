@@ -1,15 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
- <TextView
-     android:id="@+id/a"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:text="呵呵哒"
-     android:textSize="30dp"
-     >
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:paddingTop="40dp"
+    >
+   <ImageView
+       android:layout_gravity="center"
+       android:layout_marginTop="10dp"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:background="@drawable/ic_launcher"
+       />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+   <EditText
+       android:id="@+id/username"
+       android:hint="用户名"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/userPass"
+        android:hint="密码"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <Button
+        android:id="@+id/userLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="登录"
+        android:textSize="25dp"
+        android:textColor="#ffffff"
+        android:background="#0985f1" />
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       >
+       <Button
+           android:id="@+id/userRegister"
+           android:layout_alignParentBottom="true"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="新用户?点击注册新用户"
+           android:background="#ffffff"
+           android:textSize="20dp"
+           />
+
+   </RelativeLayout>
 
 
- </TextView>
+
+
 </LinearLayout>
