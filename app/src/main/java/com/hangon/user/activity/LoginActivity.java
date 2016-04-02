@@ -3,6 +3,7 @@ package com.hangon.user.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -20,6 +21,7 @@ public class LoginActivity extends Activity {
     private EditText userPass;
     private Button userLogin;
     private Button userRegister;
+    View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +39,16 @@ public class LoginActivity extends Activity {
         userRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toRegister=new Intent();
-                toRegister.setClass(LoginActivity.this,RegisterActivity.class);
+                Intent toRegister = new Intent();
+                toRegister.setClass(LoginActivity.this, RegisterActivity.class);
                 startActivity(toRegister);
             }
         });
+    }
+
+    public  View getView(View view){
+        view= LayoutInflater.from(LoginActivity.this).inflate(R.layout.activity_login,null);
+        return view;
     }
 
     public EditText getUsername() {
