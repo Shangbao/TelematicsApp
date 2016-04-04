@@ -154,7 +154,6 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             UserUtil.getInstance().saveLoginUserInfo(userInfo);
             //进行登录页面到主页面的跳转
             sendUserInfo(userInfo);
-
     }
 
     /**
