@@ -11,7 +11,7 @@ import com.hangon.user.activity.RegisterActivity;
 /**
  * Created by Administrator on 2016/3/31.
  */
-public class RegisterListener implements View.OnClickListener {
+public class RegisterService implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {

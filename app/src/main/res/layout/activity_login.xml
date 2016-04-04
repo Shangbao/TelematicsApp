@@ -20,12 +20,13 @@
         android:layout_width="match_parent"
         android:layout_height="20dp" />
    <EditText
-       android:id="@+id/username"
+       android:id="@+id/lUserName"
        android:hint="用户名"
        android:layout_width="match_parent"
        android:layout_height="wrap_content" />
     <EditText
-        android:id="@+id/userPass"
+        android:id="@+id/lUserPass"
+        android:password="true"
         android:hint="密码"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

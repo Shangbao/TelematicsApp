@@ -3,6 +3,7 @@
     package="com.example.fd.ourapplication">
      <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
+        android:name="com.hangon.common.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

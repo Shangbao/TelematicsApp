@@ -84,7 +84,7 @@ public class JsonUtil {
     }
 
     /**
-     * 将json格式转换成对象
+     * 将json格式转换成map
      */
     public static Map<?, ?> jsonToMap(String jsonStr) {
         Map<?, ?> objMap = null;
