@@ -157,7 +157,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 now.setVisibility(View.GONE);
                 getCord.setVisibility(View.VISIBLE);
             }
-        };
+        }
     };
 
     Handler handler=new Handler(){
