@@ -22,6 +22,12 @@ public class HomeActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+
+
+    }
+
+    private void getUserInfo(){
         Intent intent=getIntent();
         Bundle bundle=intent.getBundleExtra("bundle");
 
@@ -30,21 +36,6 @@ public class HomeActivity extends Activity{
         String sex=bundle.getString("sex");
         int age=bundle.getInt("age");
         String driverNum=bundle.getString("driverNum");
-
-
-        Map map=new HashMap();
-        map.put("userName",userName);
-        map.put("nickname",nickname);
-        map.put("sex",sex);
-        map.put("age", age);
-        map.put("driverNum",driverNum);
-
-        List list= new  ArrayList();
-        list.add(userName);
-        list.add(nickname);
-        list.add(sex);
-        list.add(age);
-        list.add(driverNum);
 
         Log.e("userName", userName);
         Log.e("nickname", nickname);

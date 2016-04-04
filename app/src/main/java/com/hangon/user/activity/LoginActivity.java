@@ -172,6 +172,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         bundle.putString("driverNum", userInfo.getDriverNum());
 
         toHome.putExtra("bundle",bundle);
+
         toHome.setClass(LoginActivity.this, HomeActivity.class);
         startActivity(toHome);
 
