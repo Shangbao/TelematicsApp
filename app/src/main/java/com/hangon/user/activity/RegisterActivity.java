@@ -20,7 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
+import com.hangon.common.VolleyInterface;
+import com.hangon.common.VolleyRequest;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
@@ -206,6 +212,18 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     //保存用户信息
     private void addUserInfo(){
         String url = "";
+        Map<String,String> map = new HashMap<>();
+        map.put("rUserName",rUserName.getText().toString());
+        map.put("rUserPass",rUserPass.getText().toString());
+        VolleyRequest.RequestPost(RegisterActivity.this,url,"postUserInfo",map,new VolleyInterface(RegisterActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener){
+            @Override
+            public void onMySuccess(String result) {
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+            }
+        });
     }
 
     @Override

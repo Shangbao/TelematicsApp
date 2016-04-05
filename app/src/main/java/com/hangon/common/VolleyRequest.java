@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.hangon.user.activity.RegisterActivity;
 
 import java.util.Map;
 
@@ -34,4 +35,6 @@ public class VolleyRequest {
         MyApplication.getHttpQueues().add(stringRequest);
         MyApplication.getHttpQueues().start();
     }
+
+
 }
