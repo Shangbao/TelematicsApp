@@ -1,6 +1,7 @@
 package com.hangon.user.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
+import com.hangon.common.Constants;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 
@@ -49,6 +51,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     private String iCord;
     private int time = 60;
     private boolean flag = true;
+
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         rUserPass = (EditText) findViewById(R.id.password);
         getCord.setOnClickListener(this);
         saveCord.setOnClickListener(this);
+
+        button= (Button) findViewById(R.id.button);
+        button.setOnClickListener(this);
     }
 
     @Override
@@ -132,7 +139,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 }
                 break;
 
-            default:
+            case R.id.button:
+                addUserInfo();
                 break;
         }
     }
@@ -209,19 +217,28 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
 
     };
 
-    //保存用户信息
+    //添加用户
     private void addUserInfo(){
-        String url = "";
+        String url = Constants.REGISTER_URL;
         Map<String,String> map = new HashMap<>();
-        map.put("rUserName",rUserName.getText().toString());
-        map.put("rUserPass",rUserPass.getText().toString());
-        VolleyRequest.RequestPost(RegisterActivity.this,url,"postUserInfo",map,new VolleyInterface(RegisterActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener){
+        map.put("userName",rUserName.getText().toString());
+        map.put("userPass", rUserPass.getText().toString());
+        VolleyRequest.RequestPost(RegisterActivity.this, url, "postUserInfo", map, new VolleyInterface(RegisterActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
+                Log.e("xxx",result);
+                if (result.equals("success")){
+                    Intent intent=new Intent();
+                    intent.setClass(RegisterActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(RegisterActivity.this,"用户名已存在",Toast.LENGTH_SHORT);
+                }
             }
 
             @Override
             public void onMyError(VolleyError error) {
+                Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_SHORT);
             }
         });
     }

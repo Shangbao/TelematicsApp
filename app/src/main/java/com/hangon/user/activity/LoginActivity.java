@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -50,7 +51,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
-        autoLogin();
+        //autoLogin();
     }
 
     /**
@@ -108,15 +109,16 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             Toast.makeText(LoginActivity.this,"账号或者密码错误,请重新输入.",Toast.LENGTH_SHORT).show();
         }else{
             //url="http://10.163.0.194:8080/wind/UserLogin?userName=13166837709&userPass=123456";
-         String url= Constants.LOGIN_URL+"userName="+lUserName.getText()+"&userPass="+lUserPass.getText();
+         String url= Constants.LOGIN_URL;
             Log.e("yyy",url);
-            MyStringRequest request=new MyStringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            MyStringRequest request=new MyStringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String userInfo) {
                     String message="";
                     try {
                         JSONObject jsonObject=new JSONObject(userInfo);
                         message=jsonObject.getString("message");
+                        Log.e("yyy",message);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -137,7 +139,15 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 public void onErrorResponse(VolleyError volleyError) {
                     Toast.makeText(LoginActivity.this,volleyError.toString(),Toast.LENGTH_SHORT).show();
                 }
-            });
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String,String> map=new HashMap<String,String>();
+                    map.put("userName",lUserName.getText().toString());
+                    map.put("userPass",lUserPass.getText().toString());
+                    return map;
+                }
+            };
             request.setTag("StringReqGet");
             MyApplication.getHttpQueues().add(request);
         }
