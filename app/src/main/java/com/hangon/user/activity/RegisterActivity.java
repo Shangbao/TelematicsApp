@@ -205,7 +205,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
 
     //保存用户信息
     private void addUserInfo(){
-
+        String url = "";
     }
 
     @Override
