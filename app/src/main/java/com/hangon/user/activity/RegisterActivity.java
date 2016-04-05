@@ -50,7 +50,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_register);
         init();
-        SMSSDK.initSDK(this, "113649cdccef0", "73d59a1765103c6b74844c4179cbe682");
+        SMSSDK.initSDK(this, "113728ac0f8dd", "32ca2176e3fa1f3b4eedadbd74de1ee6");
         EventHandler eh=new EventHandler(){
 
             @Override
