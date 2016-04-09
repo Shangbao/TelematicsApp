@@ -1,11 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-   <TextView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:text="hello"
-       android:textSize="30dp"
+
+   <FrameLayout
+      android:id="@+id/content"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_above="@+id/bottomArea"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentRight="true"
+       android:layout_alignParentTop="true"
+       android:background="#FFFFFF"
        />
-</LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottomArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true">
+
+        <!--tab分割线-->
+
+        <ImageView
+            android:id="@+id/tabTop"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#b6b6b6"/>
+
+        <!-- tab的四个按钮-->
+        <LinearLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/tabTop"
+            android:layout_marginTop="1dp"
+            android:gravity="center_horizontal">
+         <!-- 关于车内容的按钮-->
+            <FrameLayout
+                android:id="@+id/carLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingBottom="2dp"
+                android:paddingTop="3dp"
+                >
+                <ImageView
+                    android:id="@+id/carImageView"
+                    android:layout_width="96px"
+                    android:layout_height="84px"
+                    android:layout_gravity="top|center"
+                    android:src="@drawable/ic_launcher"
+                    />
+                <TextView
+                    android:id="@+id/carTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:text="车助手"
+                    android:textColor="#45c01a"
+                    android:textSize="13sp"
+                    />
+            </FrameLayout>
+
+            <!-- 关于我的音乐按钮-->
+            <FrameLayout
+                android:id="@+id/musicLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingBottom="2dp"
+                android:paddingTop="3dp"
+                >
+                <ImageView
+                    android:id="@+id/musicImageView"
+                    android:layout_width="96px"
+                    android:layout_height="84px"
+                    android:layout_gravity="top|center"
+                    android:src="@drawable/ic_launcher"
+                    />
+                <TextView
+                    android:id="@+id/musicTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:text="我的音乐"
+                    android:textColor="#45c01a"
+                    android:textSize="13sp"
+                    />
+            </FrameLayout>
+
+            <!-- 关于订单按钮-->
+            <FrameLayout
+                android:id="@+id/orderLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingBottom="2dp"
+                android:paddingTop="3dp"
+                >
+                <ImageView
+                    android:id="@+id/orderImageView"
+                    android:layout_width="96px"
+                    android:layout_height="84px"
+                    android:layout_gravity="top|center"
+                    android:src="@drawable/ic_launcher"
+                    />
+                <TextView
+                    android:id="@+id/orderTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:text="我的订单"
+                    android:textColor="#45c01a"
+                    android:textSize="13sp"
+                    />
+            </FrameLayout>
+
+            <!-- 关于我的音乐按钮-->
+            <FrameLayout
+                android:id="@+id/userLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingBottom="2dp"
+                android:paddingTop="3dp"
+                >
+                <ImageView
+                    android:id="@+id/userImageView"
+                    android:layout_width="96px"
+                    android:layout_height="84px"
+                    android:layout_gravity="top|center"
+                    android:src="@drawable/ic_launcher"
+                    />
+                <TextView
+                    android:id="@+id/userTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:text="个人中心"
+                    android:textColor="#45c01a"
+                    android:textSize="13sp"
+                    />
+            </FrameLayout>
+
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</RelativeLayout>

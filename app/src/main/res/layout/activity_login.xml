@@ -21,13 +21,19 @@
         android:layout_height="20dp" />
    <EditText
        android:id="@+id/lUserName"
-       android:hint="用户名"
+       android:hint="请输入您的手机号码"
+       android:textSize="20sp"
+       android:maxLength="11"
+       android:numeric="integer"
        android:layout_width="match_parent"
        android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/lUserPass"
         android:password="true"
-        android:hint="密码"
+        android:textSize="20sp"
+        android:hint="填写6-12位密码"
+        android:maxLength="12"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -38,9 +44,9 @@
     <Button
         android:id="@+id/userLogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:text="登录"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:textColor="#ffffff"
         android:background="#0985f1" />
 

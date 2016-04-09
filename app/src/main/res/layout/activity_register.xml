@@ -1,124 +1,115 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text=""
-        android:textColor="#00ffaa"
-        android:textSize="20dp" />
+    <com.hangon.common.Topbar
+        android:id="@+id/registerTopbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        custom:mTitleTextColor="#000000"
+        custom:mTitleTextSize="13sp"
+        custom:mTitle="注册"
+        custom:leftText="BACK"
+        custom:leftTextColor="#000000"
+        >
+    </com.hangon.common.Topbar>
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#666666"/>
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/phonenum" />
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:padding="20dp"
+     android:orientation="vertical">'
 
-    <EditText
-        android:id="@+id/phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_toRightOf="@+id/textView1"
-        android:maxLength="11"
-        android:ems="11"
-        android:inputType="phone" >
-        <requestFocus />
-    </EditText>
+     <EditText
+         android:id="@+id/rUserName"
+         android:background="#ffffff"
+         android:hint="输入你要注册的手机号"
+         android:layout_width="match_parent"
+         android:layout_height="50dp"
+         android:textSize="15sp"
+         android:maxLength="11"
+         android:numeric="integer"
+         android:drawableLeft="@drawable/login_003"
+         />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
-        android:text="@string/code_view"
-        android:layout_below="@+id/phone"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignStart="@+id/textView1" />
+     <LinearLayout
+         android:layout_marginTop="20dp"
+         android:orientation="horizontal"
+         android:layout_width="match_parent"
+         android:layout_height="50dp">
 
-    <EditText
-        android:id="@+id/cord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignLeft="@+id/phone"
-        android:ems="4"
-        android:maxLength="4"
-        android:inputType="phone" />
+         <EditText
+             android:id="@+id/cord"
+             android:background="#ffffff"
+             android:textSize="15sp"
+             android:hint="请输入您收到的验证码"
+             android:phoneNumber="true"
+             android:layout_width="220dp"
+             android:layout_height="match_parent"
+             android:maxLength="4"
+             android:numeric="integer"
+             android:drawableLeft="@drawable/login_003"/>
 
-    <Button
-        android:id="@+id/getcord"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/cord"
-        android:layout_alignBottom="@id/cord"
-        android:visibility="visible"
-        android:text="@string/getcode"
-        android:layout_alignTop="@+id/cord" />
+         <TextView
+             android:id="@+id/now"
+             android:visibility="gone"
+             android:textSize="15sp"
+             android:layout_marginLeft="20dp"
+             android:gravity="center"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/password_view"
-        android:id="@+id/textView"
-        android:layout_below="@id/textView3"
-        android:layout_marginTop="40dp"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3" />
+         <Button
+             android:id="@+id/getCord"
+             android:layout_marginLeft="30dp"
+             android:background="@drawable/login_002"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:text="获取验证码"
+             android:textColor="#ffffff"
+             android:textSize="15sp"
+             />
+     </LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:layout_toRightOf="@id/textView"
-        android:id="@+id/password"
-        android:layout_below="@+id/cord"
-        android:layout_alignLeft="@+id/cord"
-        android:layout_alignStart="@+id/cord"
-        android:layout_marginTop="20dp"/>
+     <EditText
+         android:id="@+id/rUserPass"
+         android:hint="请设置账户密码6-12位"
+         android:background="#ffffff"
+         android:layout_width="match_parent"
+         android:layout_height="50dp"
+         android:textSize="15sp"
+         android:layout_marginTop="20dp"
+         android:drawableLeft="@drawable/login_003"
+         android:password="true"
+         android:maxLength="12"
+         />
 
-    <Button
-        android:id="@+id/savecord"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:layout_marginTop="97dp"
-        android:layout_below="@+id/password"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+     <Button
+         android:id="@+id/saveCord"
+         android:layout_width="match_parent"
+         android:layout_height="40dp"
+         android:layout_marginTop="25dp"
+         android:text="完成"
+         android:textSize="20sp"
+         android:textColor="#ffffff"
+         android:background="@drawable/login_002"
+         />
 
-    <TextView
-        android:id="@+id/now"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/cord"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/cord"
-        android:visibility="gone"
-        android:text="..."
-        android:textColor="#aaaaaa" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="测试"/>
 
-</RelativeLayout>
+
+ </LinearLayout>
+
+
+
+
+</LinearLayout>

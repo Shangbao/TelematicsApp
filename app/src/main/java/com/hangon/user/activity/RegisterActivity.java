@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.test.LoaderTestCase;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -21,9 +22,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.fd.ourapplication.R;
 import com.hangon.common.Constants;
+import com.hangon.common.MyApplication;
+import com.hangon.common.Topbar;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 
@@ -46,6 +53,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     private Button getCord;
     private Button saveCord;
     private EditText rUserPass;
+    private Topbar registerTopbar;
 
     private String iPhone;
     private String iCord;
@@ -79,29 +87,43 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     }
 
     private void init() {
-        rUserName = (EditText) findViewById(R.id.phone);
+        rUserName = (EditText) findViewById(R.id.rUserName);
         cord = (EditText) findViewById(R.id.cord);
         now = (TextView) findViewById(R.id.now);
-        getCord = (Button) findViewById(R.id.getcord);
-        saveCord = (Button) findViewById(R.id.savecord);
-        rUserPass = (EditText) findViewById(R.id.password);
+        getCord= (Button) findViewById(R.id.getCord);
+
+        saveCord = (Button) findViewById(R.id.saveCord);
+        rUserPass = (EditText) findViewById(R.id.rUserPass);
+        registerTopbar= (Topbar) findViewById(R.id.registerTopbar);
         getCord.setOnClickListener(this);
         saveCord.setOnClickListener(this);
 
-        button= (Button) findViewById(R.id.button);
-        button.setOnClickListener(this);
+        registerTopbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
+            @Override
+            public void leftClick() {
+                Intent toLogin=new Intent();
+                toLogin.setClass(RegisterActivity.this,LoginActivity.class);
+                startActivity(toLogin);
+            }
+
+            @Override
+            public void rightClick() {
+
+            }
+        });
+
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.getcord:
+            //获取验证码
+            case R.id.getCord:
                 if(!TextUtils.isEmpty(rUserName.getText().toString().trim())){
                     if(rUserName.getText().toString().trim().length()==11){
-                        iPhone = rUserName.getText().toString().trim();
-                        SMSSDK.getVerificationCode("86",iPhone);
-                        cord.requestFocus();
-                        getCord.setVisibility(View.GONE);
+                        judgeUserExist();
+
                     }else{
                         Toast.makeText(RegisterActivity.this, "请输入完整电话号码", Toast.LENGTH_LONG).show();
                         rUserName.requestFocus();
@@ -111,8 +133,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                     rUserName.requestFocus();
                 }
                 break;
-
-            case R.id.savecord:
+            //保存验证码
+            case R.id.saveCord:
                 if(!TextUtils.isEmpty(cord.getText().toString().trim())){
                     if(cord.getText().toString().trim().length()==4){
                         iCord = cord.getText().toString().trim();
@@ -138,10 +160,6 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                     cord.requestFocus();
                 }
                 break;
-
-            case R.id.button:
-                addUserInfo();
-                break;
         }
     }
 
@@ -159,14 +177,16 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                     time--;
                     handlerText.sendEmptyMessageDelayed(1, 1000);
                 }else{
-                    now.setText("提示信息");
+                    getCord.setText("重新发送");
+
                     time = 60;
                     now.setVisibility(View.GONE);
                     getCord.setVisibility(View.VISIBLE);
                 }
             }else{
                 cord.setText("");
-                now.setText("提示信息");
+
+                getCord.setText("重新发送");
                 time = 60;
                 now.setVisibility(View.GONE);
                 getCord.setVisibility(View.VISIBLE);
@@ -226,21 +246,47 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         VolleyRequest.RequestPost(RegisterActivity.this, url, "postUserInfo", map, new VolleyInterface(RegisterActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
-                Log.e("xxx",result);
-                if (result.equals("success")){
-                    Intent intent=new Intent();
-                    intent.setClass(RegisterActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(RegisterActivity.this,"用户名已存在",Toast.LENGTH_SHORT);
-                }
+            if(result.equals("OK")){
+                Toast.makeText(RegisterActivity.this,"注册成功。",Toast.LENGTH_SHORT).show();
+                Intent toLogin=new Intent();
+                toLogin.setClass(RegisterActivity.this,LoginActivity.class);
+               startActivity(toLogin);
+             }
+
             }
 
             @Override
             public void onMyError(VolleyError error) {
-                Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_SHORT);
+              //  Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_SHORT);
             }
         });
+    }
+
+    //判断用户名是否存在
+    private  void judgeUserExist(){
+        String url=Constants.JUDGE_USER_URL+"userName="+rUserName.getText();
+     VolleyRequest.RequestGet(RegisterActivity.this, url, "userGet", new VolleyInterface(RegisterActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
+         @Override
+         public void onMySuccess(String result) {
+             if (result.equals("error")){
+                 Toast.makeText(RegisterActivity.this,"账号已存在，请重新输入",Toast.LENGTH_SHORT).show();
+                 rUserName.setText("");
+                 rUserPass.setText("");
+                 cord.setText("");
+             } else if (result.equals("success")){
+                 iPhone = rUserName.getText().toString().trim();
+                 SMSSDK.getVerificationCode("86", iPhone);
+                 cord.requestFocus();
+                 getCord.setVisibility(View.GONE);
+
+             }
+         }
+
+         @Override
+         public void onMyError(VolleyError error) {
+        // Toast.makeText(RegisterActivity.this,error.toString(),Toast.LENGTH_SHORT).show();
+         }
+     });
     }
 
     @Override

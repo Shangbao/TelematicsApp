@@ -40,4 +40,10 @@ public class WelcomeActivity extends Activity{
             startActivity(toLogin);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
 }

@@ -12,11 +12,12 @@ import com.example.fd.ourapplication.R;
 /**
  * Created by Administrator on 2016/4/4.
  */
-public class UserInfoFragment extends Fragment {
+public class UserFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment_user,container,false);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 }
