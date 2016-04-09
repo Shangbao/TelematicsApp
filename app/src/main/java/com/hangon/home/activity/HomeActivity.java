@@ -3,26 +3,18 @@ package com.hangon.home.activity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fd.ourapplication.R;
-import com.hangon.common.JsonUtil;
-import com.hangon.fragment.CarFragment;
-import com.hangon.fragment.MusicFragment;
-import com.hangon.fragment.OrderFragment;
-import com.hangon.fragment.UserFragment;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.hangon.fragment.car.CarFragment;
+import com.hangon.fragment.music.MusicFragment;
+import com.hangon.fragment.order.OrderFragment;
+import com.hangon.fragment.userinfo.UserFragment;
 
 /**
  * Created by Administrator on 2016/4/1.

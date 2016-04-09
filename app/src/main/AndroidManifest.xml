@@ -44,6 +44,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.hangon.carInfoManage.activity.CarManageSaoActivity"></activity>
+
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"

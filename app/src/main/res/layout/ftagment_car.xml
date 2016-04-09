@@ -19,5 +19,13 @@
          ></com.hangon.common.Topbar>
  </LinearLayout>
 
+    <Button
+        android:id="@+id/carManageSao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="扫一扫"
+        android:textSize="20sp"
+        />
+
 
 </LinearLayout>

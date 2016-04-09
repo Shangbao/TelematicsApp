@@ -1,4 +1,4 @@
-package com.hangon.fragment;
+package com.hangon.fragment.userinfo;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -58,7 +58,7 @@ public class UserFragment extends Fragment {
 
         map=new HashMap<String, Object>();
         map.put("imag", R.drawable.login_002);
-        map.put("userInfoKey","性别");
+        map.put("userInfoKey", "性别");
         map.put("userInfoValue", "男");
         list.add(map);
 

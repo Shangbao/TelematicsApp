@@ -1,4 +1,4 @@
-package com.hangon.fragment;
+package com.hangon.fragment.music;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -12,11 +12,11 @@ import com.example.fd.ourapplication.R;
 /**
  * Created by Administrator on 2016/4/4.
  */
-public class OrderFragment extends Fragment {
+public class MusicFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       View view=inflater.inflate(R.layout.fragment_order,container,false);
-        return  view;
+       View view=inflater.inflate(R.layout.fragment_music,container,false);
+        return view;
     }
 }
