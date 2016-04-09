@@ -26,7 +26,7 @@
 
         <ImageView
             android:id="@+id/tabTop"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#b6b6b6"/>
 
@@ -53,7 +53,7 @@
                     android:layout_width="96px"
                     android:layout_height="84px"
                     android:layout_gravity="top|center"
-                    android:src="@drawable/ic_launcher"
+                    android:src="@drawable/login_pic"
                     />
                 <TextView
                     android:id="@+id/carTextView"
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:text="车助手"
-                    android:textColor="#45c01a"
+                    android:textColor="#666666"
                     android:textSize="13sp"
                     />
             </FrameLayout>
