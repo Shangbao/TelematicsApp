@@ -40,6 +40,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     private boolean isPlaying=true;//播放状态
     private static int currIndex=0;//当前播放的索引
 
+    int playMode=Constants.SEQUENCE_MODEL;//控制播放模式
+
     private int state= Constants.IDLE;//播放状态
 
     private boolean flag=true;//标志
@@ -49,7 +51,6 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         musicView=inflater.inflate(R.layout.fragment_music,container,false);
         init();
-
         setMusicAdapter();
         start();
         return musicView;
@@ -89,7 +90,17 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnPlayModel:
-
+                if (playMode==Constants.SEQUENCE_MODEL){
+                    btnPlayModel.setText("随机");
+                    playMode=Constants.RANDOM_MODEL;
+                }else if(playMode==Constants.RANDOM_MODEL){
+                    btnPlayModel.setText("循环");
+                    playMode=Constants.CIRCULATION_MODEL;
+                }else if (playMode==Constants.CIRCULATION_MODEL){
+                    btnPlayModel.setText("顺序");
+                    playMode=Constants.SEQUENCE_MODEL;
+                }
+                break;
             case R.id.btnPrevious:
                 playPrevious();
                 btnPause.setText("暂停");
@@ -122,22 +133,36 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     //播放上一曲
     // 播放上一曲
     private void playPrevious() {
-        if ((currIndex - 1) >= 0) {
-            currIndex--;
-        } else {
-            currIndex = list.size() - 1;
+        if(playMode==Constants.SEQUENCE_MODEL){
+            if ((currIndex - 1) >= 0) {
+                currIndex--;
+            } else {
+                currIndex = list.size() - 1;
+            }
+            start();
+        }else if (playMode==Constants.RANDOM_MODEL){
+            currIndex=(int)(Math.random()*list.size());
+            start();
+        }else if (playMode==Constants.CIRCULATION_MODEL){
+            start();
         }
-        start();
     }
 
     // 播放下一曲
     private void playNext() {
-        if ((currIndex + 1) < list.size()) {
-            currIndex++;
-        } else {
-            currIndex = 0;
+        if (playMode==Constants.SEQUENCE_MODEL){
+            if ((currIndex + 1) < list.size()) {
+                currIndex++;
+            } else {
+                currIndex = 0;
+            }
+            start();
+        }else if (playMode==Constants.RANDOM_MODEL){
+            currIndex=(int)(Math.random()*list.size());
+            start();
+        }else if (playMode==Constants.CIRCULATION_MODEL){
+            start();
         }
-        start();
     }
 
     // 播放与暂停
