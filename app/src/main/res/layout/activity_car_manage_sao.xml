@@ -1,26 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hello"
-        android:textSize="25sp"/>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <TextView
+    <SurfaceView
+        android:id="@+id/preview_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hello"
-        android:textSize="25sp"/>
-    <TextView
+        android:layout_gravity="center" />
+
+    <com.hangon.outer.zxing.ViewfinderView
+        android:id="@+id/viewfinder_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hello"
-        android:textSize="25sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hello"
-        android:textSize="25sp"/>
-</LinearLayout>
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="100dp"
+            android:text="请扫描二维码"
+            android:textColor="#d78816"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_light_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/torch_off"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/btn_cancel_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="500dp"
+            android:src="@drawable/btn_camera_cancel_scan" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="fill_parent"
+        android:layout_height="65dip"
+        android:background="@drawable/navigation_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:background="@drawable/btn_back"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:singleLine="true"
+            android:textSize="20sp"
+            android:text="扫描二维码"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10.0dip"
+            android:background="@drawable/btn_map_bg"
+            android:textColor="@android:color/white"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_camera_diy_circle"
+        android:layout_marginTop="145dp"
+        android:layout_marginLeft="60.5dp"
+        android:layout_width="480px"
+        android:layout_height="480px"
+        android:background="@drawable/bar_code_center"
+        />
+
+    <ImageView
+        android:visibility="invisible"
+        android:id="@+id/iv_camera_diy"
+        android:layout_marginTop="145dp"
+        android:layout_marginLeft="65dp"
+        android:layout_width="470px"
+        android:layout_height="470px"
+        android:background="@drawable/bar_code_round_grey"
+        />
+    <ProgressBar
+        android:id="@+id/pg_camera_diy"
+        android:layout_marginTop="152dp"
+        android:layout_marginLeft="68.5dp"
+        android:layout_width="450px"
+        android:layout_height="450px"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progressbar"
+        />
+    <ImageView
+        android:id="@+id/iv_camera_diy_corner"
+        android:layout_marginTop="145dp"
+        android:layout_marginLeft="60dp"
+        android:layout_width="481px"
+        android:layout_height="479px"
+        android:background="@drawable/bar_code_four_corner"
+        />
+
+</FrameLayout>
