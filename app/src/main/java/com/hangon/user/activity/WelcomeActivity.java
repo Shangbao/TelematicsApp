@@ -46,4 +46,11 @@ public class WelcomeActivity extends Activity{
         super.onDestroy();
         finish();
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        this.onDestroy();
+        finish();
+    }
 }

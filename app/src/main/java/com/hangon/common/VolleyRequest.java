@@ -24,11 +24,11 @@ public class VolleyRequest {
         MyApplication.getHttpQueues().start();
     }
 
-    public static void RequestPost(Context mContext,String url,String tag, final Map<String,String> params,VolleyInterface vif){
+    public static void RequestPost(Context mContext,String url,String tag, final Map<String,Object> params,VolleyInterface vif){
         MyApplication.getHttpQueues().cancelAll(tag);
         myStringRequest = new MyStringRequest(Method.POST,url,vif.loadingListener(),vif.errorListener()){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map getParams() throws AuthFailureError {
                 return params;
             }
         };

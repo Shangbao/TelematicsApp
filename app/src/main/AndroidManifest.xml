@@ -60,9 +60,16 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
-        <activity android:name="com.hangon.outer.zxing.CaptureActivity"></activity>
+        <activity android:name="com.hangon.outer.zxing.CaptureActivity">
+
+        </activity>
+
+        <activity android:name="com.hangon.carInfoManage.activity.AddCarMessageActivity">
+
+        </activity>
 
         <activity
             android:name="com.mob.tools.MobUIShell"
