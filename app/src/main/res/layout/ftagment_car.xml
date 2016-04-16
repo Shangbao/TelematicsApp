@@ -16,7 +16,8 @@
          custom:mTitleTextSize="12sp"
          custom:mTitle="车助手"
          custom:mTitleTextColor="#ffffff"
-         ></com.hangon.common.Topbar>
+         >
+     </com.hangon.common.Topbar>
  </LinearLayout>
 
     <Button
@@ -26,6 +27,12 @@
         android:text="扫一扫"
         android:textSize="20sp"
         />
+
+    <Button
+        android:id="@+id/add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手动添加"/>
 
 
 </LinearLayout>

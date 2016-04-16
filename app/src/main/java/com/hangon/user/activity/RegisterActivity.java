@@ -240,7 +240,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     //添加用户
     private void addUserInfo(){
         String url = Constants.REGISTER_URL;
-        Map<String,String> map = new HashMap<>();
+        Map<String,Object> map = new HashMap<>();
         map.put("userName",rUserName.getText().toString());
         map.put("userPass", rUserPass.getText().toString());
         VolleyRequest.RequestPost(RegisterActivity.this, url, "postUserInfo", map, new VolleyInterface(RegisterActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {

@@ -61,7 +61,7 @@ public class AddCarMessageActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_add_car_message);
         init();
         carNameAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,carName);
         car_name_spinner.setAdapter(carNameAdapter);
