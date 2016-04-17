@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.fd.ourapplication.R;
 
 import com.hangon.bean.user.UserInfo;
+import com.hangon.common.ConnectionUtil;
 import com.hangon.common.Constants;
 import com.hangon.common.JsonUtil;
 import com.hangon.common.MyApplication;
@@ -91,7 +92,12 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.userLogin:
-                login();
+                if(ConnectionUtil.isConn(LoginActivity.this)==false){
+                    ConnectionUtil.setNetworkMethod(LoginActivity.this);
+                }else
+                {
+                    login();
+                }
                 break;
             case  R.id.userRegister:
                 Intent toRegister = new Intent();
