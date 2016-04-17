@@ -11,6 +11,7 @@
         android:layout_height="50dp"
         android:background="#666666">
         <com.hangon.common.Topbar
+            android:id="@+id/topbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             custom:mTitleTextSize="12sp"
@@ -101,13 +102,5 @@
         android:layout_height="wrap_content"
         android:text="设置"
         android:textSize="20sp"/>
-
-
-
-
-
-
-
-
 
 </LinearLayout>

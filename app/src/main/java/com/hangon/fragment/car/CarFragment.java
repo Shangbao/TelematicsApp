@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.fd.ourapplication.R;
-import com.hangon.carInfoManage.activity.AddCarMessageActivity;
 import com.hangon.outer.zxing.CaptureActivity;
 
 /**
@@ -34,13 +33,10 @@ public class CarFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.carManageSao:
-                Intent toSao = new Intent();
+                Intent toSao=new Intent();
                 toSao.setClass(getActivity(), CaptureActivity.class);
                 startActivity(toSao);
-            case R.id.add_btn:
-                Intent toAdd = new Intent();
-                toAdd.setClass(getActivity(), AddCarMessageActivity.class);
-                startActivity(toAdd);
+
         }
     }
 

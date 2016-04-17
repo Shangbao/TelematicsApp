@@ -11,11 +11,13 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.bean.music.Music;
 import com.hangon.common.Constants;
 import com.hangon.common.MusicUtil;
+import com.hangon.common.Topbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     Button btnPlayModel,btnPrevious,btnPause,btnNext,btnStop;
     MusicAdapter musicAdapter;//音乐列表适配器
     MediaPlayer mediaPlayer;//音乐播放器
+    TextView selectedSong,selectedSinger;
 
     private boolean isPlaying=true;//播放状态
     private static int currIndex=0;//当前播放的索引
@@ -66,6 +69,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         btnNext= (Button) musicView.findViewById(R.id.btnNext);
         btnStop= (Button) musicView.findViewById(R.id.btnStop);
         musicSeekbar= (SeekBar) musicView.findViewById(R.id.musicSeekbar);
+        selectedSinger= (TextView) musicView.findViewById(R.id.selectedSinger);
+        selectedSong= (TextView) musicView.findViewById(R.id.selectedSong);
         btnPlayModel.setOnClickListener(this);
         btnPrevious.setOnClickListener(this);
         btnPause.setOnClickListener(this);
@@ -75,6 +80,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         mediaPlayer.setOnCompletionListener(this);
         mediaPlayer.setOnErrorListener(this);
         songList.setOnItemClickListener(this);
+        Topbar topbar= (Topbar) musicView.findViewById(R.id.topbar);
+        topbar.setBtnIsVisible(false);
     }
 
     //获取音乐歌曲列表并添加适配器
@@ -194,6 +201,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     private void start() {
         if (currIndex < list.size()) {
             Music m = list.get(currIndex);
+            selectedSinger.setText(m.getSinger());
+            selectedSong.setText(m.getTitle());
             try {
                 mediaPlayer.reset();// 让播放器回到空闲
                 mediaPlayer.setDataSource(m.getUrl());// 设置文件播放的路径

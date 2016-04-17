@@ -25,15 +25,19 @@ public class Topbar extends RelativeLayout{
     private Drawable leftBackground;
     private String leftText;
 
+
     //右边button
     private int rightTextColor;
     private Drawable rightBackground;
     private String rightText;
 
+
     //标题
     private float titleTextSize;
     private  int titleTextColor;
     private String title;
+
+
 
 
 
@@ -62,9 +66,11 @@ public class Topbar extends RelativeLayout{
         leftBackground=typedArray.getDrawable(R.styleable.Topbar_leftBackground);
         leftText=typedArray.getString(R.styleable.Topbar_leftText);
 
+
         rightTextColor =typedArray.getColor(R.styleable.Topbar_rightTextColor, 0);
         rightBackground=typedArray.getDrawable(R.styleable.Topbar_rightBackground);
         rightText=typedArray.getString(R.styleable.Topbar_rightText);
+
 
         titleTextSize=typedArray.getDimension(R.styleable.Topbar_mTitleTextSize, 0);
         titleTextColor=typedArray.getColor(R.styleable.Topbar_mTitleTextColor, 0);
@@ -80,6 +86,7 @@ public class Topbar extends RelativeLayout{
         leftButton.setTextColor(leftTextColor);
         leftButton.setBackground(leftBackground);
         leftButton.setText(leftText);
+
 
         rightButton.setTextColor(rightTextColor);
         rightButton.setBackground(rightBackground);
@@ -121,5 +128,31 @@ public class Topbar extends RelativeLayout{
                 listener.rightClick();
             }
         });
+
+    }
+    public  void  setLeftIsVisible(boolean flag){
+        if(flag){
+            leftButton.setVisibility(View.VISIBLE);
+        }else {
+            leftButton.setVisibility(View.GONE);
+        }
+    }
+
+    public void setRightIsVisible(boolean flag){
+        if(flag){
+            rightButton.setVisibility(View.VISIBLE);
+        }else {
+            rightButton.setVisibility(View.GONE);
+        }
+    }
+
+    public void setBtnIsVisible(boolean flag){
+        if (flag){
+            leftButton.setVisibility(View.VISIBLE);
+            rightButton.setVisibility(View.VISIBLE);
+        }else {
+            leftButton.setVisibility(View.GONE);
+            rightButton.setVisibility(View.GONE);
+        }
     }
 }

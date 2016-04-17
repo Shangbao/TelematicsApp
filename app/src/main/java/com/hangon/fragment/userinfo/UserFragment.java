@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.example.fd.ourapplication.R;
+import com.hangon.common.Topbar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +37,8 @@ public class UserFragment extends Fragment {
     //初始化组件
     private void init(){
         userInfoList= (ListView) userView.findViewById(R.id.userInfoList);
+        Topbar topbar= (Topbar) userView.findViewById(R.id.topbar);
+        topbar.setBtnIsVisible(false);
     }
 
     //给用户信息列表设置适配器

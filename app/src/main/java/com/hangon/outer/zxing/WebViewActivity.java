@@ -21,12 +21,12 @@ public class WebViewActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.webview);
+		//setContentView(R.layout.webview);
 
 		Intent intent = getIntent();
 		String url = intent.getStringExtra("url");
 		if (url != null && !"".equals(url)) {
-			webview = (WebView) findViewById(R.id.webView);
+			//webview = (WebView) findViewById(R.id.webView);
 			// 设置WebView属性，能够执行JavaScript脚本
 			webview.getSettings().setJavaScriptEnabled(true);
 			// 加载URL内容
