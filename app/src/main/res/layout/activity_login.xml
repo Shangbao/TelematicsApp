@@ -8,6 +8,7 @@
     android:paddingRight="40dp"
     android:paddingTop="40dp"
     android:orientation="vertical"
+
     tools:context="com.hangon.user.activity.LoginActivity">
    <ImageView
        android:layout_gravity="center"
@@ -21,6 +22,7 @@
         android:layout_height="20dp" />
    <EditText
        android:id="@+id/lUserName"
+       android:drawableLeft="@drawable/login2"
        android:hint="请输入您的手机号码"
        android:textSize="20sp"
        android:maxLength="11"
@@ -31,6 +33,7 @@
         android:id="@+id/lUserPass"
         android:password="true"
         android:textSize="20sp"
+        android:drawableLeft="@drawable/login1"
         android:hint="填写6-12位密码"
         android:maxLength="12"
 

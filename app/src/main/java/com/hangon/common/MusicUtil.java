@@ -38,7 +38,10 @@ public class MusicUtil {
                     .getColumnIndex(MediaStore.Audio.Media.DATA)));
             music.setTime(cursor.getLong(cursor
                     .getColumnIndex(MediaStore.Audio.Media.DURATION)));
-            list.add(music);
+            if(music.getTitle().length()<10||music.getSinger().length()<5){
+                list.add(music);
+            }
+
         }
         return list;
     }
