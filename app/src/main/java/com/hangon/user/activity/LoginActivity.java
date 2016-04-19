@@ -132,6 +132,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         UserInfo user=new UserInfo();
                         //将用户登录信息的json格式转换成bean对象
                         user= (UserInfo) JsonUtil.jsonToBean(userInfo,UserInfo.class);
+                        user.setIsSave(true);
                         Toast.makeText(LoginActivity.this, "输入正确,正在为你加载中.", Toast.LENGTH_SHORT).show();
                         finishedLogin(user);
                     }else{
@@ -169,7 +170,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             //保存用户信息到文件里
             UserUtil.getInstance().saveLoginUserInfo(userInfo);
             //进行登录页面到主页面的跳转
-            sendUserInfo(userInfo);
+           sendUserInfo(userInfo);
     }
 
     /**

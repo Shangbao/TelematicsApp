@@ -17,8 +17,8 @@ import com.example.fd.ourapplication.R;
  * Created by Administrator on 2016/4/8.
  */
 public class Topbar extends RelativeLayout{
-    private Button leftButton,rightButton;
-    private TextView tvTitle;
+    private Button leftButton,rightButton;//左右按钮
+    private TextView tvTitle;//标题
 
     //左边button
     private int leftTextColor;
@@ -79,6 +79,7 @@ public class Topbar extends RelativeLayout{
 
         typedArray.recycle();
 
+        //
         leftButton=new Button(context);
         rightButton=new Button(context);
         tvTitle=new TextView(context);
@@ -110,10 +111,12 @@ public class Topbar extends RelativeLayout{
         addView(rightButton, rightParams);
 
         titileParams=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        titileParams.addRule(RelativeLayout.CENTER_IN_PARENT,TRUE);
+        titileParams.addRule(RelativeLayout.CENTER_IN_PARENT, TRUE);
         addView(tvTitle, titileParams);
 
-
+        /**
+         * Topbar的左按钮设置点击事件
+         */
         leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +124,10 @@ public class Topbar extends RelativeLayout{
 
             }
         });
+
+        /**
+         * topbar的右边按钮设置点击事件
+         */
 
         rightButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +137,11 @@ public class Topbar extends RelativeLayout{
         });
 
     }
+
+    /**
+     * 做按钮设置是否显示
+     */
+
     public  void  setLeftIsVisible(boolean flag){
         if(flag){
             leftButton.setVisibility(View.VISIBLE);
@@ -138,6 +150,10 @@ public class Topbar extends RelativeLayout{
         }
     }
 
+    /**
+     * Topbar的右边按钮设置是否显示的属性
+     * @param flag
+     */
     public void setRightIsVisible(boolean flag){
         if(flag){
             rightButton.setVisibility(View.VISIBLE);
@@ -145,6 +161,11 @@ public class Topbar extends RelativeLayout{
             rightButton.setVisibility(View.GONE);
         }
     }
+
+    /**
+     * Topbar的左右按钮同时设置是否显示
+     *
+     */
 
     public void setBtnIsVisible(boolean flag){
         if (flag){

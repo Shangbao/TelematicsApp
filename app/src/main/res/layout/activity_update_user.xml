@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+        <com.hangon.common.Topbar
+            android:id="@+id/updateUserTopbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            custom:leftBackground="@drawable/register01"
+            custom:mTitle="编辑用户信息"
+            custom:mTitleTextColor="#000000"
+            custom:mTitleTextSize="10sp"
+            custom:rightText="确定"
+            custom:rightTextColor="#000000"
+            ></com.hangon.common.Topbar>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#666666"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <EditText
+            android:id="@+id/uNickname"
+            android:hint="请输入你的昵称"
+            android:textSize="15sp"
+            android:maxLength="10"
+            android:drawableLeft="@drawable/login_003"
+            android:layout_marginTop="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/editext_border"/>
+
+        <EditText
+            android:id="@+id/uSex"
+            android:hint="请输入你的性别"
+            android:textSize="15sp"
+            android:drawableLeft="@drawable/login_003"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:maxLength="1"
+            android:layout_height="45dp"
+            android:background="@drawable/editext_border"/>
+
+        <EditText
+            android:id="@+id/uAge"
+            android:hint="请输入你的年龄"
+            android:textSize="15sp"
+            android:maxLength="3"
+            android:numeric="integer"
+            android:drawableLeft="@drawable/login_003"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/editext_border"/>
+
+        <EditText
+            android:id="@+id/uDriverNum"
+            android:hint="请输入你的驾驶证号"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:maxLength="18"
+            android:drawableLeft="@drawable/login_003"
+            android:background="@drawable/editext_border"/>
+    </LinearLayout>
+
+</LinearLayout>

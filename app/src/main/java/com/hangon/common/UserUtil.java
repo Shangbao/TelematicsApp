@@ -26,7 +26,7 @@ public class UserUtil {
 		UserInfo returnParam = getUserInfo();
 		returnParam.setIsSave(getBooleanConfig("isSave"));
 		returnParam.setUserName(getStringConfig("userName"));
-		returnParam.setUserName(getStringConfig("userPass"));
+		returnParam.setUserPass(getStringConfig("userPass"));
 		return returnParam;
 	}
 
@@ -47,9 +47,16 @@ public class UserUtil {
 		saveStringConfig("sex", loginUserInfo.getSex());
 		saveIntegerConfig("age", loginUserInfo.getAge());
 		saveStringConfig("driverNum", loginUserInfo.getDriverNum());
-
 		saveBooleanConfig("isSave", loginUserInfo.isSave());
 	}
+
+	public void saveUpdateUserInfo(UserInfo userInfo){
+		saveStringConfig("nickname", userInfo.getNickname());
+		saveStringConfig("sex", userInfo.getSex());
+		saveIntegerConfig("age", userInfo.getAge());
+		saveStringConfig("driverNum", userInfo.getDriverNum());
+	}
+
 
 	public String getStringConfig(String key) {
 		return sharedPrefercne.getString(key, "");

@@ -30,7 +30,7 @@ public class WelcomeActivity extends Activity{
         welcomeLogo.startAnimation(welcomeAnim);
 
         Timer timer=new Timer();
-        timer.schedule(new wait(),7000);
+        timer.schedule(new wait(),4000);
     }
 
     class wait extends TimerTask{

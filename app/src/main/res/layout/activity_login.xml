@@ -8,65 +8,81 @@
     android:paddingRight="40dp"
     android:paddingTop="40dp"
     android:orientation="vertical"
-
+   android:background="#FAFAFA"
     tools:context="com.hangon.user.activity.LoginActivity">
    <ImageView
        android:layout_gravity="center"
        android:layout_marginTop="10dp"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:background="@drawable/login_pic"
+       android:layout_width="120dp"
+       android:layout_height="120dp"
+       android:background="@drawable/login3"
        />
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="30dp" />
    <EditText
        android:id="@+id/lUserName"
-       android:drawableLeft="@drawable/login2"
+
+       android:drawableLeft="@drawable/a"
        android:hint="请输入您的手机号码"
-       android:textSize="20sp"
+       android:textSize="18sp"
        android:maxLength="11"
        android:numeric="integer"
+       android:background="#ffffff"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content" />
+       android:layout_height="35dp" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#666666"/>
     <EditText
         android:id="@+id/lUserPass"
         android:password="true"
-        android:textSize="20sp"
-        android:drawableLeft="@drawable/login1"
+        android:textSize="18sp"
+        android:background="#ffffff"
+        android:drawableLeft="@drawable/b"
         android:hint="填写6-12位密码"
         android:maxLength="12"
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="35dp" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#666666"/>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="15dp" />
+        android:layout_height="35dp" />
 
-    <Button
-        android:id="@+id/userLogin"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:text="登录"
-        android:textSize="25sp"
-        android:textColor="#ffffff"
-        android:background="#0985f1" />
+
 
    <RelativeLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        >
        <Button
-           android:id="@+id/userRegister"
-           android:layout_alignParentBottom="true"
+           android:id="@+id/userLogin"
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="35dp"
+           android:text="登录"
+           android:textSize="20sp"
+           android:textColor="#ffffff"
+           android:background="@drawable/btn_login2" />
+
+       <Button
+           android:id="@+id/userRegister"
+          android:layout_below="@+id/userLogin"
+           android:layout_width="match_parent"
+           android:layout_marginTop="180dp"
+           android:layout_height="35dp"
            android:text="新用户?点击注册新用户"
-           android:background="#ffffff"
+           android:background="@drawable/btn_login1"
            android:textSize="20dp"
+           android:textColor="#26789e"
            android:gravity="center"
            />
+
+
 
 
    </RelativeLayout>

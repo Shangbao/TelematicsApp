@@ -3,8 +3,10 @@ package com.hangon.home.activity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -43,6 +45,11 @@ public class HomeActivity extends Activity implements View.OnClickListener{
         initView();
         initFragment();
         initClickEvent();
+        Intent intent=new Intent();
+        int id=getIntent().getIntExtra("id",0);
+        if(id!=0){
+            getTab(id);
+        }
     }
 
     /**
@@ -163,6 +170,29 @@ public class HomeActivity extends Activity implements View.OnClickListener{
 
     }
 
+    /**
+     * 通过获取id值来确定底部切换栏
+     */
+    private void getTab(int id){
+        switch (id){
+            case 1:
+                clickTab(carFragment);
+            break;
+
+            case 2:
+                clickTab(carFragment);
+             break;
+
+            case 3:
+                clickTab(musicFragment);
+             break;
+
+            case 4:
+                clickTab(userFragment);
+             break;
+        }
+    }
+
 
 
     /**
@@ -216,7 +246,7 @@ public class HomeActivity extends Activity implements View.OnClickListener{
 
 
 
-    /*
+
     private void getUserInfo(){
         Intent intent=getIntent();
         Bundle bundle=intent.getBundleExtra("bundle");
@@ -232,5 +262,5 @@ public class HomeActivity extends Activity implements View.OnClickListener{
         Log.e("sex", sex);
         Log.e("age", age+"");
         Log.e("driverNum", driverNum);
-    }*/
+    }
 }

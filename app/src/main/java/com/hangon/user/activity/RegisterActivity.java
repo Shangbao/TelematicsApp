@@ -60,7 +60,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     private int time = 60;
     private boolean flag = true;
 
-    Button button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

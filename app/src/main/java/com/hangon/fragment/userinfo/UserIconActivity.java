@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -13,11 +14,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 import com.example.fd.ourapplication.R;
+import com.hangon.common.Topbar;
+import com.hangon.home.activity.HomeActivity;
+
+import javax.security.auth.login.LoginException;
 
 
 public class UserIconActivity extends Activity implements OnClickListener {
@@ -34,6 +41,25 @@ public class UserIconActivity extends Activity implements OnClickListener {
 
         findViewById(R.id.albumBtn).setOnClickListener(this);
         findViewById(R.id.captureBtn).setOnClickListener(this);
+
+
+        Topbar topbar= (Topbar) findViewById(R.id.userIconTopbar);
+       topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
+           @Override
+           public void leftClick() {
+
+               Intent intent = new Intent();
+               intent.putExtra("id",4);
+               intent.setClass(UserIconActivity.this, HomeActivity.class);
+               startActivity(intent);
+           }
+
+           @Override
+           public void rightClick() {
+
+           }
+       });
+        topbar.setRightIsVisible(false);
     }
 
     @Override

@@ -1,25 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff">
+        <com.hangon.common.Topbar
+            android:id="@+id/userIconTopbar"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            custom:mTitle="设置头像"
+            custom:mTitleTextColor="#000000"
+            custom:mTitleTextSize="12sp"
+            custom:leftBackground="@drawable/register01"
+            ></com.hangon.common.Topbar
+            >
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#6c6c6c"/>
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:id="@+id/imageView"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:background="@drawable/ic_launcher"
+        android:layout_gravity="center"/>
+
 
     <Button
         android:id="@+id/albumBtn"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/btn_login1"
+        android:textSize="18sp"
         android:text="相册" />
 
     <Button
+        android:layout_marginTop="10dp"
         android:id="@+id/captureBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:background="@drawable/btn_login1"
         android:text="相机" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 
 </LinearLayout>
