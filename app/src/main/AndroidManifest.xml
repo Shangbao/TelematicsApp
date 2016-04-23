@@ -46,6 +46,7 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:name="com.hangon.user.activity.WelcomeActivity">
 
+
         </activity>
 
         <activity
@@ -57,23 +58,29 @@
         <activity android:name="com.hangon.user.activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
-
         </activity>
 
         <activity android:name="com.hangon.home.activity.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name="com.hangon.outer.zxing.CaptureActivity"></activity>
 
         <activity android:name="com.hangon.fragment.userinfo.ClipImageActivity"></activity>
+
          <activity android:name="com.hangon.fragment.userinfo.UserIconActivity">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+
          </activity>
+
+        <activity android:name="com.hangon.fragment.userinfo.UpdateUserActivity">
+
+        </activity>
+
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"

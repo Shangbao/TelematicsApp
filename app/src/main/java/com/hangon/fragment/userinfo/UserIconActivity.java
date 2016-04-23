@@ -2,6 +2,8 @@ package com.hangon.fragment.userinfo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -20,8 +22,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
+import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
+import com.hangon.common.Constants;
+import com.hangon.common.ImageUtil;
 import com.hangon.common.Topbar;
+import com.hangon.common.UserUtil;
+import com.hangon.common.VolleyInterface;
+import com.hangon.common.VolleyRequest;
 import com.hangon.home.activity.HomeActivity;
 
 import javax.security.auth.login.LoginException;
@@ -78,11 +86,15 @@ public class UserIconActivity extends Activity implements OnClickListener {
         if (resultCode != RESULT_OK) {
             return;
         }
-
         switch (requestCode) {
             case CROP_RESULT_CODE:
                 String path = data.getStringExtra(ClipImageActivity.RESULT_PATH);
+                Log.e("xxxx",path);
                 Bitmap photo = BitmapFactory.decodeFile(path);
+                if(photo!=null){
+                    saveIconToCookies(photo);
+                    postIconBytes(photo);
+                }
                 ImageView imageView = (ImageView) findViewById(R.id.imageView);
                 imageView.setImageBitmap(photo);
                 break;
@@ -94,6 +106,40 @@ public class UserIconActivity extends Activity implements OnClickListener {
                         + "/" + TMP_PATH);
                 break;
         }
+    }
+
+    //把获取的图片保存到cookies里面
+    private void saveIconToCookies(Bitmap bitmap){
+        byte[] bytes;
+        bytes=ImageUtil.getBitmapByte(bitmap);
+    String userIconConten= ImageUtil.getStringFromByte(bytes);
+        UserUtil.instance(UserIconActivity.this);
+        UserUtil.getInstance().saveStringConfig("userIconContent",userIconConten);
+    }
+
+    //发送图片的二进制码
+    private void postIconBytes(Bitmap bitmap){
+       String url= Constants.ADD_USER_ICON_URL;
+        Map<String,Object> map=new HashMap<String,Object>();
+        UserUtil.instance(UserIconActivity.this);
+       String userName= UserUtil.getInstance().getStringConfig("userName");
+        map.put("userName",userName);
+        byte[] bytes;
+        bytes=ImageUtil.getBitmapByte(bitmap);
+        String userIconContent=ImageUtil.getStringFromByte(bytes);
+        map.put("userIconContent",userIconContent);
+
+        VolleyRequest.RequestPost(UserIconActivity.this, url, "potsUserIcon", map, new VolleyInterface(UserIconActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
+            @Override
+            public void onMySuccess(String result) {
+
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+
+            }
+        });
     }
 
 
@@ -120,6 +166,7 @@ public class UserIconActivity extends Activity implements OnClickListener {
             }
         }
     }
+
 
     private void startCapture() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

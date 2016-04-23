@@ -9,8 +9,10 @@ public class Constants {
     public static final String HOST_IP="10.58.11.204";
     public static final  String LOGIN_URL="http://"+HOST_IP+":8080/wind/UserLogin?";
     public static final  String REGISTER_URL="http://"+HOST_IP+":8080/wind/UserRegister?";
-   public static final  String JUDGE_USER_URL="http://"+HOST_IP+":8080/wind/UserJudge?";
+    public static final  String JUDGE_USER_URL="http://"+HOST_IP+":8080/wind/UserJudge?";
     public static final  String  UPDATE_USER_URL="http://"+HOST_IP+":8080/wind/UpdateUserInfo?";
+    public  static final String ADD_USER_ICON_URL="http://"+HOST_IP+":8080/wind/AddUserIcon?";
+
 
     //音乐播放状态
     public static final int IDLE = 0;// 空闲状态

@@ -36,7 +36,7 @@ public class UserUtil {
 		returnParam.setAge(getIntegerConfig("age"));
 		returnParam.setSex(getStringConfig("sex"));
 		returnParam.setDriverNum(getStringConfig("driverNum"));
-
+		returnParam.setUserIconContent(getStringConfig("userIconContent"));
 		return returnParam;
 	}
 	
@@ -47,6 +47,7 @@ public class UserUtil {
 		saveStringConfig("sex", loginUserInfo.getSex());
 		saveIntegerConfig("age", loginUserInfo.getAge());
 		saveStringConfig("driverNum", loginUserInfo.getDriverNum());
+		saveStringConfig("userIconContent",loginUserInfo.getUserIconContent());
 		saveBooleanConfig("isSave", loginUserInfo.isSave());
 	}
 
@@ -78,4 +79,5 @@ public class UserUtil {
 	public void saveIntegerConfig(String key, int value){
 		sharedPrefercne.edit().putInt(key, value).commit();
 	}
+
 }

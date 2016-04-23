@@ -43,16 +43,16 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private Button userLogin;//登录按钮
     private Button toRegister;//注册按钮
 
-   public static boolean autoLogin;//判断是否自动登录
+   public static String autoLogin;//判断是否自动登录
 
-    SharedPreferences sharedPreferences;//文件保存
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
-        //autoLogin();
+        autoLogin();
     }
 
     /**
@@ -65,7 +65,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         toRegister= (Button) findViewById(R.id.userRegister);
         userLogin.setOnClickListener(this);
         toRegister.setOnClickListener(this);
-        autoLogin=false;
+        //autoLogin=false;
         UserUtil.instance(LoginActivity.this);
     }
 
@@ -75,11 +75,11 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     public  void autoLogin(){
        UserInfo userInfo= UserUtil.getInstance().getUserInfo4Login();
         if(userInfo.isSave()){
-            lUserName.setText(userInfo.getUserName());
-            lUserPass.setText(userInfo.getUserPass());
+            lUserName.setText(userInfo.getUserName().trim());
+            lUserPass.setText(userInfo.getUserPass().trim());
             sendUserInfo(userInfo);
         }else{
-            lUserName.setText("");
+            lUserName.setText(userInfo.getUserName().trim());
             lUserPass.setText("");
         }
     }

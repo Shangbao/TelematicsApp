@@ -7,8 +7,16 @@ public class UserInfo {
 	private String sex;//性别
 	private int age;//年龄
 	private String driverNum;//驾驶证号
+	private String userIconContent;//图片的二进制码
 	private boolean isSave;//是否保存
 
+	public String getUserIconContent() {
+		return userIconContent;
+	}
+
+	public void setUserIconContent(String userIconContent) {
+		this.userIconContent = userIconContent;
+	}
 
 	public void setAge(int age) {
 		this.age = age;

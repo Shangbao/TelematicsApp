@@ -14,6 +14,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -45,6 +46,33 @@ public class ImageUtil {
             Bitmap bitmap = BitmapFactory.decodeByteArray(temp, 0, temp.length);
             return bitmap;
         }else{
+            return null;
+        }
+    }
+
+    /**
+     * 二进制码转换为String类型
+     * @param temp
+     * @return
+     */
+    public  static String getStringFromByte(byte[] temp){
+        if(temp!=null){
+            String str= Base64.encodeToString(temp, Base64.DEFAULT);
+            return str;
+        }else {
+            return null;
+        }
+    }
+
+    /**
+     * String类型数据转换成二进制码
+     */
+    public static byte[] getStringByte(String str){
+        if(str!=null){
+            byte[] bitmapArray;
+            bitmapArray=Base64.decode(str, Base64.DEFAULT);
+            return bitmapArray;
+        }else {
             return null;
         }
     }

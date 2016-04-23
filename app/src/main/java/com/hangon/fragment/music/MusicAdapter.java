@@ -71,13 +71,13 @@ public class MusicAdapter extends BaseAdapter {
                 .getTime()));
 
         if (position == currIndex) {
-            viewHold.title.setBackgroundColor(Color.BLUE);
-            viewHold.singer.setBackgroundColor(Color.BLUE);
-            viewHold.time.setBackgroundColor(Color.BLUE);
+            viewHold.title.setTextColor(Color.BLUE);
+            viewHold.singer.setTextColor(Color.BLUE);
+            viewHold.time.setTextColor(Color.BLUE);
         } else {
-            viewHold.title.setBackgroundColor(Color.WHITE);
-            viewHold.singer.setBackgroundColor(Color.WHITE);
-            viewHold.time.setBackgroundColor(Color.WHITE);
+            viewHold.title.setTextColor(Color.BLACK);
+            viewHold.singer.setTextColor(Color.GRAY);
+            viewHold.time.setTextColor(Color.GRAY);
         }
         return convertView;
     }

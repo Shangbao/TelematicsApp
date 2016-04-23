@@ -8,13 +8,13 @@
 
  <LinearLayout
      android:layout_width="match_parent"
-     android:layout_height="50dp"
-     android:background="#666666">
+     android:layout_height="40dp"
+     android:background="#1e1f22">
      <com.hangon.common.Topbar
          android:id="@+id/topbar"
          android:layout_width="match_parent"
-         android:layout_height="50dp"
-         custom:mTitleTextSize="12sp"
+         android:layout_height="40dp"
+         custom:mTitleTextSize="10sp"
          custom:mTitle="车助手"
          custom:mTitleTextColor="#ffffff"
          >

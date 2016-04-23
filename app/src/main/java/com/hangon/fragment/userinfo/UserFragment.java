@@ -2,12 +2,16 @@ package com.hangon.fragment.userinfo;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -15,8 +19,10 @@ import android.widget.TextView;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.bean.user.UserInfo;
+import com.hangon.common.ImageUtil;
 import com.hangon.common.Topbar;
 import com.hangon.common.UserUtil;
+import com.hangon.user.activity.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,15 +33,20 @@ import java.util.Objects;
 /**
  * Created by Administrator on 2016/4/4.
  */
-public class UserFragment extends Fragment  {
+public class UserFragment extends Fragment  implements View.OnClickListener{
     View userView;
     ListView userInfoList;
     UserInfo userInfo;//用户信息
+
     TextView homeNickName;//昵称
     TextView homePhoneNum;//手机号
     ImageView homeHeadIcon;//头像显示
     ImageView toSetHeadIcon;//头像设置
+
     Topbar userTopbar;//标题栏
+
+    Button btnShare;//分享APP
+    Button btnReturnLogin;//退出登录
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,21 +57,44 @@ public class UserFragment extends Fragment  {
         Log.e("ee", userInfo.toString());
         homeNickName.setText(userInfo.getNickname());
         homePhoneNum.setText(userInfo.getUserName());
+        getUserIconFromCookies();
         setUserAdapter();
-        initOnclick();
+        banListViewSlide();
         return userView;
     }
 
-    private void initOnclick(){
-        toSetHeadIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent toSetHeadIcon = new Intent();
-                toSetHeadIcon.setClass(getActivity(), UserIconActivity.class);
-                startActivity(toSetHeadIcon);
-            }
-        });
+    //获取内存里面的图片信息
+    private void getUserIconFromCookies(){
+        UserUtil.instance(getActivity());
+        String s=UserUtil.getInstance().getStringConfig("userIconContent");
+        if(s==null||s.equals("")){
+            Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
+            Bitmap bitmap1=ImageUtil.getRoundedCornerBitmap(bitmap,100);
+            homeHeadIcon.setImageBitmap(bitmap1);
+        }else {
+            byte[] bytes=ImageUtil.getStringByte(s);
+            Bitmap bitmap=ImageUtil.getBitmapFromByte(bytes);
+            Bitmap bitmap1=ImageUtil.getRoundedCornerBitmap(bitmap,100);
+            homeHeadIcon.setImageBitmap(bitmap);
+        }
+    }
 
+
+
+    //初始化组件
+    private void init(){
+        userInfoList= (ListView) userView.findViewById(R.id.userInfoList);
+        userTopbar= (Topbar) userView.findViewById(R.id.userTopbar);
+        userTopbar.setLeftIsVisible(false);
+        homeNickName= (TextView) userView.findViewById(R.id.homeNickName);
+        homePhoneNum= (TextView) userView.findViewById(R.id.homePhoneNum);
+        homeHeadIcon= (ImageView) userView.findViewById(R.id.homeHeadIcon);
+        toSetHeadIcon= (ImageView) userView.findViewById(R.id.toSetHeadIcon);
+        btnReturnLogin= (Button) userView.findViewById(R.id.btnReturnLogin);
+        btnShare= (Button) userView.findViewById(R.id.btnShare);
+        btnReturnLogin.setOnClickListener(this);
+        btnShare.setOnClickListener(this);
+        toSetHeadIcon.setOnClickListener(this);
         userTopbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
             @Override
             public void leftClick() {
@@ -77,17 +111,6 @@ public class UserFragment extends Fragment  {
 
     }
 
-    //初始化组件
-    private void init(){
-        userInfoList= (ListView) userView.findViewById(R.id.userInfoList);
-        userTopbar= (Topbar) userView.findViewById(R.id.userTopbar);
-        userTopbar.setLeftIsVisible(false);
-        homeNickName= (TextView) userView.findViewById(R.id.homeNickName);
-        homePhoneNum= (TextView) userView.findViewById(R.id.homePhoneNum);
-        homeHeadIcon= (ImageView) userView.findViewById(R.id.homeHeadIcon);
-        toSetHeadIcon= (ImageView) userView.findViewById(R.id.toSetHeadIcon);
-    }
-
     //给用户信息列表设置适配器
     private void setUserAdapter(){
         String [] x=new String[]{"img","userInfoKey","userInfoValue"};
@@ -101,24 +124,65 @@ public class UserFragment extends Fragment  {
       List<Map<String,Object>> list=new ArrayList<Map<String, Object>>();
         Map<String,Object> map=new HashMap<String, Object>();
 
-        map.put("imag", R.drawable.login_002);
+        map.put("img", R.drawable.user_icon1);
         map.put("userInfoKey", "性别");
         map.put("userInfoValue",userInfo.getSex());
         list.add(map);
 
         map=new HashMap<String, Object>();
-        map.put("imag", R.drawable.login_002);
+        map.put("img", R.drawable.user_icon2);
         map.put("userInfoKey", "年龄");
-
         map.put("userInfoValue",userInfo.getAge());
         list.add(map);
 
         map=new HashMap<String, Object>();
-        map.put("imag", R.drawable.login_003);
+        map.put("img", R.drawable.user_icon3);
         map.put("userInfoKey","驾驶证号");
         map.put("userInfoValue",userInfo.getDriverNum());
         list.add(map);
-
         return  list;
+    }
+
+    @Override
+    //所有按钮的点击事件
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.toSetHeadIcon:
+                Intent toSetHeadIcon = new Intent();
+                toSetHeadIcon.setClass(getActivity(), UserIconActivity.class);
+                startActivity(toSetHeadIcon);
+                break;
+            case R.id.btnReturnLogin:
+                clearCookies();
+                break;
+            case R.id.btnShare:
+                break;
+        }
+    }
+
+    //清除存在内存卡里面的登录信息
+    private void clearCookies(){
+        UserUtil.instance(getActivity());
+        UserUtil.getInstance().saveBooleanConfig("isSave", false);
+        UserUtil.getInstance().saveStringConfig("userPass", "");
+        Intent intent=new Intent();
+        intent.setClass(getActivity(), LoginActivity.class);
+        startActivity(intent);
+    }
+
+    //禁止listview滑动
+    private void banListViewSlide(){
+        userInfoList.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_MOVE:
+                        return true;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
     }
 }

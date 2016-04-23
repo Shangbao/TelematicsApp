@@ -132,9 +132,12 @@ public class Topbar extends RelativeLayout{
         rightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 listener.rightClick();
             }
         });
+
+
 
     }
 
@@ -176,4 +179,6 @@ public class Topbar extends RelativeLayout{
             rightButton.setVisibility(View.GONE);
         }
     }
+
+
 }

@@ -4,17 +4,18 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#efeff4"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#666666">
+        android:layout_height="40dp"
+        android:background="#1e1f22">
         <com.hangon.common.Topbar
             android:id="@+id/userTopbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            custom:mTitleTextSize="12sp"
+            android:layout_height="40dp"
+            custom:mTitleTextSize="10sp"
             custom:mTitleTextColor="#ffffff"
             custom:mTitle="个人中心"
             custom:rightTextColor="#ffffff"
@@ -22,16 +23,12 @@
         </com.hangon.common.Topbar>
     </LinearLayout>
 
-    <ImageView
-        android:layout_marginTop="15dp"
-        android:background="#6c6c6c"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
-    
+
     <LinearLayout
-       android:layout_marginTop="3dp"
+       android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:background="@drawable/layout_border"
         android:orientation="horizontal">
 
         <ImageView
@@ -43,8 +40,8 @@
             android:background="@drawable/ic_launcher"/>
 
         <LinearLayout
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
             android:layout_width="210dp"
             android:layout_height="60dp"
             android:orientation="vertical">
@@ -60,7 +57,6 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
                 <TextView
-
                     android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -85,42 +81,77 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             />
-
     </LinearLayout>
 
-    <ImageView
-        android:layout_marginTop="3dp"
-        android:background="#6c6c6c"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
-    <TextView
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="用户"
-        android:textSize="20sp"/>
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      >
+      <TextView
+          android:layout_marginLeft="30dp"
+          android:layout_centerVertical="true"
+          android:layout_width="match_parent"
+          android:layout_height="30dp"
+          android:text="用户"
+          android:textColor="#666666"
+          android:textSize="20sp"/>
+  </RelativeLayout>
+
 
     <ListView
-        android:layout_marginTop="5dp"
+        android:background="#ffffff"
         android:id="@+id/userInfoList"
-        android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="150dp">
+        android:layout_height="wrap_content">
     </ListView>
 
-    <ImageView
-        android:layout_marginTop="3dp"
-        android:background="#6c6c6c"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
 
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      >
     <TextView
-        android:layout_marginTop="5dp"
+       android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="设置"
+        android:textColor="#666666"
         android:textSize="20sp"/>
+  </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff"
+        android:padding="5dp"
+        android:orientation="horizontal">
+        <Button
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:text="监听汽车异常"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:background="@drawable/btn_login1"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/btnShare"
+            android:layout_marginTop="3dp"
+            android:text="分享APP"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_login1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/btnReturnLogin"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:background="@drawable/btn_login1"
+            android:layout_height="match_parent"
+            android:text="退出登录"/>
+    </LinearLayout>
 
 </LinearLayout>

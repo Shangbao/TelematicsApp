@@ -9,99 +9,156 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#666666">
+        android:layout_height="40dp"
+        android:background="#1e1f22">
         <com.hangon.common.Topbar
             android:id="@+id/topbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            custom:mTitleTextSize="12sp"
+            android:layout_height="40dp"
+            custom:mTitleTextSize="10sp"
             custom:mTitleTextColor="#ffffff"
             custom:mTitle="我的音乐"
             ></com.hangon.common.Topbar>
     </LinearLayout>
 
-    <ImageView
-        android:layout_marginTop="15dp"
-        android:background="#6c6c6c"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
-    
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp">
-        <TextView
-            android:id="@+id/selectedSong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="因为爱情"
-            android:textSize="25sp"
-            android:layout_alignParentLeft="true"/>
-        <TextView
-            android:id="@+id/selectedSinger"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_below="@+id/selectedSong"
-            android:text="王菲"
-            android:textSize="20sp"
-            android:layout_alignParentLeft="true"/>
-    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnPlayModel"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="45dp"
+        android:layout_width="wrap_content"
+        android:textSize="14sp"
+        android:layout_height="35dp"
+        android:background="@drawable/btn_login1"
+        android:text="顺序播放"/>
+
+
     
     <ListView
+        android:layout_weight="1"
         android:id="@+id/songList"
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="330dp">
-    </ListView>
-    
-    <SeekBar
-        android:id="@+id/musicSeekbar"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+
+
+
+    <RelativeLayout
+        android:layout_weight="8"
+        android:background="@drawable/editext_border"
+        android:layout_width="match_parent"
+        android:layout_height="65dp">
+
+        <ImageView
+            android:id="@+id/personIcon"
+            android:layout_width="60dp"
+            android:layout_marginLeft="5dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/user_icon1"/>
+
+
+    <RelativeLayout
+        android:layout_toRightOf="@+id/personIcon"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnPlayModel"
-            android:layout_weight="1"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        >
+
+        <SeekBar
+            android:id="@+id/musicSeekbar"
+            android:layout_marginTop="3dp"
+            android:progressDrawable="@drawable/seekbar_style"
+            android:thumb="@drawable/seekbar_thumb"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="顺序"/>
+            android:layout_height="wrap_content" />
 
-        <Button
-           android:id="@+id/btnPrevious"
-            android:layout_weight="1"
+        <RelativeLayout
+            android:layout_below="@+id/musicSeekbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="上一曲"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_width="90dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/selectedSong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="因为爱情"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:layout_alignParentLeft="true"/>
 
-        <Button
-            android:id="@+id/btnPause"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="暂停"/>
-
-        <Button
-            android:id="@+id/btnNext"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="下一曲"/>
-
-        <Button
-            android:id="@+id/btnStop"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="停止"/>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/selectedSinger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/selectedSong"
+                    android:text="王菲"
+                    android:textSize="10sp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"/>
+            </RelativeLayout>
 
 
+            <RelativeLayout
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
+                <Button
+                    android:id="@+id/btnPrevious"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="10sp"
+                    android:background="@drawable/btn_login1"
+                    android:layout_marginLeft="2dp"
+                    android:text="上一曲"/>
+
+                <Button
+                    android:id="@+id/btnPause"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="2dp"
+                    android:background="@drawable/btn_login1"
+                    android:layout_toRightOf="@+id/btnPrevious"
+                    android:text="暂停"/>
+
+                <Button
+                    android:id="@+id/btnNext"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/btn_login1"
+                    android:layout_toRightOf="@+id/btnPause"
+                    android:text="下一曲"/>
+
+                <Button
+                    android:id="@+id/btnStop"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:textSize="10dp"
+                    android:layout_marginLeft="2dp"
+                    android:background="@drawable/btn_login1"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/btnNext"
+                    android:text="停止"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

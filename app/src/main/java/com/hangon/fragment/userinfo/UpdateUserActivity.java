@@ -31,11 +31,13 @@ public class UpdateUserActivity extends Activity {
     Topbar updateUserTopbar;
 
     UserInfo userInfo;
+    String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_user);
         init();
+        initEditext();
         topbarClick();
     }
 
@@ -46,6 +48,15 @@ public class UpdateUserActivity extends Activity {
         uAge= (EditText) findViewById(R.id.uAge);
         uDriverNum= (EditText) findViewById(R.id.uDriverNum);
         updateUserTopbar= (Topbar) findViewById(R.id.updateUserTopbar);
+    }
+
+    private void initEditext(){
+        UserUtil.instance(UpdateUserActivity.this);
+        UserInfo userInfo=UserUtil.getInstance().getUserInfo();
+        uNickname.setText(userInfo.getNickname());
+        uSex.setText(userInfo.getSex());
+        uAge.setText(userInfo.getAge()+"");
+        uDriverNum.setText(userInfo.getDriverNum());
     }
 
     //标题栏的点击栏
@@ -62,52 +73,54 @@ public class UpdateUserActivity extends Activity {
 
             @Override
             public void rightClick() {
+                boolean a=judgeEditext();
                 if (judgeEditext()){
-                    //保存用户信息到cookies
-                    saveUserInfo();
+                    makeUser();
                     //发送要更新的信息
                     postUpdateUser();
                 }
-
-
-
             }
         });
     }
 
     private boolean judgeEditext(){
-        if(uNickname.getText().length()>2&&(uSex.getText().equals("男")||uSex.getText().equals("女"))&&uAge.getText().length()>0&&uDriverNum.getText().length()==18){
+        String nickname=uNickname.getText().toString().trim();
+        String sex=uSex.getText().toString().trim();
+        String driverNum=uDriverNum.getText().toString().trim();
+        String age=uAge.getText().toString().trim();
+        if(nickname.length()>=2&&(sex.equals("男")||sex.equals("女"))&&age.length()>0&&driverNum.length()==18){
             return true;
         }else {
-            if (uNickname.getText().length()<2){
+            if (nickname.length()<2){
                 Toast.makeText(UpdateUserActivity.this,"昵称必须大于两位",Toast.LENGTH_SHORT).show();
             }
 
-            if (!(uSex.getText().equals("男")&&uSex.getText().equals("女"))){
+            if (!(sex.equals("男")||!sex.equals("女"))){
                 Toast.makeText(UpdateUserActivity.this,"性别必须为男|女",Toast.LENGTH_SHORT).show();
             }
 
-            if (uAge.getText().length()<1||uAge.equals("")){
+            if (age.length()<1||age.equals("")){
                 Toast.makeText(UpdateUserActivity.this,"年龄不能为空",Toast.LENGTH_SHORT).show();
             }
 
-            if (uDriverNum.getText().length()!=18){
+            if (driverNum.length() !=18){
                 Toast.makeText(UpdateUserActivity.this,"身份证号必须为18位",Toast.LENGTH_SHORT).show();
             }
             return false;
-
         }
     }
 
     //把editext里的值封装到一个对象
-    private UserInfo makeUser(String userName){
-        UserInfo userInfo=new UserInfo();
-        userInfo.setNickname(uNickname.getText().toString());
-        userInfo.setSex(uSex.getText().toString());
-        userInfo.setAge(Integer.parseInt(uAge.getText().toString()));
-        userInfo.setDriverNum(uDriverNum.getText().toString());
-        userInfo.setUserName(userName);
-        return userInfo;
+    private void makeUser(){
+        UserUtil.instance(UpdateUserActivity.this);
+        userName=  UserUtil.getInstance().getStringConfig("userName");
+        UserInfo user=new UserInfo();
+        user.setNickname(uNickname.getText().toString());
+        user.setSex(uSex.getText().toString());
+        user.setAge(Integer.parseInt(uAge.getText().toString()));
+        user.setDriverNum(uDriverNum.getText().toString());
+        user.setUserName(userName);
+        userInfo=user;
     }
 
 
@@ -116,16 +129,19 @@ public class UpdateUserActivity extends Activity {
     String url= Constants.UPDATE_USER_URL;
         Map<String,Object> map=new HashMap<String,Object>();
 
+
         map.put("userName",userInfo.getUserName());
         map.put("sex",userInfo.getSex());
         map.put("nickname",userInfo.getNickname());
-        map.put("age",userInfo.getAge());
+        map.put("age",userInfo.getAge()+"");
         map.put("driverNum",userInfo.getDriverNum());
 
         VolleyRequest.RequestPost(UpdateUserActivity.this, url, "postUpdateUser", map, new VolleyInterface(UpdateUserActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
             if(result.equals("ok")){
+                //保存用户信息到cookies
+                UserUtil.getInstance().saveUpdateUserInfo(userInfo);
                 //跳转到用户信息页面
                 Intent intent=new Intent();
                 intent.putExtra("id",4);
@@ -142,13 +158,7 @@ public class UpdateUserActivity extends Activity {
         });
     }
 
-    //把更新信息存在cookies里
-    public void saveUserInfo(){
-        UserUtil.instance(UpdateUserActivity.this);
-      String userName=  UserUtil.getInstance().getStringConfig("userName");
-         userInfo=makeUser(userName);
-        UserUtil.getInstance().saveUpdateUserInfo(userInfo);
-    }
+
 
 
 }
