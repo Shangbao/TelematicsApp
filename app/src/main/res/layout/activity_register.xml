@@ -14,7 +14,6 @@
         custom:mTitleTextColor="#000000"
         custom:mTitleTextSize="13sp"
         custom:mTitle="注册"
-
         custom:leftTextColor="#000000"
         custom:leftBackground="@drawable/register01"
         >

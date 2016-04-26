@@ -11,7 +11,7 @@
      android:layout_height="40dp"
      android:background="#1e1f22">
      <com.hangon.common.Topbar
-         android:id="@+id/topbar"
+         android:id="@+id/carTopbar"
          android:layout_width="match_parent"
          android:layout_height="40dp"
          custom:mTitleTextSize="10sp"
@@ -23,17 +23,36 @@
 
     <Button
         android:id="@+id/carManageSao"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="扫一扫"
         android:textSize="20sp"
         />
 
     <Button
-        android:id="@+id/add_btn"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnShouAdd"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="手动添加"/>
+    <Button
+        android:id="@+id/btnSetCarInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="车辆管理"/>
+
+    <Button
+        android:id="@+id/btnBestWay"
+        android:text="最优路线"
+        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnGasStation"
+        android:text="周围加油站"
+        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
