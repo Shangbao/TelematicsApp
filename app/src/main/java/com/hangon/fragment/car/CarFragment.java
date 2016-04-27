@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.carInfoManage.activity.AddCarMessageActivity;
-import com.hangon.outer.zxing.CaptureActivity;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 /**
  * Created by Administrator on 2016/4/4.
