@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#1e1f22"
@@ -24,10 +25,36 @@
 
     <ListView
         android:id="@+id/carInfoList"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout">
     </ListView>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/btnShou"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_login2"
+        android:text="手动添加新车辆"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:layout_above="@+id/btnSao"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Button
+        android:id="@+id/btnSao"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_login2"
+        android:text="扫一扫添加新车辆"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true"
+        />
+
+
+
+</RelativeLayout>

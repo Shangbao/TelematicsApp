@@ -26,9 +26,11 @@ import java.util.Map;
  * Created by Chuan on 2016/4/15.
  */
 public class AddCarMessageActivity extends Activity {
+
     private Spinner car_name_spinner;
     private Spinner car_type_spinner;
     private Spinner province;
+
     private EditText car_num_pre;
     private EditText car_num_edit;
     private EditText car_enginenum_edit;
@@ -110,6 +112,8 @@ public class AddCarMessageActivity extends Activity {
         isGoodEngine = engine_spinner.getSelectedItem().toString()=="正常"?true:false;
         isGoodTran = trans_spinner.getSelectedItem().toString()=="正常"?true:false;
         isGoodLight = light_spinner.getSelectedItem().toString()=="正常"?true:false;
+
+
     }
 
     private boolean judge(){

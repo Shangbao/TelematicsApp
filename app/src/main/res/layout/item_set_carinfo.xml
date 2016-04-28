@@ -64,7 +64,20 @@
             android:textSize="15sp"
             android:layout_marginLeft="5dp"
             android:layout_centerVertical="true"
-            android:text="默认地址"/>
+            android:text="默认车辆"/>
+
+        <Button
+            android:id="@+id/btnScan"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:text="查看"
+            android:textSize="18sp"
+            android:background="@drawable/btn_login1"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="150dp"
+            />
+
 
         <Button
             android:id="@+id/btnEdite"
@@ -92,7 +105,7 @@
     </RelativeLayout>
      <ImageView
          android:layout_width="match_parent"
-         android:layout_height="10dp"
+         android:layout_height="5dp"
          android:background="#b1adad"/>
 
 </LinearLayout>

@@ -1,13 +1,15 @@
 package com.hangon.bean.carInfo;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/4/26.
  */
-public class CarMessageVO {
+public class CarMessageVO  implements Serializable {
     private  int carInfoId;//车信息id
 
-    private String brand;//车品牌
-    private String brandType;//车品牌类型
+    private int brandIndex;//车品牌
+    private int  brandTypeIndex;//车品牌类型
 
     private String carFlag;//车标志图片
     private int doorCount;//门的数量
@@ -28,6 +30,11 @@ public class CarMessageVO {
     private int isGoodTran;//变速器性能情况
     private int isGoodLight;//车灯状况
 
+    private int state;//车辆选择状况(判断是不是默认汽车)
+
+
+    public CarMessageVO() {
+    }
     public int getCarInfoId() {
         return carInfoId;
     }
@@ -148,28 +155,37 @@ public class CarMessageVO {
         this.carFlag = carFlag;
     }
 
-    public String getBrandType() {
-        return brandType;
+
+    public int getState() {
+        return state;
     }
 
-    public void setBrandType(String brandType) {
-        this.brandType = brandType;
+    public void setState(int state) {
+        this.state = state;
     }
 
-    public String getBrand() {
-        return brand;
+    public int getBrandIndex() {
+        return brandIndex;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setBrandIndex(int brandIndex) {
+        this.brandIndex = brandIndex;
+    }
+
+    public int getBrandTypeIndex() {
+        return brandTypeIndex;
+    }
+
+    public void setBrandTypeIndex(int brandTypeIndex) {
+        this.brandTypeIndex = brandTypeIndex;
     }
 
     @Override
     public String toString() {
         return "CarMessageVO{" +
                 "carInfoId=" + carInfoId +
-                ", brand='" + brand + '\'' +
-                ", brandType='" + brandType + '\'' +
+                ", brandIndex=" + brandIndex +
+                ", brandTypeIndex=" + brandTypeIndex +
                 ", carFlag='" + carFlag + '\'' +
                 ", doorCount=" + doorCount +
                 ", seatCount=" + seatCount +
@@ -184,6 +200,7 @@ public class CarMessageVO {
                 ", isGoodEngine=" + isGoodEngine +
                 ", isGoodTran=" + isGoodTran +
                 ", isGoodLight=" + isGoodLight +
+                ", state=" + state +
                 '}';
     }
 }

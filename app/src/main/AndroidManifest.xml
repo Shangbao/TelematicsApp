@@ -97,11 +97,7 @@
 
         <activity android:name="com.hangon.home.activity.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -138,6 +134,10 @@
 
         </activity>
 
+        <activity android:name="com.hangon.carInfoManage.activity.ScanCarMessageActivity">
+
+        </activity>
+
 
         <activity android:name="com.hangon.map.activity.BestRouteActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|navigation"
@@ -145,7 +145,11 @@
         </activity>
 
         <activity android:name="com.hangon.carInfoManage.activity.SetCarInfoActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
 
