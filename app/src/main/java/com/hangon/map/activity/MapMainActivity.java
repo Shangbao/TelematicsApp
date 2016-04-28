@@ -275,7 +275,7 @@ public class MapMainActivity extends Activity implements BaiduMap.OnMapClickList
         mSearch = RoutePlanSearch.newInstance();
         mSearch.setOnGetRoutePlanResultListener(this);
     }
-
+//定位
     private class MyLocationListener implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
@@ -292,6 +292,7 @@ public class MapMainActivity extends Activity implements BaiduMap.OnMapClickList
             mLongtitude = location.getLongitude();
             GasInfoUtil.setLocationlatitude(mLatitude);
             GasInfoUtil.setLocationlongtitude(mLongtitude);
+            Toast.makeText(MapMainActivity.this,"aaaaaaaa",Toast.LENGTH_LONG).show();
             if (isFirstIn) {
                 LatLng latLng = new LatLng(location.getLatitude(),
                         location.getLongitude());

@@ -1,6 +1,7 @@
 package com.hangon.fragment.userinfo;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
 import com.hangon.bean.user.UserInfo;
 import com.hangon.common.Constants;
+import com.hangon.common.DialogTool;
 import com.hangon.common.Topbar;
 import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
@@ -73,12 +75,16 @@ public class UpdateUserActivity extends Activity {
 
             @Override
             public void rightClick() {
-                boolean a=judgeEditext();
-                if (judgeEditext()){
-                    makeUser();
-                    //发送要更新的信息
-                    postUpdateUser();
-                }
+                DialogTool.createNormalDialog(UpdateUserActivity.this, "编辑用户信息", "你确定要修改吗?", "确定", "取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (judgeEditext()){
+                            makeUser();
+                            //发送要更新的信息
+                            postUpdateUser();
+                        }
+                    }
+                }, null).show();
             }
         });
     }

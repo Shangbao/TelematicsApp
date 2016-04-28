@@ -58,7 +58,6 @@ public class Topbar extends RelativeLayout{
 
 
 
-
     public Topbar(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray typedArray=context.obtainStyledAttributes(attrs, R.styleable.Topbar);
@@ -121,7 +120,6 @@ public class Topbar extends RelativeLayout{
             @Override
             public void onClick(View v) {
                 listener.leftClick();
-
             }
         });
 
@@ -132,12 +130,9 @@ public class Topbar extends RelativeLayout{
         rightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 listener.rightClick();
             }
         });
-
-
 
     }
 

@@ -1,23 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
-
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#1e1f22"
         >
         <com.hangon.common.Topbar
-            android:id="@+id/addCarMessageTopbar"
+            android:id="@+id/alterCarMessageTopbar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            custom:mTitle="添加新车辆"
+            custom:mTitle="修改车辆信息"
             custom:mTitleTextColor="#ffffff"
             custom:mTitleTextSize="10dp"
             >
@@ -31,7 +28,6 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/car_message_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -67,6 +63,7 @@
                 android:spinnerMode="dropdown"
                 android:background="#00ffffff"
                 />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -91,7 +88,7 @@
                 android:layout_height="35dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="90dp"
-               android:spinnerMode="dropdown"
+                android:spinnerMode="dropdown"
                 android:background="#00ffffff"
                 android:entries="@array/province"/>
 
@@ -194,7 +191,7 @@
                 android:hint="座位数"
                 android:maxLength="3"
                 android:background="#00ffffff"
-                 />
+                />
         </RelativeLayout>
         <ProgressBar
             android:layout_width="match_parent"
@@ -370,6 +367,4 @@
 
     </LinearLayout>
 
-
 </LinearLayout>
-

@@ -5,7 +5,7 @@
         <item>异常</item>
     </string-array>
 
-    <string-array name="province">
+    <string-array name="province" >
         <item>京</item>
         <item>津</item>
         <item>冀</item>

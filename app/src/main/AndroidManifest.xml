@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fd.ourapplication">
+
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
@@ -16,6 +18,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
     <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -36,6 +39,11 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!-- 存储卡的权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+
+
+
     <application
         android:name="com.hangon.common.MyApplication"
         android:allowBackup="true"
@@ -67,6 +75,8 @@
             </intent-filter>
         </activity>
 
+
+
         <activity
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:name="com.hangon.user.activity.WelcomeActivity">
@@ -92,6 +102,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
 
@@ -104,6 +115,44 @@
         <activity android:name="com.hangon.fragment.userinfo.UpdateUserActivity">
 
         </activity>
+
+        <activity android:name="com.hangon.carInfoManage.activity.AddCarMessageActivity">
+
+        </activity>
+
+        <activity android:name="com.hangon.map.activity.MapMainActivity">
+
+        </activity>
+
+
+        <activity android:name="com.hangon.map.activity.GasSiteDetailsActivity">
+
+        </activity>
+        <activity android:name="com.hangon.carInfoManage.activity.AlterCarMessageActivity">
+
+        </activity>
+
+        <activity android:name="com.hangon.carInfoManage.activity.WeizhangActivity"></activity>
+
+        <activity android:name="com.hangon.carInfoManage.activity.YichangActivity">
+
+        </activity>
+
+
+        <activity android:name="com.hangon.map.activity.BestRouteActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|navigation"
+            android:windowSoftInputMode="adjustPan|stateVisible">
+        </activity>
+
+        <activity android:name="com.hangon.carInfoManage.activity.SetCarInfoActivity">
+
+        </activity>
+
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
 
     </application>
 

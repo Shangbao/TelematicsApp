@@ -3,18 +3,25 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#d6d2d2"
     android:orientation="vertical"
     >
-    <com.hangon.common.Topbar
-        android:id="@+id/bestWayTopbar"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        custom:mTitleTextColor="#000000"
-        custom:mTitleTextSize="10sp"
-        custom:mTitle="最优路线"
-        custom:rightText="搜索"
-        custom:rightTextColor="#000000"
-        />
+        android:layout_height="40dp"
+        android:background="#1e1f22">
+        <com.hangon.common.Topbar
+            android:id="@+id/bestWayTopbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            custom:mTitle="最优路线"
+            custom:mTitleTextColor="#ffffff"
+            custom:mTitleTextSize="8sp"
+            custom:rightText="搜索"
+            custom:rightTextColor="#ffffff"
+            ></com.hangon.common.Topbar>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

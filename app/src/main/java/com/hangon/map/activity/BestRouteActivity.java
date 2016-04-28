@@ -175,7 +175,6 @@ public class BestRouteActivity extends Activity implements
                                 try {
                                     Thread.sleep(1000);
                                 } catch (InterruptedException e) {
-                                    // TODO Auto-generated catch block
                                     e.printStackTrace();
                                 }
                                 Bundle addressdata = new Bundle();

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#1e1f22"
+        >
+        <com.hangon.common.Topbar
+            android:id="@+id/addCarMessageTopbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            custom:mTitle="管理车辆信息"
+            custom:mTitleTextColor="#ffffff"
+            custom:mTitleTextSize="10dp"
+            >
+        </com.hangon.common.Topbar>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/carInfoList"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+</LinearLayout>

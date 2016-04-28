@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#1e1f22">
+        <com.hangon.common.Topbar
+            android:id="@+id/yichangTopbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            custom:mTitleTextSize="10sp"
+            custom:mTitleTextColor="#ffffff"
+            custom:mTitle="异常管理"
+            custom:leftText="Back"
+            custom:leftTextColor="#ffffff"
+            ></com.hangon.common.Topbar>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/yichang_mileage"
+        android:hint="里程数"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/yichang_oddGasAmount"
+        android:hint="剩余油量"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/yichang_isGoodEngine"
+        android:hint="引擎状况"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/yichang_isGoodTran"
+        android:hint="变速器状况"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/yichang_isGoodLight"
+        android:hint="车灯状况"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnYcjb"
+        android:onClick="ycjb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="异常警报"/>
+
+    <Button
+        android:id="@+id/btnScsjs"
+        android:text="生成随机数"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>
