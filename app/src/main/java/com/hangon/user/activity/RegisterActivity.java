@@ -246,6 +246,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         VolleyRequest.RequestPost(RegisterActivity.this, url, "postUserInfo", map, new VolleyInterface(RegisterActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
+                Log.e("aaa",result);
             if(result.equals("OK")){
                 Toast.makeText(RegisterActivity.this,"注册成功。",Toast.LENGTH_SHORT).show();
                 Intent toLogin=new Intent();
@@ -257,7 +258,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
 
             @Override
             public void onMyError(VolleyError error) {
-              //  Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_SHORT);
+               Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_SHORT);
             }
         });
     }
@@ -284,7 +285,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
 
          @Override
          public void onMyError(VolleyError error) {
-        // Toast.makeText(RegisterActivity.this,error.toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(RegisterActivity.this,error.toString(),Toast.LENGTH_SHORT).show();
          }
      });
     }

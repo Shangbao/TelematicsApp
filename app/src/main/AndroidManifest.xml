@@ -39,6 +39,10 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!-- 存储卡的权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--添加操作闪光灯的权限-->
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <!--添加操作震动器的权限-->
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
 
 
@@ -80,7 +84,11 @@
         <activity
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:name="com.hangon.user.activity.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -145,11 +153,7 @@
         </activity>
 
         <activity android:name="com.hangon.carInfoManage.activity.SetCarInfoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
 

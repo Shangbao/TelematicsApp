@@ -50,18 +50,26 @@
         android:hint="车灯状况"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <Button
+        android:layout_marginTop="10dp"
         android:id="@+id/btnYcjb"
         android:onClick="ycjb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:background="@drawable/btn_login2"
         android:text="异常警报"/>
 
     <Button
+        android:layout_marginTop="5dp"
         android:id="@+id/btnScsjs"
-        android:text="生成随机数"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="生成随机数"
+        android:textColor="#ffffff"
+        android:background="@drawable/btn_login2"
+        />
 
 
 </LinearLayout>

@@ -31,7 +31,10 @@ public class YichangActivity extends Activity implements View.OnClickListener{
     Button btnYcjb;//异常警报
     Button btnScsjs;//生成随机数
 
+    NotificationManager manager;
     YcglVO ycglVO;
+
+    public static final int FLAG=111;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,21 +56,21 @@ public class YichangActivity extends Activity implements View.OnClickListener{
         btnYcjb.setOnClickListener(this);
         btnScsjs.setOnClickListener(this);
 
+        manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     }
 
     private void setEditextValue(){
         mileage.setText(ycglVO.getMileage()+"");
         oddGasAmount.setText(ycglVO.getOddGasAmount()+"");
         isGoodEngine.setText(ycglVO.getYjNum()+"");
-        isGoodTran.setText(ycglVO.getBsNum()+"");
-        isGoodLight.setText(ycglVO.getCdNum()+"");
+        isGoodTran.setText(ycglVO.getBsNum() + "");
+        isGoodLight.setText(ycglVO.getCdNum() + "");
     }
 
     public void onClick(View v) {
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         switch (v.getId()){
             case R.id.btnYcjb:
-
+           send();
                 break;
             case R.id.btnScsjs:
                 generateRound();
@@ -90,5 +93,21 @@ public class YichangActivity extends Activity implements View.OnClickListener{
         ycglVO.setBsNum(bsNum);
         ycglVO.setYjNum(yjNum);
         ycglVO.setCdNum(cdNum);
+    }
+
+    private void send(){
+        Notification.Builder builder=new Notification.Builder(this);
+
+        Intent intent=new Intent(this,YichangActivity.class);
+        PendingIntent pi=PendingIntent.getActivity(this,0,intent,0);
+
+        builder.setTicker("哇哇哇,你车要炸了");
+        builder.setSmallIcon(R.drawable.loading_icon);
+        builder.setContentTitle("车灯、变速器、引擎全坏了");
+        builder.setContentText("我的小心脏还在吗？");
+        builder.setDefaults(Notification.DEFAULT_ALL);
+        builder.setContentIntent(pi);
+        Notification notification=builder.build();
+        manager.notify(FLAG,notification);
     }
 }

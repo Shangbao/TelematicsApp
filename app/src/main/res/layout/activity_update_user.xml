@@ -80,6 +80,7 @@
             android:layout_marginLeft="110dp"
             android:textSize="17sp"
             android:singleLine="true"
+            android:maxLength="1"
             android:background="#00ffffff"
             android:inputType="text"/>
     </RelativeLayout>
