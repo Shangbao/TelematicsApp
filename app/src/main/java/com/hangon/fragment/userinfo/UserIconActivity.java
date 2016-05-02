@@ -40,6 +40,7 @@ public class UserIconActivity extends Activity implements OnClickListener {
     private final int CAMERA_WITH_DATA = 2;
     private final int CROP_RESULT_CODE = 3;
     public static final String TMP_PATH = "clip_temp.jpg";
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class UserIconActivity extends Activity implements OnClickListener {
 
         findViewById(R.id.albumBtn).setOnClickListener(this);
         findViewById(R.id.captureBtn).setOnClickListener(this);
+        imageView = (ImageView) findViewById(R.id.imageView);
 
 
         Topbar topbar= (Topbar) findViewById(R.id.userIconTopbar);
@@ -68,6 +70,7 @@ public class UserIconActivity extends Activity implements OnClickListener {
            }
        });
         topbar.setRightIsVisible(false);
+        getUserIconFromCookies();
     }
 
     @Override
@@ -95,8 +98,8 @@ public class UserIconActivity extends Activity implements OnClickListener {
                     saveIconToCookies(photo);
                     postIconBytes(photo);
                 }
-                ImageView imageView = (ImageView) findViewById(R.id.imageView);
-                imageView.setImageBitmap(photo);
+
+                 getUserIconFromCookies();
                 break;
             case START_ALBUM_REQUESTCODE:
                 startCropImageActivity(getFilePath(data.getData()));
@@ -105,6 +108,22 @@ public class UserIconActivity extends Activity implements OnClickListener {
                 startCropImageActivity(Environment.getExternalStorageDirectory()
                         + "/" + TMP_PATH);
                 break;
+        }
+    }
+
+    //获取内存里面的图片信息
+    private void getUserIconFromCookies(){
+        UserUtil.instance(UserIconActivity.this);
+        String s=UserUtil.getInstance().getStringConfig("userIconContent");
+        if(s==null||s.equals("")){
+            Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
+            Bitmap bitmap1=ImageUtil.getRoundedCornerBitmap(bitmap,100);
+            imageView.setImageBitmap(bitmap1);
+        }else {
+            byte[] bytes=ImageUtil.getStringByte(s);
+            Bitmap bitmap=ImageUtil.getBitmapFromByte(bytes);
+            Bitmap bitmap1=ImageUtil.getRoundedCornerBitmap(bitmap,100);
+            imageView.setImageBitmap(bitmap);
         }
     }
 

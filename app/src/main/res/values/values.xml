@@ -5,6 +5,11 @@
         <item>异常</item>
     </string-array>
 
+    <string-array name="state">
+        <item>默认车辆</item>
+        <item>普通车辆</item>
+    </string-array>
+
     <string-array name="province" >
         <item>京</item>
         <item>津</item>

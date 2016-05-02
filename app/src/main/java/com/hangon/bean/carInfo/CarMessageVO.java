@@ -10,8 +10,8 @@ public class CarMessageVO  implements Serializable {
 
     private int brandIndex;//车品牌
     private int  brandTypeIndex;//车品牌类型
-
     private String carFlag;//车标志图片
+
     private int doorCount;//门的数量
     private int seatCount;//座位的数量
 

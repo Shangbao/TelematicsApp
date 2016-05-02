@@ -1,6 +1,7 @@
 package com.hangon.fragment.userinfo;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.bean.user.UserInfo;
+import com.hangon.common.DialogTool;
 import com.hangon.common.ImageUtil;
 import com.hangon.common.Topbar;
 import com.hangon.common.UserUtil;
@@ -153,7 +155,13 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
                 startActivity(toSetHeadIcon);
                 break;
             case R.id.btnReturnLogin:
-                clearCookies();
+                DialogTool.createNormalDialog(getActivity(), "退出登录", "你确定要退出登录吗?", "取消", "确认", null, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        clearCookies();
+                    }
+                }).show();
+
                 break;
             case R.id.btnShare:
                 break;

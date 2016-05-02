@@ -3,19 +3,32 @@ package com.hangon.carInfoManage.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.hangon.bean.carInfo.BrandVO;
 import com.hangon.bean.carInfo.CarMessageVO;
+import com.hangon.common.Constants;
+import com.hangon.common.VolleyInterface;
+import com.hangon.common.VolleyRequest;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/4/28.
  */
 public class ScanCarMessageActivity extends Activity {
+    Gson gson;//数据解析器
     private TextView car_name_spinner;// 车品牌
     private TextView car_type_spinner;//车品牌类型
 
@@ -42,6 +55,7 @@ public class ScanCarMessageActivity extends Activity {
         carMessageVO= (CarMessageVO) intent.getSerializableExtra("carMessage");
         init();
         setValue();
+        getBrandInfoList();
     }
 
     private void init(){
@@ -62,8 +76,7 @@ public class ScanCarMessageActivity extends Activity {
         state= (TextView) findViewById(R.id.state);
     }
     private void setValue(){
-
-        car_plate_num.setText(carMessageVO.getProvinceIndex()+carMessageVO.getCarLicenceTail());
+        car_plate_num.setText(Constants.PROVINCE_VALUE.charAt(carMessageVO.getProvinceIndex())+carMessageVO.getCarLicenceTail());
         car_enginenum_edit.setText(carMessageVO.getEngineNum());
         car_chassis_number.setText(carMessageVO.getChassisNum());
 
@@ -95,5 +108,28 @@ public class ScanCarMessageActivity extends Activity {
         }else {
             state.setText("非常用车辆");
         }
+    }
+
+    //获得车品牌数据
+    public void getBrandInfoList(){
+        String url=Constants.GET_BRAND_INFO_URL;
+        VolleyRequest.RequestGet(ScanCarMessageActivity.this, url, "getBrandInfoList", new VolleyInterface(ScanCarMessageActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
+            @Override
+            public void onMySuccess(String result) {
+                gson = new Gson();
+                List<BrandVO> list = new ArrayList<BrandVO>();
+                list = gson.fromJson(result, new TypeToken<List<BrandVO>>() {}.getType());
+
+                car_name_spinner.setText(list.get(carMessageVO.getBrandIndex()).getBrand());
+                car_type_spinner.setText(list.get(carMessageVO.getBrandIndex()).getBrandTypeList().get(carMessageVO.getBrandTypeIndex()).getName());
+                Log.e("getBrandInfoList", result);
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                Toast.makeText(ScanCarMessageActivity.this, "网络异常，请重试加载", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

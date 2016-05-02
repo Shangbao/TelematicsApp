@@ -3,6 +3,7 @@ package com.hangon.carInfoManage.activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.example.fd.ourapplication.R;
 import com.hangon.bean.carInfo.CarInfoVO;
 import com.hangon.bean.carInfo.CarMessageVO;
 import com.hangon.bean.music.Music;
+import com.hangon.common.Constants;
 import com.hangon.common.DialogTool;
 
 import org.w3c.dom.Text;
@@ -82,7 +84,7 @@ public class SetCarInfoAdapter extends BaseAdapter {
 
         viewHold.name.setText(list.get(position).getName());
         viewHold.phoneNum.setText(list.get(position).getPhoneNum());
-        viewHold.plateNum.setText(list.get(position).getProvinceIndex()+list.get(position).getCarLicenceTail());
+        viewHold.plateNum.setText(Constants.PROVINCE_VALUE.charAt(list.get(position).getProvinceIndex())+list.get(position).getCarLicenceTail());
 
         if(list.get(position).getState()==1){
             viewHold.defaultAddress.setVisibility(View.VISIBLE);

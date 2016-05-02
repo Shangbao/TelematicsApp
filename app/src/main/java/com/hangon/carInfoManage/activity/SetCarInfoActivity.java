@@ -13,9 +13,14 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.hangon.bean.carInfo.BrandVO;
 import com.hangon.bean.carInfo.CarInfoVO;
 import com.hangon.bean.carInfo.CarMessageVO;
+import com.hangon.common.Constants;
 import com.hangon.common.DialogTool;
+import com.hangon.common.JsonUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
@@ -38,12 +43,14 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
     Button btnSao;
 
     List<CarMessageVO> carMessageList;//车辆信息列表数据
+    Gson gson;//解析json数据
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_set_carinfo);
         init();
-        initAdapter();
+        getCarMessageList();
     }
 
     //初始化组件
@@ -56,19 +63,18 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
     }
 
     //初始化适配器
-    private void initAdapter(){
-        carMessageList=getCarMessageList();
+    private void initAdapter(final List<CarMessageVO> carMessageList){
         adapter=new SetCarInfoAdapter(carMessageList,SetCarInfoActivity.this);
         adapter.setBtnClickListener(new SetCarInfoAdapter.btnClickListener() {
             @Override
             public void btnEditeClick(int position) {
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setClass(SetCarInfoActivity.this, AlterCarMessageActivity.class);
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putSerializable("carMessage", carMessageList.get(position));
                 intent.putExtras(bundle);
                 startActivity(intent);
-                Log.e("aa",""+position);
+                Log.e("aa", "" + position);
             }
 
             @Override
@@ -78,15 +84,16 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         delete(position);
+
                     }
                 }, null).show();
             }
 
             @Override
             public void btnScanClick(int position) {
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setClass(SetCarInfoActivity.this, ScanCarMessageActivity.class);
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putSerializable("carMessage", carMessageList.get(position));
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -117,48 +124,36 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
 
 
    //获取车辆信息列表
-    private List<CarMessageVO> getCarMessageList(){
-        List<CarMessageVO> list=new ArrayList<CarMessageVO>();
+    private void getCarMessageList(){
 
-        CarMessageVO carMessageVO=new CarMessageVO();
-        carMessageVO.setCarInfoId(1);
-        carMessageVO.setBrandIndex(1);
-        carMessageVO.setBrandTypeIndex(1);
-        carMessageVO.setCarFlag("呵呵");
-        carMessageVO.setDoorCount(3);
-        carMessageVO.setSeatCount(5);
+        String url= Constants.GET_CAR_INFO_URL;
+        VolleyRequest.RequestGet(SetCarInfoActivity.this, url, "getCarMessageList", new VolleyInterface(SetCarInfoActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
 
-        carMessageVO.setChassisNum("abc123456");//车架号
-        carMessageVO.setEngineNum("a1111");
-       carMessageVO.setProvinceIndex(1);
-        carMessageVO.setCarLicenceTail("A66666");
+            @Override
+            public void onMySuccess(String result) {
+                gson=new Gson();
+                carMessageList=new ArrayList<CarMessageVO>();
+                carMessageList= gson.fromJson(result,new TypeToken<List<CarMessageVO>>(){}.getType());
+                initAdapter(carMessageList);
+            }
 
-        carMessageVO.setName("黄大宝");
-        carMessageVO.setPhoneNum("13166837709");
-        carMessageVO.setMileage(150000);
-        carMessageVO.setOddGasAmount(56);
-        carMessageVO.setIsGoodEngine(1);
-        carMessageVO.setIsGoodTran(0);
-        carMessageVO.setIsGoodLight(1);
-        carMessageVO.setState(1);
-
-        list.add(carMessageVO);
-
-        return list;
+            @Override
+            public void onMyError(VolleyError error) {
+             Toast.makeText(SetCarInfoActivity.this,"网络异常,车辆加载失败",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     int p;//要删除的数据的位置
     private void delete(int position){
-         p=carMessageList.get(position).getCarInfoId();
-        String url=""+"position="+p;
+         p=position;
+        String url=Constants.DELETE_CAR_INFO_URL+"?carInfoId="+carMessageList.get(position).getCarInfoId();
 
         VolleyRequest.RequestGet(SetCarInfoActivity.this, url, "deleteCarMessage", new VolleyInterface(SetCarInfoActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
-                if(result.equals("success")){
-                    carMessageList.remove(p);
-                    adapter.notifyDataSetChanged();
-                }
+                carMessageList.remove(p);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -166,7 +161,6 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
                 Toast.makeText(SetCarInfoActivity.this,"网络异常，删除失败",Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
 
