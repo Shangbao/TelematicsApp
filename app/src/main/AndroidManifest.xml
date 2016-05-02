@@ -84,6 +84,11 @@
         <activity
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:name="com.hangon.user.activity.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>13
 
         </activity>
 
@@ -131,7 +136,9 @@
 
         </activity>
 
-        <activity android:name="com.hangon.carInfoManage.activity.WeizhangActivity"></activity>
+        <activity android:name="com.hangon.carInfoManage.activity.WeizhangActivity">
+
+        </activity>
 
         <activity android:name="com.hangon.carInfoManage.activity.YichangActivity">
 
@@ -148,11 +155,7 @@
         </activity>
 
         <activity android:name="com.hangon.carInfoManage.activity.SetCarInfoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name="com.hangon.weizhang.activity.MainActivity">
@@ -168,12 +171,10 @@
         </activity>
         <service android:name="com.cheshouye.api.client.WeizhangIntentService" />
 
-
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
-
     </application>
 
     <supports-screens android:largeScreens="true"
