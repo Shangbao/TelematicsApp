@@ -105,7 +105,7 @@ public class BestRouteActivity extends Activity implements
          */
           mGeoCoder = GeoCoder.newInstance();
           mPoiSearch = PoiSearch.newInstance();
-        mSuggestionSearch = SuggestionSearch.newInstance();
+          mSuggestionSearch = SuggestionSearch.newInstance();
         /**
          * 监听结果回调
          */
@@ -115,7 +115,6 @@ public class BestRouteActivity extends Activity implements
         receiver();
 
     }
-
     /**
      * 接受数据
      */
@@ -159,9 +158,8 @@ public class BestRouteActivity extends Activity implements
             public void rightClick() {
                 judgeNetState=mReceiver.getNetType();
                 if(judgeNetState.equals("mobilenet")||judgeNetState.equals("wifinet")){
-                    SearchGeocoder();
                     judgeNet.setStates(1);
-
+                    SearchGeocoder();
                     if ("".equals(startPosition.getText().toString().trim())
                             || "".equals(endPosition.getText().toString().trim())) {
                         Toast.makeText(BestRouteActivity.this, "请输入起始点",
@@ -228,7 +226,6 @@ public class BestRouteActivity extends Activity implements
             searchPositionList.setVisibility(View.VISIBLE);
         }
     }
-
     public class PoiSearchListenerEnd implements TextWatcher {
         @Override
         public void afterTextChanged(Editable s) {
@@ -306,7 +303,7 @@ public class BestRouteActivity extends Activity implements
                     startPosition.getText().toString()));
         }
     }
-
+//地理编码
     @Override
     public void onGetGeoCodeResult(GeoCodeResult result) {
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
@@ -318,12 +315,33 @@ public class BestRouteActivity extends Activity implements
         judgeNet.setLat(result.getLocation().latitude);
         judgeNet.setLon(result.getLocation().longitude);
     }
-
+    //反地理编码
     @Override
     public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
 
     }
-
+    @Override
+    public void onGetSuggestionResult(SuggestionResult suggestionResult) {
+        if (suggestionResult == null || suggestionResult.getAllSuggestions() == null) {
+            return;
+        }
+        for (SuggestionResult.SuggestionInfo info : suggestionResult.getAllSuggestions()) {
+            if (info.key != null) {
+            }
+        }
+    }
+    //poi详情结果
+    @Override
+    public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
+        if (poiDetailResult.error != SearchResult.ERRORNO.NO_ERROR) {
+            Toast.makeText(BestRouteActivity.this, "抱歉，未找到结果", Toast.LENGTH_SHORT)
+                    .show();
+        } else {
+            Log.i("yxx",
+                    "==2=poi===" + poiDetailResult.getName() + ": "
+                            + poiDetailResult.getAddress());
+        }
+    }
     @Override
     public void onGetPoiResult(PoiResult poiResult) {
         if (poiResult == null
@@ -358,28 +376,8 @@ public class BestRouteActivity extends Activity implements
         }
     }
 
-    @Override
-    public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
-        if (poiDetailResult.error != SearchResult.ERRORNO.NO_ERROR) {
-            Toast.makeText(BestRouteActivity.this, "抱歉，未找到结果", Toast.LENGTH_SHORT)
-                    .show();
-        } else {
-            Log.i("yxx",
-                    "==2=poi===" + poiDetailResult.getName() + ": "
-                            + poiDetailResult.getAddress());
-        }
-    }
 
-    @Override
-    public void onGetSuggestionResult(SuggestionResult suggestionResult) {
-        if (suggestionResult == null || suggestionResult.getAllSuggestions() == null) {
-            return;
-        }
-        for (SuggestionResult.SuggestionInfo info : suggestionResult.getAllSuggestions()) {
-            if (info.key != null) {
-            }
-        }
-    }
+
 
     @Override
     protected void onPause() {

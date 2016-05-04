@@ -146,9 +146,7 @@ public class MapMainActivity extends Activity implements BaiduMap.OnMapClickList
         initLocation();
 
         judgeNet=new JudgeNet();
-
         states=judgeNet.getStates();
-
         mLocationListener = new MyLocationListener();
         initView();
         initfindViewById();

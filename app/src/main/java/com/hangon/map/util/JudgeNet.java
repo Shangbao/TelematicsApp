@@ -13,7 +13,8 @@ public class JudgeNet {
      */
     private static double lat=0.0;
     private static double lon=0.0;
-
+    //判断选择个人信息返回参数值
+    private static  int personalInformation=0;
     public static int getStates() {
         return states;
     }
@@ -28,6 +29,13 @@ public class JudgeNet {
 
     public static void setLat(double lat) {
         JudgeNet.lat = lat;
+    }
+
+    public  int getPersonalInformation() {
+        return personalInformation;
+    }
+    public void setPersonalInformation(int personalInformation) {
+        JudgeNet.personalInformation = personalInformation;
     }
 
     public static double getLon() {

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/list_order_gasname"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="长春工业大学南湖校区男寝八栋加油站"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="6" >
+
+            <TextView
+                android:id="@+id/list_gasorder_status"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:text="待支付"
+                android:textColor="#33ffff"
+                android:textSize="12dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/ordertimetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="下单时间:"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/list_ordertime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/ordertimetext"
+            android:text="2016-08-12  12:00"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/gastypetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="50dp"
+            android:text="加油类型："
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/list_gastype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="20dp"
+            android:text="E97"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/gaslitretext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ordertimetext"
+            android:layout_below="@+id/ordertimetext"
+            android:layout_marginTop="5dp"
+            android:text="加油升数:"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/gassumpricetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/list_gaslitre"
+            android:layout_alignBottom="@+id/list_gaslitre"
+            android:layout_alignLeft="@+id/gastypetext"
+            android:text="加油总价:"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_marginLeft="-3dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/list_gassumprice"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/list_gastype"
+            android:text="￥11111"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/list_gaslitre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/list_ordertime"
+            android:layout_alignTop="@+id/gaslitretext"
+            android:text="18"
+            android:textSize="12dp" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        >
+        <TextView
+            android:layout_marginLeft="210dp"
+            android:gravity="center"
+            android:id="@+id/gaslist_cancel_order"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:background="#ffffff"
+            android:text="取消订单"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_marginLeft="280dp"
+            android:id="@+id/gaslist_payment_order"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:background="#fd9229"
+            android:gravity="center"
+            android:text="付款"
+            android:textColor="#ffffff"
+            android:textSize="12dp" />
+    </RelativeLayout>
+</LinearLayout>

@@ -15,9 +15,9 @@ import android.widget.TextView;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.bean.map.Gastprice;
-import com.hangon.common.UserUtil;
 import com.hangon.map.util.GasInfoUtil;
 import com.hangon.map.util.JudgeNet;
+import com.hangon.order.activity.AppointmentOrder;
 
 import java.util.List;
 
@@ -25,26 +25,29 @@ import java.util.List;
  * Created by Administrator on 2016/4/24.
  */
 public class GasSiteDetailsActivity extends Activity {
-    private TextView gas_indent_name;
-    private TextView gas_indent_address;
-    private TextView GasNameDetails;
-    private TextView GasAreanameDetails;
-    private TextView GasFwlmscDetails;
-    private TextView GasAddressDetails;
-    private TextView GasDistanceDetails;
-    private ImageView GasStartRoute;
-    private Button start;
-
+    //加油站名称
+    private TextView mGasNameDetails;
+    //加油站类型
+    private TextView mGasAreanameDetails;
+    //加油卡
+    private TextView mGasFwlmscDetails;
+    //加油站地址
+    private TextView mGasAddressDetails;
+    //距离
+    private TextView mGasDistanceDetails;
+    //进行线路查询
+    private ImageView mGasStartRoute;
+    //预约加油
+    private Button mAppointAddGas;
+    //获取加油站在列表中的位置
     private int position;
-    private String gastype;
-    private String gasprice;
-
+ //自定义不知，代码生成
     private LinearLayout gas_price_city;
     private LinearLayout gas_price_site;
     private LinearLayout gas_indent_maker;
-
-    List<Gastprice> gascitylist ;
+    //用于进行状态判断
     JudgeNet judge;
+    //存取加油站数据
     GasInfoUtil datainfo;
     Context context;
 
@@ -57,15 +60,15 @@ public class GasSiteDetailsActivity extends Activity {
         receive();
         datainfo=new GasInfoUtil();
     }
-
+//由于接受加油站的数据
     public void receive(){
         Bundle bundle=this.getIntent().getExtras().getBundle("mGasList");
         position=bundle.getInt("position");
-        GasAddressDetails.setText(GasInfoUtil.gasinfo.get(position).getAddress());
-        GasDistanceDetails.setText(GasInfoUtil.gasinfo.get(position).getDistance());
-        GasAreanameDetails.setText(GasInfoUtil.gasinfo.get(position).getBrandname());
-        GasNameDetails.setText(GasInfoUtil.gasinfo.get(position).getName());
-        GasFwlmscDetails.setText(GasInfoUtil.gasinfo.get(position).getFwlsmc());
+        mGasAddressDetails.setText(GasInfoUtil.gasinfo.get(position).getAddress());
+        mGasDistanceDetails.setText(GasInfoUtil.gasinfo.get(position).getDistance());
+        mGasAreanameDetails.setText(GasInfoUtil.gasinfo.get(position).getBrandname());
+        mGasNameDetails.setText(GasInfoUtil.gasinfo.get(position).getName());
+        mGasFwlmscDetails.setText(GasInfoUtil.gasinfo.get(position).getFwlsmc());
         for(int i=0;i<GasInfoUtil.gasinfo.get(position).getGastprice().size();i++){
             LinearLayout layout1=new LinearLayout(context);
             layout1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,80));
@@ -115,28 +118,49 @@ public class GasSiteDetailsActivity extends Activity {
         }
 
     }
+    //获取页面各个控件以及监听事件的添加
     private void init() {
         judge=new JudgeNet();
-        GasStartRoute=(ImageView)findViewById(R.id.GasStartRoute);
-        GasAddressDetails=(TextView)findViewById(R.id.gasAddressDetails);
-        GasNameDetails=(TextView)findViewById(R.id.gasNameDetails);
-        GasDistanceDetails=(TextView)findViewById(R.id.gasDistanceDetails);
-        GasFwlmscDetails=(TextView)findViewById(R.id.gasFwlmscDetails);
-        GasAreanameDetails=(TextView) findViewById(R.id.gasAreanameDetails);
+        mGasStartRoute =(ImageView)findViewById(R.id.GasStartRoute);
+        mGasAddressDetails =(TextView)findViewById(R.id.gasAddressDetails);
+        mGasNameDetails =(TextView)findViewById(R.id.gasNameDetails);
+        mGasDistanceDetails =(TextView)findViewById(R.id.gasDistanceDetails);
+        mGasFwlmscDetails =(TextView)findViewById(R.id.gasFwlmscDetails);
+        mGasAreanameDetails =(TextView) findViewById(R.id.gasAreanameDetails);
         gas_price_city=(LinearLayout)findViewById(R.id.gas_price_city);
         gas_price_site=(LinearLayout)findViewById(R.id.gas_price_site);
         gas_indent_maker=(LinearLayout)findViewById(R.id.gas_indent_maker);
-        GasStartRoute.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                judge.setStates(3);
-                Bundle bundle=new Bundle();
-                bundle.putString("endaddress",GasAddressDetails.getText().toString());
-                Intent intent=new Intent();
-                intent.setClass(GasSiteDetailsActivity.this, BestRouteActivity.class);
-                intent.putExtra("endaddress", bundle);
-                startActivity(intent);
+        mAppointAddGas=(Button)findViewById(R.id.appoint_add_gas);
+        Onclick mOnclick=new Onclick() ;
+        mGasStartRoute.setOnClickListener(mOnclick);
+        mAppointAddGas.setOnClickListener(mOnclick);
+
+    }
+    //设置监听事件
+    class Onclick implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case  R.id.GasStartRoute:
+                    //发送终点位置到最优路线,用来进行状态判断
+                    judge.setStates(3);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("endaddress", mGasAddressDetails.getText().toString());
+                    Intent intent = new Intent();
+                    intent.setClass(GasSiteDetailsActivity.this, BestRouteActivity.class);
+                    intent.putExtra("endaddress", bundle);
+                    startActivity(intent);
+                    break;
+                case R.id.appoint_add_gas:
+                    Bundle bundle1=new Bundle();
+                    bundle1.putInt("GasSiteposition", position);
+                    Intent intent2=new Intent();
+                    intent2.setClass(GasSiteDetailsActivity.this, AppointmentOrder.class);
+                    intent2.putExtra("GasSite", bundle1);
+                    startActivity(intent2);
+                    break;
+
             }
-        });
+        }
     }
 }

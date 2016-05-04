@@ -6,7 +6,7 @@ package com.hangon.common;
 public class Constants {
     //网络请求URL
     //10.163.0.194   10.58.11.204
-    public static final String HOST_IP="192.168.253.1";
+    public static final String HOST_IP="10.59.3.167";
     //关于用户信息的网络请求地址
     public static final  String LOGIN_URL="http://"+HOST_IP+":8080/wind/UserLogin?";
     public static final  String REGISTER_URL="http://"+HOST_IP+":8080/wind/UserRegister?";
@@ -20,6 +20,14 @@ public class Constants {
     public static final String ADD_CAR_INFO_URL="http://"+HOST_IP+":8080/wind/Car/AddCarInfo";
     public static final String UPDATE_CAR_INFO_URL="http://"+HOST_IP+":8080/wind/Car/UpdateCarInfo";
     public static final String DELETE_CAR_INFO_URL="http://"+HOST_IP+":8080/wind/Car/DeleteCarInfo";
+
+    //关于订单的网络请求地址
+    public static final String ADD_ORDER_INFO_URL="http://"+HOST_IP+":8080/wind/Order/AddOrderInfo";
+    public static final String GET_ORDER_INFOS_URL="http://"+HOST_IP+":8080/wind/Order/GetOrderInfos";
+    public static final String DELETE_ORDER_INFO_URL="http://"+HOST_IP+":8080/wind/Order/DeleteOrderInfo";
+    public static final String CHANGE_ORDER_INFO_URL="http://"+HOST_IP+":8080/wind/Order/ChangeOrderState";
+    public static final String GET_WZF_ORDER_INFOS_URL="http://"+HOST_IP+":8080/wind/Order/GetWzfOrderInfos";
+    public static final String GET_YZF_ORDER_INFOS_URL="http://"+HOST_IP+":8080/wind/Order/GetYzfOrderInfos";
 
     //音乐播放状态
     public static final int IDLE = 0;// 空闲状态

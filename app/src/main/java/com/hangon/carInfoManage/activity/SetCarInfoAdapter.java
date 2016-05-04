@@ -85,7 +85,6 @@ public class SetCarInfoAdapter extends BaseAdapter {
         viewHold.name.setText(list.get(position).getName());
         viewHold.phoneNum.setText(list.get(position).getPhoneNum());
         viewHold.plateNum.setText(Constants.PROVINCE_VALUE.charAt(list.get(position).getProvinceIndex())+list.get(position).getCarLicenceTail());
-
         if(list.get(position).getState()==1){
             viewHold.defaultAddress.setVisibility(View.VISIBLE);
         }else {

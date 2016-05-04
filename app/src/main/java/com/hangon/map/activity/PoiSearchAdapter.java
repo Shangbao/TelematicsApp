@@ -25,18 +25,16 @@ import com.example.fd.ourapplication.R;
  *
  *
  */
-public class PoiSearchAdapter extends BaseAdapter implements Comparable<PoiInfo>{
-	Pattern pattern;
-	Matcher matcher;
+public class PoiSearchAdapter extends BaseAdapter {
 	private Context context;
 	private List<PoiInfo> list;
 	private ViewHolder holder;
-	private String address;
+
 
 	public PoiSearchAdapter(Context context,List<PoiInfo> appGroup) {
 		this.context = context;
 		this.list = appGroup;
-		this.address=address;
+
 	}
 
 	@Override
@@ -74,7 +72,7 @@ public class PoiSearchAdapter extends BaseAdapter implements Comparable<PoiInfo>
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		pattern=Pattern.compile("[\u4e00-\u9fa5]");
+
 		for(int i=0;i<list.size()-1;i++){
 			if(list.get(i).address.length()>list.get(i+1).address.length()){
 				String a=list.get(i).address;
@@ -88,9 +86,4 @@ public class PoiSearchAdapter extends BaseAdapter implements Comparable<PoiInfo>
 		public TextView mpoi_name;// 名称
 		public TextView mpoi_address;// 地址
 	}
-	@Override
-	public int compareTo(PoiInfo another) {
-		return Integer.valueOf(this.address)-Integer.valueOf(another.address);
-	}
-
 }

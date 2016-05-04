@@ -6,7 +6,8 @@ package com.hangon.bean.carInfo;
 public class CarInfoVO {
     private String name;
     private String phoneNum;
-    private String plateNum;
+    private int provinceIndex;//车牌省份索引
+    private String carLicenceTail;//车牌尾号
     private int state;
 
     public CarInfoVO() {
@@ -36,12 +37,20 @@ public class CarInfoVO {
         this.phoneNum = phoneNum;
     }
 
-    public String getPlateNum() {
-        return plateNum;
+    public int getProvinceIndex() {
+        return provinceIndex;
     }
 
-    public void setPlateNum(String plateNum) {
-        this.plateNum = plateNum;
+    public void setProvinceIndex(int provinceIndex) {
+        this.provinceIndex = provinceIndex;
+    }
+
+    public String getCarLicenceTail() {
+        return carLicenceTail;
+    }
+
+    public void setCarLicenceTail(String carLicenceTail) {
+        this.carLicenceTail = carLicenceTail;
     }
 
     @Override
@@ -49,7 +58,8 @@ public class CarInfoVO {
         return "CarInfoVO{" +
                 "name='" + name + '\'' +
                 ", phoneNum='" + phoneNum + '\'' +
-                ", plateNum='" + plateNum + '\'' +
+                ", provinceIndex=" + provinceIndex +
+                ", carLicenceTail='" + carLicenceTail + '\'' +
                 ", state=" + state +
                 '}';
     }

@@ -125,7 +125,6 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
 
    //获取车辆信息列表
     private void getCarMessageList(){
-
         String url= Constants.GET_CAR_INFO_URL;
         VolleyRequest.RequestGet(SetCarInfoActivity.this, url, "getCarMessageList", new VolleyInterface(SetCarInfoActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
 

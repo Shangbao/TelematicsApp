@@ -22,6 +22,7 @@ import com.hangon.map.activity.BestRouteActivity;
 import com.hangon.map.activity.MapMainActivity;
 import com.hangon.map.util.JudgeNet;
 import com.hangon.map.util.NetReceiver;
+import com.hangon.order.activity.OrderMain;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 /**
@@ -38,6 +39,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         Button btnGasStation;//周围加油站
         Button btnWeizhang;
         Button btnYichang;
+        Button btnOrder;
 
         Intent intent;//用于跳转
 
@@ -70,7 +72,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
             btnGasStation= (Button) carView.findViewById(R.id.btnGasStation);
             btnWeizhang= (Button) carView.findViewById(R.id.btnWeihang);
             btnYichang= (Button) carView.findViewById(R.id.btnYichang);
-
+            btnOrder= (Button) carView.findViewById(R.id.btnOrder);
             //设置监听事件
             btnGasStation.setOnClickListener(this);
             btnBestWay.setOnClickListener(this);
@@ -79,6 +81,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
             btnShouAdd.setOnClickListener(this);
             btnWeizhang.setOnClickListener(this);
             btnYichang.setOnClickListener(this);
+            btnOrder.setOnClickListener(this);
 
             mReceiver=new NetReceiver();//网络接受
             mFilter=new IntentFilter();
@@ -141,6 +144,11 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                         Toast.makeText(getActivity(), "当前没有可用网络", Toast.LENGTH_SHORT).show();
                     }
                     break;
+                case R.id.btnOrder:
+                    intent=new Intent();
+                    intent.setClass(getActivity(), OrderMain.class);
+                    startActivity(intent);
+                break;
             }
         }
 

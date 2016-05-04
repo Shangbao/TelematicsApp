@@ -12,17 +12,26 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.hangon.common.Constants;
+import com.hangon.common.VolleyInterface;
+import com.hangon.common.VolleyRequest;
 import com.hangon.fragment.car.CarFragment;
 import com.hangon.fragment.music.MusicFragment;
 import com.hangon.fragment.order.OrderFragment;
 import com.hangon.fragment.userinfo.UserFragment;
+import com.hangon.order.activity.PersonalInformationData;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/4/1.
  */
 public class HomeActivity extends Activity implements View.OnClickListener{
-
+     PersonalInformationData personalInformationData;
     //定位四个帧fragment
     private Fragment carFragment=new CarFragment();
     private  Fragment musicFragment=new MusicFragment();
@@ -31,6 +40,7 @@ public class HomeActivity extends Activity implements View.OnClickListener{
 
     //tab中的四个帧布局
     private FrameLayout carFrameLayout,musicFrameLayout,orderFrameLayout,userFrameLayout;
+
 
     //tab中的四个图片组件
     private TextView carTextView,musicTextView,orderTextView,userTextView;
@@ -42,6 +52,7 @@ public class HomeActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        personalInformationData=new PersonalInformationData();
         initView();
         initFragment();
         initClickEvent();
@@ -263,4 +274,6 @@ public class HomeActivity extends Activity implements View.OnClickListener{
         Log.e("age", age+"");
         Log.e("driverNum", driverNum);
     }
+
+
 }

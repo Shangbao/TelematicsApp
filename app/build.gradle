@@ -34,4 +34,5 @@ dependencies {
     compile name: 'SMSSDKGUI-2.0.2', ext: 'aar'
     compile project(':libzxing')
     compile project(':onekeyshare')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }

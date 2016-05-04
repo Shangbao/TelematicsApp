@@ -105,7 +105,6 @@ public class AlterCarMessageActivity extends Activity {
         phone_num= (EditText) findViewById(R.id.phone_num);
         state= (Spinner) findViewById(R.id.state);
         topbar= (Topbar) findViewById(R.id.alterCarMessageTopbar);
-
     }
 
     //为spinner设置监听事件
@@ -147,7 +146,6 @@ public class AlterCarMessageActivity extends Activity {
                 }, null).show();
             }
         });
-
     }
 
     //设置组件里面的值
