@@ -45,9 +45,6 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
 
 
-
-
-
     <application
         android:name="com.hangon.common.MyApplication"
         android:allowBackup="true"
@@ -79,85 +76,87 @@
             </intent-filter>
         </activity>
 
-
-
+        <!--欢迎页activity-->
         <activity
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:name="com.hangon.user.activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>13
-
+            </intent-filter>
         </activity>
 
+        <!--注册页面的activity-->
         <activity
             android:name="com.hangon.user.activity.RegisterActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
+        <!--登录页面的activity-->
         <activity android:name="com.hangon.user.activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
 
+        <!--主页activity-->
         <activity android:name="com.hangon.home.activity.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
-
         </activity>
 
-
+        <!--获取头像的activity-->
         <activity android:name="com.hangon.fragment.userinfo.ClipImageActivity"></activity>
 
+        <!--用户头像activity-->
          <activity android:name="com.hangon.fragment.userinfo.UserIconActivity">
 
          </activity>
 
+        <!--编辑用户信息activity-->
         <activity android:name="com.hangon.fragment.userinfo.UpdateUserActivity">
 
         </activity>
 
+        <!--添加车辆信息activity-->
         <activity android:name="com.hangon.carInfoManage.activity.AddCarMessageActivity">
 
         </activity>
 
+        <!--周围加油站地图页面-->
         <activity android:name="com.hangon.map.activity.MapMainActivity">
-
         </activity>
 
+        <activity android:name="com.hangon.map.activity.GasSiteDetailsActivity"/>
 
-        <activity android:name="com.hangon.map.activity.GasSiteDetailsActivity">
-
-        </activity>
+        <!--修改指定车辆信息的activity-->
         <activity android:name="com.hangon.carInfoManage.activity.AlterCarMessageActivity">
 
         </activity>
 
+        <!--违章管理activity-->
         <activity android:name="com.hangon.carInfoManage.activity.WeizhangActivity">
 
         </activity>
 
+        <!--异常管理activity-->
         <activity android:name="com.hangon.carInfoManage.activity.YichangActivity">
 
         </activity>
 
+        <!--查看指定车辆信息activity-->
         <activity android:name="com.hangon.carInfoManage.activity.ScanCarMessageActivity">
-
         </activity>
 
-
+        <!--最优路线activity-->
         <activity android:name="com.hangon.map.activity.BestRouteActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|navigation"
             android:windowSoftInputMode="adjustPan|stateVisible">
         </activity>
 
+        <!--管理车辆信息页面-->
         <activity android:name="com.hangon.carInfoManage.activity.SetCarInfoActivity">
-
         </activity>
 
+        <!--违章相关页面-->
         <activity android:name="com.hangon.weizhang.activity.MainActivity">
         </activity>
 

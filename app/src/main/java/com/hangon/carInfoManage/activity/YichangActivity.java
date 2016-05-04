@@ -14,6 +14,8 @@ import android.widget.EditText;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.bean.carInfo.YcglVO;
+import com.hangon.common.Topbar;
+import com.hangon.home.activity.HomeActivity;
 
 import java.util.Random;
 
@@ -30,6 +32,8 @@ public class YichangActivity extends Activity implements View.OnClickListener{
 
     Button btnYcjb;//异常警报
     Button btnScsjs;//生成随机数
+
+    Topbar topbar;
 
     NotificationManager manager;
     YcglVO ycglVO;
@@ -50,11 +54,28 @@ public class YichangActivity extends Activity implements View.OnClickListener{
         isGoodEngine= (EditText) findViewById(R.id.yichang_isGoodEngine);
         isGoodTran= (EditText) findViewById(R.id.yichang_isGoodTran);
         isGoodLight= (EditText) findViewById(R.id.yichang_isGoodLight);
+        topbar= (Topbar) findViewById(R.id.yichangTopbar);
 
         btnScsjs= (Button) findViewById(R.id.btnScsjs);
         btnYcjb= (Button) findViewById(R.id.btnYcjb);
         btnYcjb.setOnClickListener(this);
         btnScsjs.setOnClickListener(this);
+
+        topbar.setRightIsVisible(false);
+        topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
+            @Override
+            public void leftClick() {
+                Intent intent=new Intent();
+                intent.setClass(YichangActivity.this, HomeActivity.class);
+                intent.putExtra("id",1);
+                startActivity(intent);
+            }
+
+            @Override
+            public void rightClick() {
+
+            }
+        });
 
         manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     }

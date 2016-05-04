@@ -17,7 +17,7 @@
             custom:mTitleTextSize="10sp"
             custom:mTitleTextColor="#ffffff"
             custom:mTitle="违章管理"
-            custom:leftText="Back"
+            custom:leftText="BACK"
             custom:leftTextColor="#ffffff"
             ></com.hangon.common.Topbar>
     </LinearLayout>
