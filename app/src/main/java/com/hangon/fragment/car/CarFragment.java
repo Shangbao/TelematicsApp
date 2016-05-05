@@ -32,14 +32,13 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         View  carView;
 
         Topbar carTopbar;//标题栏
-        Button carManageSao;//扫一扫添加车辆
-        Button btnShouAdd;//手动添加
+        Button btnSstq;//扫一扫实时天气
         Button btnSetCarInfo;//车辆信息管理
         Button btnBestWay;//最优路线
         Button btnGasStation;//周围加油站
-        Button btnWeizhang;
-        Button btnYichang;
-        Button btnOrder;
+        Button btnWeizhang;//违章查询
+        Button btnYichang;//异常管理
+        Button btnOrder;//订单管理
 
         Intent intent;//用于跳转
 
@@ -65,22 +64,20 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         //初始化组件与实例化
         public void init(){
             //实例化
-            carManageSao= (Button) carView.findViewById(R.id.carManageSao);
-            btnShouAdd= (Button) carView.findViewById(R.id.btnShouAdd);
+            btnSstq= (Button) carView.findViewById(R.id.btnSstq);
             btnSetCarInfo= (Button) carView.findViewById(R.id.btnSetCarInfo);
             btnBestWay= (Button) carView.findViewById(R.id.btnBestWay);
             btnGasStation= (Button) carView.findViewById(R.id.btnGasStation);
-            btnWeizhang= (Button) carView.findViewById(R.id.btnWeihang);
-            btnYichang= (Button) carView.findViewById(R.id.btnYichang);
+            btnWeizhang= (Button) carView.findViewById(R.id.btnWeiZhang);
+            //btnYichang= (Button) carView.findViewById(R.id.btnYichang);
             btnOrder= (Button) carView.findViewById(R.id.btnOrder);
             //设置监听事件
             btnGasStation.setOnClickListener(this);
             btnBestWay.setOnClickListener(this);
             btnSetCarInfo.setOnClickListener(this);
-            carManageSao.setOnClickListener(this);
-            btnShouAdd.setOnClickListener(this);
+            btnSstq.setOnClickListener(this);
             btnWeizhang.setOnClickListener(this);
-            btnYichang.setOnClickListener(this);
+//            btnYichang.setOnClickListener(this);
             btnOrder.setOnClickListener(this);
 
             mReceiver=new NetReceiver();//网络接受
@@ -96,17 +93,10 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         //点击事件
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.carManageSao:
-                    intent=new Intent();
-                    intent.setClass(getActivity(), CaptureActivity.class);
-                    startActivity(intent);
+                case R.id.btnSstq:
+
                     break;
 
-                case R.id.btnShouAdd:
-                    intent=new Intent();
-                    intent.setClass(getActivity(), AddCarMessageActivity.class);
-                    startActivity(intent);
-                    break;
 
                 case R.id.btnSetCarInfo:
                     intent=new Intent();
@@ -121,16 +111,17 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                     startActivity(intent);
                     break;
 
-                case R.id.btnWeihang:
+                case R.id.btnWeiZhang:
                     intent=new Intent();
                     intent.setClass(getActivity(), WeizhangActivity.class);
                     startActivity(intent);
                     break;
+                /*
                 case R.id.btnYichang:
                     intent=new Intent();
                     intent.setClass(getActivity(), YichangActivity.class);
                     startActivity(intent);
-                    break;
+                    break;*/
 
                 case R.id.btnGasStation:
                     judgeNetState=mReceiver.getNetType();

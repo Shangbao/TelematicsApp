@@ -191,10 +191,17 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
         toHome.setClass(LoginActivity.this, HomeActivity.class);
         startActivity(toHome);
-
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
 
-
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        this.onDestroy();
+    }
 }

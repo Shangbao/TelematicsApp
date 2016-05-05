@@ -14,23 +14,11 @@
             android:id="@+id/topbar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            custom:mTitle="我的订单"
+            custom:mTitle="智能维护"
             custom:mTitleTextColor="#ffffff"
             custom:mTitleTextSize="10sp"
             ></com.hangon.common.Topbar>
     </LinearLayout>
-
-    <include layout="@layout/activity_main_top_tab" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
-    </android.support.v4.view.ViewPager>
-
-
-
 
 
 </LinearLayout>

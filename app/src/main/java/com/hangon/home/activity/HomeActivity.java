@@ -12,76 +12,68 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.hangon.common.Constants;
-import com.hangon.common.VolleyInterface;
-import com.hangon.common.VolleyRequest;
 import com.hangon.fragment.car.CarFragment;
 import com.hangon.fragment.music.MusicFragment;
-import com.hangon.fragment.order.OrderFragment;
+import com.hangon.fragment.order.ZnwhFragment;
 import com.hangon.fragment.userinfo.UserFragment;
 import com.hangon.order.activity.PersonalInformationData;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2016/4/1.
  */
-public class HomeActivity extends Activity implements View.OnClickListener{
-     PersonalInformationData personalInformationData;
+public class HomeActivity extends Activity implements View.OnClickListener {
+    PersonalInformationData personalInformationData;
     //定位四个帧fragment
-    private Fragment carFragment=new CarFragment();
-    private  Fragment musicFragment=new MusicFragment();
-    private  Fragment orderFragment=new OrderFragment();
-    private  Fragment userFragment=new UserFragment();
+    private Fragment carFragment = new CarFragment();
+    private Fragment musicFragment = new MusicFragment();
+    private Fragment znwhFragment = new ZnwhFragment();
+    private Fragment userFragment = new UserFragment();
 
     //tab中的四个帧布局
-    private FrameLayout carFrameLayout,musicFrameLayout,orderFrameLayout,userFrameLayout;
+    private FrameLayout carFrameLayout, musicFrameLayout, znwhFrameLayout, userFrameLayout;
 
 
     //tab中的四个图片组件
-    private TextView carTextView,musicTextView,orderTextView,userTextView;
+    private TextView carTextView, musicTextView, znwhTextView, userTextView;
 
     //tab中的四个图片对应的文字
-    private ImageView carImageView,musicImageView,orderImageView,userImageView;
+    private ImageView carImageView, musicImageView, znwhImageView, userImageView;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        personalInformationData=new PersonalInformationData();
+        personalInformationData = new PersonalInformationData();
         initView();
         initFragment();
         initClickEvent();
-        Intent intent=new Intent();
-        int id=getIntent().getIntExtra("id",0);
-        if(id!=0){
+        Intent intent = new Intent();
+        int id = getIntent().getIntExtra("id", 0);
+        if (id != 0) {
             getTab(id);
         }
     }
 
     /**
-    初始化所有的fragment
+     * 初始化所有的fragment
      */
-    private  void initFragment(){
-        FragmentTransaction transaction=getFragmentManager().beginTransaction();
-        if(!carFragment.isAdded()){
-            transaction.add(R.id.content,carFragment);
+    private void initFragment() {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (!carFragment.isAdded()) {
+            transaction.add(R.id.content, carFragment);
             transaction.hide(carFragment);
         }
-        if(!musicFragment.isAdded()){
-            transaction.add(R.id.content,musicFragment);
+        if (!musicFragment.isAdded()) {
+            transaction.add(R.id.content, musicFragment);
             transaction.hide(musicFragment);
         }
-        if(!orderFragment.isAdded()){
-            transaction.add(R.id.content,orderFragment);
-            transaction.hide(orderFragment);
+        if (!znwhFragment.isAdded()) {
+            transaction.add(R.id.content, znwhFragment);
+            transaction.hide(znwhFragment);
         }
-        if(!userFragment.isAdded()){
-            transaction.add(R.id.content,userFragment);
+        if (!userFragment.isAdded()) {
+            transaction.add(R.id.content, userFragment);
             transaction.hide(userFragment);
         }
         //隐藏所有的Fragment
@@ -94,51 +86,49 @@ public class HomeActivity extends Activity implements View.OnClickListener{
 
     /**
      * 隐藏所有的fragment
-     *
      */
     private void hideAllFragement(FragmentTransaction transaction) {
         transaction.hide(carFragment);
         transaction.hide(musicFragment);
-        transaction.hide(orderFragment);
+        transaction.hide(znwhFragment);
         transaction.hide(userFragment);
     }
 
     /**
      * 初始化组件
      */
-    private  void initView(){
-        carFrameLayout= (FrameLayout) findViewById(R.id.carLayout);
-        musicFrameLayout= (FrameLayout) findViewById(R.id.musicLayout);
-        orderFrameLayout= (FrameLayout) findViewById(R.id.orderLayout);
-        userFrameLayout= (FrameLayout) findViewById(R.id.userLayout);
+    private void initView() {
+        carFrameLayout = (FrameLayout) findViewById(R.id.carLayout);
+        musicFrameLayout = (FrameLayout) findViewById(R.id.musicLayout);
+        znwhFrameLayout = (FrameLayout) findViewById(R.id.znwhLayout);
+        userFrameLayout = (FrameLayout) findViewById(R.id.userLayout);
 
-        carImageView= (ImageView) findViewById(R.id.carImageView);
-        musicImageView= (ImageView) findViewById(R.id.musicImageView);
-        orderImageView= (ImageView) findViewById(R.id.orderImageView);
-        userImageView= (ImageView) findViewById(R.id.userImageView);
+        carImageView = (ImageView) findViewById(R.id.carImageView);
+        musicImageView = (ImageView) findViewById(R.id.musicImageView);
+        znwhImageView = (ImageView) findViewById(R.id.znwhImageView);
+        userImageView = (ImageView) findViewById(R.id.userImageView);
 
-        carTextView= (TextView) findViewById(R.id.carTextView);
-        musicTextView= (TextView) findViewById(R.id.musicTextView);
-        orderTextView= (TextView) findViewById(R.id.orderTextView);
-        userTextView= (TextView) findViewById(R.id.userTextView);
+        carTextView = (TextView) findViewById(R.id.carTextView);
+        musicTextView = (TextView) findViewById(R.id.musicTextView);
+        znwhTextView = (TextView) findViewById(R.id.znwhTextView);
+        userTextView = (TextView) findViewById(R.id.userTextView);
     }
 
     /**
-     初始化点击事件
+     * 初始化点击事件
      */
-    private void initClickEvent(){
+    private void initClickEvent() {
         carFrameLayout.setOnClickListener(this);
         musicFrameLayout.setOnClickListener(this);
-        orderFrameLayout.setOnClickListener(this);
+        znwhFrameLayout.setOnClickListener(this);
         userFrameLayout.setOnClickListener(this);
     }
 
     /**
-     *
      * 触发tab中FramLayout点击事件
      */
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.carLayout:
                 clickTab(carFragment);
                 break;
@@ -147,8 +137,8 @@ public class HomeActivity extends Activity implements View.OnClickListener{
                 clickTab(musicFragment);
                 break;
 
-            case R.id.orderLayout:
-                clickTab(orderFragment);
+            case R.id.znwhLayout:
+                clickTab(znwhFragment);
                 break;
 
             case R.id.userLayout:
@@ -160,12 +150,11 @@ public class HomeActivity extends Activity implements View.OnClickListener{
 
     /**
      * 点击Tab按钮
-     *
      */
     private void clickTab(Fragment tabFragment) {
         //清除之前选中的状态
         clearSelected();
-        FragmentTransaction transaction=getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
         //隐藏所有的Fragment
         hideAllFragement(transaction);
@@ -184,26 +173,25 @@ public class HomeActivity extends Activity implements View.OnClickListener{
     /**
      * 通过获取id值来确定底部切换栏
      */
-    private void getTab(int id){
-        switch (id){
+    private void getTab(int id) {
+        switch (id) {
             case 1:
                 clickTab(carFragment);
-            break;
+                break;
 
             case 2:
-                clickTab(carFragment);
-             break;
+                clickTab(musicFragment);
+                break;
 
             case 3:
-                clickTab(musicFragment);
-             break;
+                clickTab(znwhFragment);
+                break;
 
             case 4:
                 clickTab(userFragment);
-             break;
+                break;
         }
     }
-
 
 
     /**
@@ -218,9 +206,9 @@ public class HomeActivity extends Activity implements View.OnClickListener{
             musicImageView.setImageResource(R.drawable.ic_launcher);
             musicTextView.setTextColor(Color.parseColor("#45C01A"));
         }
-        if (!orderFragment.isHidden()) {
-            orderImageView.setImageResource(R.drawable.ic_launcher);
-            orderTextView.setTextColor(Color.parseColor("#45C01A"));
+        if (!znwhFragment.isHidden()) {
+            znwhImageView.setImageResource(R.drawable.ic_launcher);
+            znwhTextView.setTextColor(Color.parseColor("#45C01A"));
         }
 
         if (!userFragment.isHidden()) {
@@ -231,6 +219,7 @@ public class HomeActivity extends Activity implements View.OnClickListener{
 
     /**
      * 根据样式改变选中的装填
+     *
      * @param tabFragment
      */
     private void changeTabStyle(Fragment tabFragment) {
@@ -244,9 +233,9 @@ public class HomeActivity extends Activity implements View.OnClickListener{
             musicTextView.setTextColor(Color.parseColor("#999999"));
         }
 
-        if (tabFragment instanceof OrderFragment) {
-            orderImageView.setImageResource(R.drawable.login_pic);
-            orderTextView.setTextColor(Color.parseColor("#999999"));
+        if (tabFragment instanceof ZnwhFragment) {
+            znwhImageView.setImageResource(R.drawable.login_pic);
+            znwhTextView.setTextColor(Color.parseColor("#999999"));
         }
 
         if (tabFragment instanceof UserFragment) {
@@ -255,25 +244,9 @@ public class HomeActivity extends Activity implements View.OnClickListener{
         }
     }
 
-
-
-
-    private void getUserInfo(){
-        Intent intent=getIntent();
-        Bundle bundle=intent.getBundleExtra("bundle");
-
-        String userName=bundle.getString("userName");
-        String  nickname=bundle.getString("nickname");
-        String sex=bundle.getString("sex");
-        int age=bundle.getInt("age");
-        String driverNum=bundle.getString("driverNum");
-
-        Log.e("userName", userName);
-        Log.e("nickname", nickname);
-        Log.e("sex", sex);
-        Log.e("age", age+"");
-        Log.e("driverNum", driverNum);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
     }
-
-
 }

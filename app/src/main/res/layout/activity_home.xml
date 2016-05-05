@@ -95,7 +95,7 @@
 
             <!-- 关于订单按钮-->
             <FrameLayout
-                android:id="@+id/orderLayout"
+                android:id="@+id/znwhLayout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -103,18 +103,18 @@
                 android:paddingTop="3dp"
                 >
                 <ImageView
-                    android:id="@+id/orderImageView"
+                    android:id="@+id/znwhImageView"
                     android:layout_width="96px"
                     android:layout_height="84px"
                     android:layout_gravity="top|center"
                     android:src="@drawable/ic_launcher"
                     />
                 <TextView
-                    android:id="@+id/orderTextView"
+                    android:id="@+id/znwhTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
-                    android:text="我的订单"
+                    android:text="智能维护"
                     android:textColor="#45c01a"
                     android:textSize="13sp"
                     />
