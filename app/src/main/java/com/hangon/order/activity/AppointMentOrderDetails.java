@@ -17,6 +17,7 @@ import com.hangon.common.Constants;
 import com.hangon.common.DialogTool;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
+import com.hangon.map.util.JudgeNet;
 import com.hangon.order.util.OrderData;
 
 public class AppointMentOrderDetails extends Activity {
@@ -118,6 +119,9 @@ public class AppointMentOrderDetails extends Activity {
 		appointment_sweep_qrcode.setOnClickListener(appointMentListeer);
 	}
 	private void receiveData() {
+		JudgeNet judgeNet=new JudgeNet();
+
+		if(judgeNet.getAppointOrderData()==0){
 		Bundle bundle = this.getIntent().getBundleExtra("gasdata");
 		orderData = (OrderData) bundle.getSerializable("orderdata");
 		cusName.setText(orderData.getCusName());
@@ -132,6 +136,20 @@ public class AppointMentOrderDetails extends Activity {
 		orderTime.setText(orderData.getStrTime());
 		OrderId=orderData.getOrderId();
 		//gasStationType.setText(mReceiveDataList.get(position).getGasStationType());
+	}
+	if(judgeNet.getAppointOrderData()==1){
+		Bundle bundle = this.getIntent().getBundleExtra("orderdata");
+		cusName.setText(bundle.get("cusName").toString());
+		cusPlateNum.setText(bundle.get("cusPlateNum").toString());
+		cusPhoneNum.setText(bundle.get("cusphone").toString());
+		gasStationName.setText(bundle.get("gasStationName").toString());
+		gasStationAddress.setText(bundle.get("gasStationAddress").toString());
+		gasType.setText(bundle.get("gasType").toString());
+		gasLitre.setText(bundle.get("gasLitre").toString());
+		gasSinglePrice.setText(bundle.get("gasSinglePrice").toString());
+		gasSumPrice.setText(bundle.get("gasSumPrice").toString());
+		orderTime.setText(bundle.get("orderTime").toString());
+	}
 	}
 	public class AppointMentListeer implements OnClickListener {
 

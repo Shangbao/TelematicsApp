@@ -43,12 +43,21 @@ public class AllOrder extends Fragment {
 	GasOrderAdapter adapter;
 	//
 	View allorder;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+//		ViewGroup container;
+//		allorder = LayoutInflater.from(getActivity()).inflate(R.layout.allorder,null);
+		getData();
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		 allorder = inflater.inflate(R.layout.allorder, container, false);
 		mAllorderList=(ListView)allorder.findViewById(R.id.allorderlist);
-		getData();
+		onCreate(savedInstanceState);
 		return allorder;
 	}
 
@@ -69,18 +78,19 @@ public class AllOrder extends Fragment {
 			@Override
 			public void onMySuccess(String result) {
 				Gson gson = new Gson();
-			//	Log.e("aaaa", result);
-				List<OrderData> list = gson.fromJson(result, new TypeToken<List<OrderData>>() {}.getType());
-				adapter=new GasOrderAdapter(getActivity(),list, R.layout.orderlist);
+				//	Log.e("aaaa", result);
+				List<OrderData> list = gson.fromJson(result, new TypeToken<List<OrderData>>() {
+				}.getType());
+				adapter = new GasOrderAdapter(getActivity(), list, R.layout.orderlist);
 				mAllorderList.setAdapter(adapter);
 				mAllorderList.setOnItemClickListener(new OnItemclick(getActivity(), list));
-			//	initAdapter(setData(list));
+				//	initAdapter(setData(list));
 				//Toast.makeText(getActivity(), list.get(0).getCusName() + list.get(0).getCusPhoneNum(), Toast.LENGTH_LONG).show();
 			}
 
 			@Override
 			public void onMyError(VolleyError error) {
-                //Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+				//Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -113,32 +123,9 @@ public class AllOrder extends Fragment {
 		// TODO 自动生成的方法存根
 		super.onResume();
 		Log.d("aaaaaaaaaaa", "aaaaaaaaaaaaaa");
-
 		getData();
 
 	}
-	@Override
-	public void onStart() {
-		super.onStart();
-		getData();
-	}
 
-	@Override
-	public void onStop() {
-		super.onStop();
-		getData();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		getData();
-	}
-
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		onDestroy();
-	}
 
 }

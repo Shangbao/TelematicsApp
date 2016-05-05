@@ -15,6 +15,17 @@ public class JudgeNet {
     private static double lon=0.0;
     //判断选择个人信息返回参数值
     private static  int personalInformation=0;
+    //判断是否是从预约加油页面传过去的数据
+    private static  int appointOrderData=0;
+
+    public int getAppointOrderData() {
+        return appointOrderData;
+    }
+
+    public void setAppointOrderData(int appointOrderData) {
+        JudgeNet.appointOrderData = appointOrderData;
+    }
+
     public static int getStates() {
         return states;
     }

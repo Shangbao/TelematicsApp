@@ -23,6 +23,7 @@ import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.map.util.GasInfoUtil;
 import com.hangon.map.util.JudgeNet;
+import com.hangon.order.util.Date1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -226,7 +227,7 @@ public class AppointmentOrder extends Activity {
 		double b=Double.valueOf(mGasPrice.getText().toString());
 		String url=Constants.ADD_ORDER_INFO_URL;
 		Toast.makeText(AppointmentOrder.this,"bb",Toast.LENGTH_LONG).show();
-		Map map = new HashMap<>();
+		final Map map = new HashMap<>();
 		map.put("gasStationAddress", mGasAddress.getText().toString());
 		map.put("gasStationName", mGasname.getText().toString());
 		map.put("cusName", mCusname.getText().toString());
@@ -239,8 +240,26 @@ public class AppointmentOrder extends Activity {
 		VolleyRequest.RequestPost(AppointmentOrder.this, url, "PostVolley", map, new VolleyInterface(AppointmentOrder.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
 			@Override
 			public void onMySuccess(String result) {
+				Date1 date1=new Date1();
+				double a=Double.parseDouble(mGasLitre.getText().toString());
+				double b=Double.parseDouble(mGasPrice.getText().toString());
+				Bundle bundle=new Bundle();
+				bundle.putString("gasStationAddress", mGasAddress.getText().toString());
+				bundle.putString("gasStationName", mGasname.getText().toString());
+				bundle.putString("cusPlateNum", mCusPlatecar.getText().toString());
+				bundle.putString("cusPhoneNum", mCusphone.getText().toString());
+				bundle.putString("gasSinglePrice", mGasPrice.getText().toString());
+				bundle.putString("gasType", selected.toString());
+				bundle.putString("gasSumPrice", a * b + "");
+				bundle.putString("gasLitre", mGasLitre.getText().toString());
+				bundle.putString("cusphone", mCusphone.getText().toString());
+				bundle.putString("cusName",mCusname.getText().toString());
+				bundle.putString("orderTime",date1.GetTime());
+                JudgeNet judgeNet=new JudgeNet();
+				judgeNet.setAppointOrderData(1);
 				Intent confirm = new Intent();
 				confirm.setClass(AppointmentOrder.this, AppointMentOrderDetails.class);
+				confirm.putExtra("orderdata",bundle);
 				startActivity(confirm);
 			}
 			@Override

@@ -72,6 +72,7 @@ public class PayOrder extends Fragment {
 				//initAdapter(setData(list));
 				adapter = new GasOrderAdapter(getActivity(), list, R.layout.orderlist);
 				mOrderPayList.setAdapter(adapter);
+				adapter.notifyDataSetChanged();
 			//	Toast.makeText(getActivity(), list.get(0).getCusName() + list.get(0).getCusPhoneNum(), Toast.LENGTH_LONG).show();
 			}
 
@@ -109,28 +110,4 @@ public class PayOrder extends Fragment {
 		getData();
 
 	}
-	@Override
-	public void onStart() {
-		super.onStart();
-		getData();
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		getData();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		getData();
-	}
-
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		onDestroy();
-	}
-
 }

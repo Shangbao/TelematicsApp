@@ -66,7 +66,6 @@ public class NotPay extends Fragment {
 			public void onMySuccess(String result) {
 				Gson gson = new Gson();
 				Log.e("aaaa", result);
-
 				List<OrderData> list = gson.fromJson(result, new TypeToken<List<OrderData>>() {
 				}.getType());
 				mOrderNotPayList.setOnItemClickListener(new OnItemclick(getActivity(), list));
@@ -105,32 +104,8 @@ public void onResume() {
 	// TODO 自动生成的方法存根
 	super.onResume();
 	Log.d("aaaaaaaaaaa", "aaaaaaaaaaaaaa");
-
 	getData();
 
 }
-	@Override
-	public void onStart() {
-		super.onStart();
-		getData();
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		getData();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		getData();
-	}
-
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		onDestroy();
-	}
 
 }

@@ -60,19 +60,23 @@ public class GasOrderAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		vh = new ViewHolder();
-		View v = LayoutInflater.from(context).inflate(resource, null);
-		this.position=position;
-		vh.list_gasname=(TextView)v.findViewById(R.id.list_order_gasname);
-		vh.list_gassumprice=(TextView)v.findViewById(R.id.list_gassumprice);
-		vh.list_gaslitre=(TextView)v.findViewById(R.id.list_gaslitre);
-		vh.list_gastype=(TextView)v.findViewById(R.id.list_gastype);
-		vh.list_ordertime=(TextView)v.findViewById(R.id.list_ordertime);
-		vh.list_gasorder_status=(TextView)v.findViewById(R.id.list_gasorder_status);
-		vh.list_gassumprice=(TextView)v.findViewById(R.id.list_gassumprice);
-		vh.list_gassumprice=(TextView)v.findViewById(R.id.list_gassumprice);
-		vh.gaslist_cancel_order=(TextView)v.findViewById(R.id.gaslist_cancel_order);
-		vh.gaslist_payment_order=(TextView)v.findViewById(R.id.gaslist_payment_order);
+		if(convertView==null) {
+			vh = new ViewHolder();
+			convertView = LayoutInflater.from(context).inflate(resource, null);
+			vh.list_gasname = (TextView) convertView.findViewById(R.id.list_order_gasname);
+			vh.list_gassumprice = (TextView) convertView.findViewById(R.id.list_gassumprice);
+			vh.list_gaslitre = (TextView) convertView.findViewById(R.id.list_gaslitre);
+			vh.list_gastype = (TextView) convertView.findViewById(R.id.list_gastype);
+			vh.list_ordertime = (TextView) convertView.findViewById(R.id.list_ordertime);
+			vh.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_gasorder_status);
+			vh.list_gassumprice = (TextView) convertView.findViewById(R.id.list_gassumprice);
+			vh.list_gassumprice = (TextView) convertView.findViewById(R.id.list_gassumprice);
+			vh.gaslist_cancel_order = (TextView) convertView.findViewById(R.id.gaslist_cancel_order);
+			vh.gaslist_payment_order = (TextView) convertView.findViewById(R.id.gaslist_payment_order);
+           convertView.setTag(vh);
+		}else{
+			vh= (ViewHolder) convertView.getTag();
+		}
 		PayOnclickListener listener=new PayOnclickListener(position);
 		vh.gaslist_cancel_order.setOnClickListener(listener);
 		vh.gaslist_payment_order.setOnClickListener(listener);
@@ -87,7 +91,8 @@ public class GasOrderAdapter extends BaseAdapter {
 			vh.gaslist_cancel_order.setVisibility(View.GONE);
 			vh.gaslist_payment_order.setText("删除订单");
 		}
-		return v;
+		notifyDataSetChanged();
+		return convertView;
 	}
 	class ViewHolder {
 		//关于订单列表字段

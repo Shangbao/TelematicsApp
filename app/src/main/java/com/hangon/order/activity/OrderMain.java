@@ -101,6 +101,7 @@ public class OrderMain extends FragmentActivity {
 				this.getSupportFragmentManager(), mFragmentList);
 		mViewPagerOrder.setAdapter(mFragmentAdapter);
 		mViewPagerOrder.setCurrentItem(0);
+		mViewPagerOrder.setOffscreenPageLimit(0);
 		mViewPagerOrder.setOnPageChangeListener(new OnPageChangeListener() {
 
 			/**
@@ -135,18 +136,22 @@ public class OrderMain extends FragmentActivity {
 					lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 3) + currentIndex
 							* (screenWidth / 3));
 
+
 				} else if (currentIndex == 1 && position == 0) // 1->0
 				{
+
 					lp.leftMargin = (int) (-(1 - offset)
 							* (screenWidth * 1.0 / 3) + currentIndex
 							* (screenWidth / 3));
 
 				} else if (currentIndex == 1 && position == 1) // 1->2
 				{
+
 					lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 3) + currentIndex
 							* (screenWidth / 3));
 				} else if (currentIndex == 2 && position == 1) // 2->1
 				{
+
 					lp.leftMargin = (int) (-(1 - offset)
 							* (screenWidth * 1.0 / 3) + currentIndex
 							* (screenWidth / 3));
