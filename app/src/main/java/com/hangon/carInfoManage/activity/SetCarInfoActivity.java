@@ -21,8 +21,10 @@ import com.hangon.bean.carInfo.CarMessageVO;
 import com.hangon.common.Constants;
 import com.hangon.common.DialogTool;
 import com.hangon.common.JsonUtil;
+import com.hangon.common.Topbar;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
+import com.hangon.home.activity.HomeActivity;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 
@@ -41,6 +43,7 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
 
     Button btnShou;
     Button btnSao;
+    Topbar topbar;
 
     List<CarMessageVO> carMessageList;//车辆信息列表数据
     Gson gson;//解析json数据
@@ -57,9 +60,25 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
     private void init(){
         btnSao= (Button) findViewById(R.id.btnSao);
         btnShou= (Button) findViewById(R.id.btnShou);
+        topbar= (Topbar) findViewById(R.id.addCarMessageTopbar);
         btnSao.setOnClickListener(this);
         btnShou.setOnClickListener(this);
         listView= (ListView) findViewById(R.id.carInfoList);
+        topbar.setRightIsVisible(false);
+        topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
+            @Override
+            public void leftClick() {
+                Intent intent=new Intent();
+                intent.putExtra("id",1);
+                intent.setClass(SetCarInfoActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void rightClick() {
+
+            }
+        });
     }
 
     //初始化适配器

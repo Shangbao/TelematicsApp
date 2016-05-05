@@ -19,6 +19,8 @@
             custom:mTitle="管理车辆信息"
             custom:mTitleTextColor="#ffffff"
             custom:mTitleTextSize="10dp"
+            custom:leftText="BACK"
+            custom:leftTextColor="#ffffff"
             >
         </com.hangon.common.Topbar>
     </LinearLayout>
