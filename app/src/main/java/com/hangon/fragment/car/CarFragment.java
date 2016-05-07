@@ -36,10 +36,9 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         Button btnSstq;//扫一扫实时天气
         Button btnSetCarInfo;//车辆信息管理
         Button btnBestWay;//最优路线
-        Button btnGasStation;//周围加油站
         Button btnWeizhang;//违章查询
-        Button btnYichang;//异常管理
-        Button btnOrder;//订单管理
+        Button btnYyjy;//预约加油按钮
+
 
         Intent intent;//用于跳转
 
@@ -68,18 +67,15 @@ public class CarFragment extends Fragment implements View.OnClickListener {
             btnSstq= (Button) carView.findViewById(R.id.btnSstq);
             btnSetCarInfo= (Button) carView.findViewById(R.id.btnSetCarInfo);
             btnBestWay= (Button) carView.findViewById(R.id.btnBestWay);
-            btnGasStation= (Button) carView.findViewById(R.id.btnGasStation);
             btnWeizhang= (Button) carView.findViewById(R.id.btnWeiZhang);
-            //btnYichang= (Button) carView.findViewById(R.id.btnYichang);
-            btnOrder= (Button) carView.findViewById(R.id.btnOrder);
+            btnYyjy= (Button) carView.findViewById(R.id.btnYyjy);
+
             //设置监听事件
-            btnGasStation.setOnClickListener(this);
             btnBestWay.setOnClickListener(this);
             btnSetCarInfo.setOnClickListener(this);
             btnSstq.setOnClickListener(this);
             btnWeizhang.setOnClickListener(this);
-//            btnYichang.setOnClickListener(this);
-            btnOrder.setOnClickListener(this);
+           btnYyjy.setOnClickListener(this);
 
             mReceiver=new NetReceiver();//网络接受
             mFilter=new IntentFilter();
@@ -100,7 +96,6 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                     startActivity(intent);
                     break;
 
-
                 case R.id.btnSetCarInfo:
                     intent=new Intent();
                     intent.setClass(getActivity(),SetCarInfoActivity.class);
@@ -119,14 +114,8 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                     intent.setClass(getActivity(), WeizhangActivity.class);
                     startActivity(intent);
                     break;
-                /*
-                case R.id.btnYichang:
-                    intent=new Intent();
-                    intent.setClass(getActivity(), YichangActivity.class);
-                    startActivity(intent);
-                    break;*/
 
-                case R.id.btnGasStation:
+                case R.id.btnYyjy:
                     judgeNetState=mReceiver.getNetType();
                     if(judgeNetState.equals("mobilenet")||judgeNetState.equals("wifinet")){
                         judgeNet.setStates(2);
@@ -138,11 +127,6 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                         Toast.makeText(getActivity(), "当前没有可用网络", Toast.LENGTH_SHORT).show();
                     }
                     break;
-                case R.id.btnOrder:
-                    intent=new Intent();
-                    intent.setClass(getActivity(), OrderMain.class);
-                    startActivity(intent);
-                break;
             }
         }
 
@@ -151,6 +135,5 @@ public class CarFragment extends Fragment implements View.OnClickListener {
             super.onDestroy();
             getActivity().unregisterReceiver(mReceiver);
         }
-
 
 }

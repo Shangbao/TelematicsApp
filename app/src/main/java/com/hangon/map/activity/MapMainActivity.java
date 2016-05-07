@@ -59,6 +59,7 @@ import com.hangon.map.util.AnimAsyncTask;
 import com.hangon.map.util.GasInfoUtil;
 import com.hangon.map.util.IOExceptionHandle;
 import com.hangon.map.util.JudgeNet;
+import com.hangon.order.activity.AllOrder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,7 +69,7 @@ import java.util.Map;
 /**
  * Created by Administrator on 2016/4/23.
  */
-public class MapMainActivity extends Activity implements BaiduMap.OnMapClickListener,
+public class MapMainActivity extends Activity implements View.OnClickListener,BaiduMap.OnMapClickListener,
         OnGetRoutePlanResultListener, OnGetGeoCoderResultListener {
     int position = 0;//对应的覆盖物点击标识
 
@@ -109,6 +110,9 @@ public class MapMainActivity extends Activity implements BaiduMap.OnMapClickList
     private ImageView location_position;
     private Button DisplayListButton;
     private ImageView route_search;
+
+    Button btnOrder;//订单管理
+    Button btnGasStation;//周围加油站
 
     // 起始地址接收
     private static String start_position = "";
@@ -229,7 +233,23 @@ public class MapMainActivity extends Activity implements BaiduMap.OnMapClickList
         location_position.setOnClickListener(maplistener);
         DisplayListButton.setOnClickListener(maplistener);
         route_search.setOnClickListener(maplistener);
+        btnOrder= (Button) findViewById(R.id.btnOrder);
+        btnGasStation= (Button) findViewById(R.id.btnZwjyz);
+        btnOrder.setOnClickListener(this);
+        btnGasStation.setOnClickListener(this);
         Listlistener();
+    }
+
+    @Override
+    public void onClick(View v) {
+     switch (v.getId()){
+         case R.id.btnOrder:
+             Intent intent=new Intent(MapMainActivity.this, AllOrder.class);
+             startActivity(intent);
+             break;
+         case R.id.btnZwjyz:
+             break;
+     }
     }
     //初始化画面
     private void initView() {
@@ -273,7 +293,10 @@ public class MapMainActivity extends Activity implements BaiduMap.OnMapClickList
         mSearch = RoutePlanSearch.newInstance();
         mSearch.setOnGetRoutePlanResultListener(this);
     }
-//定位
+
+
+
+    //定位
     private class MyLocationListener implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {

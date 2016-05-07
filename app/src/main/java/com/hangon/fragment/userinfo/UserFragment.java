@@ -109,7 +109,6 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
                 Intent toUpdateUserInfo = new Intent();
                 toUpdateUserInfo.setClass(getActivity(), UpdateUserActivity.class);
                 startActivity(toUpdateUserInfo);
-                getActivity().finish();
             }
         });
 

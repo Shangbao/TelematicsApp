@@ -82,12 +82,12 @@
         </RelativeLayout>
 
         <RelativeLayout
-               android:layout_weight="1"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content">
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <Button
-                android:id="@+id/btnGasStation"
-                android:text="周围加油站"
+                android:id="@+id/btnYyjy"
+                android:text="预约加油"
                 android:textSize="18sp"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
@@ -96,26 +96,6 @@
                 />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/btnOrder"
-                android:text="订单管理"
-                android:textSize="18sp"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:background="@drawable/btn_sy_car1"
-                android:layout_centerInParent="true" />
-        </RelativeLayout>
-
-
-
-
     </LinearLayout>
-
-
-
 
 </LinearLayout>
