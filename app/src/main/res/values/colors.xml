@@ -43,4 +43,7 @@
     <color name="csy_label">#ff969696</color>
     <color name="csy_text">#ff555555</color>
     <color name="csy_hint">#ffc6c6c6</color>
+    <color name="black">#000000</color>
+    <color name="grey">#808080</color>
+    <color name="light_grey">#D3D3D3</color>
 </resources>

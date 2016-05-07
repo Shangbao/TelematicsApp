@@ -23,6 +23,7 @@ import com.hangon.map.activity.MapMainActivity;
 import com.hangon.map.util.JudgeNet;
 import com.hangon.map.util.NetReceiver;
 import com.hangon.order.activity.OrderMain;
+import com.hangon.weather.WeatherActivity;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 /**
@@ -94,7 +95,9 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.btnSstq:
-
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), WeatherActivity.class);
+                    startActivity(intent);
                     break;
 
 
