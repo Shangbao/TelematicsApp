@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 
 import com.example.fd.ourapplication.R;
+import com.hangon.common.Constants;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,12 +19,11 @@ import java.util.TimerTask;
  * Created by Administrator on 2016/3/31.
  */
 public class WelcomeActivity extends Activity{
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
-
 
         ImageView welcomeLogo =(ImageView)findViewById(R.id.welcomeLogo);
         Animation welcomeAnim= AnimationUtils.loadAnimation(WelcomeActivity.this,R.anim.welcome_anim);
@@ -36,21 +36,14 @@ public class WelcomeActivity extends Activity{
     class wait extends TimerTask{
         public void run(){
             Intent toLogin=new Intent();
-            toLogin.setClass(WelcomeActivity.this,LoginActivity.class);
+            toLogin.setClass(WelcomeActivity.this, LoginActivity.class);
+            if(Constants.VERSION>5){
+            overridePendingTransition(R.anim.welcome_anim,R.anim.welcome_out_anim);
+            }
             startActivity(toLogin);
+            WelcomeActivity.this.finish();
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        finish();
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        this.onDestroy();
-        finish();
-    }
 }

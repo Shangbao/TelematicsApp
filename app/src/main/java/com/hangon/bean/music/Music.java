@@ -4,6 +4,7 @@ package com.hangon.bean.music;
  * Created by Administrator on 2016/4/10.
  */
 public class Music {
+    private String  number;
     private String title;// 歌名
     private String singer;// 艺术家
     private String url;// 路径
@@ -14,14 +15,6 @@ public class Music {
         super();
     }
 
-    public Music(String title, String singer, String url, long time, String name) {
-        super();
-        this.title = title;
-        this.singer = singer;
-        this.url = url;
-        this.time = time;
-        this.name = name;
-    }
 
     public String getTitle() {
         return title;
@@ -63,9 +56,11 @@ public class Music {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Music [title=" + title + ", singer=" + singer + ", url=" + url
-                + ", time=" + time + ", name=" + name + "]";
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

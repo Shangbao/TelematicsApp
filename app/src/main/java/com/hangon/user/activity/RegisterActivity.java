@@ -101,9 +101,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         registerTopbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
             @Override
             public void leftClick() {
-                Intent toLogin=new Intent();
-                toLogin.setClass(RegisterActivity.this,LoginActivity.class);
-                startActivity(toLogin);
+                RegisterActivity.this.finish();
             }
 
             @Override

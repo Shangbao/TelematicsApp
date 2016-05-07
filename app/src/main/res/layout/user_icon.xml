@@ -28,7 +28,7 @@
         android:layout_height="1dp"
         android:background="#6c6c6c"/>
 
-    <ImageView
+    <com.hangon.fragment.music.MusicImage
         android:layout_marginTop="20dp"
         android:id="@+id/imageView"
         android:layout_width="125dp"

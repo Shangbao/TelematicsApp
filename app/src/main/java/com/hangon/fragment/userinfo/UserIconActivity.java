@@ -59,9 +59,10 @@ public class UserIconActivity extends Activity implements OnClickListener {
            public void leftClick() {
 
                Intent intent = new Intent();
-               intent.putExtra("id",4);
+               intent.putExtra("id", 4);
                intent.setClass(UserIconActivity.this, HomeActivity.class);
                startActivity(intent);
+               UserIconActivity.this.finish();
            }
 
            @Override
@@ -71,6 +72,7 @@ public class UserIconActivity extends Activity implements OnClickListener {
        });
         topbar.setRightIsVisible(false);
         getUserIconFromCookies();
+
     }
 
     @Override

@@ -7,8 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -39,6 +43,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     MusicAdapter musicAdapter;//音乐列表适配器
     MediaPlayer mediaPlayer;//音乐播放器
     TextView selectedSong,selectedSinger;
+    MusicImage musicImage;
 
     private boolean isPlaying=true;//播放状态
     private static int currIndex=0;//当前播放的索引
@@ -80,8 +85,13 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         mediaPlayer.setOnCompletionListener(this);
         mediaPlayer.setOnErrorListener(this);
         songList.setOnItemClickListener(this);
+        musicImage= (MusicImage) musicView.findViewById(R.id.personIcon);
         Topbar topbar= (Topbar) musicView.findViewById(R.id.topbar);
         topbar.setBtnIsVisible(false);
+        Animation operatingAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.music_rotate);
+        LinearInterpolator lin = new LinearInterpolator();
+        operatingAnim.setInterpolator(lin);
+        musicImage.startAnimation(operatingAnim);
     }
 
     //获取音乐歌曲列表并添加适配器

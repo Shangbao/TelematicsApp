@@ -78,6 +78,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             lUserName.setText(userInfo.getUserName().trim());
             lUserPass.setText(userInfo.getUserPass().trim());
             sendUserInfo(userInfo);
+            this.finish();
         }else{
             lUserName.setText(userInfo.getUserName().trim());
             lUserPass.setText("");
@@ -135,6 +136,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         user.setIsSave(true);
                         Toast.makeText(LoginActivity.this, "输入正确,正在为你加载中.", Toast.LENGTH_SHORT).show();
                         finishedLogin(user);
+                        LoginActivity.this.finish();
                     }else{
                         Toast.makeText(LoginActivity.this, "账号或者密码错误,请重新输入.", Toast.LENGTH_SHORT).show();
                     }
@@ -170,7 +172,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             //保存用户信息到文件里
             UserUtil.getInstance().saveLoginUserInfo(userInfo);
             //进行登录页面到主页面的跳转
-           sendUserInfo(userInfo);
+        sendUserInfo(userInfo);
     }
 
     /**
@@ -186,22 +188,10 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         bundle.putString("sex", userInfo.getSex());
         bundle.putInt("age",userInfo.getAge());
         bundle.putString("driverNum", userInfo.getDriverNum());
-
         toHome.putExtra("bundle",bundle);
-
         toHome.setClass(LoginActivity.this, HomeActivity.class);
         startActivity(toHome);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        finish();
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        this.onDestroy();
-    }
 }

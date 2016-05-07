@@ -71,6 +71,7 @@ public class UpdateUserActivity extends Activity {
                 intent.putExtra("id",4);
                 intent.setClass(UpdateUserActivity.this, HomeActivity.class);
                 startActivity(intent);
+                UpdateUserActivity.this.finish();
             }
 
             @Override
@@ -90,30 +91,54 @@ public class UpdateUserActivity extends Activity {
     }
 
     private boolean judgeEditext(){
+        boolean state=false;
         String nickname=uNickname.getText().toString().trim();
         String sex=uSex.getText().toString().trim();
         String driverNum=uDriverNum.getText().toString().trim();
         String age=uAge.getText().toString().trim();
-        if(nickname.length()>=2&&(sex.equals("男")||sex.equals("女"))&&age.length()>0&&driverNum.length()==18){
-            return true;
-        }else {
+
+        if(!nickname.isEmpty()){
             if (nickname.length()<2){
                 Toast.makeText(UpdateUserActivity.this,"昵称必须大于两位",Toast.LENGTH_SHORT).show();
+                state=false;
+                return  false;
             }
+        }
 
-            if (!(sex.equals("男")||!sex.equals("女"))){
+        if (!sex.isEmpty()){
+            if (!(sex.equals("男")&&!sex.equals("女"))){
                 Toast.makeText(UpdateUserActivity.this,"性别必须为男|女",Toast.LENGTH_SHORT).show();
+                state=false;
+                return false;
             }
+        }
 
-            if (age.length()<1||age.equals("")){
-                Toast.makeText(UpdateUserActivity.this,"年龄不能为空",Toast.LENGTH_SHORT).show();
+        if(!age.isEmpty()){
+            if (Integer.parseInt(age)<=0&&Integer.parseInt(age)>140){
+                Toast.makeText(UpdateUserActivity.this,"年龄必须在0-140之间",Toast.LENGTH_SHORT).show();
+                state=false;
+                return false;
             }
+        }
 
+        if(!driverNum.isEmpty()){
             if (driverNum.length() !=18){
                 Toast.makeText(UpdateUserActivity.this,"身份证号必须为18位",Toast.LENGTH_SHORT).show();
+                state=false;
+                return false;
             }
-            return false;
         }
+
+        if(nickname.isEmpty()&&sex.isEmpty()&&driverNum.isEmpty()&&age.isEmpty()){
+            Toast.makeText(UpdateUserActivity.this,"不能全部都为空",Toast.LENGTH_SHORT).show();
+            state=false;
+            return state;
+        }
+
+        if(nickname.length()>=2||sex.equals("男")||sex.equals("女")||driverNum.length()==18||Integer.parseInt(age)>0||Integer.parseInt(age)<=140){
+            state=true;
+        }
+        return state;
     }
 
     //把editext里的值封装到一个对象
@@ -123,7 +148,11 @@ public class UpdateUserActivity extends Activity {
         UserInfo user=new UserInfo();
         user.setNickname(uNickname.getText().toString());
         user.setSex(uSex.getText().toString());
-        user.setAge(Integer.parseInt(uAge.getText().toString()));
+        if(uAge.getText().toString().isEmpty()){
+            user.setAge(-1);
+        }else {
+            user.setAge(Integer.parseInt(uAge.getText().toString()));
+        }
         user.setDriverNum(uDriverNum.getText().toString());
         user.setUserName(userName);
         userInfo=user;

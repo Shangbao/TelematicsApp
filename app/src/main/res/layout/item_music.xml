@@ -3,46 +3,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" >
- 
+
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="60dp"
         android:layout_height="50dp">
-
-        <TextView
-            android:id="@+id/item_title"
-            android:layout_marginLeft="45dp"
+        <com.hangon.common.CircleView
+            android:id="@+id/item_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:text="标题"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/item_singer"
-            android:layout_marginLeft="45dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/item_title"
-            android:layout_marginTop="2dp"
-            android:text="歌手"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/item_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:text="时长"
-            android:textSize="15sp" />
+            android:layout_centerInParent="true"
+            android:textSize="20dp"
+            android:textColor="#302f2f"
+            android:text="01"
+            />
     </RelativeLayout>
-    <ImageView
-        android:layout_marginTop="5dp"
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#666666"
-        />
+        android:layout_height="50dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:text="标题"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/item_singer"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_title"
+                android:layout_marginTop="2dp"
+                android:text="歌手"
+                android:textSize="15sp"
+                android:textColor="#302f2f"/>
+
+            <TextView
+                android:id="@+id/item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:text="时长"
+                android:textSize="15sp" />
+        </RelativeLayout>
+        <ImageView
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e24040"
+            />
+    </LinearLayout>
+ 
+
+
+
 
 
 </LinearLayout>

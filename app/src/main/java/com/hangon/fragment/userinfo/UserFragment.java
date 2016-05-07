@@ -24,6 +24,7 @@ import com.hangon.common.DialogTool;
 import com.hangon.common.ImageUtil;
 import com.hangon.common.Topbar;
 import com.hangon.common.UserUtil;
+import com.hangon.fragment.music.MusicImage;
 import com.hangon.user.activity.LoginActivity;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
 
     TextView homeNickName;//昵称
     TextView homePhoneNum;//手机号
-    ImageView homeHeadIcon;//头像显示
+    MusicImage homeHeadIcon;//头像显示
     ImageView toSetHeadIcon;//头像设置
 
     Topbar userTopbar;//标题栏
@@ -90,7 +91,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
         userTopbar.setLeftIsVisible(false);
         homeNickName= (TextView) userView.findViewById(R.id.homeNickName);
         homePhoneNum= (TextView) userView.findViewById(R.id.homePhoneNum);
-        homeHeadIcon= (ImageView) userView.findViewById(R.id.homeHeadIcon);
+        homeHeadIcon= (MusicImage) userView.findViewById(R.id.homeHeadIcon);
         toSetHeadIcon= (ImageView) userView.findViewById(R.id.toSetHeadIcon);
         btnReturnLogin= (Button) userView.findViewById(R.id.btnReturnLogin);
         btnShare= (Button) userView.findViewById(R.id.btnShare);
@@ -108,6 +109,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
                 Intent toUpdateUserInfo = new Intent();
                 toUpdateUserInfo.setClass(getActivity(), UpdateUserActivity.class);
                 startActivity(toUpdateUserInfo);
+                getActivity().finish();
             }
         });
 
@@ -159,8 +161,10 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         clearCookies();
+                        getActivity().finish();
                     }
                 }).show();
+
 
                 break;
             case R.id.btnShare:

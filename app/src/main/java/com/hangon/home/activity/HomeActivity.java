@@ -23,7 +23,9 @@ import com.hangon.order.activity.PersonalInformationData;
  * Created by Administrator on 2016/4/1.
  */
 public class HomeActivity extends Activity implements View.OnClickListener {
-    PersonalInformationData personalInformationData;
+
+    //fragment的位置position
+    int position;
     //定位四个帧fragment
     private Fragment carFragment = new CarFragment();
     private Fragment musicFragment = new MusicFragment();
@@ -44,14 +46,15 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        personalInformationData = new PersonalInformationData();
+
         initView();
         initFragment();
         initClickEvent();
-        Intent intent = new Intent();
-        int id = getIntent().getIntExtra("id", 0);
-        if (id != 0) {
-            getTab(id);
+        int position = getIntent().getIntExtra("id", 0);
+        if (position != 0) {
+            getTab(position);
+        }else {
+            getTab(1);
         }
     }
 
@@ -130,19 +133,23 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.carLayout:
-                clickTab(carFragment);
+                position=1;
+                getTab(position);
                 break;
 
             case R.id.musicLayout:
-                clickTab(musicFragment);
+                position=2;
+                getTab(position);
                 break;
 
             case R.id.znwhLayout:
-                clickTab(znwhFragment);
+                position=3;
+                getTab(position);
                 break;
 
             case R.id.userLayout:
-                clickTab(userFragment);
+                position=4;
+                getTab(position);
                 break;
         }
 
@@ -173,9 +180,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     /**
      * 通过获取id值来确定底部切换栏
      */
-    private void getTab(int id) {
-        switch (id) {
-            case 1:
+    private void getTab(int position) {
+        switch (position) {
+              case 1:
                 clickTab(carFragment);
                 break;
 
@@ -245,8 +252,15 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        finish();
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        position=savedInstanceState.getInt("id");
+        getTab(position);
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //记录当前的position
+        outState.putInt("id",position);
     }
 }

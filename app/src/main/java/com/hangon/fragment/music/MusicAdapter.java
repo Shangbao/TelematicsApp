@@ -2,6 +2,7 @@ package com.hangon.fragment.music;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.bean.music.Music;
+import com.hangon.common.CircleView;
 import com.hangon.common.MusicUtil;
 
 import java.util.ArrayList;
@@ -54,7 +56,7 @@ public class MusicAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHold = new ViewHold();
             convertView = mInflater.inflate(R.layout.item_music, null);
-
+         viewHold.number= (CircleView) convertView.findViewById(R.id.item_num);
             viewHold.title = (TextView) convertView
                     .findViewById(R.id.item_title);
             viewHold.time = (TextView) convertView.findViewById(R.id.item_time);
@@ -64,7 +66,7 @@ public class MusicAdapter extends BaseAdapter {
         } else {
             viewHold = (ViewHold) convertView.getTag();
         }
-
+        viewHold.number.setText(list.get(position).getNumber());
         viewHold.title.setText(list.get(position).getTitle());
         viewHold.singer.setText(list.get(position).getSinger());
         viewHold.time.setText(MusicUtil.toTime((int) list.get(position)
@@ -74,10 +76,15 @@ public class MusicAdapter extends BaseAdapter {
             viewHold.title.setTextColor(Color.BLUE);
             viewHold.singer.setTextColor(Color.BLUE);
             viewHold.time.setTextColor(Color.BLUE);
+            viewHold.number.setText("");
+            viewHold.number.setBackgroundResource(R.drawable.ic_launcher);
+
         } else {
+            viewHold.number.setTextColor(Color.GRAY);
             viewHold.title.setTextColor(Color.BLACK);
             viewHold.singer.setTextColor(Color.GRAY);
-            viewHold.time.setTextColor(Color.GRAY);
+            viewHold.time.setTextColor(Color.BLACK);
+            viewHold.number.setBackgroundResource(0);
         }
         return convertView;
     }
@@ -86,6 +93,7 @@ public class MusicAdapter extends BaseAdapter {
         TextView title;
         TextView singer;
         TextView time;
+        CircleView number;
     }
 
     public int getCurrIndex() {
