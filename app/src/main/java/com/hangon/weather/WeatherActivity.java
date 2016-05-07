@@ -36,6 +36,8 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
     private TextView tvTemperature;
     private TextView tvWind;
     private TextView tvDate;
+    private TextView tvCurrentTemperature;
+    private TextView tvCurrentWeather;
 
     public static Weather context;
 
@@ -104,6 +106,8 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
         weeks = (ArrayList<HashMap<String,Object>>) weather.get("future");
         HashMap<String, Object> week = weeks.get(0);
         tvCity.setText(com.mob.tools.utils.R.toString(weather.get("city")));
+        tvCurrentTemperature.setText(com.mob.tools.utils.R.toString(weather.get("temperature")));
+        tvCurrentWeather.setText(com.mob.tools.utils.R.toString(weather.get("weather")));
         String time = com.mob.tools.utils.R.toString(weather.get("updateTime"));
         String date = "今日 ";
         String upTime = time.substring(8, 10) + ":" + time.substring(10, 12);
@@ -120,6 +124,9 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
         tvCity = (TextView) findViewById(R.id.city);
         tvUpdateTime = (TextView) findViewById(R.id.update_time);
         tvTemperature = (TextView) findViewById(R.id.temperature);
+        tvCurrentTemperature = (TextView) findViewById(R.id.current_temperature);
+        tvCurrentWeather = (TextView) findViewById(R.id.current_weather);
+
         tvWind = (TextView) findViewById(R.id.wind);
         tvDate = (TextView) findViewById(R.id.date);
         weatherBg = (LinearLayout) findViewById(R.id.weather_bg);
