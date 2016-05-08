@@ -74,7 +74,7 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
         time = new Time();
 
         intent = getIntent();
-        if(city == null || city == "自动定位"){
+        if(city == null){
             new Thread(){
                 public void run() {
                     ip = null;
