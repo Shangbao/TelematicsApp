@@ -1,45 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/activity/AllOrder.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/activity/AppointMentOrderDetails.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/activity/AppointmentOrder.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/activity/NotPay.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/activity/OrderMain.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/activity/PayOrder.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/activity/PayOrderDetails.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/activity/PersonalInformation.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/activity/PersonalInformationData.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/util/Date1.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/util/DialogTool.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/util/FragmentAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/util/GasOrderAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/util/GetOrderData.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/util/OnItemclick.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/util/OrderData.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/util/PersonalAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/hangon/order/util/UserInfo.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/a.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/addressmaker.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/closetrade.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_launcher.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/personal_information.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/successtrade.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/waitpayment.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/xian1.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/addgas.jpg" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/xia.png" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_top_tab.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/allorder.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/appointgas.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/appointment_order.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/appointment_order_details.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/orderlist.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/pay_order.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/pay_order_details.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/persona_linformation.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/personal_information_list.xml" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

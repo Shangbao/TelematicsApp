@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.text.format.Time;
 
 import com.example.fd.ourapplication.R;
 import com.mob.mobapi.API;
@@ -38,12 +41,14 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
     private TextView tvDate;
     private TextView tvCurrentTemperature;
     private TextView tvCurrentWeather;
+    private ImageView weatherIcon;
 
     public static Weather context;
 
     private LinearLayout weatherBg;
     private LinearLayout titleBarLayout;
     private LinearLayout currentWeatherLayout;
+    private ScrollView scrollView;
 
     private ListView weatherForcastList;
 
@@ -53,6 +58,9 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
 
     private Intent intent;
     private String city;
+    private String currentWeather;
+
+    private Time time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +71,10 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
         Weather api = (Weather) MobAPI.getAPI(Weather.NAME);
         api.getSupportedCities(this);
 
+        time = new Time();
+
         intent = getIntent();
-        if(city == null){
+        if(city == null || city == "自动定位"){
             new Thread(){
                 public void run() {
                     ip = null;
@@ -107,17 +117,101 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
         HashMap<String, Object> week = weeks.get(0);
         tvCity.setText(com.mob.tools.utils.R.toString(weather.get("city")));
         tvCurrentTemperature.setText(com.mob.tools.utils.R.toString(weather.get("temperature")));
-        tvCurrentWeather.setText(com.mob.tools.utils.R.toString(weather.get("weather")));
+        currentWeather = com.mob.tools.utils.R.toString(weather.get("weather"));
+        tvCurrentWeather.setText(currentWeather);
         String time = com.mob.tools.utils.R.toString(weather.get("updateTime"));
         String date = "今日 ";
         String upTime = time.substring(8, 10) + ":" + time.substring(10, 12);
-        tvUpdateTime.setText(date + " " + upTime);
+        tvUpdateTime.setText(date + " " + upTime + " 更新");
         tvTemperature.setText(com.mob.tools.utils.R.toString(week.get("temperature")));
         tvWind.setText(com.mob.tools.utils.R.toString(weather.get("wind")));
         tvDate.setText(time.substring(4, 6) + "/" + time.substring(6, 8) + " " + com.mob.tools.utils.R.toString(weather.get("week")));
         initWeather();
         WeatherAdapter adapter = new WeatherAdapter(WeatherActivity.this,R.layout.weather_forecast_item,weathers);
         weatherForcastList.setAdapter(adapter);
+        updateWeatherImage();
+    }
+
+    /**
+     * 更新背景图片和天气图标
+     */
+    private void updateWeatherImage() {
+        time.setToNow();
+        if (currentWeather.contains("晴")) {
+            if (time.hour >= 7 && time.hour < 19) {
+                weatherBg.setBackgroundResource(R.drawable.bg_fine_day);
+                weatherIcon.setImageResource(R.drawable.weather_img_fine_day);
+            } else {
+                weatherBg.setBackgroundResource(R.drawable.bg_fine_night);
+                weatherIcon.setImageResource(R.drawable.weather_img_fine_night);
+            }
+        } else if (currentWeather.contains("多云")) {
+            if (time.hour >= 7 && time.hour < 19) {
+                weatherBg.setBackgroundResource(R.drawable.bg_cloudy_day);
+                weatherIcon.setImageResource(R.drawable.weather_img_cloudy_day);
+            } else {
+                weatherBg.setBackgroundResource(R.drawable.bg_cloudy_night);
+                weatherIcon
+                        .setImageResource(R.drawable.weather_img_cloudy_night);
+            }
+        } else if (currentWeather.contains("阴")) {
+            weatherBg.setBackgroundResource(R.drawable.bg_overcast);
+            weatherIcon.setImageResource(R.drawable.weather_img_overcast);
+        } else if (currentWeather.contains("雷")) {
+            weatherBg.setBackgroundResource(R.drawable.bg_thunder_storm);
+            weatherIcon.setImageResource(R.drawable.weather_img_thunder_storm);
+        } else if (currentWeather.contains("雨")) {
+            weatherBg.setBackgroundResource(R.drawable.bg_rain);
+            if (currentWeather.contains("小雨")) {
+                weatherIcon.setImageResource(R.drawable.weather_img_rain_small);
+            } else if (currentWeather.contains("中雨")) {
+                weatherIcon
+                        .setImageResource(R.drawable.weather_img_rain_middle);
+            } else if (currentWeather.contains("大雨")) {
+                weatherIcon.setImageResource(R.drawable.weather_img_rain_big);
+            } else if (currentWeather.contains("暴雨")) {
+                weatherIcon.setImageResource(R.drawable.weather_img_rain_storm);
+            } else if (currentWeather.contains("雨夹雪")) {
+                weatherIcon.setImageResource(R.drawable.weather_img_rain_snow);
+            } else if (currentWeather.contains("冻雨")) {
+                weatherIcon.setImageResource(R.drawable.weather_img_sleet);
+            } else {
+                weatherIcon
+                        .setImageResource(R.drawable.weather_img_rain_middle);
+            }
+        } else if (currentWeather.contains("雪")
+                || currentWeather.contains("冰雹")) {
+            weatherBg.setBackgroundResource(R.drawable.bg_snow);
+            if (currentWeather.contains("小雪")) {
+                weatherIcon.setImageResource(R.drawable.weather_img_snow_small);
+            } else if (currentWeather.contains("中雪")) {
+                weatherIcon
+                        .setImageResource(R.drawable.weather_img_snow_middle);
+            } else if (currentWeather.contains("大雪")) {
+                weatherIcon.setImageResource(R.drawable.weather_img_snow_big);
+            } else if (currentWeather.contains("暴雪")) {
+                weatherIcon.setImageResource(R.drawable.weather_img_snow_storm);
+            } else if (currentWeather.contains("冰雹")) {
+                weatherIcon.setImageResource(R.drawable.weather_img_hail);
+            } else {
+                weatherIcon
+                        .setImageResource(R.drawable.weather_img_snow_middle);
+            }
+        } else if (currentWeather.contains("雾")) {
+            weatherBg.setBackgroundResource(R.drawable.bg_fog);
+            weatherIcon.setImageResource(R.drawable.weather_img_fog);
+        } else if (currentWeather.contains("霾")) {
+            weatherBg.setBackgroundResource(R.drawable.bg_haze);
+            weatherIcon.setImageResource(R.drawable.weather_img_fog);
+        } else if (currentWeather.contains("沙尘暴")
+                || currentWeather.contains("浮尘")
+                || currentWeather.contains("扬沙")) {
+            weatherBg.setBackgroundResource(R.drawable.bg_sand_storm);
+            weatherIcon.setImageResource(R.drawable.weather_img_sand_storm);
+        } else {
+            weatherBg.setBackgroundResource(R.drawable.bg_na);
+            weatherIcon.setImageResource(R.drawable.weather_img_fine_day);
+        }
     }
 
     private void init(){
@@ -127,10 +221,12 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
         tvCurrentTemperature = (TextView) findViewById(R.id.current_temperature);
         tvCurrentWeather = (TextView) findViewById(R.id.current_weather);
 
+        weatherIcon = (ImageView) findViewById(R.id.weather_icon);
+
         tvWind = (TextView) findViewById(R.id.wind);
         tvDate = (TextView) findViewById(R.id.date);
         weatherBg = (LinearLayout) findViewById(R.id.weather_bg);
-        weatherForcastList = (ListView) findViewById(R.id.weather_forcast_list);
+        weatherForcastList = (ListView) findViewById(R.id.weather_forecast_list);
         tvCity.setOnClickListener(this);
     }
 
@@ -155,12 +251,6 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
                 intent = new Intent();
                 intent.setClass(WeatherActivity.this, SelectCity.class);
                 WeatherActivity.this.startActivityForResult(intent, 1);
-                break;
-            case R.id.share:
-                break;
-            case R.id.about:
-                break;
-            case R.id.refresh:
                 break;
         }
     }
@@ -203,8 +293,31 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
             case 1:
                 if(resultCode == RESULT_OK){
                     city = data.getStringExtra("city");
-                    Weather api = (Weather) MobAPI.getAPI(Weather.NAME);
-                    api.queryByCityName(city, this);
+                    if(!city.equals("自动定位")){
+                        Weather api = (Weather) MobAPI.getAPI(Weather.NAME);
+                        api.queryByCityName(city, this);
+                    }else{
+                        //Toast.makeText(WeatherActivity.this, city, Toast.LENGTH_SHORT).show();
+                        new Thread(){
+                            public void run() {
+                                ip = null;
+                                try {
+                                    NetworkHelper network = new NetworkHelper();
+                                    ArrayList<KVPair<String>> values = new ArrayList<KVPair<String>>();
+                                    values.add(new KVPair<String>("ie", "utf-8"));
+                                    String resp = network.httpGet("http://pv.sohu.com/cityjson", values, null, null);
+                                    resp = resp.replace("var returnCitySN = {", "{").replace("};", "}");
+                                    ip = (String) (new Hashon().fromJson(resp).get("cip"));
+                                } catch (Throwable t) {
+                                    t.printStackTrace();
+                                }finally {
+                                    Weather api = (Weather) MobAPI.getAPI(Weather.NAME);
+                                    api.queryByIPAddress(ip, WeatherActivity.this);
+                                }
+                            }
+
+                        }.start();
+                    }
                 }
                 break;
             default:

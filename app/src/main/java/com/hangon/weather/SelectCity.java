@@ -23,7 +23,7 @@ import java.util.ArrayList;
  */
 public class SelectCity extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
-    private String[] citys = {"北京","上海","广州","深圳","厦门","三亚","天津","重庆","珠海","苏州","石家庄","太原","呼和浩特","沈阳",
+    private String[] citys = {"自动定位","北京","上海","广州","深圳","厦门","天津","重庆","珠海","苏州","石家庄","太原","呼和浩特","沈阳",
             "长春","哈尔滨","南京","杭州","合肥","福州","南昌","济南","郑州","武汉","长沙",
             "南宁","海口","成都","贵阳","昆明","拉萨","西安","兰州","银川","西宁","乌鲁木齐"};
     private ImageView back;
