@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -19,6 +20,8 @@
             custom:mTitleTextSize="10dp"
             custom:rightText="保存"
             custom:rightTextColor="#ffffff"
+            custom:leftText="BACK"
+            custom:leftTextColor="#ffffff"
             >
         </com.hangon.common.Topbar>
     </LinearLayout>
@@ -36,13 +39,17 @@
             android:background="@drawable/editext_border"
             >
 
-            <ImageView
+            <com.hangon.fragment.music.MusicImage
                 android:id="@+id/carFlag"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/ic_launcher"/>
+                android:background="@drawable/ic_launcher"
+                imagecontrol:border_inside_color="#fff7f2e9"
+                imagecontrol:border_outside_color="#ffd5d1c8"
+                imagecontrol:border_thickness="2dp"
+                />
 
             <Spinner
                 android:id="@+id/car_name_spinner"

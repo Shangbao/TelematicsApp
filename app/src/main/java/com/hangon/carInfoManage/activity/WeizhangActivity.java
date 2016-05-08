@@ -20,6 +20,7 @@ import com.hangon.common.Topbar;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.home.activity.HomeActivity;
+import com.hangon.user.activity.WelcomeActivity;
 import com.hangon.weizhang.activity.MainActivity;
 import com.hangon.weizhang.model.CarInfo;
 
@@ -88,8 +89,9 @@ public class WeizhangActivity extends Activity{
             public void leftClick() {
                 Intent intent=new Intent();
                 intent.setClass(WeizhangActivity.this, HomeActivity.class);
-                intent.putExtra("id",1);
+                intent.putExtra("id", 1);
                 startActivity(intent);
+                WeizhangActivity.this.finish();
             }
 
             @Override

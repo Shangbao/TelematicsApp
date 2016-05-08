@@ -3,6 +3,7 @@ package com.hangon.carInfoManage.activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,10 +11,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.example.fd.ourapplication.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,6 +26,7 @@ import com.hangon.bean.carInfo.BrandVO;
 import com.hangon.bean.carInfo.CarMessageVO;
 import com.hangon.common.Constants;
 import com.hangon.common.DialogTool;
+import com.hangon.common.MyApplication;
 import com.hangon.common.Topbar;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
@@ -42,6 +47,7 @@ public class AlterCarMessageActivity extends Activity {
     private Spinner car_name_spinner;// 车品牌
     private Spinner car_type_spinner;//车品牌类型
     private Spinner province;//车牌省份
+    private ImageView carFlag;//车标志
 
     private EditText car_num_pre;//区域号
     private EditText car_num_edit;//车尾号
@@ -88,6 +94,8 @@ public class AlterCarMessageActivity extends Activity {
         car_name_spinner = (Spinner) findViewById(R.id.car_name_spinner);
         car_type_spinner = (Spinner) findViewById(R.id.car_type_spinner);
         province = (Spinner) findViewById(R.id.car_province);
+        carFlag= (ImageView) findViewById(R.id.carFlag);
+
         car_num_pre = (EditText) findViewById(R.id.pre);
         car_num_edit = (EditText) findViewById(R.id.car_number);
         car_enginenum_edit = (EditText) findViewById(R.id.car_engine_number);
@@ -112,12 +120,13 @@ public class AlterCarMessageActivity extends Activity {
         car_name_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                carType=null;
-                carType=new ArrayList<String>();
-                for (int i=0;i<brandList.get(position).getBrandTypeList().size();i++){
+                carType = null;
+                carType = new ArrayList<String>();
+                getCarFlag(brandList,position);
+                for (int i = 0; i < brandList.get(position).getBrandTypeList().size(); i++) {
                     carType.add(brandList.get(position).getBrandTypeList().get(i).getName().toString().trim());
                 }
-                carTypeAdapter = new ArrayAdapter<String>(AlterCarMessageActivity.this,android.R.layout.simple_list_item_multiple_choice,carType);
+                carTypeAdapter = new ArrayAdapter<String>(AlterCarMessageActivity.this, android.R.layout.simple_list_item_multiple_choice, carType);
                 car_type_spinner.setAdapter(carTypeAdapter);
             }
 
@@ -127,12 +136,15 @@ public class AlterCarMessageActivity extends Activity {
             }
         });
 
-        topbar.setLeftIsVisible(false);
+
+
 
         topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
             @Override
             public void leftClick() {
-
+              Intent intent=new Intent(AlterCarMessageActivity.this,SetCarInfoActivity.class);
+                startActivity(intent);
+                AlterCarMessageActivity.this.finish();
             }
 
             @Override
@@ -148,11 +160,46 @@ public class AlterCarMessageActivity extends Activity {
         });
     }
 
+    //获取车图标图片资源
+    private void getCarFlag(List<BrandVO> list,int position){
+        String url=Constants.CAR_FLAG_URL.trim()+list.get(position).getCarFlag().trim();
+        ImageRequest request=new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap bitmap) {
+                carFlag.setImageBitmap(bitmap);
+            }
+        }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(AlterCarMessageActivity.this,"车标志图片加载失败",Toast.LENGTH_SHORT).show();
+            }
+        });
+        MyApplication.getHttpQueues().add(request);
+    }
+
+    //获取车图标图片资源
+    private void getCarFlag(String iconUrl){
+       String  url=Constants.CAR_FLAG_URL.trim()+iconUrl;
+        ImageRequest request=new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap bitmap) {
+                carFlag.setImageBitmap(bitmap);
+            }
+        }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(AlterCarMessageActivity.this,"车标志图片加载失败",Toast.LENGTH_SHORT).show();
+            }
+        });
+        MyApplication.getHttpQueues().add(request);
+    }
+
     //设置组件里面的值
     private void setEditeValue(){
         province.setSelection(carMessageVO.getProvinceIndex());
         car_num_pre.setText(carMessageVO.getCarLicenceTail().substring(0, 1));
         car_num_edit.setText(carMessageVO.getCarLicenceTail().substring(1));
+        getCarFlag(carMessageVO.getCarFlag().trim());
 
         cus_name.setText(carMessageVO.getName());
         phone_num.setText(carMessageVO.getPhoneNum());
@@ -216,6 +263,7 @@ public class AlterCarMessageActivity extends Activity {
     private void getData(){
         carMessageVO.setBrandIndex(car_name_spinner.getSelectedItemPosition());
         carMessageVO.setBrandTypeIndex(car_type_spinner.getSelectedItemPosition());
+        carMessageVO.setCarFlag(brandList.get(car_name_spinner.getSelectedItemPosition()).getCarFlag());
 
         carMessageVO.setPhoneNum(phone_num.getText().toString().trim());
         carMessageVO.setName(cus_name.getText().toString().trim());
@@ -243,8 +291,8 @@ public class AlterCarMessageActivity extends Activity {
         map.put("carInfoId",carMessageVO.getCarInfoId()+"");
         map.put("brandIndex", carMessageVO.getBrandIndex() + "");
         map.put("brandTypeIndex", carMessageVO.getBrandTypeIndex() + "");
+        map.put("carFlag",carMessageVO.getCarFlag().trim()+"");
 
-        // map.put("carFlag",carMessageVO.getCarFlag());
         map.put("provinceIndex", carMessageVO.getProvinceIndex() + "");
         map.put("carLicenceTail", carMessageVO.getCarLicenceTail());
 
@@ -267,6 +315,7 @@ public class AlterCarMessageActivity extends Activity {
                 Intent intent = new Intent();
                 intent.setClass(AlterCarMessageActivity.this, SetCarInfoActivity.class);
                 startActivity(intent);
+                AlterCarMessageActivity.this.finish();
             }
 
             @Override

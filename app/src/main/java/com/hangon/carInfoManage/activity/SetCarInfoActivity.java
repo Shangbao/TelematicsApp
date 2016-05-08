@@ -72,6 +72,7 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
                 intent.putExtra("id",1);
                 intent.setClass(SetCarInfoActivity.this, HomeActivity.class);
                 startActivity(intent);
+                SetCarInfoActivity.this.finish();
             }
 
             @Override

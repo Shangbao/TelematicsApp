@@ -1,6 +1,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,6 +21,8 @@
             custom:mTitle="添加新车辆"
             custom:mTitleTextColor="#ffffff"
             custom:mTitleTextSize="10dp"
+            custom:leftText="BACK"
+            custom:leftTextColor="#ffffff"
             custom:rightText="保存"
             custom:rightTextColor="#ffffff"
             >
@@ -35,17 +38,20 @@
         <RelativeLayout
             android:id="@+id/car_message_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/editext_border"
             >
 
-            <ImageView
+            <com.hangon.fragment.music.MusicImage
                 android:id="@+id/carFlag"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
+                imagecontrol:border_inside_color="#fff7f2e9"
+                imagecontrol:border_outside_color="#ffd5d1c8"
+                imagecontrol:border_thickness="2dp"
                 android:background="@drawable/ic_launcher"/>
 
             <Spinner
@@ -448,7 +454,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#666666"/>
-
     </LinearLayout>
 
 </LinearLayout>

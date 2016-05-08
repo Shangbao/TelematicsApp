@@ -160,10 +160,8 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         clearCookies();
-                        getActivity().finish();
                     }
                 }).show();
-
 
                 break;
             case R.id.btnShare:
@@ -179,6 +177,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
         Intent intent=new Intent();
         intent.setClass(getActivity(), LoginActivity.class);
         startActivity(intent);
+        getActivity().finish();
     }
 
     //禁止listview滑动

@@ -29,6 +29,10 @@ public class Constants {
     public static final String GET_WZF_ORDER_INFOS_URL="http://"+HOST_IP+":8080/wind/Order/GetWzfOrderInfos";
     public static final String GET_YZF_ORDER_INFOS_URL="http://"+HOST_IP+":8080/wind/Order/GetYzfOrderInfos";
 
+    //车logo图片资源
+    public static final String CAR_FLAG_URL="http://"+HOST_IP+":8080/wind/img/car_icon/";
+
+
     //音乐播放状态
     public static final int IDLE = 0;// 空闲状态
     public static final int PLAY = 1;//播放状态
