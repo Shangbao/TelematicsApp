@@ -20,6 +20,8 @@ public class Constants {
     public static final String ADD_CAR_INFO_URL="http://"+HOST_IP+":8080/wind/Car/AddCarInfo";
     public static final String UPDATE_CAR_INFO_URL="http://"+HOST_IP+":8080/wind/Car/UpdateCarInfo";
     public static final String DELETE_CAR_INFO_URL="http://"+HOST_IP+":8080/wind/Car/DeleteCarInfo";
+    public static final String GET_ZNWH_INFO_URL="http://"+HOST_IP+":8080/wind/Car/GetZnwhInfo";
+    public static final String UPDATE_ZNWH_INFO_URL="http://"+HOST_IP+":8080/wind/Car/UpdateZnwhInfo";
 
     //关于订单的网络请求地址
     public static final String ADD_ORDER_INFO_URL="http://"+HOST_IP+":8080/wind/Order/AddOrderInfo";

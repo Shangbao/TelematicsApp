@@ -16,6 +16,7 @@ import com.example.fd.ourapplication.R;
 import com.hangon.fragment.car.CarFragment;
 import com.hangon.fragment.music.MusicFragment;
 import com.hangon.fragment.order.ZnwhFragment;
+import com.hangon.fragment.order.ZnwhService;
 import com.hangon.fragment.userinfo.UserFragment;
 import com.hangon.order.activity.PersonalInformationData;
 
@@ -31,6 +32,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     private Fragment musicFragment = new MusicFragment();
     private Fragment znwhFragment = new ZnwhFragment();
     private Fragment userFragment = new UserFragment();
+
+    private Intent intent;
 
     //tab中的四个帧布局
     private FrameLayout carFrameLayout, musicFrameLayout, znwhFrameLayout, userFrameLayout;
@@ -74,6 +77,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         if (!znwhFragment.isAdded()) {
             transaction.add(R.id.content, znwhFragment);
             transaction.hide(znwhFragment);
+//            Intent intent = getIntent();
+//            Bundle bundle = intent.getBundleExtra("ZnwhInfo");
+//            znwhFragment.setArguments(bundle);
         }
         if (!userFragment.isAdded()) {
             transaction.add(R.id.content, userFragment);
@@ -261,6 +267,19 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         //记录当前的position
-        outState.putInt("id",position);
+        outState.putInt("id", position);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        intent = new Intent(HomeActivity.this, ZnwhService.class);
+        startService(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(intent);
     }
 }
