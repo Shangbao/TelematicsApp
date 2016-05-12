@@ -269,7 +269,7 @@ public class AlterCarMessageActivity extends Activity {
         carMessageVO.setName(cus_name.getText().toString().trim());
 
         carMessageVO.setProvinceIndex(province.getSelectedItemPosition());
-        carMessageVO.setCarLicenceTail(car_num_pre.getText().toString()+car_num_edit.getText().toString().trim() );
+        carMessageVO.setCarLicenceTail(car_num_pre.getText().toString()+car_num_edit.getText().toString().trim());
         carMessageVO.setChassisNum(car_chassis_number.getText().toString().trim());
         carMessageVO.setEngineNum(car_enginenum_edit.getText().toString().trim());
 

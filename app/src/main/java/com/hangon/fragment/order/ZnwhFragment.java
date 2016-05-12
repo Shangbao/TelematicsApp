@@ -63,7 +63,7 @@ public class ZnwhFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             Bundle bundle=intent.getExtras();
             ZnwhInfoVO znwhInfoVO = (ZnwhInfoVO) bundle.getSerializable("ZnwhInfo");
-            tvUserId.setText(znwhInfoVO.getUserId()+"");
+            //tvUserId.setText(znwhInfoVO.getUserId()+"");
             tvMil.setText(znwhInfoVO.getMileage()+"");
             tvGas.setText(znwhInfoVO.getOddGasAmount()+"");
             if (znwhInfoVO.getIsGoodEngine() == 1){
