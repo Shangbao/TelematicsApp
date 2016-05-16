@@ -1,8 +1,17 @@
 package com.hangon.fragment.music;
 
 import android.app.Fragment;
+import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.media.MediaPlayer;
+import android.os.Binder;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.bean.music.Music;
@@ -32,8 +42,7 @@ import java.util.concurrent.Executors;
  * Created by Administrator on 2016/4/4.
  */
 public class MusicFragment extends Fragment implements View.OnClickListener,
-        SeekBar.OnSeekBarChangeListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener,
-        AdapterView.OnItemClickListener {
+        SeekBar.OnSeekBarChangeListener, AdapterView.OnItemClickListener {
 
     View musicView;
     ListView songList;//歌曲列表List
@@ -41,12 +50,31 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     SeekBar musicSeekbar;//音乐播放进度条
     Button btnPlayModel,btnPrevious,btnPause,btnNext,btnStop;
     MusicAdapter musicAdapter;//音乐列表适配器
-    MediaPlayer mediaPlayer;//音乐播放器
     TextView selectedSong,selectedSinger;
     MusicImage musicImage;
+    MusicService.MyBinder myBinder;
+
+    private int currentPosition;
+    private int currentMax;
+
+    Intent intent;
+
+    private ProgressReceiver progressReceiver;
+
+    private ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            myBinder = (MusicService.MyBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Toast.makeText(getActivity(), "音乐播放器打开失败！", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     private boolean isPlaying=true;//播放状态
-    private static int currIndex=0;//当前播放的索引
+    private static int currIndex = 0;//当前播放的索引
 
     int playMode=Constants.SEQUENCE_MODEL;//控制播放模式
 
@@ -54,19 +82,18 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
 
     private boolean flag=true;//标志
 
-    ExecutorService es= Executors.newSingleThreadExecutor();// 单线程的执行器
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         musicView=inflater.inflate(R.layout.fragment_music,container,false);
         init();
+        intent = new Intent(getActivity(), MusicService.class);
+        getActivity().bindService(intent, conn, Service.BIND_AUTO_CREATE);
         setMusicAdapter();
-        start();
+        registerReceiver();
         return musicView;
     }
 
     //初始化组件
     private void init(){
-        mediaPlayer=new MediaPlayer();
         songList= (ListView) musicView.findViewById(R.id.songList);
         btnPlayModel= (Button) musicView.findViewById(R.id.btnPlayModel);
         btnPrevious= (Button) musicView.findViewById(R.id.btnPrevious);
@@ -82,8 +109,6 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         btnNext.setOnClickListener(this);
         btnStop.setOnClickListener(this);
         musicSeekbar.setOnSeekBarChangeListener(this);
-        mediaPlayer.setOnCompletionListener(this);
-        mediaPlayer.setOnErrorListener(this);
         songList.setOnItemClickListener(this);
         musicImage= (MusicImage) musicView.findViewById(R.id.personIcon);
         Topbar topbar= (Topbar) musicView.findViewById(R.id.topbar);
@@ -92,6 +117,15 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         LinearInterpolator lin = new LinearInterpolator();
         operatingAnim.setInterpolator(lin);
         musicImage.startAnimation(operatingAnim);
+    }
+
+    private void registerReceiver(){
+        progressReceiver = new ProgressReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(MusicService.ACTION_UPDATE_PROGRESS);
+        intentFilter.addAction(MusicService.ACTION_UPDATE_DURATION);
+        intentFilter.addAction(MusicService.ACTION_UPDATE_CURRENT_MUSIC);
+        getActivity().registerReceiver(progressReceiver, intentFilter);
     }
 
     //获取音乐歌曲列表并添加适配器
@@ -117,196 +151,98 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
                     btnPlayModel.setText("顺序");
                     playMode=Constants.SEQUENCE_MODEL;
                 }
+                myBinder.setPlayMode(playMode);
                 break;
             case R.id.btnPrevious:
-                playPrevious();
+                myBinder.toPrevious();
                 btnPause.setText("暂停");
                 isPlaying = false;
                 break;
             case R.id.btnPause:
                 if (isPlaying == true) {
-                    play();
+                    myBinder.startPlay(currIndex);
                     btnPause.setText("暂停");
                     isPlaying = false;
                 } else if (isPlaying == false) {
                     btnPause.setText("播放");
                     isPlaying = true;
-                    pause();
+                    myBinder.toPause();
                 }
                 break;
             case R.id.btnNext:
                 btnPause.setText("暂停");
                 isPlaying = false;
-                playNext();
+                myBinder.toNext();
                 break;
             case R.id.btnStop:
-                stop();
+                myBinder.stopPlay();
                 btnPause.setText("播放");
                 isPlaying = true;
                 break;
         }
     }
 
-    //播放上一曲
-    // 播放上一曲
-    private void playPrevious() {
-        if(playMode==Constants.SEQUENCE_MODEL){
-            if ((currIndex - 1) >= 0) {
-                currIndex--;
-            } else {
-                currIndex = list.size() - 1;
-            }
-            start();
-        }else if (playMode==Constants.RANDOM_MODEL){
-            currIndex=(int)(Math.random()*list.size());
-            start();
-        }else if (playMode==Constants.CIRCULATION_MODEL){
-            start();
-        }
-    }
-
-    // 播放下一曲
-    private void playNext() {
-        if (playMode==Constants.SEQUENCE_MODEL){
-            if ((currIndex + 1) < list.size()) {
-                currIndex++;
-            } else {
-                currIndex = 0;
-            }
-            start();
-        }else if (playMode==Constants.RANDOM_MODEL){
-            currIndex=(int)(Math.random()*list.size());
-            start();
-        }else if (playMode==Constants.CIRCULATION_MODEL){
-            start();
-        }
-    }
-
-    // 播放与暂停
-    // ---从上一次状态开始播放
-    // 从上一次的播放状态开始播放
-    private void play() {
-        if (state == Constants.PAUSE) {
-            mediaPlayer.start();
-        } else {
-            start();
-        }
-        state = Constants.PLAY;
-    }
-
-    // 停止播放
-    private void stop() {
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.stop();
-            state = Constants.STOP;
-            flag = flag;
-        }
-    }
-
-    private void pause() {
-        mediaPlayer.pause();
-        state = Constants.PAUSE;
-    }
-
-    private void start() {
-        if (currIndex < list.size()) {
-            Music m = list.get(currIndex);
-            selectedSinger.setText(m.getSinger());
-            selectedSong.setText(m.getTitle());
-            try {
-                mediaPlayer.reset();// 让播放器回到空闲
-                mediaPlayer.setDataSource(m.getUrl());// 设置文件播放的路径
-                mediaPlayer.prepare();
-                mediaPlayer.start();// 开始播放
-                initSeekBar();
-                es.execute(new seekBar());
-                musicAdapter.setCurrIndex(currIndex);
-                musicAdapter.notifyDataSetChanged();
-            } catch (Exception e) {
-            }
-        }
-    }
-
-    // 初始化进度条
-    private void initSeekBar() {
-        musicSeekbar.setMax(mediaPlayer.getDuration());// 设置进度条的总进度
-        musicSeekbar.setProgress(0);
-    }
-
-    // 实现播放进度
-    class seekBar implements Runnable {
-        public seekBar() {
-            flag = true;
-        }
-
-        @Override
-        public void run() {
-            while (flag) {
-                if (mediaPlayer.getCurrentPosition() < mediaPlayer
-                        .getDuration()) {
-                    musicSeekbar.setProgress(mediaPlayer.getCurrentPosition());
-                } else {
-                    flag = false;
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    @Override
-    // 监听网络媒体播放结束
-    public void onCompletion(MediaPlayer mp) {
-        playNext();
-    }
-
-    @Override
-    //音频播放错误的时候
-    public boolean onError(MediaPlayer mp, int what, int extra) {
-        mediaPlayer.reset();
-        return false;
-    }
-
     @Override
     //音频  释放音乐歌曲列表选项
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        currIndex = (int) id;
-        play();
+        currIndex = (int)id;
+        myBinder.toStart(currIndex);
     }
 
-    @Override
-
     //歌曲进度条发生改变时触发
+    @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (fromUser) {
-            mediaPlayer.seekTo(progress);
+            myBinder.changeProgress(progress);
         }
     }
 
     @Override
     //触摸进度条触发
     public void onStartTrackingTouch(SeekBar seekBar) {
-        pause();
+        myBinder.toPause();
     }
 
     @Override
     //离开进度条触发
     public void onStopTrackingTouch(SeekBar seekBar) {
-        play();
+        myBinder.startPlay(currIndex);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mediaPlayer != null) {
-            if (mediaPlayer.isPlaying()) {
-                mediaPlayer.stop();
-            }
-            mediaPlayer.release();
-        }
+        getActivity().unbindService(conn);
+        getActivity().stopService(intent);
         flag=false;
+    }
+
+    class ProgressReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(MusicService.ACTION_UPDATE_PROGRESS.equals(action)){
+                int progress = intent.getIntExtra(MusicService.ACTION_UPDATE_PROGRESS, 0);
+                if(progress > 0){
+                    currentPosition = progress; // Remember the current position
+                    musicSeekbar.setProgress(progress / 1000);
+                }
+            }else if(MusicService.ACTION_UPDATE_CURRENT_MUSIC.equals(action)){
+                //Retrive the current music and get the title to show on top of the screen.
+                currIndex = intent.getIntExtra(MusicService.ACTION_UPDATE_CURRENT_MUSIC, 0);
+                selectedSong.setText(list.get(currIndex).getTitle());
+                selectedSinger.setText(list.get(currIndex).getSinger());
+                musicAdapter.setCurrIndex(currIndex);
+                musicAdapter.notifyDataSetChanged();
+
+            }else if(MusicService.ACTION_UPDATE_DURATION.equals(action)){
+                //Receive the duration and show under the progress bar
+                //Why do this ? because from the ContentResolver, the duration is zero.
+                currentMax = intent.getIntExtra(MusicService.ACTION_UPDATE_DURATION, 0);
+                int max = currentMax / 1000;
+                musicSeekbar.setMax(currentMax / 1000);
+            }
+        }
     }
 }

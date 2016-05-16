@@ -185,6 +185,7 @@
             android:enabled="true"
             android:process=":remote" />
         <service android:name="com.hangon.fragment.order.ZnwhService"></service>
+        <service android:name="com.hangon.fragment.music.MusicService"></service>
     </application>
 
     <supports-screens android:largeScreens="true"

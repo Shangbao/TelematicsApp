@@ -281,5 +281,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     protected void onDestroy() {
         super.onDestroy();
         stopService(intent);
+
     }
 }
