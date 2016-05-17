@@ -27,7 +27,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     private MediaPlayer mediaPlayer = new MediaPlayer();//音乐播放器
 
     private int playMode=Constants.SEQUENCE_MODEL;//控制播放模式
-    private static int currIndex = 0;//当前播放的索引
+    private  int currIndex = 0;//当前播放的索引
     private List<Music> list;
     private int state= Constants.IDLE;
 
@@ -237,7 +237,8 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             pause();
         }
 
-        public void toStart(int currIndex){
+        public void toStart(int id){
+            currIndex=id;
             start(currIndex);
         }
 

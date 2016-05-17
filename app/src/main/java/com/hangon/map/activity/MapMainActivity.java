@@ -60,6 +60,7 @@ import com.hangon.map.util.GasInfoUtil;
 import com.hangon.map.util.IOExceptionHandle;
 import com.hangon.map.util.JudgeNet;
 import com.hangon.order.activity.AllOrder;
+import com.hangon.order.activity.OrderMain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -244,7 +245,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener,Ba
     public void onClick(View v) {
      switch (v.getId()){
          case R.id.btnOrder:
-             Intent intent=new Intent(MapMainActivity.this, AllOrder.class);
+             Intent intent=new Intent(MapMainActivity.this, OrderMain.class);
              startActivity(intent);
              break;
          case R.id.btnZwjyz:

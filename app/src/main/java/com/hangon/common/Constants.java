@@ -6,7 +6,7 @@ package com.hangon.common;
 public class Constants {
     //网络请求URL
     //10.163.0.194   10.58.11.204
-    public static final String HOST_IP="10.163.0.5";
+    public static final String HOST_IP="10.59.3.167";
     //关于用户信息的网络请求地址
     public static final  String LOGIN_URL="http://"+HOST_IP+":8080/wind/UserLogin?";
     public static final  String REGISTER_URL="http://"+HOST_IP+":8080/wind/UserRegister?";

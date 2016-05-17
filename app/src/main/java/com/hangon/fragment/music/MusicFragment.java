@@ -74,7 +74,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     };
 
     private boolean isPlaying=true;//播放状态
-    private static int currIndex = 0;//当前播放的索引
+    private  int currIndex = 0;//当前播放的索引
 
     int playMode=Constants.SEQUENCE_MODEL;//控制播放模式
 
@@ -185,8 +185,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     @Override
     //音频  释放音乐歌曲列表选项
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        currIndex = (int)id;
-        myBinder.toStart(currIndex);
+       // currIndex = (int)id;
+        myBinder.toStart((int)id);
     }
 
     //歌曲进度条发生改变时触发
