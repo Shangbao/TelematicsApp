@@ -15,10 +15,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.cheshouye.api.client.WeizhangIntentService;
 import com.cheshouye.api.client.json.CityInfoJson;
 import com.cheshouye.api.client.json.InputConfigJson;
 import com.example.fd.ourapplication.R;
+import com.google.gson.Gson;
+import com.hangon.bean.carInfo.WeiZhangInfoVO;
+import com.hangon.common.Constants;
+import com.hangon.common.JsonUtil;
+import com.hangon.common.VolleyInterface;
+import com.hangon.common.VolleyRequest;
+import com.hangon.home.activity.HomeActivity;
+import com.hangon.map.activity.MapMainActivity;
 import com.hangon.weizhang.model.CarInfo;
 
 public class MainActivity extends Activity {
@@ -39,6 +48,8 @@ public class MainActivity extends Activity {
 	// 行驶证图示
 	private View popXSZ;
 
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,24 +58,25 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.csy_activity_main);
 		init();
 		//getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.csy_titlebar);
-		Intent intent = this.getIntent();
-		if(intent.getSerializableExtra("carInfo")!=null){
-			CarInfo car = (CarInfo) intent.getSerializableExtra("carInfo");
-			Log.d("aa",car.getChepai_no());
-			Log.d("aa",car.getChepai_no().substring(0, 1));
-			Log.d("aa",car.getEngine_no());
-			defaultChepai = car.getChepai_no().substring(0,1);
-			//short_name.setText(car.getChepai_no().substring(0, 1));
-			chepai_number.setText(car.getChepai_no().substring(1));
-			chejia_number.setText(car.getChejia_no());
-			engine_number.setText(car.getEngine_no());
-
-		}
-
+		getWeizhangData("1");
 
 		// 标题
 		TextView txtTitle = (TextView) findViewById(R.id.txtTitle);
 		txtTitle.setText("车辆违章查询");
+
+		// 返回按钮
+		Button btnBack = (Button) findViewById(R.id.btnBack);
+		btnBack.setVisibility(View.VISIBLE);
+		btnBack.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent=new Intent();
+				intent.setClass(MainActivity.this, HomeActivity.class);
+				intent.putExtra("id", 1);
+				startActivity(intent);
+				MainActivity.this.finish();
+			}
+		});
 
 		// ********************************************************
 		Log.d("初始化服务代码","");
@@ -141,7 +153,6 @@ public class MainActivity extends Activity {
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("carInfo",car);
 				intent.putExtras(bundle);
-
 				boolean result = checkQueryItem(car);
 
 				if (result) {
@@ -152,14 +163,39 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		// 根据默认查询地城市id, 初始化查询项目
-		// setQueryItem(defaultCityId, defaultCityName);
-		short_name.setText(defaultChepai);
-
 		// 显示隐藏行驶证图示
 		popXSZ = (View) findViewById(R.id.popXSZ);
 		popXSZ.setOnTouchListener(new popOnTouchListener());
 		hideShowXSZ();
+	}
+
+	//获取违章信息数据
+	private void getWeizhangData(String userId){
+		String url= Constants.GET_WEIZHANG_INFO_URL+"userId="+userId;
+		VolleyRequest.RequestGet(MainActivity.this, url, "getWeizhangData", new VolleyInterface(MainActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
+			@Override
+			public void onMySuccess(String result) {
+				Log.e("getWeizhangData--result", result);
+				if(!result.equals("error")){
+					Gson gson=new Gson();
+					WeiZhangInfoVO weiZhangInfoVO= (WeiZhangInfoVO) JsonUtil.jsonToBean(result,WeiZhangInfoVO.class);
+					defaultChepai =(Constants.PROVINCE_VALUE.charAt(weiZhangInfoVO.getProvinceIndex())+"").trim();
+					Log.e("defaultChepai", defaultChepai);
+					short_name.setText(defaultChepai);
+					chepai_number.setText(weiZhangInfoVO.getCarLicenceTail());
+					chejia_number.setText(weiZhangInfoVO.getChassisNum());
+					engine_number.setText(weiZhangInfoVO.getEngineNum());
+					CarInfo car=new CarInfo();
+				}else {
+					Toast.makeText(MainActivity.this,"车主没有设置默认车辆，请手动填写。",Toast.LENGTH_SHORT).show();
+				}
+			}
+
+			@Override
+			public void onMyError(VolleyError error) {
+				Toast.makeText(MainActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	private void init(){

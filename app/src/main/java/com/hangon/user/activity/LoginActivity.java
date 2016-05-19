@@ -3,6 +3,7 @@ package com.hangon.user.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.util.Log;
@@ -15,12 +16,14 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.fd.ourapplication.R;
 
 import com.hangon.bean.user.UserInfo;
 import com.hangon.common.ConnectionUtil;
 import com.hangon.common.Constants;
+import com.hangon.common.ImageUtil;
 import com.hangon.common.JsonUtil;
 import com.hangon.common.MyApplication;
 import com.hangon.common.MyStringRequest;
@@ -44,8 +47,6 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private Button toRegister;//注册按钮
 
    public static String autoLogin;//判断是否自动登录
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +88,6 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
 
     /**
-     *
      * 初始化点击事件按钮的点击事件
      */
     public void onClick(View v) {
@@ -141,7 +141,6 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         Toast.makeText(LoginActivity.this, "账号或者密码错误,请重新输入.", Toast.LENGTH_SHORT).show();
                     }
                     Log.e("xxx", userInfo);
-
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -163,16 +162,27 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     }
 
     /**
-     *
+     *完成登录
      */
     private void finishedLogin(UserInfo userInfo){
-
             //设置自动登录状态
             userInfo.setIsSave(true);
             //保存用户信息到文件里
-            UserUtil.getInstance().saveLoginUserInfo(userInfo);
+            if(!userInfo.getUserName().equals(UserUtil.getInstance().getStringConfig("userName"))){
+             String s=userInfo.getUserIconUrl().trim();
+               Log.e("aa1","111111");
+             if(s!=null&&!s.isEmpty()){
+                 Log.e("aa2","222222");
+                 loadUserIcon(s);
+             }else {
+                 Log.e("aa3","333333");
+                 UserUtil.instance(LoginActivity.this);
+                 UserUtil.getInstance().saveStringConfig("userIconContent","");
+             }
+            }
+        UserUtil.getInstance().saveLoginUserInfo(userInfo);
             //进行登录页面到主页面的跳转
-        sendUserInfo(userInfo);
+            sendUserInfo(userInfo);
     }
 
     /**
@@ -180,7 +190,6 @@ public class LoginActivity extends Activity implements View.OnClickListener{
      */
     public void sendUserInfo(UserInfo userInfo){
         Intent toHome=new Intent();
-
         //装载数据
         Bundle bundle=new Bundle();
         bundle.putString("userName",userInfo.getUserName());
@@ -188,10 +197,36 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         bundle.putString("sex", userInfo.getSex());
         bundle.putInt("age",userInfo.getAge());
         bundle.putString("driverNum", userInfo.getDriverNum());
-        toHome.putExtra("bundle",bundle);
+        toHome.putExtra("bundle", bundle);
         toHome.setClass(LoginActivity.this, HomeActivity.class);
         startActivity(toHome);
     }
 
+    //   //读取图片并且加载链接
+    private void loadUserIcon(String s){
+        String url= Constants.LOAD_USER_ICON_URL+s;
+        ImageRequest request=new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap bitmap) {
+               //把获取的图片保存到cookies里面
+                saveIconToCookies(bitmap);
+            }
+        }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(LoginActivity.this,"用户头像获取失败",Toast.LENGTH_SHORT).show();
+            }
+        });
+        MyApplication.getHttpQueues().add(request);
+    }
+
+    //把获取的图片保存到cookies里面
+    private void saveIconToCookies(Bitmap bitmap){
+        byte[] bytes;
+        bytes= ImageUtil.getBitmapByte(bitmap);
+        String userIconConten= ImageUtil.getStringFromByte(bytes);
+        UserUtil.instance(LoginActivity.this);
+        UserUtil.getInstance().saveStringConfig("userIconContent",userIconConten);
+    }
 
 }

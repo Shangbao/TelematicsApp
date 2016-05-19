@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -54,12 +55,25 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     MusicImage musicImage;
     MusicService.MyBinder myBinder;
 
-    private int currentPosition;
-    private int currentMax;
+    private int currentPosition;//当前音乐播放位置
+    private int currentMax;//播放条的最大位置
 
     Intent intent;
 
     private ProgressReceiver progressReceiver;
+
+    private boolean isPlaying=true;//播放状态
+    private  int currIndex = 0;//当前播放的索引
+
+    int playMode=Constants.SEQUENCE_MODEL;//控制播放模式
+
+    private int state= Constants.IDLE;//播放状态
+
+    private boolean flag=true;//标志
+
+    int mStartItem;//音乐播放列表窗口可见的第一项
+    int mEndItem;//音乐播放列表窗口可见的最后项
+
 
     private ServiceConnection conn = new ServiceConnection() {
         @Override
@@ -73,14 +87,6 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         }
     };
 
-    private boolean isPlaying=true;//播放状态
-    private  int currIndex = 0;//当前播放的索引
-
-    int playMode=Constants.SEQUENCE_MODEL;//控制播放模式
-
-    private int state= Constants.IDLE;//播放状态
-
-    private boolean flag=true;//标志
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         musicView=inflater.inflate(R.layout.fragment_music,container,false);
@@ -113,9 +119,11 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         musicImage= (MusicImage) musicView.findViewById(R.id.personIcon);
         Topbar topbar= (Topbar) musicView.findViewById(R.id.topbar);
         topbar.setBtnIsVisible(false);
+        mListItemScroll();//设置list的滚动
         Animation operatingAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.music_rotate);
         LinearInterpolator lin = new LinearInterpolator();
         operatingAnim.setInterpolator(lin);
+        mListItemScroll();
         musicImage.startAnimation(operatingAnim);
     }
 
@@ -189,6 +197,19 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         myBinder.toStart((int)id);
     }
 
+    //跳转
+    private void skipSelected(int position){
+        if(position<=mStartItem){
+            songList.setSelection(position);
+            //songList.smoothScrollBy(3,0);
+            //songList.smoothScrollToPosition(position);
+        }else if (position>=mEndItem-1){
+            songList.setSelection(position);
+           // songList.smoothScrollToPosition(5,0);
+            //songList.smoothScrollToPosition(position);
+        }
+    }
+
     //歌曲进度条发生改变时触发
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -207,6 +228,22 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     //离开进度条触发
     public void onStopTrackingTouch(SeekBar seekBar) {
         myBinder.startPlay(currIndex);
+    }
+
+    //歌曲列表滚动的时候，触发
+    private void mListItemScroll(){
+        songList.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+             mStartItem=firstVisibleItem;
+             mEndItem=firstVisibleItem+visibleItemCount;
+            }
+        });
     }
 
     @Override
@@ -234,6 +271,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
                 selectedSong.setText(list.get(currIndex).getTitle());
                 selectedSinger.setText(list.get(currIndex).getSinger());
                 musicAdapter.setCurrIndex(currIndex);
+                skipSelected(currIndex);
                 musicAdapter.notifyDataSetChanged();
 
             }else if(MusicService.ACTION_UPDATE_DURATION.equals(action)){

@@ -13,18 +13,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.fd.ourapplication.R;
-import com.hangon.carInfoManage.activity.AddCarMessageActivity;
 import com.hangon.carInfoManage.activity.SetCarInfoActivity;
-import com.hangon.carInfoManage.activity.WeizhangActivity;
-import com.hangon.carInfoManage.activity.YichangActivity;
 import com.hangon.common.Topbar;
 import com.hangon.map.activity.BestRouteActivity;
 import com.hangon.map.activity.MapMainActivity;
 import com.hangon.map.util.JudgeNet;
 import com.hangon.map.util.NetReceiver;
-import com.hangon.order.activity.OrderMain;
 import com.hangon.weather.WeatherActivity;
-import com.xys.libzxing.zxing.activity.CaptureActivity;
+import com.hangon.weizhang.activity.MainActivity;
 
 /**
  * Created by Administrator on 2016/4/4.
@@ -111,7 +107,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
 
                 case R.id.btnWeiZhang:
                     intent=new Intent();
-                    intent.setClass(getActivity(), WeizhangActivity.class);
+                    intent.setClass(getActivity(), MainActivity.class);
                     startActivity(intent);
                     break;
 

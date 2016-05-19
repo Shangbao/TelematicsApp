@@ -17,9 +17,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.example.fd.ourapplication.R;
 import com.hangon.bean.user.UserInfo;
+import com.hangon.common.Constants;
 import com.hangon.common.DialogTool;
 import com.hangon.common.ImageUtil;
 import com.hangon.common.Topbar;
@@ -70,7 +75,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
     private void getUserIconFromCookies(){
         UserUtil.instance(getActivity());
         String s=UserUtil.getInstance().getStringConfig("userIconContent");
-        if(s==null||s.equals("")){
+        if(s==null||s.isEmpty()){
             Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
             Bitmap bitmap1=ImageUtil.getRoundedCornerBitmap(bitmap,100);
             homeHeadIcon.setImageBitmap(bitmap1);
@@ -81,9 +86,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
             homeHeadIcon.setImageBitmap(bitmap);
         }
     }
-
-
-
+    
     //初始化组件
     private void init(){
         userInfoList= (ListView) userView.findViewById(R.id.userInfoList);

@@ -47,7 +47,6 @@ public class UserUtil {
 		saveStringConfig("sex", loginUserInfo.getSex());
 		saveIntegerConfig("age", loginUserInfo.getAge());
 		saveStringConfig("driverNum", loginUserInfo.getDriverNum());
-		saveStringConfig("userIconContent",loginUserInfo.getUserIconContent());
 		saveBooleanConfig("isSave", loginUserInfo.isSave());
 	}
 

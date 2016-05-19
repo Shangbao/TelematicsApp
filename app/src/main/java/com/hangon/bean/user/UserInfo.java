@@ -9,6 +9,15 @@ public class UserInfo {
 	private String driverNum;//驾驶证号
 	private String userIconContent;//图片的二进制码
 	private boolean isSave;//是否保存
+	private String userIconUrl;//用户头像对应的地址
+
+	public String getUserIconUrl() {
+		return userIconUrl;
+	}
+
+	public void setUserIconUrl(String userIconUrl) {
+		this.userIconUrl = userIconUrl;
+	}
 
 	public String getUserIconContent() {
 		return userIconContent;
