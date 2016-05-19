@@ -58,8 +58,6 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.csy_activity_main);
 		init();
 		//getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.csy_titlebar);
-		getWeizhangData("1");
-
 		// 标题
 		TextView txtTitle = (TextView) findViewById(R.id.txtTitle);
 		txtTitle.setText("车辆违章查询");
@@ -70,7 +68,7 @@ public class MainActivity extends Activity {
 		btnBack.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent=new Intent();
+				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, HomeActivity.class);
 				intent.putExtra("id", 1);
 				startActivity(intent);
@@ -78,6 +76,8 @@ public class MainActivity extends Activity {
 			}
 		});
 
+		short_name.setText(defaultChepai);
+		getWeizhangData("1");
 		// ********************************************************
 		Log.d("初始化服务代码","");
 		Intent weizhangIntent = new Intent(this, WeizhangIntentService.class);
@@ -151,7 +151,7 @@ public class MainActivity extends Activity {
 
 				car.setEngine_no(engineNumberStr);
 				Bundle bundle = new Bundle();
-				bundle.putSerializable("carInfo",car);
+				bundle.putSerializable("carInfo", car);
 				intent.putExtras(bundle);
 				boolean result = checkQueryItem(car);
 
@@ -162,6 +162,7 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
+
 
 		// 显示隐藏行驶证图示
 		popXSZ = (View) findViewById(R.id.popXSZ);
