@@ -24,7 +24,6 @@ public class AnimAsyncTask extends AsyncTask<Integer, String, Integer> {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             progress=this.getProgress();

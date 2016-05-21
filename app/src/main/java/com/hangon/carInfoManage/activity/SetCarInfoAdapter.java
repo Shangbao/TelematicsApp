@@ -65,7 +65,7 @@ public class SetCarInfoAdapter extends BaseAdapter {
     }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHold viewHold;
+        ViewHold viewHold=null;
 
         if(convertView==null){
             viewHold=new ViewHold();
@@ -84,7 +84,7 @@ public class SetCarInfoAdapter extends BaseAdapter {
 
         viewHold.name.setText(list.get(position).getName());
         viewHold.phoneNum.setText(list.get(position).getPhoneNum());
-        viewHold.plateNum.setText(Constants.PROVINCE_VALUE.charAt(list.get(position).getProvinceIndex())+list.get(position).getCarLicenceTail());
+        viewHold.plateNum.setText(Constants.PROVINCE_VALUE.charAt(list.get(position).getProvinceIndex())+list.get(position).getCarLicenceTail()+"");
         if(list.get(position).getState()==1){
             viewHold.defaultAddress.setVisibility(View.VISIBLE);
         }else {

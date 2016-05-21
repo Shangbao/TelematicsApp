@@ -5,32 +5,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.example.fd.ourapplication.R;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hangon.bean.map.Gastprice;
+import com.hangon.carInfoManage.activity.SetCarInfoActivity;
 import com.hangon.common.Constants;
 import com.hangon.common.DialogTool;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.map.util.GasInfoUtil;
 import com.hangon.map.util.JudgeNet;
-import com.hangon.order.util.Date1;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -59,10 +52,13 @@ public class AppointmentOrder extends Activity {
 	private Spinner mSelectGasType;
 	//升数
 	private EditText mGasLitre;
+	private EditText mGasmoney;
 	//确定预约
 	private TextView mConfirmappoint;
 	//个人信息
 	private LinearLayout mPerSonaInformal;
+	//计算总价格
+	double gasLitre,gasSingleprice;
 
 	/**
 	 * 接收加油站油的类型与单价
@@ -85,8 +81,6 @@ public class AppointmentOrder extends Activity {
 	private int Gasposition;
 	List<PersonalInformationData> mPersonalList;
 	JudgeNet judge;
-
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -95,19 +89,38 @@ public class AppointmentOrder extends Activity {
 		getData();
 		//组件获取
 		initfindViewById();
-
 		//接收数据
 		ReceiveData();
 		//下拉列表适配器
 		SpinerAdapter();
 	}
-
 	private void setInitData(List<PersonalInformationData> mPersonalList) {
 		if (judge.getPersonalInformation() == 0) {
-			mCusname.setText(mPersonalList.get(0).getName());
+			if(mPersonalList==null||mPersonalList.size()==0){
+				DialogTool.createNormalDialog(AppointmentOrder.this, "绑定车辆信息", "对不起，检测不到你个车辆信息", "前去绑定", "取消", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent=new Intent();
+						intent.setClass(AppointmentOrder.this,SetCarInfoActivity.class);
+						startActivity(intent);
+						judge.setPersonalInformation(2);
+						finish();
+						//finish();
+					}
+				}, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+						return;
+					}
+				}).show();
+			}
+				else {
+				mCusname.setText(mPersonalList.get(0).getName());
 			mCusphone.setText(mPersonalList.get(0).getPhoneNum());
 			mCusPlatecar.setText(Constants.PROVINCE_VALUE.charAt(mPersonalList.get(0).getProvinceIndex())+mPersonalList.get(0).getCarLicenceTail());
-		} else if (judge.getPersonalInformation() == 1) {
+		}}
+				else if (judge.getPersonalInformation() == 1) {
 			Bundle bundle = this.getIntent().getExtras().getBundle("personal_information");
 			mPersonalPosition = bundle.getInt("position");
 			Gasposition = bundle.getInt("gasposition");
@@ -125,24 +138,68 @@ public class AppointmentOrder extends Activity {
 		mCusPlatecar = (TextView) findViewById(R.id.appointgas_platecar);
 		mSelectGasType = (Spinner) findViewById(R.id.appoint_gasselecttype);
 		mGasLitre = (EditText) findViewById(R.id.appoint_gaslitre);
+		mGasmoney=(EditText)findViewById(R.id.appoint_gasmoney);
 		mConfirmappoint = (TextView) findViewById(R.id.confirm_appointment);
 		mPerSonaInformal = (LinearLayout) findViewById(R.id.appoint_change_personal);
 
+		mGasLitre.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+			@Override
+			public void afterTextChanged(Editable s) {
+				if(mGasLitre.hasFocus()&&mGasmoney.hasFocus()==false){
+					if(mGasLitre.getText().toString().trim().equals("")){
+						mGasmoney.setText("0");
+					}
+					else{
+				     mGasmoney.setText(Double.parseDouble((mGasLitre.getText()+" ").toString())*(Double.parseDouble(mGasPrice.getText().toString()+" "))+" ");
+			}}
+			}
+		});
+
+		mGasmoney.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+			@Override
+			public void afterTextChanged(Editable s) {
+				if(mGasLitre.hasFocus()==false&&mGasmoney.hasFocus()){
+					if(mGasmoney.getText().toString().trim().equals("")){
+						mGasLitre.setText("0");
+					}else{
+                 mGasLitre.setText((Double.parseDouble((mGasmoney.getText()+" ").toString())/(Double.parseDouble(mGasPrice.getText().toString()+" ")))+" ");
+			}}}
+		});
 		mConfirmappoint.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
-				double a=Double.parseDouble(mGasLitre.getText().toString());
-				double b=Double.parseDouble(mGasPrice.getText().toString());
-				DialogTool.createNormalDialog(AppointmentOrder.this, "预约加油", "共" +a*b+ "元,是否预约", "取消", "确定", null, new DialogInterface.OnClickListener() {
+				if(mGasLitre.getText().toString().trim().equals("")||mGasPrice.getText().toString().trim().equals("")){
+					Toast.makeText(AppointmentOrder.this, "请输入钱数或者升数", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				else if(mGasLitre.getText().toString().trim().equals("0")||mGasPrice.getText().toString().trim().equals("0")){
+					Toast.makeText(AppointmentOrder.this, "钱数或者升数不能为0", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				else{
+				gasLitre=Double.valueOf(mGasLitre.getText().toString());
+				gasSingleprice=Double.valueOf(mGasPrice.getText().toString());
+				DialogTool.createNormalDialog(AppointmentOrder.this, "预约加油", "共" +gasLitre*gasSingleprice+ "元,是否预约", "取消", "确定", null, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						PostVolley();
 						Toast.makeText(AppointmentOrder.this,selected.toString(),Toast.LENGTH_LONG).show();
-
 					}
 				}).show();
-
+			}
 			}
 		});
 		mPerSonaInformal.setOnClickListener(new OnClickListener() {
@@ -166,7 +223,6 @@ public class AppointmentOrder extends Activity {
 		//用于获取对应有类型的价格
 		mGasTyprPriceList = new ArrayList();
 	}
-
 	//接收数据
 	private void ReceiveData() {
 		if (judge.getPersonalInformation() != 1) {
@@ -190,7 +246,6 @@ public class AppointmentOrder extends Activity {
 			judge.setPersonalInformation(0);
 		}
 	}
-
 	private void SpinerAdapter() {
 		//将可选内容与ArrayAdapter连接起来
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mGasTypeList);
@@ -204,24 +259,21 @@ public class AppointmentOrder extends Activity {
 		mSelectGasType.setSelection(0, true);
 		//设置加油类型初始值
 		selected = mGasTypeList.get(0).toString();
-		mGasPrice.setText( mGasTyprPriceList.get(0).toString());
+		mGasPrice.setText(mGasTyprPriceList.get(0).toString());
 		// 省级下拉框监听
 		mSelectGasType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			// 表示选项被改变的时候触发此方法，主要实现办法：动态改变地级适配器的绑定值
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
 				selected = mGasTypeList.get(position).toString();
-				mGasPrice.setText( mGasTyprPriceList.get(position).toString());
+				mGasPrice.setText(mGasTyprPriceList.get(position).toString());
 			}
-
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-
 			}
 		});
 	}
-
-
+	//加油信息。发送到数据库
 	private void PostVolley() {
 		double a=Double.valueOf(mGasLitre.getText().toString());
 		double b=Double.valueOf(mGasPrice.getText().toString());
@@ -240,35 +292,18 @@ public class AppointmentOrder extends Activity {
 		VolleyRequest.RequestPost(AppointmentOrder.this, url, "PostVolley", map, new VolleyInterface(AppointmentOrder.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
 			@Override
 			public void onMySuccess(String result) {
-				Date1 date1=new Date1();
-				double a=Double.parseDouble(mGasLitre.getText().toString());
-				double b=Double.parseDouble(mGasPrice.getText().toString());
-				Bundle bundle=new Bundle();
-				bundle.putString("gasStationAddress", mGasAddress.getText().toString());
-				bundle.putString("gasStationName", mGasname.getText().toString());
-				bundle.putString("cusPlateNum", mCusPlatecar.getText().toString());
-				bundle.putString("cusPhoneNum", mCusphone.getText().toString());
-				bundle.putString("gasSinglePrice", mGasPrice.getText().toString());
-				bundle.putString("gasType", selected.toString());
-				bundle.putString("gasSumPrice", a * b + "");
-				bundle.putString("gasLitre", mGasLitre.getText().toString());
-				bundle.putString("cusphone", mCusphone.getText().toString());
-				bundle.putString("cusName",mCusname.getText().toString());
-				bundle.putString("orderTime",date1.GetTime());
-                JudgeNet judgeNet=new JudgeNet();
-				judgeNet.setAppointOrderData(1);
 				Intent confirm = new Intent();
-				confirm.setClass(AppointmentOrder.this, AppointMentOrderDetails.class);
-				confirm.putExtra("orderdata",bundle);
+				confirm.setClass(AppointmentOrder.this, Success.class);
 				startActivity(confirm);
+				finish();
 			}
 			@Override
 			public void onMyError(VolleyError error) {
 				Toast.makeText(AppointmentOrder.this,"网络错误",Toast.LENGTH_LONG).show();
 			}
 		});
-
 	}
+	//获取个人此信息
 	private void getData() {
 		String url = Constants.GET_CAR_INFO_URL;
 		VolleyRequest.RequestGet(AppointmentOrder.this, url, "getData", new VolleyInterface(AppointmentOrder.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
@@ -278,8 +313,7 @@ public class AppointmentOrder extends Activity {
 				Log.e("aaaa", result);
 				mPersonalList = gson.fromJson(result, new TypeToken<List<PersonalInformationData>>() {
 				}.getType());
-				Log.e("aaa", mPersonalList.get(0).getName() + mPersonalList.get(0).getProvinceIndex()+mPersonalList.get(0).getPhoneNum());
-			     setInitData(mPersonalList);
+				setInitData(mPersonalList);
 			}
 
 			@Override
@@ -288,18 +322,10 @@ public class AppointmentOrder extends Activity {
 			}
 		});
 	}
-
 	@Override
 	public void onStart() {
 		super.onStart();
 
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-
-		finish();
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.hangon.map.util;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -14,6 +15,8 @@ import com.hangon.bean.map.Status;
 import com.hangon.common.MyApplication;
 import com.hangon.common.MyStringRequest;
 
+
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -209,40 +212,51 @@ public class GasInfoUtil implements Serializable {
     }
 
     public static List<Datas> gasinfo = new ArrayList<Datas>();
+
     public static void VolleyGet(final Context context) {
-        String url = "http://apis.juhe.cn/oil/local?key=f76a41676986a78971d9ab2265dbe714&lon="
-                + locationlongtitude
-                + "&lat="
-                + locationlatitude
-                + "&format=2&r=3000";
+        try {
+            String url = "http://apis.juhe.cn/oil/local?key=f76a41676986a78971d9ab2265dbe714&lon="
+                    + locationlongtitude
+                    + "&lat="
+                    + locationlatitude
+                    + "&format=2&r=3000";
 
-        MyStringRequest request = new MyStringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    public void onResponse(String response) {
-                        JudgeNet judgeNet = new JudgeNet();
-                        Gson gson = new Gson();
-                        Status status = gson.fromJson(response, Status.class);
-                        if (status.getResult()!= null) {
-                            Toast.makeText(context, "111111",
-                                    Toast.LENGTH_LONG).show();
-                            gasinfo = status.getResult().getData();
-                            Collections.sort(gasinfo);
-                        } else if (status.getResult() == null) {
-                            Toast.makeText(context, "抱歉，查找失败",
-                                    Toast.LENGTH_LONG).show();
-                            AnimAsyncTask.progress = 1;
-
+            MyStringRequest request = new MyStringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        public void onResponse(String response) {
+                            if (response == null || response.isEmpty()) {
+                                return;
+                            } else {
+                                JudgeNet judgeNet = new JudgeNet();
+                                Log.e("aaa", response);
+                                Gson gson = new Gson();
+                                Status status = gson.fromJson(response, Status.class);
+                                if (status.getResult() != null) {
+                                    Toast.makeText(context, "111111",
+                                            Toast.LENGTH_LONG).show();
+                                    gasinfo = status.getResult().getData();
+                                    Collections.sort(gasinfo);
+                                } else if (status.getResult() == null) {
+                                    Toast.makeText(context, "抱歉，查找失败",
+                                            Toast.LENGTH_LONG).show();
+                                    AnimAsyncTask.progress = 1;
+                                }
+                            }
                         }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(context, volleyError.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        request.setTag("StringReqGet");
-        MyApplication.getHttpQueues().add(request);
-        return ;
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Toast.makeText(context, volleyError.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            request.setTag("StringReqGet");
+            MyApplication.getHttpQueues().add(request);
+            return;
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(context,"网络错误",Toast.LENGTH_SHORT).show();
+            AnimAsyncTask.progress=1;
+        }
     }
 
     public static List<GasInfoUtil> infos = new ArrayList<GasInfoUtil>();

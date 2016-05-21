@@ -2,9 +2,12 @@ package com.hangon.map.activity;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -55,6 +58,7 @@ import com.baidu.mapapi.utils.poi.BaiduMapPoiSearch;
 import com.baidu.mapapi.utils.route.BaiduMapRoutePlan;
 import com.example.fd.ourapplication.R;
 import com.hangon.bean.map.Datas;
+import com.hangon.common.DialogTool;
 import com.hangon.map.util.AnimAsyncTask;
 import com.hangon.map.util.GasInfoUtil;
 import com.hangon.map.util.IOExceptionHandle;
@@ -142,7 +146,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener,Ba
      * 加油站列表
      */
     List<Map<String, ?>> mGasList;
-
+ Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SDKInitializer.initialize(getApplicationContext());
@@ -188,7 +192,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener,Ba
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -198,29 +202,34 @@ public class MapMainActivity extends Activity implements View.OnClickListener,Ba
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-//                for (int i = 0; i < GasInfoUtil.gasinfo.size(); i++){
-//                    Datas datas = GasInfoUtil.gasinfo.get(i);
-//                    GasInfoUtil.infos.add(new GasInfoUtil(
-//                            datas.getLat(),
-//                            datas.getLon(),
-//                            R.drawable.ic_launcher,
-//                            datas.getName(),
-//                            datas.getDistance(),
-//                            datas.getBrandname(),
-//                            datas.getAddress(),
-//                            datas.getFwlsmc(),
-//                            datas.getGastprice(),
-//                            datas.getPrice()
-//                    ));
-//                }
                 addInfosOverlay(GasInfoUtil.gasinfo);
                 gasShowinfo(GasInfoUtil.gasinfo);
                 AnimAsyncTask.progress = 1;
+                if(GasInfoUtil.gasinfo==null){
+                    View view= LayoutInflater.from(getApplicationContext()).inflate(R.layout.netalert,null);
+                    TextView donwload=(TextView)view.findViewById(R.id.donwload);
+                     dialog=new Dialog(getApplicationContext());
+                    final AlertDialog.Builder builder=new AlertDialog.Builder(getApplicationContext());
+                    builder.setView(view);
+                    dialog=builder.create();
+                    dialog.show();
+
+                    donwload.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            GasReceiver();
+                           dialog.dismiss();
+
+                        }
+                    });
+                }
                 initMarkerClickEvent();
             }
 
         }).start();
     }
+
+
 
     //初始化组件
     private void initfindViewById() {
@@ -334,8 +343,9 @@ public class MapMainActivity extends Activity implements View.OnClickListener,Ba
 
     // 起始位置终点位置数据接收
     public void receive() {
-        if (states == 0) {
+        if (states == 0||judgeNet.getAppointRoute()==1) {
             Toast.makeText(MapMainActivity.this, "sssss", Toast.LENGTH_LONG).show();
+            judgeNet.setAppointRoute(0);
             return;
         } else {
             Bundle bundle = this.getIntent().getExtras().getBundle("address");
@@ -361,7 +371,12 @@ public class MapMainActivity extends Activity implements View.OnClickListener,Ba
         PlanNode mypositionNode = PlanNode.withLocation(myposition);
         route = null;
         mBaiduMap.clear();
-        if ("我的位置".equals(end_position)) {
+       if(judgeNet.getAppointRoute()==1){
+
+           mSearch.drivingSearch((new DrivingRoutePlanOption()).from(mypositionNode)
+                   .to(endNode));
+       }
+      else  if ("我的位置".equals(end_position)) {
             // end_position = myLocationPosition;
             mSearch.drivingSearch((new DrivingRoutePlanOption()).from(endNode)
                     .to(mypositionNode));
@@ -606,7 +621,13 @@ public class MapMainActivity extends Activity implements View.OnClickListener,Ba
      *
      */
     public void SearchGeocoder() {
-        if ("我的位置".equals(start_position)) {
+        if(judgeNet.getAppointRoute()==1){
+            Bundle bundle=this.getIntent().getBundleExtra("endaddress");
+            String Address=bundle.get("endaddress").toString();
+                mGeoCoder.geocode(new GeoCodeOption().city("")
+                        .address(Address));
+        }
+      else  if ("我的位置".equals(start_position)) {
             mGeoCoder.geocode(new GeoCodeOption().city("")
                     .address(end_position));
         } else if ("我的位置".equals(end_position)) {

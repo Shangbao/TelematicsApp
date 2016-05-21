@@ -265,7 +265,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="请输入加油量/升："
+                android:text="请输入油量/金额："
                 android:textSize="15dp" />
 
             <EditText
@@ -274,6 +274,24 @@
                 android:layout_height="match_parent"
                 android:hint="请输入升数"
                 android:textSize="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="升"
+                android:textSize="15dp"
+                />
+            <EditText
+                android:id="@+id/appoint_gasmoney"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:hint="请输入金额 "
+                android:textSize="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="元"
+                android:textSize="15dp"
+                />
         </LinearLayout>
         <View
             android:layout_width="match_parent"

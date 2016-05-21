@@ -5,9 +5,16 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Xml;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +26,9 @@ import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.map.util.JudgeNet;
 import com.hangon.order.util.OrderData;
+import com.xys.libzxing.zxing.encoding.EncodingUtils;
+
+import org.json.JSONArray;
 
 public class AppointMentOrderDetails extends Activity {
 	/**
@@ -125,7 +135,7 @@ public class AppointMentOrderDetails extends Activity {
 		Bundle bundle = this.getIntent().getBundleExtra("gasdata");
 		orderData = (OrderData) bundle.getSerializable("orderdata");
 		cusName.setText(orderData.getCusName());
-		cusPlateNum.setText(orderData.getCuspPlateNum());
+		cusPlateNum.setText(orderData.getCusPlateNum());
 		cusPhoneNum.setText(orderData.getCusPhoneNum());
 		gasStationName.setText(orderData.getGasStationName());
 		gasStationAddress.setText(orderData.getGasStationAddress());
@@ -193,6 +203,14 @@ public class AppointMentOrderDetails extends Activity {
 					}).show();
 					break;
 				case R.id.appointment_sweep_qrcode:
+					View root= LayoutInflater.from(getApplicationContext()).inflate(R.layout.qrcode,null);
+					ImageView imageView=(ImageView)root.findViewById(R.id.qrcode_img);
+					Bitmap bitmapDrawable=EncodingUtils.createQRCode("123", 100, 100, null);
+						imageView.setImageBitmap(EncodingUtils.createQRCode("123", 100, 100, null));
+					PopupWindow popupWindow=new PopupWindow(root,500,500);
+					popupWindow.showAsDropDown(v);
+					popupWindow.showAtLocation(findViewById(R.id.appoint_order_gasname), Gravity.CENTER, 20, 20);
+
 
 					break;
 			}

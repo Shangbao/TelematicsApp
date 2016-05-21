@@ -17,7 +17,15 @@ public class JudgeNet {
     private static  int personalInformation=0;
     //判断是否是从预约加油页面传过去的数据
     private static  int appointOrderData=0;
+    //判断从预约加油到线路规划
+    private static int appointRoute=0;
+    public int getAppointRoute() {
+        return appointRoute;
+    }
 
+    public void setAppointRoute(int appointOrderData) {
+        JudgeNet.appointRoute= appointOrderData;
+    }
     public int getAppointOrderData() {
         return appointOrderData;
     }

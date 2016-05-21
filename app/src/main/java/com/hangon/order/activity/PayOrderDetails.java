@@ -106,7 +106,7 @@ public class PayOrderDetails extends Activity {
 		Bundle bundle = this.getIntent().getBundleExtra("gasdata");
 		orderData = (OrderData) bundle.getSerializable("orderdata");
 		cusName.setText(orderData.getCusName());
-		cusPlateNum.setText(orderData.getCuspPlateNum());
+		cusPlateNum.setText(orderData.getCusPlateNum());
 		cusPhoneNum.setText(orderData.getCusPhoneNum());
 		gasStationName.setText(orderData.getGasStationName());
 		gasStationAddress.setText(orderData.getGasStationAddress());

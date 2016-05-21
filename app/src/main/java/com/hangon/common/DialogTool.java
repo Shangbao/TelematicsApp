@@ -1,8 +1,12 @@
 package com.hangon.common;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.View;
+
+import com.hangon.order.activity.AppointmentOrder;
 
 /**
  * 对话框封装类
@@ -65,6 +69,30 @@ public class DialogTool {
         builder.setNegativeButton(NegName, NegNamelistener);
         // 创建一个普通对话框
         dialog = builder.create();
+        return dialog;
+    }
+    public static Dialog createViewDialog(Context ctx,
+                                            String title,
+                                            View view,
+                                            String PosName,
+                                            String NegName,
+                                            DialogInterface.OnClickListener PosNamelistener,
+                                            DialogInterface.OnClickListener NegNamelistener
+    ) {
+        Dialog dialog=null;
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ctx);
+        // 设置对话框的图标
+
+        // 设置对话框的标题
+        builder.setTitle(title);
+        // 设置对话框的显示内容
+        builder.setView(view);
+        // 添加按钮，android.content.DialogInterface.OnClickListener.OnClickListener
+        builder.setPositiveButton(PosName, PosNamelistener);
+        builder.setNegativeButton(NegName, NegNamelistener);
+        // 创建一个普通对话框
+        dialog = builder.create();
+
         return dialog;
     }
 

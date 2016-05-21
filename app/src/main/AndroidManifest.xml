@@ -71,12 +71,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" >
-            <intent-filter>
-                <data android:scheme="tencent1104646053" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+
         </activity>
 
 
@@ -170,6 +165,8 @@
         <activity android:name="com.hangon.order.activity.AppointmentOrder"/>
         <activity android:name="com.hangon.order.activity.OrderMain"/>
         <activity android:name="com.hangon.order.activity.PersonalInformation"/>
+        <activity android:name="com.hangon.order.activity.EditOrder"/>
+        <activity android:name="com.hangon.order.activity.Success"/>
 
         <activity android:name="com.hangon.weather.WeatherActivity">
         </activity>

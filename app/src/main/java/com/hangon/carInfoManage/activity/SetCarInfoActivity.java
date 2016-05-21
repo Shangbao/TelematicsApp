@@ -25,6 +25,7 @@ import com.hangon.common.Topbar;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.home.activity.HomeActivity;
+import com.hangon.map.util.JudgeNet;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 
@@ -68,8 +69,8 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
         topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
             @Override
             public void leftClick() {
-                Intent intent = new Intent();
-                intent.putExtra("id", 1);
+                Intent intent=new Intent();
+                intent.putExtra("id",1);
                 intent.setClass(SetCarInfoActivity.this, HomeActivity.class);
                 startActivity(intent);
                 SetCarInfoActivity.this.finish();
@@ -122,38 +123,7 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
         listView.setAdapter(adapter);
     }
 
-    //扫描二维码的结果
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
-            case 1:
-                if (resultCode == RESULT_OK){
-                    Bundle bundle = data.getExtras();
-                    String result = bundle.getString("result");
-                    Log.e("aaaaa",result);
-                    dealCodeResult(result);
-                    init();
-                    getCarMessageList();
-                }
-                break;
-        }
-    }
 
-    //对二维码扫描结果进行处理
-    private void dealCodeResult(String result){
-        String url=Constants.MY_ADD_CAR_INFO_URL.trim()+result.trim();
-        VolleyRequest.RequestGet(SetCarInfoActivity.this, url, "dealCodeResult", new VolleyInterface(SetCarInfoActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
-            @Override
-            public void onMySuccess(String result) {
-                Toast.makeText(SetCarInfoActivity.this,"二维码扫描添加车辆成功.",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onMyError(VolleyError error) {
-           Toast.makeText(SetCarInfoActivity.this,"二维码扫描添加车辆失败.",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     //点击事件
     @Override
@@ -163,11 +133,15 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
                 Intent intent=new Intent();
                 intent.setClass(SetCarInfoActivity.this,AddCarMessageActivity.class);
                 startActivity(intent);
+                JudgeNet judgeNet=new JudgeNet();
+                if(judgeNet.getPersonalInformation()==2){
+                    finish();
+                }
                 break;
             case R.id.btnSao:
                 Intent intent1=new Intent();
                 intent1.setClass(SetCarInfoActivity.this, CaptureActivity.class);
-                startActivityForResult(intent1, 1);
+                startActivity(intent1);
                 break;
         }
 

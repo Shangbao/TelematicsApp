@@ -35,6 +35,7 @@ import com.hangon.common.MyApplication;
 import com.hangon.common.Topbar;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
+import com.hangon.map.util.JudgeNet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -109,6 +110,12 @@ public class AddCarMessageActivity extends Activity {
                         } else {
                             getData();
                             addCarInfo();
+                            JudgeNet judgeNet=new JudgeNet();
+                            if(judgeNet.getPersonalInformation()==2){
+                                judgeNet.setPersonalInformation(0);
+                                finish();
+
+                            }
                         }
                     }
                 }).show();

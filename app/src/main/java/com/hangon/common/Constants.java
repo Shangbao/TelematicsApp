@@ -34,7 +34,7 @@ public class Constants {
     public static final String CHANGE_ORDER_INFO_URL="http://"+HOST_IP+":8080/wind/Order/ChangeOrderState";
     public static final String GET_WZF_ORDER_INFOS_URL="http://"+HOST_IP+":8080/wind/Order/GetWzfOrderInfos";
     public static final String GET_YZF_ORDER_INFOS_URL="http://"+HOST_IP+":8080/wind/Order/GetYzfOrderInfos";
-
+    public static final String DELETE_ORDER_INFOS_URL="http://"+HOST_IP+":8080/wind/Order/DeleteHopedOrderInfo";
     //车logo图片资源
     public static final String CAR_FLAG_URL="http://"+HOST_IP+":8080/wind/img/car_icon/";
     //用户头像图片资源

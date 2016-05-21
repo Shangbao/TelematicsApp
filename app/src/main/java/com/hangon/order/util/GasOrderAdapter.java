@@ -13,12 +13,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
@@ -27,17 +29,21 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hangon.common.Constants;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
+import com.hangon.order.activity.AllOrder;
 import com.hangon.order.activity.AppointMentOrderDetails;
+import com.hangon.order.activity.OrderMain;
 
 public class GasOrderAdapter extends BaseAdapter {
 	ViewHolder vh;
 	Context context;
 	int resource;
 	List<OrderData> gaslist;
-	int position;
+
 	public GasOrderAdapter(Context context,List<OrderData> list,int resource){
 		this.context = context;
 		this.resource = resource;
@@ -57,22 +63,20 @@ public class GasOrderAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		return position;
 	}
-
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if(convertView==null) {
 			vh = new ViewHolder();
-			convertView = LayoutInflater.from(context).inflate(resource, null);
+			convertView = LayoutInflater.from(context).inflate(R.layout.orderlist, null);
 			vh.list_gasname = (TextView) convertView.findViewById(R.id.list_order_gasname);
 			vh.list_gassumprice = (TextView) convertView.findViewById(R.id.list_gassumprice);
 			vh.list_gaslitre = (TextView) convertView.findViewById(R.id.list_gaslitre);
 			vh.list_gastype = (TextView) convertView.findViewById(R.id.list_gastype);
 			vh.list_ordertime = (TextView) convertView.findViewById(R.id.list_ordertime);
 			vh.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_gasorder_status);
-			vh.list_gassumprice = (TextView) convertView.findViewById(R.id.list_gassumprice);
-			vh.list_gassumprice = (TextView) convertView.findViewById(R.id.list_gassumprice);
 			vh.gaslist_cancel_order = (TextView) convertView.findViewById(R.id.gaslist_cancel_order);
 			vh.gaslist_payment_order = (TextView) convertView.findViewById(R.id.gaslist_payment_order);
+			vh.item_cb=(CheckBox)convertView.findViewById(R.id.item_cb);
            convertView.setTag(vh);
 		}else{
 			vh= (ViewHolder) convertView.getTag();
@@ -83,14 +87,13 @@ public class GasOrderAdapter extends BaseAdapter {
 		vh.list_gasname.setText(gaslist.get(position).getGasStationName());
 		vh.list_gassumprice.setText(gaslist.get(position).getGasSumPrice());
 		vh.list_gaslitre.setText(gaslist.get(position).getGasLitre());
-		//vh.list_gastype.setText(map.get("OrderGasType").toString());
 		vh.list_ordertime.setText(gaslist.get(position).getStrTime());
-	//	vh.list_gasorder_status.setText(gaslist.get(position).getOrderState());
 		if((gaslist.get(position).getOrderState()==1)){
 			vh.list_gasorder_status.setText("已支付");
 			vh.gaslist_cancel_order.setVisibility(View.GONE);
 			vh.gaslist_payment_order.setText("删除订单");
 		}
+		vh.item_cb.setChecked(gaslist.get(position).equals("true"));
 		notifyDataSetChanged();
 		return convertView;
 	}
@@ -128,7 +131,12 @@ public class GasOrderAdapter extends BaseAdapter {
 		 * 付款项（当已经完结时，会将其改为删除按钮）
 		 */
 		TextView gaslist_payment_order;
+		/**
+		 * 复选框
+		 */
+		CheckBox item_cb;
 	}
+
 	public class PayOnclickListener implements OnClickListener{
 		int position;
 		public PayOnclickListener(int position) {
@@ -147,20 +155,18 @@ public class GasOrderAdapter extends BaseAdapter {
 								@Override
 								public void onMySuccess(String result) {
 									gaslist.remove(position);
-									notifyDataSetChanged();
 								}
 								@Override
 								public void onMyError(VolleyError error) {
 									Toast.makeText(context, "网络错误", Toast.LENGTH_LONG).show();
 								}
 							});
-
 						}
 					}, null).show();
 					break;
 				case R.id.gaslist_payment_order:
 					if(gaslist.get(position).getOrderState()==0){
-					DialogTool.createNormalDialog(context, "取消订单", "确定取消吗？", "取消", "确定", null, new DialogInterface.OnClickListener() {
+					DialogTool.createNormalDialog(context, "确定付款", "确定付款吗？", "取消", "确定", null, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							int orderId = gaslist.get(position).getOrderId();
@@ -168,18 +174,15 @@ public class GasOrderAdapter extends BaseAdapter {
 							VolleyRequest.RequestGet(context, url, "aaa", new VolleyInterface(context, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
 								@Override
 								public void onMySuccess(String result) {
-									notifyDataSetChanged();
 								}
-
-								;
-
 								@Override
 								public void onMyError(VolleyError error) {
 									Toast.makeText(context, "网络错误", Toast.LENGTH_LONG).show();
 								}
 							});
 					}
-					}).show();}
+					}).show();
+					}
 					else if (gaslist.get(position).getOrderState()==1){
 						DialogTool.createNormalDialog(context, "删除订单", "确定删除吗？", "取消", "确定", null, new DialogInterface.OnClickListener() {
 							@Override
@@ -197,8 +200,6 @@ public class GasOrderAdapter extends BaseAdapter {
 										Toast.makeText(context, "网络错误", Toast.LENGTH_LONG).show();
 									}
 								});
-
-
 							}
 						}).show();}
 					break;

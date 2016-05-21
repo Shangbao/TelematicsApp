@@ -16,16 +16,12 @@ import com.hangon.order.activity.AppointMentOrderDetails;
 import com.hangon.order.activity.PayOrderDetails;
 
 public class OnItemclick implements OnItemClickListener {
-
 	Context startcontext;
 	List<OrderData> orderDatas;
 	public OnItemclick(Context startcontext,List<OrderData> orderDatas) {
 		this.startcontext=startcontext;
 		this.orderDatas=orderDatas;
 	}
-
-
-
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 							long id) {

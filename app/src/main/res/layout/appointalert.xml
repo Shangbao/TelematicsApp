@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="加油类型："
+            android:textSize="15dp" />
+
+        <TextView
+            android:gravity="center"
+            android:text="#e39"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/appoint_gastype"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="15dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="单价/升："
+            android:textSize="15dp" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_marginLeft="-20dp"
+            android:id="@+id/appoint_gassingleprice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="￥5.97"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp" >
+
+        <TextView
+            android:layout_marginLeft="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="请输入油量/金额："
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/alert_appoint_gaslitre"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:hint="请输入升数"
+            android:textSize="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="升"
+            android:textSize="15dp"
+            />
+        <EditText
+            android:id="@+id/alert_appoint_gasmoney"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:hint="请输入金额 "
+            android:textSize="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="元"
+            android:textSize="15dp"
+            />
+    </LinearLayout>
+</LinearLayout>
