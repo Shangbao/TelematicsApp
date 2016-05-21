@@ -1,6 +1,8 @@
 package com.hangon.fragment.car;
 
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -10,17 +12,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fd.ourapplication.R;
+import com.hangon.carInfoManage.activity.AddCarMessageActivity;
 import com.hangon.carInfoManage.activity.SetCarInfoActivity;
+import com.hangon.carInfoManage.activity.YichangActivity;
 import com.hangon.common.Topbar;
+import com.hangon.fragment.music.MusicService;
 import com.hangon.map.activity.BestRouteActivity;
 import com.hangon.map.activity.MapMainActivity;
 import com.hangon.map.util.JudgeNet;
 import com.hangon.map.util.NetReceiver;
+import com.hangon.order.activity.OrderMain;
 import com.hangon.weather.WeatherActivity;
+import com.hangon.weather.WeatherService;
 import com.hangon.weizhang.activity.MainActivity;
+import com.mob.mobapi.API;
+import com.mob.mobapi.APICallback;
+import com.mob.mobapi.MobAPI;
+import com.mob.mobapi.apis.Weather;
+import com.mob.tools.network.KVPair;
+import com.mob.tools.network.NetworkHelper;
+import com.mob.tools.utils.Hashon;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2016/4/4.
@@ -29,11 +49,16 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         View  carView;
 
         Topbar carTopbar;//标题栏
-        Button btnSstq;//扫一扫实时天气
+        LinearLayout btnSstq;//扫一扫实时天气
         Button btnSetCarInfo;//车辆信息管理
         Button btnBestWay;//最优路线
         Button btnWeizhang;//违章查询
         Button btnYyjy;//预约加油按钮
+
+    TextView tvWeather;
+    TextView tvCity;
+
+        private String ip;
 
 
         Intent intent;//用于跳转
@@ -46,6 +71,8 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         NetReceiver mReceiver ;
         IntentFilter mFilter;
 
+    private ProgressReceiver progressReceiver;
+
 
 
         @Override
@@ -54,17 +81,20 @@ public class CarFragment extends Fragment implements View.OnClickListener {
             init();
             mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
             getActivity().registerReceiver(mReceiver, mFilter);
+            registerReceiver();
             return  carView;
         }
 
         //初始化组件与实例化
         public void init(){
             //实例化
-            btnSstq= (Button) carView.findViewById(R.id.btnSstq);
+            btnSstq= (LinearLayout) carView.findViewById(R.id.btnSstq);
             btnSetCarInfo= (Button) carView.findViewById(R.id.btnSetCarInfo);
             btnBestWay= (Button) carView.findViewById(R.id.btnBestWay);
             btnWeizhang= (Button) carView.findViewById(R.id.btnWeiZhang);
             btnYyjy= (Button) carView.findViewById(R.id.btnYyjy);
+            tvWeather = (TextView) carView.findViewById(R.id.weather_text);
+            tvCity = (TextView) carView.findViewById(R.id.city_text);
 
             //设置监听事件
             btnBestWay.setOnClickListener(this);
@@ -130,6 +160,31 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         public void onDestroy() {
             super.onDestroy();
             getActivity().unregisterReceiver(mReceiver);
+            getActivity().unregisterReceiver(progressReceiver);
         }
 
+    private void registerReceiver(){
+        progressReceiver = new ProgressReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(WeatherService.ACTION_UPDATE_WEATHER);
+        intentFilter.addAction(WeatherService.ACTION_UPDATE_CITY);
+        getActivity().registerReceiver(progressReceiver, intentFilter);
+    }
+
+    class ProgressReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String weather = null, city = null;
+            String action = intent.getAction();
+            if(WeatherService.ACTION_UPDATE_WEATHER.equals(action)){
+                weather = intent.getStringExtra(WeatherService.ACTION_UPDATE_WEATHER);
+                tvWeather.setText(weather);
+            }else if(WeatherService.ACTION_UPDATE_CITY.equals(action)){
+                //Retrive the current music and get the title to show on top of the screen.
+                city = intent.getStringExtra(WeatherService.ACTION_UPDATE_CITY);
+                tvCity.setText(city);
+            }
+        }
+    }
 }

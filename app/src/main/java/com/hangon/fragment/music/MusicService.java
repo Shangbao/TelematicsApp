@@ -35,6 +35,8 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     private int currentPosition;
 
+    private boolean flag;
+
     ExecutorService es= Executors.newSingleThreadExecutor();// 单线程的执行器
 
 
@@ -136,9 +138,9 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                 mediaPlayer.prepare();
                 mediaPlayer.start();// 开始播放
                 initSeekBar();
-                es.execute(new seekBar());
                 handler.sendEmptyMessage(updateCurrentMusic);
                 handler.sendEmptyMessage(updateDuration);
+                es.execute(new seekBar());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -147,7 +149,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     // 实现播放进度
     class seekBar implements Runnable {
-        boolean flag;
         public seekBar() {
             flag = true;
         }

@@ -19,6 +19,12 @@ import com.hangon.fragment.order.ZnwhFragment;
 import com.hangon.fragment.order.ZnwhService;
 import com.hangon.fragment.userinfo.UserFragment;
 import com.hangon.order.activity.PersonalInformationData;
+import com.hangon.weather.Weather;
+import com.hangon.weather.WeatherService;
+import com.mob.mobapi.API;
+import com.mob.mobapi.APICallback;
+
+import java.util.Map;
 
 /**
  * Created by Administrator on 2016/4/1.
@@ -34,6 +40,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     private Fragment userFragment = new UserFragment();
 
     private Intent intent;
+    private Intent weatherIntent;
 
     //tab中的四个帧布局
     private FrameLayout carFrameLayout, musicFrameLayout, znwhFrameLayout, userFrameLayout;
@@ -49,6 +56,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        weatherIntent = new Intent(this, WeatherService.class);
+        startService(weatherIntent);
 
         initView();
         initFragment();
@@ -273,14 +282,11 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onStart() {
         super.onStart();
-        intent = new Intent(HomeActivity.this, ZnwhService.class);
-        startService(intent);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopService(intent);
-
+        stopService(weatherIntent);
     }
 }

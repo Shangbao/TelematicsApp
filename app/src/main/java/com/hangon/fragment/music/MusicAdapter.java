@@ -21,7 +21,7 @@ import java.util.List;
  * Created by Administrator on 2016/4/10.
  */
 public class MusicAdapter extends BaseAdapter {
-    private List<Music> list = new ArrayList<Music>();
+    private List<Music> list;
     private LayoutInflater mInflater;
     private int currIndex;
 

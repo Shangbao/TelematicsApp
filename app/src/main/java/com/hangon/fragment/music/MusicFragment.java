@@ -249,6 +249,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onDestroy() {
         super.onDestroy();
+        getActivity().unregisterReceiver(progressReceiver);
         getActivity().unbindService(conn);
         getActivity().stopService(intent);
         flag=false;

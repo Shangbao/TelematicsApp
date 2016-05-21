@@ -26,15 +26,25 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:orientation="horizontal">
-        <Button
+        <LinearLayout
             android:id="@+id/btnSstq"
             android:layout_width="130dp"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:textSize="18sp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_sy_car2"
-            android:text="实时天气"/>
+            android:background="@drawable/btn_sy_car2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/weather_text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/city_text"/>
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnSetCarInfo"

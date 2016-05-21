@@ -2,6 +2,7 @@ package com.hangon.fragment.order;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -39,6 +40,8 @@ public class ZnwhService extends Service {
 
     private ZnwhInfoVO znwhInfo = new ZnwhInfoVO();
 
+    private MyBinder myBinder = new MyBinder();
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -52,7 +55,7 @@ public class ZnwhService extends Service {
 
                     updateZnwhInfo();
                     try{
-                        Thread.sleep(20000);
+                        Thread.sleep(2000);
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -65,7 +68,7 @@ public class ZnwhService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return myBinder;
     }
 
     public void reflush(ZnwhInfoVO znwhInfoVO){
@@ -156,4 +159,13 @@ public class ZnwhService extends Service {
         });
     }
 
+    class MyBinder extends Binder{
+        public void off(){
+            flag = false;
+        }
+
+        public void on(){
+            flag = true;
+        }
+    }
 }
