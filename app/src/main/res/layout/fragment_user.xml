@@ -115,11 +115,12 @@
         android:background="#ffffff"
         android:id="@+id/userInfoList"
         android:layout_width="wrap_content"
-        android:layout_height="50dp">
+        android:layout_height="wrap_content">
     </ListView>
 
 
     <RelativeLayout
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="40dp">
         <TextView
@@ -143,6 +144,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -151,20 +153,22 @@
 
 
             <Switch
+                android:id="@+id/znwh_switch"
                 android:checked="true"
                 android:layout_marginLeft="200dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="智能维护"
                 android:textOff="关闭"
                 android:textOn="开启"
-                android:id="@+id/znwh_switch" />
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="50dp">
             <TextView
+                android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -175,8 +179,7 @@
             <Switch
                 android:id="@+id/switch_xcjly"
                 android:layout_width="wrap_content"
-                android:background="@drawable/btn_login1"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>
@@ -185,6 +188,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
