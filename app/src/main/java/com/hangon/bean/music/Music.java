@@ -4,7 +4,7 @@ package com.hangon.bean.music;
  * Created by Administrator on 2016/4/10.
  */
 public class Music {
-    private String  number;
+    private String number;
     private String title;// 歌名
     private String singer;// 艺术家
     private String url;// 路径

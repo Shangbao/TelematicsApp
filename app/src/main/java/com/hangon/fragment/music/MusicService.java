@@ -22,14 +22,14 @@ import java.util.concurrent.Executors;
 /**
  * Created by Chuan on 2016/5/14.
  */
-public class MusicService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener{
+public class MusicService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
 
     private MediaPlayer mediaPlayer = new MediaPlayer();//音乐播放器
 
-    private int playMode=Constants.SEQUENCE_MODEL;//控制播放模式
-    private  int currIndex = 0;//当前播放的索引
+    private int playMode = Constants.SEQUENCE_MODEL;//控制播放模式
+    private int currIndex = 0;//当前播放的索引
     private List<Music> list;
-    private int state= Constants.IDLE;
+    private int state = Constants.IDLE;
 
     private MyBinder myBinder = new MyBinder();
 
@@ -37,7 +37,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     private boolean flag;
 
-    ExecutorService es= Executors.newSingleThreadExecutor();// 单线程的执行器
+    ExecutorService es = Executors.newSingleThreadExecutor();// 单线程的执行器
 
 
     private static final int updateProgress = 1;
@@ -49,10 +49,10 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     public static final String ACTION_UPDATE_CURRENT_MUSIC = "com.hangon.fragment.music.UPDATE_CURRENT_MUSIC";
 
     //向MusicFragment传递消息
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
 
-        public void handleMessage(Message msg){
-            switch(msg.what){
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
                 //更新进度
                 case updateProgress:
                     toUpdateProgress();
@@ -71,34 +71,34 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     // 播放上一曲
     private void playPrevious() {
-        if(playMode== Constants.SEQUENCE_MODEL){
+        if (playMode == Constants.SEQUENCE_MODEL) {
             if ((currIndex - 1) >= 0) {
                 currIndex--;
             } else {
                 currIndex = list.size() - 1;
             }
             start(currIndex);
-        }else if (playMode==Constants.RANDOM_MODEL){
-            currIndex=(int)(Math.random()*list.size());
+        } else if (playMode == Constants.RANDOM_MODEL) {
+            currIndex = (int) (Math.random() * list.size());
             start(currIndex);
-        }else if (playMode==Constants.CIRCULATION_MODEL){
+        } else if (playMode == Constants.CIRCULATION_MODEL) {
             start(currIndex);
         }
     }
 
     // 播放下一曲
     private void playNext() {
-        if (playMode==Constants.SEQUENCE_MODEL){
+        if (playMode == Constants.SEQUENCE_MODEL) {
             if ((currIndex + 1) < list.size()) {
                 currIndex++;
             } else {
                 currIndex = 0;
             }
             start(currIndex);
-        }else if (playMode==Constants.RANDOM_MODEL){
-            currIndex=(int)(Math.random()*list.size());
+        } else if (playMode == Constants.RANDOM_MODEL) {
+            currIndex = (int) (Math.random() * list.size());
             start(currIndex);
-        }else if (playMode==Constants.CIRCULATION_MODEL){
+        } else if (playMode == Constants.CIRCULATION_MODEL) {
             start(currIndex);
         }
     }
@@ -171,12 +171,12 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         }
     }
 
-    private void initSeekBar(){
+    private void initSeekBar() {
         currentPosition = 0;
     }
 
-    private void toUpdateProgress(){
-        if(mediaPlayer != null && mediaPlayer.isPlaying()){
+    private void toUpdateProgress() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             int progress = mediaPlayer.getCurrentPosition();
             Intent intent = new Intent();
             intent.setAction(ACTION_UPDATE_PROGRESS);
@@ -186,8 +186,8 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         }
     }
 
-    private void toUpdateDuration(){
-        if(mediaPlayer != null){
+    private void toUpdateDuration() {
+        if (mediaPlayer != null) {
             int duration = mediaPlayer.getDuration();
             Intent intent = new Intent();
             intent.setAction(ACTION_UPDATE_DURATION);
@@ -196,14 +196,14 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         }
     }
 
-    private void toUpdateCurrentMusic(){
+    private void toUpdateCurrentMusic() {
         Intent intent = new Intent();
         intent.setAction(ACTION_UPDATE_CURRENT_MUSIC);
-        intent.putExtra(ACTION_UPDATE_CURRENT_MUSIC,currIndex);
+        intent.putExtra(ACTION_UPDATE_CURRENT_MUSIC, currIndex);
         sendBroadcast(intent);
     }
 
-    private void outSetPlayMode(int playMode){
+    private void outSetPlayMode(int playMode) {
         this.playMode = playMode;
     }
 
@@ -217,43 +217,44 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         return false;
     }
 
-    class MyBinder extends Binder{
-        public void startPlay(int currIndex){
+    class MyBinder extends Binder {
+        public void startPlay(int currIndex) {
             play(currIndex);
         }
 
-        public void stopPlay(){
+        public void stopPlay() {
             stop();
         }
 
-        public void toNext(){
+        public void toNext() {
             playNext();
         }
 
-        public void toPrevious(){
+        public void toPrevious() {
             playPrevious();
         }
 
-        public void toPause(){
+        public void toPause() {
             pause();
         }
 
-        public void toStart(int id){
-            currIndex=id;
+        public void toStart(int id) {
+            currIndex = id;
             start(currIndex);
         }
 
-        public void changeProgress(int progress){
-            if(mediaPlayer != null){
+        public void changeProgress(int progress) {
+            if (mediaPlayer != null) {
                 currentPosition = progress * 1000;
                 mediaPlayer.seekTo(currentPosition);
             }
         }
 
-        public void setPlayMode(int playMode){
+        public void setPlayMode(int playMode) {
             outSetPlayMode(playMode);
         }
     }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {

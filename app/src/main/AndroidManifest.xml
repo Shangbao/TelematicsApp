@@ -43,6 +43,20 @@
     <!--添加操作震动器的权限-->
     <uses-permission android:name="android.permission.VIBRATE"/>
 
+    <!--支付宝相关权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
 
     <application
         android:name="com.hangon.common.MyApplication"
@@ -73,11 +87,13 @@
 
         </activity>
 
-
-
         <activity
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:name="com.hangon.user.activity.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -93,10 +109,6 @@
 
         <activity android:name="com.hangon.home.activity.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
 
@@ -123,10 +135,6 @@
 
         </activity>
         <activity android:name="com.hangon.carInfoManage.activity.AlterCarMessageActivity">
-
-        </activity>
-
-        <activity android:name="com.hangon.carInfoManage.activity.YichangActivity">
 
         </activity>
 
@@ -161,7 +169,9 @@
         <activity android:name="com.hangon.order.activity.AppointMentOrderDetails"/>
         <activity android:name="com.hangon.order.activity.PayOrderDetails"/>
         <activity android:name="com.hangon.order.activity.AppointmentOrder"/>
-        <activity android:name="com.hangon.order.activity.OrderMain"/>
+        <activity android:name="com.hangon.order.activity.MainOrderActivity">
+
+        </activity>
         <activity android:name="com.hangon.order.activity.PersonalInformation"/>
         <activity android:name="com.hangon.order.activity.EditOrder"/>
         <activity android:name="com.hangon.order.activity.Success"/>
@@ -170,6 +180,24 @@
         </activity>
         <activity android:name="com.hangon.weather.SelectCity">
         </activity>
+
+        <!--支付宝支付页面-->
+        <activity android:name="com.hangon.alipay.PayDemoActivity">
+        </activity>
+
+        <!--支付成功-->
+        <activity android:name="com.hangon.alipay.PaySuccess"></activity>
+
+        <!-- alipay sdk begin -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <!-- alipay sdk end -->
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

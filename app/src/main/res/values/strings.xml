@@ -15,4 +15,8 @@
     <string name="csy_chejia_lab">车架号</string>
     <string name="csy_engine_lab">发动机号</string>
     <string name="csy_close">关闭</string>
+
+    <string name="all_order">全部订单</string>
+    <string name="nopay_order">未支付</string>
+    <string name="pay_order">已支付</string>
 </resources>

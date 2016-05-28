@@ -33,19 +33,22 @@ public class SetCarInfoAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 
     public SetCarInfoAdapter(List<CarMessageVO> list, Context context) {
-        this.list=list;
-        this.mInflater=LayoutInflater.from(context);
+        this.list = list;
+        this.mInflater = LayoutInflater.from(context);
     }
+
     btnClickListener listener;
 
-    public interface btnClickListener{
+    public interface btnClickListener {
         public void btnEditeClick(int position);
+
         public void btnDeleteClick(int position);
+
         public void btnScanClick(int position);
     }
 
-    public void setBtnClickListener(btnClickListener btnListener){
-        this.listener=btnListener;
+    public void setBtnClickListener(btnClickListener btnListener) {
+        this.listener = btnListener;
     }
 
     @Override
@@ -63,31 +66,32 @@ public class SetCarInfoAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHold viewHold=null;
+        ViewHold viewHold = null;
 
-        if(convertView==null){
-            viewHold=new ViewHold();
-            convertView=mInflater.inflate(R.layout.item_set_carinfo,null);
-            viewHold.plateNum= (TextView) convertView.findViewById(R.id.plateNum);
-            viewHold.name= (TextView) convertView.findViewById(R.id.name);
-            viewHold.phoneNum= (TextView) convertView.findViewById(R.id.phoneNum);
-            viewHold.defaultAddress= (TextView) convertView.findViewById(R.id.defaultAddress);
-            viewHold.btnEdite= (Button) convertView.findViewById(R.id.btnEdite);
-            viewHold.btnDelete= (Button) convertView.findViewById(R.id.btnDelete);
-            viewHold.btnScan= (Button) convertView.findViewById(R.id.btnScan);
+        if (convertView == null) {
+            viewHold = new ViewHold();
+            convertView = mInflater.inflate(R.layout.item_set_carinfo, null);
+            viewHold.plateNum = (TextView) convertView.findViewById(R.id.plateNum);
+            viewHold.name = (TextView) convertView.findViewById(R.id.name);
+            viewHold.phoneNum = (TextView) convertView.findViewById(R.id.phoneNum);
+            viewHold.defaultAddress = (TextView) convertView.findViewById(R.id.defaultAddress);
+            viewHold.btnEdite = (Button) convertView.findViewById(R.id.btnEdite);
+            viewHold.btnDelete = (Button) convertView.findViewById(R.id.btnDelete);
+            viewHold.btnScan = (Button) convertView.findViewById(R.id.btnScan);
             convertView.setTag(viewHold);
-        }else {
-            viewHold= (ViewHold) convertView.getTag();
+        } else {
+            viewHold = (ViewHold) convertView.getTag();
         }
 
         viewHold.name.setText(list.get(position).getName());
         viewHold.phoneNum.setText(list.get(position).getPhoneNum());
-        viewHold.plateNum.setText(Constants.PROVINCE_VALUE.charAt(list.get(position).getProvinceIndex())+list.get(position).getCarLicenceTail()+"");
-        if(list.get(position).getState()==1){
+        viewHold.plateNum.setText(Constants.PROVINCE_VALUE.charAt(list.get(position).getProvinceIndex()) + list.get(position).getCarLicenceTail() + "");
+        if (list.get(position).getState() == 1) {
             viewHold.defaultAddress.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             viewHold.defaultAddress.setVisibility(View.GONE);
         }
 
@@ -115,7 +119,7 @@ public class SetCarInfoAdapter extends BaseAdapter {
         return convertView;
     }
 
-    class ViewHold{
+    class ViewHold {
         TextView plateNum;
         TextView name;
         TextView phoneNum;

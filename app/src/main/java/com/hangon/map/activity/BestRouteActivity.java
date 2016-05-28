@@ -54,8 +54,8 @@ public class BestRouteActivity extends Activity implements
     AutoCompleteTextView endPosition;//终点
     ImageView siteSwap;//地址互换
     TextView queryStart;//发起路线查询按钮
-    private  String text;//???
-    GeoCoder mGeoCoder=null;//地理编码
+    private String text;//???
+    GeoCoder mGeoCoder = null;//地理编码
     JudgeNet judgeNet;//判断网络函数
 
     /**
@@ -68,7 +68,7 @@ public class BestRouteActivity extends Activity implements
     private SuggestionSearch mSuggestionSearch = null;//检索建议
 
     /**
-     *搜索列表
+     * 搜索列表
      */
     private PoiSearchAdapter adapter;
     ListView searchPositionList;
@@ -78,34 +78,34 @@ public class BestRouteActivity extends Activity implements
     private String gasaddress;//接受加油站地址
 
     /**
-     *判断网络是否可用
+     * 判断网络是否可用
      */
-    NetReceiver mReceiver ;
+    NetReceiver mReceiver;
     IntentFilter mFilter;
 
     /**
-     *判断网络状态参数
+     * 判断网络状态参数
      */
     String judgeNetState;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)  {
+    protected void onCreate(Bundle savedInstanceState) {
         SDKInitializer.initialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_best_way);
 
-        mReceiver=new NetReceiver();
-        mFilter=new IntentFilter();
+        mReceiver = new NetReceiver();
+        mFilter = new IntentFilter();
         mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(mReceiver, mFilter);
         init();
-        judgeNet=new JudgeNet();
+        judgeNet = new JudgeNet();
         /**
          * 初始化搜索模块，注册事件监听
          */
-          mGeoCoder = GeoCoder.newInstance();
-          mPoiSearch = PoiSearch.newInstance();
-          mSuggestionSearch = SuggestionSearch.newInstance();
+        mGeoCoder = GeoCoder.newInstance();
+        mPoiSearch = PoiSearch.newInstance();
+        mSuggestionSearch = SuggestionSearch.newInstance();
         /**
          * 监听结果回调
          */
@@ -115,6 +115,7 @@ public class BestRouteActivity extends Activity implements
         receiver();
 
     }
+
     /**
      * 接受数据
      */
@@ -128,13 +129,13 @@ public class BestRouteActivity extends Activity implements
     }
 
     //初始化组件
-    private void init(){
-        bestWayTopbar= (Topbar) findViewById(R.id.bestWayTopbar);
-        startPosition= (AutoCompleteTextView) findViewById(R.id.start_position);
-        endPosition= (AutoCompleteTextView) findViewById(R.id.end_position);
-        siteSwap= (ImageView) findViewById(R.id.site_swap);
-        searchPositionList= (ListView) findViewById(R.id.searchPositionList);
-        bestWayTopbar= (Topbar) findViewById(R.id.bestWayTopbar);
+    private void init() {
+        bestWayTopbar = (Topbar) findViewById(R.id.bestWayTopbar);
+        startPosition = (AutoCompleteTextView) findViewById(R.id.start_position);
+        endPosition = (AutoCompleteTextView) findViewById(R.id.end_position);
+        siteSwap = (ImageView) findViewById(R.id.site_swap);
+        searchPositionList = (ListView) findViewById(R.id.searchPositionList);
+        bestWayTopbar = (Topbar) findViewById(R.id.bestWayTopbar);
         RouteListener routeListener = new RouteListener();
         PoiSearchListenerEnd end = new PoiSearchListenerEnd();
         PoiSearchListenerStart start = new PoiSearchListenerStart();
@@ -147,7 +148,7 @@ public class BestRouteActivity extends Activity implements
         queryStart();
     }
 
-    private void queryStart(){
+    private void queryStart() {
         bestWayTopbar.setLeftIsVisible(false);
         bestWayTopbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
             @Override
@@ -156,8 +157,8 @@ public class BestRouteActivity extends Activity implements
 
             @Override
             public void rightClick() {
-                judgeNetState=mReceiver.getNetType();
-                if(judgeNetState.equals("mobilenet")||judgeNetState.equals("wifinet")){
+                judgeNetState = mReceiver.getNetType();
+                if (judgeNetState.equals("mobilenet") || judgeNetState.equals("wifinet")) {
                     judgeNet.setStates(1);
                     SearchGeocoder();
                     if ("".equals(startPosition.getText().toString().trim())
@@ -187,15 +188,14 @@ public class BestRouteActivity extends Activity implements
                             }
                         }).start();
                     }
-                }
-                else{
-                    Toast.makeText(BestRouteActivity.this,"抱歉，当前无网络可用", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(BestRouteActivity.this, "抱歉，当前无网络可用", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    public class RouteListener implements View.OnClickListener{
+    public class RouteListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             String address = startPosition.getText().toString();
@@ -226,6 +226,7 @@ public class BestRouteActivity extends Activity implements
             searchPositionList.setVisibility(View.VISIBLE);
         }
     }
+
     public class PoiSearchListenerEnd implements TextWatcher {
         @Override
         public void afterTextChanged(Editable s) {
@@ -255,7 +256,7 @@ public class BestRouteActivity extends Activity implements
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            try{
+            try {
                 ListView listView = (ListView) parent;
                 if (startPosition.hasFocus()) {
                     int a = (listpoiinfo.get(position).name).length();
@@ -288,7 +289,6 @@ public class BestRouteActivity extends Activity implements
 
     /**
      * 发起搜索
-     *
      */
     public void SearchGeocoder() {
         if ("我的位置".equals(startPosition.getText().toString())) {
@@ -303,7 +303,8 @@ public class BestRouteActivity extends Activity implements
                     startPosition.getText().toString()));
         }
     }
-//地理编码
+
+    //地理编码
     @Override
     public void onGetGeoCodeResult(GeoCodeResult result) {
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
@@ -315,11 +316,13 @@ public class BestRouteActivity extends Activity implements
         judgeNet.setLat(result.getLocation().latitude);
         judgeNet.setLon(result.getLocation().longitude);
     }
+
     //反地理编码
     @Override
     public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
 
     }
+
     @Override
     public void onGetSuggestionResult(SuggestionResult suggestionResult) {
         if (suggestionResult == null || suggestionResult.getAllSuggestions() == null) {
@@ -330,6 +333,7 @@ public class BestRouteActivity extends Activity implements
             }
         }
     }
+
     //poi详情结果
     @Override
     public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
@@ -342,6 +346,7 @@ public class BestRouteActivity extends Activity implements
                             + poiDetailResult.getAddress());
         }
     }
+
     @Override
     public void onGetPoiResult(PoiResult poiResult) {
         if (poiResult == null
@@ -375,8 +380,6 @@ public class BestRouteActivity extends Activity implements
             // .show();
         }
     }
-
-
 
 
     @Override

@@ -39,10 +39,10 @@ public class WeatherService extends Service implements APICallback {
     public static final String ACTION_UPDATE_WEATHER = "com.hangon.weather.UPDATE_WEATHER";
     public static final String ACTION_UPDATE_CITY = "com.hangon.weather.UPDATE_CITY";
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
 
-        public void handleMessage(Message msg){
-            switch(msg.what){
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
                 case updateWeather:
                     updateWeahther();
                     break;
@@ -52,6 +52,7 @@ public class WeatherService extends Service implements APICallback {
             }
         }
     };
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -63,9 +64,9 @@ public class WeatherService extends Service implements APICallback {
         MobAPI.initSDK(this, "120b650027878");
         com.mob.mobapi.apis.Weather api = (com.mob.mobapi.apis.Weather) MobAPI.getAPI(com.mob.mobapi.apis.Weather.NAME);
         api.getSupportedCities(this);
-        new Thread(){
+        new Thread() {
             public void run() {
-                while(flag){
+                while (flag) {
                     ip = null;
                     try {
                         NetworkHelper network = new NetworkHelper();
@@ -85,7 +86,7 @@ public class WeatherService extends Service implements APICallback {
         }.start();
     }
 
-    public void onWeatherDetailsGot(Map<String, Object> result){
+    public void onWeatherDetailsGot(Map<String, Object> result) {
         results = (ArrayList<HashMap<String, Object>>) result.get("result");
         HashMap<String, Object> weather = results.get(0);
         city = com.mob.tools.utils.R.toString(weather.get("city"));
@@ -94,7 +95,7 @@ public class WeatherService extends Service implements APICallback {
         handler.sendEmptyMessage(updateCity);
     }
 
-    public void updateWeahther(){
+    public void updateWeahther() {
         Intent intent = new Intent();
         intent.setAction(ACTION_UPDATE_WEATHER);
         intent.putExtra(ACTION_UPDATE_WEATHER, temperature);
@@ -102,7 +103,7 @@ public class WeatherService extends Service implements APICallback {
         handler.sendEmptyMessageDelayed(updateWeather, 1000);
     }
 
-    public void updateCity(){
+    public void updateCity() {
         Intent intent = new Intent();
         intent.setAction(ACTION_UPDATE_CITY);
         intent.putExtra(ACTION_UPDATE_CITY, city);
@@ -113,7 +114,9 @@ public class WeatherService extends Service implements APICallback {
     @Override
     public void onSuccess(API api, int action, Map<String, Object> result) {
         switch (action) {
-            case com.mob.mobapi.apis.Weather.ACTION_IP: onWeatherDetailsGot(result); break;
+            case com.mob.mobapi.apis.Weather.ACTION_IP:
+                onWeatherDetailsGot(result);
+                break;
         }
     }
 

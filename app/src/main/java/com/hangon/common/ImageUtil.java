@@ -26,7 +26,7 @@ public class ImageUtil {
     /**
      * Bitmap → byte[]
      */
-    public static byte[] getBitmapByte(Bitmap bitmap){
+    public static byte[] getBitmapByte(Bitmap bitmap) {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
         try {
@@ -41,25 +41,26 @@ public class ImageUtil {
     /**
      * byte[] → Bitmap
      */
-    public static Bitmap getBitmapFromByte(byte[] temp){
-        if(temp != null){
+    public static Bitmap getBitmapFromByte(byte[] temp) {
+        if (temp != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(temp, 0, temp.length);
             return bitmap;
-        }else{
+        } else {
             return null;
         }
     }
 
     /**
      * 二进制码转换为String类型
+     *
      * @param temp
      * @return
      */
-    public  static String getStringFromByte(byte[] temp){
-        if(temp!=null){
-            String str= Base64.encodeToString(temp, Base64.DEFAULT);
+    public static String getStringFromByte(byte[] temp) {
+        if (temp != null) {
+            String str = Base64.encodeToString(temp, Base64.DEFAULT);
             return str;
-        }else {
+        } else {
             return null;
         }
     }
@@ -67,12 +68,12 @@ public class ImageUtil {
     /**
      * String类型数据转换成二进制码
      */
-    public static byte[] getStringByte(String str){
-        if(str!=null){
+    public static byte[] getStringByte(String str) {
+        if (str != null) {
             byte[] bitmapArray;
-            bitmapArray=Base64.decode(str, Base64.DEFAULT);
+            bitmapArray = Base64.decode(str, Base64.DEFAULT);
             return bitmapArray;
-        }else {
+        } else {
             return null;
         }
     }

@@ -70,10 +70,31 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
         MobAPI.initSDK(this, "120b650027878");
         Weather api = (Weather) MobAPI.getAPI(Weather.NAME);
         api.getSupportedCities(this);
+
         time = new Time();
+
         intent = getIntent();
-        city = intent.getStringExtra("city");
-        api.queryByCityName(city, this);
+        if(city == null){
+            new Thread(){
+                public void run() {
+                    ip = null;
+                    try {
+                        NetworkHelper network = new NetworkHelper();
+                        ArrayList<KVPair<String>> values = new ArrayList<KVPair<String>>();
+                        values.add(new KVPair<String>("ie", "utf-8"));
+                        String resp = network.httpGet("http://pv.sohu.com/cityjson", values, null, null);
+                        resp = resp.replace("var returnCitySN = {", "{").replace("};", "}");
+                        ip = (String) (new Hashon().fromJson(resp).get("cip"));
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }finally {
+                        Weather api = (Weather) MobAPI.getAPI(Weather.NAME);
+                        api.queryByIPAddress(ip, WeatherActivity.this);
+                    }
+                }
+
+            }.start();
+        }
     }
 
     private void initWeather(){

@@ -28,9 +28,9 @@ import java.util.ArrayList;
  */
 public class SelectCity extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
-    private String[] citys = {"自动定位","北京","上海","广州","深圳","厦门","天津","重庆","珠海","苏州","石家庄","太原","呼和浩特","沈阳",
-            "长春","哈尔滨","南京","杭州","合肥","福州","南昌","济南","郑州","武汉","长沙",
-            "南宁","海口","成都","贵阳","昆明","拉萨","西安","兰州","银川","西宁","乌鲁木齐"};
+    private String[] citys = {"自动定位", "北京", "上海", "广州", "深圳", "厦门", "天津", "重庆", "珠海", "苏州", "石家庄", "太原", "呼和浩特", "沈阳",
+            "长春", "哈尔滨", "南京", "杭州", "合肥", "福州", "南昌", "济南", "郑州", "武汉", "长沙",
+            "南宁", "海口", "成都", "贵阳", "昆明", "拉萨", "西安", "兰州", "银川", "西宁", "乌鲁木齐"};
     private ImageView back;
     private GridView cityList;
     private Intent intent;
@@ -40,6 +40,7 @@ public class SelectCity extends Activity implements AdapterView.OnItemClickListe
     private String city;
 
     private ArrayList<City> cityArrayList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,7 @@ public class SelectCity extends Activity implements AdapterView.OnItemClickListe
         super.onDestroy();
     }
 
-    private void init(){
+    private void init() {
         back = (ImageView) findViewById(R.id.back);
         cityList = (GridView) findViewById(R.id.city_list);
         inputCity = (EditText) findViewById(R.id.input_city);
@@ -67,8 +68,8 @@ public class SelectCity extends Activity implements AdapterView.OnItemClickListe
         search.setOnClickListener(this);
     }
 
-    private void initCity(){
-        for(int i = 0; i < citys.length; i++){
+    private void initCity() {
+        for (int i = 0; i < citys.length; i++) {
             City city = new City(citys[i]);
             cityArrayList.add(city);
         }

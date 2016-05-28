@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by Administrator on 2016/5/2.
  */
-public class WeiZhangInfoVO implements Serializable{
+public class WeiZhangInfoVO implements Serializable {
     private String name;//车主姓名
     private int provinceIndex;//车牌索引
     private String carLicenceTail;//车牌尾号

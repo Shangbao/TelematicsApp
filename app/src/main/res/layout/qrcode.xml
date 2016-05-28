@@ -8,12 +8,13 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="100dp">
+
         <LinearLayout
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
             <TextView
-
                 android:layout_weight="3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -28,6 +29,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="zhangsan"
+                android:textSize="20dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="状态："
+                android:textSize="20dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/qr_state"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="未付款"
                 android:textSize="20dp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"

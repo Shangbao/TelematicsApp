@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * Created by Administrator on 2016/3/31.
  */
-public class MyStringRequest extends StringRequest{
+public class MyStringRequest extends StringRequest {
     public MyStringRequest(int method, String url, Response.Listener<String> listener,
                            Response.ErrorListener errorListener) {
         super(method, url, listener, errorListener);

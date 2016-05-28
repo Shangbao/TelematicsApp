@@ -56,7 +56,7 @@ public class MusicAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHold = new ViewHold();
             convertView = mInflater.inflate(R.layout.item_music, null);
-         viewHold.number= (CircleView) convertView.findViewById(R.id.item_num);
+            viewHold.number = (CircleView) convertView.findViewById(R.id.item_num);
             viewHold.title = (TextView) convertView
                     .findViewById(R.id.item_title);
             viewHold.time = (TextView) convertView.findViewById(R.id.item_time);

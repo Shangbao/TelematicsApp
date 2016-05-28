@@ -150,7 +150,6 @@ public class GasSiteDetailsActivity extends Activity {
                 appointGastype = (TextView) alertView.findViewById(R.id.appoint_gastype);
                 mGasLitre = (EditText) alertView.findViewById(R.id.alert_appoint_gaslitre);
                 mGasmoney = (EditText) alertView.findViewById(R.id.alert_appoint_gasmoney);
-                appointGastype = (TextView) alertView.findViewById(R.id.appoint_gastype);
                 appointGasSingleprice = (TextView) alertView.findViewById(R.id.appoint_gassingleprice);
                 appointGasSingleprice.setText(GasInfoUtil.getGasinfo().get(position1).getGastprice().get(position).getPrice());
                 appointGastype.setText(GasInfoUtil.getGasinfo().get(position1).getGastprice().get(position).getName());
@@ -252,7 +251,7 @@ public class GasSiteDetailsActivity extends Activity {
     //加油信息发送到数据库
     private void PostVolley() {
         double a = Double.valueOf(mGasLitre.getText().toString());
-        double b = Double.valueOf(mGasmoney.getText().toString());
+        double b = Double.valueOf(appointGasSingleprice.getText().toString());
         String url = Constants.ADD_ORDER_INFO_URL;
         final Map map = new HashMap<>();
         map.put("gasStationAddress", mGasAddressDetails.getText().toString());

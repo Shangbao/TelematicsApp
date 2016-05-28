@@ -46,4 +46,9 @@
     <color name="black">#000000</color>
     <color name="grey">#808080</color>
     <color name="light_grey">#D3D3D3</color>
+
+    <color name="main_top_color">#f7614d</color>
+    <color name="main_top_tab_color">#fcc9c5</color>
+    <color name="matrix_color">#ffffff</color>
+    <color name="main_top_tab_color_2">#ffffff</color>
 </resources>

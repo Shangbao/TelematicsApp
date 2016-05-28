@@ -60,31 +60,31 @@ public class ScanCarMessageActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_car_message);
-        Intent intent=getIntent();
-        carMessageVO= (CarMessageVO) intent.getSerializableExtra("carMessage");
+        Intent intent = getIntent();
+        carMessageVO = (CarMessageVO) intent.getSerializableExtra("carMessage");
         init();
         setValue();
         getBrandInfoList();
     }
 
-    private void init(){
-         car_name_spinner= (TextView) findViewById(R.id.car_name_spinner);// 车品牌
-         car_type_spinner= (TextView) findViewById(R.id.car_type_spinner);//车品牌类型
-         carFlag= (ImageView) findViewById(R.id.carFlag);
+    private void init() {
+        car_name_spinner = (TextView) findViewById(R.id.car_name_spinner);// 车品牌
+        car_type_spinner = (TextView) findViewById(R.id.car_type_spinner);//车品牌类型
+        carFlag = (ImageView) findViewById(R.id.carFlag);
 
-         car_plate_num= (TextView) findViewById(R.id.car_plate_num);//车牌号
-          car_enginenum_edit= (TextView) findViewById(R.id.car_engine_number);//车的引擎号
-         car_degree= (TextView) findViewById(R.id.car_degree);//车身级别
-        car_chassis_number= (TextView) findViewById(R.id.car_chassis_number);
+        car_plate_num = (TextView) findViewById(R.id.car_plate_num);//车牌号
+        car_enginenum_edit = (TextView) findViewById(R.id.car_engine_number);//车的引擎号
+        car_degree = (TextView) findViewById(R.id.car_degree);//车身级别
+        car_chassis_number = (TextView) findViewById(R.id.car_chassis_number);
 
-        car_mileage= (TextView) findViewById(R.id.car_mileage);//车行驶的公里数
-        car_gas= (TextView) findViewById(R.id.car_gas);//车汽油剩余量
-        engine_is_good= (TextView) findViewById(R.id.engine_is_good);//车引擎的状况
-        trans_is_good= (TextView) findViewById(R.id.trans_is_good);//车变速器的状况
-        light_is_good= (TextView) findViewById(R.id.light_is_good);//车灯的状况
+        car_mileage = (TextView) findViewById(R.id.car_mileage);//车行驶的公里数
+        car_gas = (TextView) findViewById(R.id.car_gas);//车汽油剩余量
+        engine_is_good = (TextView) findViewById(R.id.engine_is_good);//车引擎的状况
+        trans_is_good = (TextView) findViewById(R.id.trans_is_good);//车变速器的状况
+        light_is_good = (TextView) findViewById(R.id.light_is_good);//车灯的状况
 
-        state= (TextView) findViewById(R.id.state);
-        topbar= (Topbar) findViewById(R.id.scanCarMessageTopbar);
+        state = (TextView) findViewById(R.id.state);
+        topbar = (Topbar) findViewById(R.id.scanCarMessageTopbar);
         topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
             @Override
             public void leftClick() {
@@ -100,66 +100,68 @@ public class ScanCarMessageActivity extends Activity {
         });
         topbar.setRightIsVisible(false);
     }
-    private void setValue(){
-        car_plate_num.setText(Constants.PROVINCE_VALUE.charAt(carMessageVO.getProvinceIndex())+carMessageVO.getCarLicenceTail());
+
+    private void setValue() {
+        car_plate_num.setText(Constants.PROVINCE_VALUE.charAt(carMessageVO.getProvinceIndex()) + carMessageVO.getCarLicenceTail());
         car_enginenum_edit.setText(carMessageVO.getEngineNum());
         car_chassis_number.setText(carMessageVO.getChassisNum());
         getCarFlag(carMessageVO.getCarFlag().trim());
-        car_degree.setText(carMessageVO.getDoorCount()+"门"+carMessageVO.getSeatCount()+"座");
+        car_degree.setText(carMessageVO.getDoorCount() + "门" + carMessageVO.getSeatCount() + "座");
 
-        car_mileage.setText(carMessageVO.getMileage()+"");
-        car_gas.setText(carMessageVO.getOddGasAmount()+"");
+        car_mileage.setText(carMessageVO.getMileage() + "");
+        car_gas.setText(carMessageVO.getOddGasAmount() + "");
 
-        if(carMessageVO.getIsGoodEngine()==1){
+        if (carMessageVO.getIsGoodEngine() == 1) {
             engine_is_good.setText("正常");
-        }else {
+        } else {
             engine_is_good.setText("异常");
         }
 
-        if(carMessageVO.getIsGoodTran()==1){
+        if (carMessageVO.getIsGoodTran() == 1) {
             trans_is_good.setText("正常");
-        }else {
+        } else {
             trans_is_good.setText("异常");
         }
 
-        if(carMessageVO.getIsGoodLight()==1){
+        if (carMessageVO.getIsGoodLight() == 1) {
             light_is_good.setText("正常");
-        }else {
+        } else {
             light_is_good.setText("异常");
         }
 
-        if(carMessageVO.getState()==1){
+        if (carMessageVO.getState() == 1) {
             state.setText("默认使用车辆");
-        }else {
+        } else {
             state.setText("非常用车辆");
         }
     }
 
-    private void getCarFlag(String iconUrl){
-        String url=Constants.CAR_FLAG_URL+iconUrl;
-        ImageRequest request=new ImageRequest(url, new Response.Listener<Bitmap>() {
+    private void getCarFlag(String iconUrl) {
+        String url = Constants.CAR_FLAG_URL + iconUrl;
+        ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap bitmap) {
-            carFlag.setImageBitmap(bitmap);
+                carFlag.setImageBitmap(bitmap);
             }
         }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(ScanCarMessageActivity.this,"网络异常，车标志加载失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScanCarMessageActivity.this, "网络异常，车标志加载失败", Toast.LENGTH_SHORT).show();
             }
         });
         MyApplication.getHttpQueues().add(request);
     }
 
     //获得车品牌数据
-    public void getBrandInfoList(){
-        String url=Constants.GET_BRAND_INFO_URL;
+    public void getBrandInfoList() {
+        String url = Constants.GET_BRAND_INFO_URL;
         VolleyRequest.RequestGet(ScanCarMessageActivity.this, url, "getBrandInfoList", new VolleyInterface(ScanCarMessageActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
                 gson = new Gson();
                 List<BrandVO> list = new ArrayList<BrandVO>();
-                list = gson.fromJson(result, new TypeToken<List<BrandVO>>() {}.getType());
+                list = gson.fromJson(result, new TypeToken<List<BrandVO>>() {
+                }.getType());
 
                 car_name_spinner.setText(list.get(carMessageVO.getBrandIndex()).getBrand());
                 car_type_spinner.setText(list.get(carMessageVO.getBrandIndex()).getBrandTypeList().get(carMessageVO.getBrandTypeIndex()).getName());

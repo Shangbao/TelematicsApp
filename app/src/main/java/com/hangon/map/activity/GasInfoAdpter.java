@@ -32,11 +32,13 @@ public class GasInfoAdpter extends SimpleAdapter {
     public double getLat() {
         return lat;
     }
+
     public void setLat(double lat) {
         this.lat = lat;
     }
+
     public GasInfoAdpter(Context context, List<? extends Map<String, ?>> data,
-                     int resource, String[] from, int[] to) {
+                         int resource, String[] from, int[] to) {
         super(context, data, resource, from, to);
         this.context = context;
         this.resource = resource;
@@ -68,6 +70,7 @@ public class GasInfoAdpter extends SimpleAdapter {
         }
         return v;
     }
+
     public void item(ListView list) {
         for (int i = 0; i < gaslist.size(); i++) {
             HashMap map1 = (HashMap) gaslist.get(i);
@@ -78,12 +81,15 @@ public class GasInfoAdpter extends SimpleAdapter {
             }
         }
     }
+
     public int getFals() {
         return fals;
     }
+
     public void setFals(int fals) {
         this.fals = fals;
     }
+
     public void item1(ListView list) {
         for (int i = 0; i < gaslist.size(); i++) {
             HashMap map1 = (HashMap) gaslist.get(i);
@@ -91,7 +97,9 @@ public class GasInfoAdpter extends SimpleAdapter {
                     .equals(map1.get("gaslat").toString().trim())) {
                 list.setSelection(i);
             }
-        }}
+        }
+    }
+
     class ViewHolder {
         RelativeLayout rl;
         TextView gasname;

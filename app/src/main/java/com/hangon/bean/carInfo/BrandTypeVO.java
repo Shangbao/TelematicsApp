@@ -4,12 +4,10 @@ package com.hangon.bean.carInfo;
  * Created by Administrator on 2016/4/30.
  */
 public class BrandTypeVO {
-    private  String name;
+    private String name;
 
     public BrandTypeVO() {
     }
-
-
 
     public String getName() {
         return name;

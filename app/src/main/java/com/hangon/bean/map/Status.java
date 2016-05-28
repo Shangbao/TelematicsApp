@@ -5,23 +5,23 @@ import java.util.List;
 
 public class Status {
 
-	private Result result;
+    private Result result;
 
-	public Status() {
-	}
+    public Status() {
+    }
 
-	public Result getResult() {
-		return result;
-	}
+    public Result getResult() {
+        return result;
+    }
 
-	public void setResult(Result result) {
-		this.result = result;
-	}
+    public void setResult(Result result) {
+        this.result = result;
+    }
 
-	@Override
-	public String toString() {
-		return "Status{" +
-				"result=" + result +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Status{" +
+                "result=" + result +
+                '}';
+    }
 }

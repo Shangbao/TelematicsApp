@@ -1,85 +1,85 @@
 package com.hangon.bean.user;
 
 public class UserInfo {
-	private String userName;//用户名
-	private String userPass;//密码
-	private String nickname;//昵称
-	private String sex;//性别
-	private int age;//年龄
-	private String driverNum;//驾驶证号
-	private String userIconContent;//图片的二进制码
-	private boolean isSave;//是否保存
-	private String userIconUrl;//用户头像对应的地址
+    private String userName;//用户名
+    private String userPass;//密码
+    private String nickname;//昵称
+    private String sex;//性别
+    private int age;//年龄
+    private String driverNum;//驾驶证号
+    private String userIconContent;//图片的二进制码
+    private boolean isSave;//是否保存
+    private String userIconUrl;//用户头像对应的地址
 
-	public String getUserIconUrl() {
-		return userIconUrl;
-	}
+    public String getUserIconUrl() {
+        return userIconUrl;
+    }
 
-	public void setUserIconUrl(String userIconUrl) {
-		this.userIconUrl = userIconUrl;
-	}
+    public void setUserIconUrl(String userIconUrl) {
+        this.userIconUrl = userIconUrl;
+    }
 
-	public String getUserIconContent() {
-		return userIconContent;
-	}
+    public String getUserIconContent() {
+        return userIconContent;
+    }
 
-	public void setUserIconContent(String userIconContent) {
-		this.userIconContent = userIconContent;
-	}
+    public void setUserIconContent(String userIconContent) {
+        this.userIconContent = userIconContent;
+    }
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-	public int getAge() {
-		return age;
-	}
+    public int getAge() {
+        return age;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-	public String getUserPass() {
-		return userPass;
-	}
+    public String getUserPass() {
+        return userPass;
+    }
 
-	public void setUserPass(String userPass) {
-		this.userPass = userPass;
-	}
+    public void setUserPass(String userPass) {
+        this.userPass = userPass;
+    }
 
-	public String getNickname() {
-		return nickname;
-	}
+    public String getNickname() {
+        return nickname;
+    }
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
-	public String getSex() {
-		return sex;
-	}
+    public String getSex() {
+        return sex;
+    }
 
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
-	public String getDriverNum() {
-		return driverNum;
-	}
+    public String getDriverNum() {
+        return driverNum;
+    }
 
-	public void setDriverNum(String driverNum) {
-		this.driverNum = driverNum;
-	}
+    public void setDriverNum(String driverNum) {
+        this.driverNum = driverNum;
+    }
 
-	public boolean isSave() {
-		return isSave;
-	}
+    public boolean isSave() {
+        return isSave;
+    }
 
-	public void setIsSave(boolean isSave) {
-		this.isSave = isSave;
-	}
+    public void setIsSave(boolean isSave) {
+        this.isSave = isSave;
+    }
 }

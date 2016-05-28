@@ -46,7 +46,7 @@ import static com.mob.tools.utils.R.getStringRes;
 /**
  * Created by Administrator on 2016/3/31.
  */
-public class RegisterActivity extends Activity implements View.OnClickListener{
+public class RegisterActivity extends Activity implements View.OnClickListener {
     private EditText rUserName;
     private EditText cord;
     private TextView now;
@@ -61,7 +61,6 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     private boolean flag = true;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +68,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_register);
         init();
         SMSSDK.initSDK(this, "113728ac0f8dd", "32ca2176e3fa1f3b4eedadbd74de1ee6");
-        EventHandler eh=new EventHandler(){
+        EventHandler eh = new EventHandler() {
 
             @Override
             public void afterEvent(int event, int result, Object data) {
@@ -90,11 +89,11 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         rUserName = (EditText) findViewById(R.id.rUserName);
         cord = (EditText) findViewById(R.id.cord);
         now = (TextView) findViewById(R.id.now);
-        getCord= (Button) findViewById(R.id.getCord);
+        getCord = (Button) findViewById(R.id.getCord);
 
         saveCord = (Button) findViewById(R.id.saveCord);
         rUserPass = (EditText) findViewById(R.id.rUserPass);
-        registerTopbar= (Topbar) findViewById(R.id.registerTopbar);
+        registerTopbar = (Topbar) findViewById(R.id.registerTopbar);
         getCord.setOnClickListener(this);
         saveCord.setOnClickListener(this);
 
@@ -118,42 +117,41 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         switch (v.getId()) {
             //获取验证码
             case R.id.getCord:
-                if(!TextUtils.isEmpty(rUserName.getText().toString().trim())){
-                    if(rUserName.getText().toString().trim().length()==11){
+                if (!TextUtils.isEmpty(rUserName.getText().toString().trim())) {
+                    if (rUserName.getText().toString().trim().length() == 11) {
                         judgeUserExist();
 
-                    }else{
+                    } else {
                         Toast.makeText(RegisterActivity.this, "请输入完整电话号码", Toast.LENGTH_LONG).show();
                         rUserName.requestFocus();
                     }
-                }else{
+                } else {
                     Toast.makeText(RegisterActivity.this, "请输入您的电话号码", Toast.LENGTH_LONG).show();
                     rUserName.requestFocus();
                 }
                 break;
             //保存验证码
             case R.id.saveCord:
-                if(!TextUtils.isEmpty(cord.getText().toString().trim())){
-                    if(cord.getText().toString().trim().length()==4){
+                if (!TextUtils.isEmpty(cord.getText().toString().trim())) {
+                    if (cord.getText().toString().trim().length() == 4) {
                         iCord = cord.getText().toString().trim();
                         flag = false;
-                        if (!TextUtils.isEmpty(rUserPass.getText().toString().trim())){
-                            if (rUserPass.getText().toString().trim().length()<6||rUserPass.getText().toString().trim().length()>12){
+                        if (!TextUtils.isEmpty(rUserPass.getText().toString().trim())) {
+                            if (rUserPass.getText().toString().trim().length() < 6 || rUserPass.getText().toString().trim().length() > 12) {
                                 Toast.makeText(RegisterActivity.this, "密码需在6-12位之间！", Toast.LENGTH_LONG).show();
                                 rUserPass.requestFocus();
-                            }
-                            else{
+                            } else {
                                 SMSSDK.submitVerificationCode("86", iPhone, iCord);
                             }
-                        }else{
+                        } else {
                             Toast.makeText(RegisterActivity.this, "请输入密码", Toast.LENGTH_LONG).show();
                             rUserPass.requestFocus();
                         }
-                    }else{
+                    } else {
                         Toast.makeText(RegisterActivity.this, "请输入完整验证码", Toast.LENGTH_LONG).show();
                         cord.requestFocus();
                     }
-                }else{
+                } else {
                     Toast.makeText(RegisterActivity.this, "请输入验证码", Toast.LENGTH_LONG).show();
                     cord.requestFocus();
                 }
@@ -167,21 +165,21 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         handlerText.sendEmptyMessageDelayed(1, 1000);
     }
 
-    Handler handlerText =new Handler(){
+    Handler handlerText = new Handler() {
         public void handleMessage(Message msg) {
-            if(msg.what==1){
-                if(time>0){
-                    now.setText("验证码已发送"+time+"秒");
+            if (msg.what == 1) {
+                if (time > 0) {
+                    now.setText("验证码已发送" + time + "秒");
                     time--;
                     handlerText.sendEmptyMessageDelayed(1, 1000);
-                }else{
+                } else {
                     getCord.setText("重新发送");
 
                     time = 60;
                     now.setVisibility(View.GONE);
                     getCord.setVisibility(View.VISIBLE);
                 }
-            }else{
+            } else {
                 cord.setText("");
 
                 getCord.setText("重新发送");
@@ -192,7 +190,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         }
     };
 
-    Handler handler=new Handler(){
+    Handler handler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
@@ -208,18 +206,18 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                     Toast.makeText(getApplicationContext(), "验证码校验成功", Toast.LENGTH_SHORT).show();
                     handlerText.sendEmptyMessage(2);
                     addUserInfo();
-                } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){//服务器验证码发送成功
+                } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {//服务器验证码发送成功
                     reminderText();
                     Toast.makeText(getApplicationContext(), "验证码已经发送", Toast.LENGTH_SHORT).show();
-                }else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){//返回支持发送验证码的国家列表
+                } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {//返回支持发送验证码的国家列表
                     Toast.makeText(getApplicationContext(), "获取国家列表成功", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                if(flag){
+                if (flag) {
                     getCord.setVisibility(View.VISIBLE);
                     Toast.makeText(RegisterActivity.this, "验证码获取失败，请重新获取", Toast.LENGTH_SHORT).show();
                     rUserName.requestFocus();
-                }else{
+                } else {
                     ((Throwable) data).printStackTrace();
                     int resId = getStringRes(RegisterActivity.this, "smssdk_network_error");
                     Toast.makeText(RegisterActivity.this, "验证码错误", Toast.LENGTH_SHORT).show();
@@ -236,56 +234,56 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     };
 
     //添加用户
-    private void addUserInfo(){
+    private void addUserInfo() {
         String url = Constants.REGISTER_URL;
-        Map<String,Object> map = new HashMap<>();
-        map.put("userName",rUserName.getText().toString());
+        Map<String, Object> map = new HashMap<>();
+        map.put("userName", rUserName.getText().toString());
         map.put("userPass", rUserPass.getText().toString());
         VolleyRequest.RequestPost(RegisterActivity.this, url, "postUserInfo", map, new VolleyInterface(RegisterActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
-                Log.e("aaa",result);
-            if(result.equals("OK")){
-                Toast.makeText(RegisterActivity.this,"注册成功。",Toast.LENGTH_SHORT).show();
-                Intent toLogin=new Intent();
-                toLogin.setClass(RegisterActivity.this,LoginActivity.class);
-               startActivity(toLogin);
-             }
+                Log.e("aaa", result);
+                if (result.equals("OK")) {
+                    Toast.makeText(RegisterActivity.this, "注册成功。", Toast.LENGTH_SHORT).show();
+                    Intent toLogin = new Intent();
+                    toLogin.setClass(RegisterActivity.this, LoginActivity.class);
+                    startActivity(toLogin);
+                }
 
             }
 
             @Override
             public void onMyError(VolleyError error) {
-               Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_SHORT);
+                Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_SHORT);
             }
         });
     }
 
     //判断用户名是否存在
-    private  void judgeUserExist(){
-        String url=Constants.JUDGE_USER_URL+"userName="+rUserName.getText();
-     VolleyRequest.RequestGet(RegisterActivity.this, url, "userGet", new VolleyInterface(RegisterActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
-         @Override
-         public void onMySuccess(String result) {
-             if (result.equals("error")){
-                 Toast.makeText(RegisterActivity.this,"账号已存在，请重新输入",Toast.LENGTH_SHORT).show();
-                 rUserName.setText("");
-                 rUserPass.setText("");
-                 cord.setText("");
-             } else if (result.equals("success")){
-                 iPhone = rUserName.getText().toString().trim();
-                 SMSSDK.getVerificationCode("86", iPhone);
-                 cord.requestFocus();
-                 getCord.setVisibility(View.GONE);
+    private void judgeUserExist() {
+        String url = Constants.JUDGE_USER_URL + "userName=" + rUserName.getText();
+        VolleyRequest.RequestGet(RegisterActivity.this, url, "userGet", new VolleyInterface(RegisterActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
+            @Override
+            public void onMySuccess(String result) {
+                if (result.equals("error")) {
+                    Toast.makeText(RegisterActivity.this, "账号已存在，请重新输入", Toast.LENGTH_SHORT).show();
+                    rUserName.setText("");
+                    rUserPass.setText("");
+                    cord.setText("");
+                } else if (result.equals("success")) {
+                    iPhone = rUserName.getText().toString().trim();
+                    SMSSDK.getVerificationCode("86", iPhone);
+                    cord.requestFocus();
+                    getCord.setVisibility(View.GONE);
 
-             }
-         }
+                }
+            }
 
-         @Override
-         public void onMyError(VolleyError error) {
-        Toast.makeText(RegisterActivity.this,error.toString(),Toast.LENGTH_SHORT).show();
-         }
-     });
+            @Override
+            public void onMyError(VolleyError error) {
+                Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

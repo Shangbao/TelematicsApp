@@ -1,42 +1,25 @@
 package com.hangon.order.util;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar.Tab;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.hangon.common.Constants;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
-import com.hangon.order.activity.AllOrder;
-import com.hangon.order.activity.AppointMentOrderDetails;
-import com.hangon.order.activity.OrderMain;
 
 public class GasOrderAdapter extends BaseAdapter {
 	ViewHolder vh;

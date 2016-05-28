@@ -83,7 +83,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         int position = getIntent().getIntExtra("id", 0);
         if (position != 0) {
             getTab(position);
-        }else {
+        } else {
             getTab(1);
         }
     }
@@ -166,22 +166,22 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.carLayout:
-                position=1;
+                position = 1;
                 getTab(position);
                 break;
 
             case R.id.musicLayout:
-                position=2;
+                position = 2;
                 getTab(position);
                 break;
 
             case R.id.znwhLayout:
-                position=3;
+                position = 3;
                 getTab(position);
                 break;
 
             case R.id.userLayout:
-                position=4;
+                position = 4;
                 getTab(position);
                 break;
         }
@@ -215,7 +215,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
      */
     private void getTab(int position) {
         switch (position) {
-              case 1:
+            case 1:
                 clickTab(carFragment);
                 break;
 
@@ -286,7 +286,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        position=savedInstanceState.getInt("id");
+        position = savedInstanceState.getInt("id");
         getTab(position);
         super.onRestoreInstanceState(savedInstanceState);
     }

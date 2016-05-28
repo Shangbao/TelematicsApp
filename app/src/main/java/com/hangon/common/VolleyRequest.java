@@ -16,17 +16,18 @@ import java.util.Map;
 public class VolleyRequest {
     public static MyStringRequest myStringRequest;
     public static Context context;
-    public static void RequestGet(Context mContext,String url,String tag,VolleyInterface vif){
+
+    public static void RequestGet(Context mContext, String url, String tag, VolleyInterface vif) {
         MyApplication.getHttpQueues().cancelAll(tag);
-        myStringRequest =  new MyStringRequest(Method.GET,url,vif.loadingListener(),vif.errorListener());
+        myStringRequest = new MyStringRequest(Method.GET, url, vif.loadingListener(), vif.errorListener());
         myStringRequest.setTag(tag);
         MyApplication.getHttpQueues().add(myStringRequest);
         MyApplication.getHttpQueues().start();
     }
 
-    public static void RequestPost(Context mContext,String url,String tag, final Map<String,Object> params,VolleyInterface vif){
+    public static void RequestPost(Context mContext, String url, String tag, final Map<String, Object> params, VolleyInterface vif) {
         MyApplication.getHttpQueues().cancelAll(tag);
-        myStringRequest = new MyStringRequest(Method.POST,url,vif.loadingListener(),vif.errorListener()){
+        myStringRequest = new MyStringRequest(Method.POST, url, vif.loadingListener(), vif.errorListener()) {
             @Override
             protected Map getParams() throws AuthFailureError {
                 return params;
@@ -36,6 +37,5 @@ public class VolleyRequest {
         MyApplication.getHttpQueues().add(myStringRequest);
         MyApplication.getHttpQueues().start();
     }
-
 
 }

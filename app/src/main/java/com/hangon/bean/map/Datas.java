@@ -1,183 +1,188 @@
 package com.hangon.bean.map;
 
 
-
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * 加油站的与位置相关信息
  */
-public class Datas implements Comparable<Datas>,Serializable{
-	private String id;//编号
-	private String name;//加油站名称
-	private String area;//地区
-	private String areaname;//地区名称
-	private String address;//地址
-	private String brandname;//品牌名称
-	private String type;//加油站类型
-	private String discount;//折扣
-	private String exhaust;
-	private String position;
-	private double lon;
-	private double lat;
-	private List<Price> price;
-	private List<Gastprice> gastprice;
-	private String fwlsmc;
-	private String distance;
-    public Datas(String name,String addresss,String brandname,List<Gastprice> gasprice,double lon,double lat
-    		    ,String distance){
-     this.name=name;
-     this.brandname=brandname;
-     this.type=type;
-     this.lat=lat;
-     this.lon=lon;
-     this.address=address;
-     this.distance=distance;
-     this.gastprice=gasprice;
+public class Datas implements Comparable<Datas>, Serializable {
+    private String id;//编号
+    private String name;//加油站名称
+    private String area;//地区
+    private String areaname;//地区名称
+    private String address;//地址
+    private String brandname;//品牌名称
+    private String type;//加油站类型
+    private String discount;//折扣
+    private String exhaust;
+    private String position;
+    private double lon;
+    private double lat;
+    private List<Price> price;
+    private List<Gastprice> gastprice;
+    private String fwlsmc;
+    private String distance;
+
+    public Datas(String name, String addresss, String brandname, List<Gastprice> gasprice, double lon, double lat
+            , String distance) {
+        this.name = name;
+        this.brandname = brandname;
+        this.type = type;
+        this.lat = lat;
+        this.lon = lon;
+        this.address = address;
+        this.distance = distance;
+        this.gastprice = gasprice;
     }
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public String getArea() {
-		return area;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setArea(String area) {
-		this.area = area;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getArea() {
+        return area;
+    }
 
-	public String getBrandname() {
-		return brandname;
-	}
+    public void setArea(String area) {
+        this.area = area;
+    }
 
-	public void setBrandname(String brandname) {
-		this.brandname = brandname;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public String getBrandname() {
+        return brandname;
+    }
 
-	public String getDiscount() {
-		return discount;
-	}
+    public void setBrandname(String brandname) {
+        this.brandname = brandname;
+    }
 
-	public void setDiscount(String discount) {
-		this.discount = discount;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public String getExhaust() {
-		return exhaust;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public void setExhaust(String exhaust) {
-		this.exhaust = exhaust;
-	}
+    public String getDiscount() {
+        return discount;
+    }
 
-	public String getPosition() {
-		return position;
-	}
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
 
-	public void setPosition(String position) {
-		this.position = position;
-	}
+    public String getExhaust() {
+        return exhaust;
+    }
 
-	public double getLon() {
-		return lon;
-	}
+    public void setExhaust(String exhaust) {
+        this.exhaust = exhaust;
+    }
 
-	public void setLon(double lon) {
-		this.lon = lon;
-	}
+    public String getPosition() {
+        return position;
+    }
 
-	public double getLat() {
-		return lat;
-	}
+    public void setPosition(String position) {
+        this.position = position;
+    }
 
-	public void setLat(double lat) {
-		this.lat = lat;
-	}
+    public double getLon() {
+        return lon;
+    }
 
-	public List<Price> getPrice() {
-		return price;
-	}
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
 
-	public void setPrice(List<Price> price) {
-		this.price = price;
-	}
+    public double getLat() {
+        return lat;
+    }
 
-	public List<Gastprice> getGastprice() {
-		return gastprice;
-	}
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
 
-	public void setGastprice(List<Gastprice> gastprice) {
-		this.gastprice = gastprice;
-	}
+    public List<Price> getPrice() {
+        return price;
+    }
 
-	public String getFwlsmc() {
-		return fwlsmc;
-	}
+    public void setPrice(List<Price> price) {
+        this.price = price;
+    }
 
-	public void setFwlsmc(String fwlsmc) {
-		this.fwlsmc = fwlsmc;
-	}
+    public List<Gastprice> getGastprice() {
+        return gastprice;
+    }
 
-	public String getDistance() {
-		return distance;
-	}
+    public void setGastprice(List<Gastprice> gastprice) {
+        this.gastprice = gastprice;
+    }
 
-	public void setDistance(String distance) {
-		this.distance = distance;
-	}
+    public String getFwlsmc() {
+        return fwlsmc;
+    }
 
-	@Override
-	public String toString() {
-		return "Datas [id=" + id + ", name=" + name + ", area=" + area
-				+ ", address=" + address + ", brandname=" + brandname
-				+ ", type=" + type + ", discount=" + discount + ", exhaust="
-				+ exhaust + ", position=" + position + ", lon=" + lon
-				+ ", lat=" + lat + ", price=" + price + ", gastprice="
-				+ gastprice + ", fwlsmc=" + fwlsmc + ", distance=" + distance
-				+ "]";
-	}
+    public void setFwlsmc(String fwlsmc) {
+        this.fwlsmc = fwlsmc;
+    }
 
-	public String getAreaname() {
-		return areaname;
-	}
+    public String getDistance() {
+        return distance;
+    }
 
-	public void setAreaname(String areaname) {
-		this.areaname = areaname;
-	}
-	public Datas(){
-		
-	}	
-	@Override
-	public int compareTo(Datas another) {
-		return	Integer.valueOf(this.distance)-Integer.valueOf(another.distance);		
-	}
-	
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    @Override
+    public String toString() {
+        return "Datas [id=" + id + ", name=" + name + ", area=" + area
+                + ", address=" + address + ", brandname=" + brandname
+                + ", type=" + type + ", discount=" + discount + ", exhaust="
+                + exhaust + ", position=" + position + ", lon=" + lon
+                + ", lat=" + lat + ", price=" + price + ", gastprice="
+                + gastprice + ", fwlsmc=" + fwlsmc + ", distance=" + distance
+                + "]";
+    }
+
+    public String getAreaname() {
+        return areaname;
+    }
+
+    public void setAreaname(String areaname) {
+        this.areaname = areaname;
+    }
+
+    public Datas() {
+
+    }
+
+    @Override
+    public int compareTo(Datas another) {
+        return Integer.valueOf(this.distance) - Integer.valueOf(another.distance);
+    }
+
 }

@@ -1,7 +1,8 @@
 package com.hangon.order.util;
 
+
 /**
- * Created by fd on 2016/5/8.
+ * 用于编辑按钮中，用来删除选中的订单
  */
 public class Bean {
     private String key;

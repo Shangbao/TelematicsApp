@@ -6,7 +6,7 @@ package com.hangon.weather;
 public class City {
     private String name;
 
-    public City(String name){
+    public City(String name) {
         this.name = name;
     }
 

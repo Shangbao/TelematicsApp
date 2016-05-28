@@ -1,33 +1,33 @@
 package com.hangon.weizhang.model;
 
 public class ListModel {
-	private int nameId;
-	private String textName;
-	private int imageId;
+    private int nameId;
+    private String textName;
+    private int imageId;
 
-	public String getTextName() {
-		return textName;
-	}
+    public String getTextName() {
+        return textName;
+    }
 
-	public void setTextName(String textName) {
-		this.textName = textName;
-	}
+    public void setTextName(String textName) {
+        this.textName = textName;
+    }
 
-	public int getImageId() {
-		return imageId;
-	}
+    public int getImageId() {
+        return imageId;
+    }
 
-	public void setImageId(int imageId) {
-		this.imageId = imageId;
-	}
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
+    }
 
-	public int getNameId() {
-		return nameId;
-	}
+    public int getNameId() {
+        return nameId;
+    }
 
-	public void setNameId(int nameId) {
-		this.nameId = nameId;
-	}
+    public void setNameId(int nameId) {
+        this.nameId = nameId;
+    }
 
-	
+
 }

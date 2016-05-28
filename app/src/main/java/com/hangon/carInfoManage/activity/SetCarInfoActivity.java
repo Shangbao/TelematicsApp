@@ -36,7 +36,7 @@ import java.util.Set;
 /**
  * Created by Administrator on 2016/4/26.
  */
-public class SetCarInfoActivity extends Activity implements View.OnClickListener{
+public class SetCarInfoActivity extends Activity implements View.OnClickListener {
 
 
     ListView listView;//车辆信息列表
@@ -58,19 +58,19 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
     }
 
     //初始化组件
-    private void init(){
-        btnSao= (Button) findViewById(R.id.btnSao);
-        btnShou= (Button) findViewById(R.id.btnShou);
-        topbar= (Topbar) findViewById(R.id.addCarMessageTopbar);
+    private void init() {
+        btnSao = (Button) findViewById(R.id.btnSao);
+        btnShou = (Button) findViewById(R.id.btnShou);
+        topbar = (Topbar) findViewById(R.id.addCarMessageTopbar);
         btnSao.setOnClickListener(this);
         btnShou.setOnClickListener(this);
-        listView= (ListView) findViewById(R.id.carInfoList);
+        listView = (ListView) findViewById(R.id.carInfoList);
         topbar.setRightIsVisible(false);
         topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
             @Override
             public void leftClick() {
-                Intent intent=new Intent();
-                intent.putExtra("id",1);
+                Intent intent = new Intent();
+                intent.putExtra("id", 1);
                 intent.setClass(SetCarInfoActivity.this, HomeActivity.class);
                 startActivity(intent);
                 SetCarInfoActivity.this.finish();
@@ -84,8 +84,8 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
     }
 
     //初始化适配器
-    private void initAdapter(final List<CarMessageVO> carMessageList){
-        adapter=new SetCarInfoAdapter(carMessageList,SetCarInfoActivity.this);
+    private void initAdapter(final List<CarMessageVO> carMessageList) {
+        adapter = new SetCarInfoAdapter(carMessageList, SetCarInfoActivity.this);
         adapter.setBtnClickListener(new SetCarInfoAdapter.btnClickListener() {
             @Override
             public void btnEditeClick(int position) {
@@ -124,22 +124,21 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
     }
 
 
-
     //点击事件
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnShou:
-                Intent intent=new Intent();
-                intent.setClass(SetCarInfoActivity.this,AddCarMessageActivity.class);
+                Intent intent = new Intent();
+                intent.setClass(SetCarInfoActivity.this, AddCarMessageActivity.class);
                 startActivity(intent);
-                JudgeNet judgeNet=new JudgeNet();
-                if(judgeNet.getPersonalInformation()==2){
+                JudgeNet judgeNet = new JudgeNet();
+                if (judgeNet.getPersonalInformation() == 2) {
                     finish();
                 }
                 break;
             case R.id.btnSao:
-                Intent intent1=new Intent();
+                Intent intent1 = new Intent();
                 intent1.setClass(SetCarInfoActivity.this, CaptureActivity.class);
                 startActivity(intent1);
                 break;
@@ -148,32 +147,34 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
     }
 
 
-   //获取车辆信息列表
-    private void getCarMessageList(){
-        String url= Constants.GET_CAR_INFO_URL;
-        VolleyRequest.RequestGet(SetCarInfoActivity.this, url, "getCarMessageList", new VolleyInterface(SetCarInfoActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
+    //获取车辆信息列表
+    private void getCarMessageList() {
+        String url = Constants.GET_CAR_INFO_URL;
+        VolleyRequest.RequestGet(SetCarInfoActivity.this, url, "getCarMessageList", new VolleyInterface(SetCarInfoActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
 
             @Override
             public void onMySuccess(String result) {
-                gson=new Gson();
-                carMessageList=new ArrayList<CarMessageVO>();
-                carMessageList= gson.fromJson(result,new TypeToken<List<CarMessageVO>>(){}.getType());
+                gson = new Gson();
+                carMessageList = new ArrayList<CarMessageVO>();
+                carMessageList = gson.fromJson(result, new TypeToken<List<CarMessageVO>>() {
+                }.getType());
                 initAdapter(carMessageList);
             }
 
             @Override
             public void onMyError(VolleyError error) {
-             Toast.makeText(SetCarInfoActivity.this,"网络异常,车辆加载失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SetCarInfoActivity.this, "网络异常,车辆加载失败", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     int p;//要删除的数据的位置
-    private void delete(int position){
-         p=position;
-        String url=Constants.DELETE_CAR_INFO_URL+"?carInfoId="+carMessageList.get(position).getCarInfoId();
 
-        VolleyRequest.RequestGet(SetCarInfoActivity.this, url, "deleteCarMessage", new VolleyInterface(SetCarInfoActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
+    private void delete(int position) {
+        p = position;
+        String url = Constants.DELETE_CAR_INFO_URL + "?carInfoId=" + carMessageList.get(position).getCarInfoId();
+
+        VolleyRequest.RequestGet(SetCarInfoActivity.this, url, "deleteCarMessage", new VolleyInterface(SetCarInfoActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
                 carMessageList.remove(p);
@@ -182,7 +183,7 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
 
             @Override
             public void onMyError(VolleyError error) {
-                Toast.makeText(SetCarInfoActivity.this,"网络异常，删除失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SetCarInfoActivity.this, "网络异常，删除失败", Toast.LENGTH_SHORT).show();
             }
         });
     }

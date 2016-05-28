@@ -12,7 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentAdapter extends FragmentStatePagerAdapter {
+public class FragmentAdapter extends FragmentPagerAdapter {
 
 	List<Fragment> fragmentList = new ArrayList<Fragment>();
 	FragmentManager fm;
@@ -22,21 +22,6 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
 		this.fragmentList = fragmentList;
 		this.fm = fm;
 	}
-
-	public void setFragmentLists(ArrayList<Fragment> fragmentList) {
-		if (this.fragmentList != null) {
-			android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
-			for (Fragment f : this.fragmentList) {
-				ft.remove(f);
-			}
-			ft.commit();
-			ft = null;
-			fm.executePendingTransactions();
-		}
-		this.fragmentList = fragmentList;
-		notifyDataSetChanged();
-	}
-
 	@Override
 	public Fragment getItem(int position) {
 		return fragmentList.get(position);
@@ -47,19 +32,6 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
 		return fragmentList.size();
 	}
 
-	@Override
-	public int getItemPosition(Object object) {
-		return POSITION_NONE;
-	}
 
-	@Override
-	public void destroyItem(ViewGroup container, int position, Object object) {
-
-	}
-
-	@Override
-	public boolean isViewFromObject(View view, Object object) {
-		return super.isViewFromObject(view, object);
-	}
 
 }

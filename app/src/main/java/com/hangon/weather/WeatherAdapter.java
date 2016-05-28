@@ -17,8 +17,8 @@ import java.util.List;
 public class WeatherAdapter extends ArrayAdapter<Weather> {
     private int resourceId;
 
-    public WeatherAdapter(Context context,int textViewResourceId,List<Weather> objects){
-        super(context,textViewResourceId,objects);
+    public WeatherAdapter(Context context, int textViewResourceId, List<Weather> objects) {
+        super(context, textViewResourceId, objects);
         resourceId = textViewResourceId;
     }
 

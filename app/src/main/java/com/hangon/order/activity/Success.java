@@ -18,17 +18,17 @@ public class Success extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.success);
-        Timer timer=new Timer();
-        timer.schedule(new mIntent(),2000);
+        Timer timer = new Timer();
+        timer.schedule(new mIntent(), 2000);
     }
-    public  class mIntent extends TimerTask{
+
+    public class mIntent extends TimerTask {
         @Override
         public void run() {
-             finish();
+            finish();
 //            Intent intent=new Intent();
 //            intent.setClass(Success.this, GasSiteDetailsActivity.class);
 //            startActivity(intent);
-
         }
     }
 }

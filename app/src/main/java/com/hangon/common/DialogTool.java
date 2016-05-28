@@ -10,18 +10,17 @@ import com.hangon.order.activity.AppointmentOrder;
 
 /**
  * 对话框封装类
- *
  */
 
 public class DialogTool {
     /**
      * 创建普通对话框
      *
-     * @param ctx 上下文 必填
-     * @param iconId 图标，如：R.drawable.icon 必填
-     * @param title 标题 必填
-     * @param message 显示内容 必填
-     * @param btnName 按钮名称 必填
+     * @param ctx      上下文 必填
+     * @param iconId   图标，如：R.drawable.icon 必填
+     * @param title    标题 必填
+     * @param message  显示内容 必填
+     * @param btnName  按钮名称 必填
      * @param listener 监听器，需实现android.content.DialogInterface.OnClickListener接口 必填
      * @return
      */
@@ -31,7 +30,7 @@ public class DialogTool {
                                             String message,
                                             String btnName,
                                             DialogInterface.OnClickListener listener) {
-        Dialog dialog=null;
+        Dialog dialog = null;
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ctx);
         // 设置对话框的图标
         builder.setIcon(iconId);
@@ -56,7 +55,7 @@ public class DialogTool {
                                             DialogInterface.OnClickListener PosNamelistener,
                                             DialogInterface.OnClickListener NegNamelistener
     ) {
-        Dialog dialog=null;
+        Dialog dialog = null;
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ctx);
         // 设置对话框的图标
 
@@ -71,15 +70,16 @@ public class DialogTool {
         dialog = builder.create();
         return dialog;
     }
+
     public static Dialog createViewDialog(Context ctx,
-                                            String title,
-                                            View view,
-                                            String PosName,
-                                            String NegName,
-                                            DialogInterface.OnClickListener PosNamelistener,
-                                            DialogInterface.OnClickListener NegNamelistener
+                                          String title,
+                                          View view,
+                                          String PosName,
+                                          String NegName,
+                                          DialogInterface.OnClickListener PosNamelistener,
+                                          DialogInterface.OnClickListener NegNamelistener
     ) {
-        Dialog dialog=null;
+        Dialog dialog = null;
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ctx);
         // 设置对话框的图标
 
@@ -99,10 +99,10 @@ public class DialogTool {
     /**
      * 创建列表对话框
      *
-     * @param ctx 上下文 必填
-     * @param iconId 图标，如：R.drawable.icon 必填
-     * @param title 标题 必填
-     * @param itemsId 字符串数组资源id 必填
+     * @param ctx      上下文 必填
+     * @param iconId   图标，如：R.drawable.icon 必填
+     * @param title    标题 必填
+     * @param itemsId  字符串数组资源id 必填
      * @param listener 监听器，需实现android.content.DialogInterface.OnClickListener接口 必填
      * @return
      */
@@ -111,7 +111,7 @@ public class DialogTool {
                                           String title,
                                           int itemsId,
                                           DialogInterface.OnClickListener listener) {
-        Dialog dialog=null;
+        Dialog dialog = null;
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ctx);
         // 设置对话框的图标
         builder.setIcon(iconId);
@@ -126,12 +126,13 @@ public class DialogTool {
 
     /**
      * 创建单选按钮对话框
-     * @param ctx 上下文 必填
-     * @param iconId 图标，如：R.drawable.icon 必填
-     * @param title 标题 必填
-     * @param itemsId 字符串数组资源id 必填
-     * @param listener 单选按钮项监听器，需实现android.content.DialogInterface.OnClickListener接口 必填
-     * @param btnName 按钮名称 必填
+     *
+     * @param ctx       上下文 必填
+     * @param iconId    图标，如：R.drawable.icon 必填
+     * @param title     标题 必填
+     * @param itemsId   字符串数组资源id 必填
+     * @param listener  单选按钮项监听器，需实现android.content.DialogInterface.OnClickListener接口 必填
+     * @param btnName   按钮名称 必填
      * @param listener2 按钮监听器，需实现android.content.DialogInterface.OnClickListener接口 必填
      * @return
      */
@@ -142,7 +143,7 @@ public class DialogTool {
                                            DialogInterface.OnClickListener listener,
                                            String btnName,
                                            DialogInterface.OnClickListener listener2) {
-        Dialog dialog=null;
+        Dialog dialog = null;
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ctx);
         // 设置对话框的图标
         builder.setIcon(iconId);
@@ -151,7 +152,7 @@ public class DialogTool {
         // 0: 默认第一个单选按钮被选中
         builder.setSingleChoiceItems(itemsId, 0, listener);
         // 添加一个按钮
-        builder.setPositiveButton(btnName, listener2) ;
+        builder.setPositiveButton(btnName, listener2);
         // 创建一个单选按钮对话框
         dialog = builder.create();
         return dialog;
@@ -160,13 +161,13 @@ public class DialogTool {
     /**
      * 创建复选对话框
      *
-     * @param ctx 上下文 必填
-     * @param iconId 图标，如：R.drawable.icon 必填
-     * @param title 标题 必填
-     * @param itemsId 字符串数组资源id 必填
-     * @param flags 初始复选情况 必填
-     * @param listener 单选按钮项监听器，需实现android.content.DialogInterface.OnMultiChoiceClickListener接口 必填
-     * @param btnName 按钮名称 必填
+     * @param ctx       上下文 必填
+     * @param iconId    图标，如：R.drawable.icon 必填
+     * @param title     标题 必填
+     * @param itemsId   字符串数组资源id 必填
+     * @param flags     初始复选情况 必填
+     * @param listener  单选按钮项监听器，需实现android.content.DialogInterface.OnMultiChoiceClickListener接口 必填
+     * @param btnName   按钮名称 必填
      * @param listener2 按钮监听器，需实现android.content.DialogInterface.OnClickListener接口 必填
      * @return
      */
@@ -178,7 +179,7 @@ public class DialogTool {
                                               android.content.DialogInterface.OnMultiChoiceClickListener listener,
                                               String btnName,
                                               DialogInterface.OnClickListener listener2) {
-        Dialog dialog=null;
+        Dialog dialog = null;
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ctx);
         // 设置对话框的图标
         builder.setIcon(iconId);
@@ -186,7 +187,7 @@ public class DialogTool {
         builder.setTitle(title);
         builder.setMultiChoiceItems(itemsId, flags, listener);
         // 添加一个按钮
-        builder.setPositiveButton(btnName, listener2) ;
+        builder.setPositiveButton(btnName, listener2);
         // 创建一个复选对话框
         dialog = builder.create();
         return dialog;

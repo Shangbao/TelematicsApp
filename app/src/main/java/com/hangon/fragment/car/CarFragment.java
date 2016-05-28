@@ -19,14 +19,12 @@ import android.widget.Toast;
 import com.example.fd.ourapplication.R;
 import com.hangon.carInfoManage.activity.AddCarMessageActivity;
 import com.hangon.carInfoManage.activity.SetCarInfoActivity;
-import com.hangon.carInfoManage.activity.YichangActivity;
 import com.hangon.common.Topbar;
 import com.hangon.fragment.music.MusicService;
 import com.hangon.map.activity.BestRouteActivity;
 import com.hangon.map.activity.MapMainActivity;
 import com.hangon.map.util.JudgeNet;
 import com.hangon.map.util.NetReceiver;
-import com.hangon.order.activity.OrderMain;
 import com.hangon.weather.WeatherActivity;
 import com.hangon.weather.WeatherService;
 import com.hangon.weizhang.activity.MainActivity;
@@ -49,7 +47,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         View  carView;
 
         Topbar carTopbar;//标题栏
-        LinearLayout btnSstq;//实时天气
+        LinearLayout btnSstq;//扫一扫实时天气
         Button btnSetCarInfo;//车辆信息管理
         Button btnBestWay;//最优路线
         Button btnWeizhang;//违章查询
@@ -57,6 +55,11 @@ public class CarFragment extends Fragment implements View.OnClickListener {
 
         TextView tvWeather;
         TextView tvCity;
+
+        private String ip;
+
+
+        Intent intent;//用于跳转
 
         JudgeNet judgeNet;//判断网络状态
         String judgeNetState;//判断网络是否可用参数
@@ -111,7 +114,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         @Override
         //点击事件
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.btnSstq:
                     Intent intent = new Intent();
                     intent.setClass(getActivity(), WeatherActivity.class);
@@ -120,30 +123,24 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                     break;
 
                 case R.id.btnSetCarInfo:
-                    intent=new Intent();
-                    intent.setClass(getActivity(),SetCarInfoActivity.class);
+                    intent = new Intent();
+                    intent.setClass(getActivity(), SetCarInfoActivity.class);
                     startActivity(intent);
                     break;
 
                 case R.id.btnBestWay:
-                    judgeNetState=mReceiver.getNetType();
+                    judgeNetState = mReceiver.getNetType();
                     intent = new Intent();
                     intent.setClass(getActivity(), BestRouteActivity.class);
                     startActivity(intent);
                     break;
 
-                case R.id.btnWeiZhang:
-                    intent=new Intent();
-                    intent.setClass(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    break;
-
                 case R.id.btnYyjy:
-                    judgeNetState=mReceiver.getNetType();
-                    if(judgeNetState.equals("mobilenet")||judgeNetState.equals("wifinet")){
+                    judgeNetState = mReceiver.getNetType();
+                    if (judgeNetState.equals("mobilenet") || judgeNetState.equals("wifinet")) {
                         judgeNet.setStates(2);
                         Log.e("bbb", judgeNet.getStates() + "");
-                        intent=new Intent();
+                        intent = new Intent();
                         intent.setClass(getActivity(), MapMainActivity.class);
                         startActivity(intent);
                     } else {
