@@ -80,7 +80,7 @@ public class AlterCarMessageActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gai_car_message);
-        Intent intent=getIntent();
+        Intent intent= getIntent();
         carMessageVO= (CarMessageVO) intent.getSerializableExtra("carMessage");
         Log.e("aaa", carMessageVO.getCarInfoId() + "");
         init();

@@ -3,14 +3,20 @@ package com.hangon.home.activity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.Service;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.fragment.car.CarFragment;
@@ -25,6 +31,8 @@ import com.mob.mobapi.API;
 import com.mob.mobapi.APICallback;
 
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Administrator on 2016/4/1.
@@ -38,8 +46,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     private Fragment musicFragment = new MusicFragment();
     private Fragment znwhFragment = new ZnwhFragment();
     private Fragment userFragment = new UserFragment();
-
-    private Intent intent;
     private Intent weatherIntent;
 
     //tab中的四个帧布局
@@ -51,6 +57,18 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
     //tab中的四个图片对应的文字
     private ImageView carImageView, musicImageView, znwhImageView, userImageView;
+
+//    private ServiceConnection conn = new ServiceConnection() {
+//        @Override
+//        public void onServiceConnected(ComponentName name, IBinder service) {
+//            binder = (WeatherService.MyBinder) service;
+//        }
+//
+//        @Override
+//        public void onServiceDisconnected(ComponentName name) {
+//            Toast.makeText(HomeActivity.this, "亲，恐怕无法更新天气！", Toast.LENGTH_SHORT).show();
+//        }
+//    };
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -288,5 +306,39 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     protected void onDestroy() {
         super.onDestroy();
         stopService(weatherIntent);
+    }
+
+    /**
+     * 菜单、返回键响应
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitBy2Click();
+        }
+        return false;
+    }
+
+    /**
+     * 双击退出函数
+     */
+    private static Boolean isExit = false;
+
+    private void exitBy2Click() {
+        Timer timer = null;
+        if (isExit == false) {
+            isExit = true;
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    isExit = false;
+                }
+            }, 2000);
+        } else {
+            finish();
+            System.exit(0);
+        }
     }
 }

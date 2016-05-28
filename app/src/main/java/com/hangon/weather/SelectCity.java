@@ -3,8 +3,12 @@ package com.hangon.weather;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.app.Service;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.fd.ourapplication.R;
 
@@ -31,8 +36,6 @@ public class SelectCity extends Activity implements AdapterView.OnItemClickListe
     private Intent intent;
     private EditText inputCity;
     private Button search;
-    private ProgressDialog dialog;
-    private AlertDialog.Builder builder;
 
     private String city;
 
@@ -45,6 +48,12 @@ public class SelectCity extends Activity implements AdapterView.OnItemClickListe
         initCity();
         CityAdapter adapter = new CityAdapter(SelectCity.this, R.layout.city_item, cityArrayList);
         cityList.setAdapter(adapter);
+        final Intent intent = new Intent(SelectCity.this, WeatherService.class);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     private void init(){

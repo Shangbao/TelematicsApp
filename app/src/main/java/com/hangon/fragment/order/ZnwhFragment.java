@@ -39,21 +39,6 @@ public class ZnwhFragment extends Fragment {
     private TextView tvIsEng;
     private TextView tvIsTran;
     private TextView tvIsLight;
-    private Switch aSwitch;
-
-    ZnwhService.MyBinder binder;
-
-    private ServiceConnection conn = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            binder = (ZnwhService.MyBinder) service;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            Toast.makeText(getActivity(),"智能维护开启失败！",Toast.LENGTH_SHORT).show();
-        }
-    };
 
 
     @Nullable
@@ -62,27 +47,12 @@ public class ZnwhFragment extends Fragment {
         znwhView=inflater.inflate(R.layout.fragment_znwh,container,false);
 //        Bundle bundle = getArguments();
         init();
-        final Intent intent = new Intent(getActivity(), ZnwhService.class);
-        getActivity().bindService(intent, conn, Service.BIND_AUTO_CREATE);
         receiver = new MyReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction("com.hangon.fragment.order.ZnwhService");
         getActivity().registerReceiver(receiver, filter);
         Topbar topbar= (Topbar) znwhView.findViewById(R.id.topbar);
         topbar.setBtnIsVisible(false);
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    binder.on();
-                    getActivity().bindService(intent, conn, Service.BIND_AUTO_CREATE);
-                }else{
-                    binder.off();
-                    getActivity().unbindService(conn);
-                    getActivity().stopService(intent);
-                }
-            }
-        });
         return  znwhView;
     }
 
@@ -93,7 +63,6 @@ public class ZnwhFragment extends Fragment {
         tvIsEng = (TextView) znwhView.findViewById(R.id.znwh_iseng);
         tvIsTran = (TextView) znwhView.findViewById(R.id.znwh_istran);
         tvIsLight = (TextView) znwhView.findViewById(R.id.znwh_islight);
-        aSwitch = (Switch) znwhView.findViewById(R.id.znwh_switch);
     }
 
     @Override

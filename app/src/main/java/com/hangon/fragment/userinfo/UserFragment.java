@@ -1,11 +1,15 @@
 package com.hangon.fragment.userinfo;
 
 import android.app.Fragment;
+import android.app.Service;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,9 +17,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +36,7 @@ import com.hangon.common.ImageUtil;
 import com.hangon.common.Topbar;
 import com.hangon.common.UserUtil;
 import com.hangon.fragment.music.MusicImage;
+import com.hangon.fragment.order.ZnwhService;
 import com.hangon.user.activity.LoginActivity;
 
 import java.util.ArrayList;
@@ -50,15 +57,31 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
     TextView homePhoneNum;//手机号
     MusicImage homeHeadIcon;//头像显示
     ImageView toSetHeadIcon;//头像设置
+    Switch aSwitch;//智能维护启动按钮
 
     Topbar userTopbar;//标题栏
 
     Button btnShare;//分享APP
     Button btnReturnLogin;//退出登录
+    ZnwhService.MyBinder binder;
+
+    Intent intent;
+
+    private ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            binder = (ZnwhService.MyBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Toast.makeText(getActivity(),"智能维护开启失败！",Toast.LENGTH_SHORT).show();
+        }
+    };
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-         userView=inflater.inflate(R.layout.fragment_user,container,false);
+        userView=inflater.inflate(R.layout.fragment_user,container,false);
         init();
         UserUtil.instance(getActivity());
         userInfo=UserUtil.getInstance().getUserInfo4Login();
@@ -68,7 +91,14 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
         getUserIconFromCookies();
         setUserAdapter();
         banListViewSlide();
+        getActivity().bindService(intent, conn, Service.BIND_AUTO_CREATE);
         return userView;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unbindService(conn);
     }
 
     //获取内存里面的图片信息
@@ -97,7 +127,8 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
         homeHeadIcon= (MusicImage) userView.findViewById(R.id.homeHeadIcon);
         toSetHeadIcon= (ImageView) userView.findViewById(R.id.toSetHeadIcon);
         btnReturnLogin= (Button) userView.findViewById(R.id.btnReturnLogin);
-        btnShare= (Button) userView.findViewById(R.id.btnShare);
+        btnShare= (Button) userView.findViewById(R.id.btn_share);
+        aSwitch = (Switch) userView.findViewById(R.id.znwh_switch);
         btnReturnLogin.setOnClickListener(this);
         btnShare.setOnClickListener(this);
         toSetHeadIcon.setOnClickListener(this);
@@ -114,7 +145,19 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
                 startActivity(toUpdateUserInfo);
             }
         });
-
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    binder.on();
+                    getActivity().bindService(intent, conn, Service.BIND_AUTO_CREATE);
+                } else {
+                    binder.off();
+                    getActivity().unbindService(conn);
+                }
+            }
+        });
+        intent = new Intent(getActivity(), ZnwhService.class);
     }
 
     //给用户信息列表设置适配器
@@ -167,7 +210,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
                 }).show();
 
                 break;
-            case R.id.btnShare:
+            case R.id.btn_share:
                 break;
         }
     }
@@ -179,8 +222,8 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
         UserUtil.getInstance().saveStringConfig("userPass", "");
         Intent intent=new Intent();
         intent.setClass(getActivity(), LoginActivity.class);
-        startActivity(intent);
         getActivity().finish();
+        startActivity(intent);
     }
 
     //禁止listview滑动

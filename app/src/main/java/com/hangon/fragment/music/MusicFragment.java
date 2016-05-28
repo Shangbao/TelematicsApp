@@ -62,7 +62,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
 
     private ProgressReceiver progressReceiver;
 
-    private boolean isPlaying=true;//播放状态
+    private boolean isPlaying=false;//播放状态
     private  int currIndex = 0;//当前播放的索引
 
     int playMode=Constants.SEQUENCE_MODEL;//控制播放模式
@@ -195,6 +195,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
        // currIndex = (int)id;
         myBinder.toStart((int)id);
+        btnPause.setText("暂停");
+        isPlaying = false;
     }
 
     //跳转
@@ -251,7 +253,6 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         super.onDestroy();
         getActivity().unregisterReceiver(progressReceiver);
         getActivity().unbindService(conn);
-        getActivity().stopService(intent);
         flag=false;
     }
 

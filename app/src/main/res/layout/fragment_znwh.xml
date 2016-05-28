@@ -33,16 +33,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <Switch
-            android:checked="true"
-            android:layout_marginLeft="200dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="智能维护"
-            android:textOff="关闭"
-            android:textOn="开启"
-            android:id="@+id/znwh_switch" />
-
     </LinearLayout>
 
     <LinearLayout

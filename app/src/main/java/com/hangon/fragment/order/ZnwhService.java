@@ -25,7 +25,7 @@ import java.util.Random;
 public class ZnwhService extends Service {
 
     NotificationAdmain admain;
-    Intent intent;
+    Intent znwhIntent;
     ZnwhInfoVO znwhInfoVO;//智能维护信息;
     static int NOTIFICATION_ID = 13565400;
 
@@ -40,19 +40,18 @@ public class ZnwhService extends Service {
 
     private ZnwhInfoVO znwhInfo = new ZnwhInfoVO();
 
-    private MyBinder myBinder = new MyBinder();
+    private MyBinder myBinder;
 
+    @Nullable
     @Override
-    public void onCreate() {
-        super.onCreate();
+    public IBinder onBind(Intent intent) {
         admain = new NotificationAdmain(this,NOTIFICATION_ID);
-        intent = new Intent(this, HomeActivity.class);
+        znwhIntent = new Intent(this, HomeActivity.class);
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while(flag){
                     getZnwhInfo();
-
                     updateZnwhInfo();
                     try{
                         Thread.sleep(2000);
@@ -63,11 +62,7 @@ public class ZnwhService extends Service {
             }
         });
         thread.start();
-    }
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
+        myBinder = new MyBinder();
         return myBinder;
     }
 
@@ -76,39 +71,39 @@ public class ZnwhService extends Service {
         isGoodLight=znwhInfoVO.getIsGoodLight();
         isGoodTran=znwhInfoVO.getIsGoodTran();
         if (znwhInfoVO.getOddGasAmount()<15){
-            admain.normal_notification(intent,smallIcon,"汽车智能维护","你的汽车油量不足15%","请尽快加油");
+            admain.normal_notification(znwhIntent,smallIcon,"汽车智能维护","你的汽车油量不足15%","请尽快加油");
         }
         if (znwhInfoVO.getMileage()>=1500&&znwhInfoVO.getMileage()%1500>=0&&znwhInfoVO.getMileage()%1500<=100){
-            admain.normal_notification(intent,smallIcon,"汽车智能维护","你的里程数为:"+znwhInfoVO.getMileage(),"请及时保养你的汽车");
+            admain.normal_notification(znwhIntent,smallIcon,"汽车智能维护","你的里程数为:"+znwhInfoVO.getMileage(),"请及时保养你的汽车");
         }
 
         if (isGoodEngine != oldEngine){
             if (znwhInfoVO.getIsGoodEngine() == 0){
-                admain.normal_notification(intent, smallIcon, "汽车智能维护", "你的汽车需要维修！",
+                admain.normal_notification(znwhIntent, smallIcon, "汽车智能维护", "你的汽车需要维修！",
                         "发动机出现异常！");
             }
             else{
-                admain.normal_notification(intent, smallIcon, "汽车智能维护", "你的汽车完成维修！",
+                admain.normal_notification(znwhIntent, smallIcon, "汽车智能维护", "你的汽车完成维修！",
                         "发动机可以正常运行！");
             }
         }
         if (isGoodTran != oldTran){
             if (isGoodTran == 0){
-                admain.normal_notification(intent, smallIcon, "汽车智能维护", "你的汽车需要维修！",
+                admain.normal_notification(znwhIntent, smallIcon, "汽车智能维护", "你的汽车需要维修！",
                         "变速器出现异常！");
             }
             else{
-                admain.normal_notification(intent, smallIcon, "汽车智能维护", "你的汽车完成维修！",
+                admain.normal_notification(znwhIntent, smallIcon, "汽车智能维护", "你的汽车完成维修！",
                         "变速器可以正常运行！");
             }
         }
         if (isGoodLight != oldLight){
             if (isGoodEngine == 0){
-                admain.normal_notification(intent, smallIcon, "汽车智能维护", "你的汽车需要维修！",
+                admain.normal_notification(znwhIntent, smallIcon, "汽车智能维护", "你的汽车需要维修！",
                         "车灯出现异常！");
             }
             else{
-                admain.normal_notification(intent, smallIcon, "汽车智能维护", "你的汽车完成维修！",
+                admain.normal_notification(znwhIntent, smallIcon, "汽车智能维护", "你的汽车完成维修！",
                         "车灯可以正常运行！");
             }
         }
@@ -159,7 +154,7 @@ public class ZnwhService extends Service {
         });
     }
 
-    class MyBinder extends Binder{
+    public class MyBinder extends Binder{
         public void off(){
             flag = false;
         }

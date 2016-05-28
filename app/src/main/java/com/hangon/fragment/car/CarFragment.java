@@ -49,19 +49,14 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         View  carView;
 
         Topbar carTopbar;//标题栏
-        LinearLayout btnSstq;//扫一扫实时天气
+        LinearLayout btnSstq;//实时天气
         Button btnSetCarInfo;//车辆信息管理
         Button btnBestWay;//最优路线
         Button btnWeizhang;//违章查询
         Button btnYyjy;//预约加油按钮
 
-    TextView tvWeather;
-    TextView tvCity;
-
-        private String ip;
-
-
-        Intent intent;//用于跳转
+        TextView tvWeather;
+        TextView tvCity;
 
         JudgeNet judgeNet;//判断网络状态
         String judgeNetState;//判断网络是否可用参数
@@ -71,7 +66,8 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         NetReceiver mReceiver ;
         IntentFilter mFilter;
 
-    private ProgressReceiver progressReceiver;
+        private ProgressReceiver progressReceiver;
+        private String city,weather;
 
 
 
@@ -119,6 +115,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                 case R.id.btnSstq:
                     Intent intent = new Intent();
                     intent.setClass(getActivity(), WeatherActivity.class);
+                    intent.putExtra("city", city);
                     startActivity(intent);
                     break;
 
@@ -130,7 +127,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
 
                 case R.id.btnBestWay:
                     judgeNetState=mReceiver.getNetType();
-                    intent=new Intent();
+                    intent = new Intent();
                     intent.setClass(getActivity(), BestRouteActivity.class);
                     startActivity(intent);
                     break;
@@ -175,7 +172,6 @@ public class CarFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String weather = null, city = null;
             String action = intent.getAction();
             if(WeatherService.ACTION_UPDATE_WEATHER.equals(action)){
                 weather = intent.getStringExtra(WeatherService.ACTION_UPDATE_WEATHER);
