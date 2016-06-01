@@ -1,33 +1,27 @@
 package com.hangon.fragment.order;
 
 import android.app.Fragment;
-import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
-import android.os.Binder;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.common.Topbar;
+import com.hangon.saying.activity.MainSaying;
+import com.hangon.saying.viewPager.MainActivity;
 
 /**
  * Created by Administrator on 2016/4/4.
  */
-public class ZnwhFragment extends Fragment {
+public class ZnwhFragment extends Fragment implements View.OnClickListener {
 
     View znwhView;
 
@@ -39,30 +33,32 @@ public class ZnwhFragment extends Fragment {
     private TextView tvIsEng;
     private TextView tvIsTran;
     private TextView tvIsLight;
-
+    private Button btnSaying;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        znwhView=inflater.inflate(R.layout.fragment_znwh,container,false);
+        znwhView = inflater.inflate(R.layout.fragment_znwh, container, false);
 //        Bundle bundle = getArguments();
         init();
         receiver = new MyReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction("com.hangon.fragment.order.ZnwhService");
         getActivity().registerReceiver(receiver, filter);
-        Topbar topbar= (Topbar) znwhView.findViewById(R.id.topbar);
+        Topbar topbar = (Topbar) znwhView.findViewById(R.id.topbar);
         topbar.setBtnIsVisible(false);
-        return  znwhView;
+        return znwhView;
     }
 
-    public void init(){
+    public void init() {
         tvUserId = (TextView) znwhView.findViewById(R.id.znwh_userid);
         tvMil = (TextView) znwhView.findViewById(R.id.znwh_mil);
         tvGas = (TextView) znwhView.findViewById(R.id.znwh_gas);
         tvIsEng = (TextView) znwhView.findViewById(R.id.znwh_iseng);
         tvIsTran = (TextView) znwhView.findViewById(R.id.znwh_istran);
         tvIsLight = (TextView) znwhView.findViewById(R.id.znwh_islight);
+        btnSaying = (Button) znwhView.findViewById(R.id.btn_saying);
+        btnSaying.setOnClickListener(this);
     }
 
     @Override
@@ -71,28 +67,39 @@ public class ZnwhFragment extends Fragment {
         getActivity().unregisterReceiver(receiver);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_saying:
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+        }
+    }
+
     public class MyReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Bundle bundle=intent.getExtras();
+            Bundle bundle = intent.getExtras();
             ZnwhInfoVO znwhInfoVO = (ZnwhInfoVO) bundle.getSerializable("ZnwhInfo");
             //tvUserId.setText(znwhInfoVO.getUserId()+"");
-            tvMil.setText(znwhInfoVO.getMileage()+"");
-            tvGas.setText(znwhInfoVO.getOddGasAmount()+"");
-            if (znwhInfoVO.getIsGoodEngine() == 1){
+            tvMil.setText(znwhInfoVO.getMileage() + "");
+            tvGas.setText(znwhInfoVO.getOddGasAmount() + "");
+            if (znwhInfoVO.getIsGoodEngine() == 1) {
                 tvIsEng.setText("异常");
-            }else {
+            } else {
                 tvIsEng.setText("正常");
             }
-            if (znwhInfoVO.getIsGoodTran() == 1){
+            if (znwhInfoVO.getIsGoodTran() == 1) {
                 tvIsTran.setText("异常");
-            }else {
+            } else {
                 tvIsTran.setText("正常");
             }
-            if (znwhInfoVO.getIsGoodLight() == 1){
+            if (znwhInfoVO.getIsGoodLight() == 1) {
                 tvIsLight.setText("异常");
-            }else {
+            } else {
                 tvIsLight.setText("正常");
             }
         }

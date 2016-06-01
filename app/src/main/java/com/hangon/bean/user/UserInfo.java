@@ -1,6 +1,7 @@
 package com.hangon.bean.user;
 
 public class UserInfo {
+    private int userId;//用户id
     private String userName;//用户名
     private String userPass;//密码
     private String nickname;//昵称
@@ -10,6 +11,14 @@ public class UserInfo {
     private String userIconContent;//图片的二进制码
     private boolean isSave;//是否保存
     private String userIconUrl;//用户头像对应的地址
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getUserIconUrl() {
         return userIconUrl;

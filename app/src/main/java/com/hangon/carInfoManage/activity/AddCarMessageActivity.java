@@ -33,6 +33,7 @@ import com.hangon.common.DialogTool;
 import com.hangon.common.JsonUtil;
 import com.hangon.common.MyApplication;
 import com.hangon.common.Topbar;
+import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.map.util.JudgeNet;
@@ -253,8 +254,10 @@ public class AddCarMessageActivity extends Activity {
 
     private void addCarInfo() {
         String url = Constants.ADD_CAR_INFO_URL;
-
+        UserUtil.instance(AddCarMessageActivity.this);
+        int userId = UserUtil.getInstance().getIntegerConfig("userId");
         Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId + "");
         map.put("brandIndex", carMessageVO.getBrandIndex() + "");
         map.put("brandTypeIndex", carMessageVO.getBrandTypeIndex() + "");
 

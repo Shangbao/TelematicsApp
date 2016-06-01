@@ -22,6 +22,7 @@ import com.hangon.common.Constants;
 import com.hangon.common.DialogTool;
 import com.hangon.common.JsonUtil;
 import com.hangon.common.Topbar;
+import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.home.activity.HomeActivity;
@@ -149,7 +150,9 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
 
     //获取车辆信息列表
     private void getCarMessageList() {
-        String url = Constants.GET_CAR_INFO_URL;
+        UserUtil.instance(SetCarInfoActivity.this);
+        String userId=UserUtil.getInstance().getIntegerConfig("userId")+"";
+        String url = Constants.GET_CAR_INFO_URL+"?userId="+userId;
         VolleyRequest.RequestGet(SetCarInfoActivity.this, url, "getCarMessageList", new VolleyInterface(SetCarInfoActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
 
             @Override

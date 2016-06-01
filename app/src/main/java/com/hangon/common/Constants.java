@@ -40,6 +40,15 @@ public class Constants {
     //用户头像图片资源
     public static final String LOAD_USER_ICON_URL = "http://" + HOST_IP + ":8080/wind/img/user_icon";
 
+    //说说图片地址
+    public static final String LOAD_SAYING_IMG_URL="http://" + HOST_IP + ":8080/wind/img/saying_img";
+
+    //关于车友圈说说的地址
+    public static final String GET_QZ_SAYINGS ="http://" + HOST_IP + ":8080/wind/Saying/GetQzSayings";
+    public static final String GET_CZW_SAYINGS ="http://" + HOST_IP + ":8080/wind/Saying/GetCzwSayings";
+    public static final String ADD_SAYING ="http://" + HOST_IP + ":8080/wind/Saying/AddSaying";
+    public static final String DELETE_SAYING ="http://" + HOST_IP + ":8080/wind/Saying/DeleteSaying";
+
     //音乐播放状态
     public static final int IDLE = 0;// 空闲状态
     public static final int PLAY = 1;//播放状态

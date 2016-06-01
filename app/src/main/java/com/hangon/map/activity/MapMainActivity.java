@@ -728,7 +728,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
 
     @Override
     protected void onStop() {
-        // TODO Auto-generated method stub
         super.onStop();
 
         // 停止定位

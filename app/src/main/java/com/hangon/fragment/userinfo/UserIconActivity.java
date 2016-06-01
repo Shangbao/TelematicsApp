@@ -77,7 +77,6 @@ public class UserIconActivity extends Activity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
         if (v.getId() == R.id.albumBtn) {
             startAlbum();
         } else if (v.getId() == R.id.captureBtn) {
@@ -182,7 +181,6 @@ public class UserIconActivity extends Activity implements OnClickListener {
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                 startActivityForResult(intent, START_ALBUM_REQUESTCODE);
             } catch (Exception e2) {
-                // TODO: handle exception
                 e.printStackTrace();
             }
         }

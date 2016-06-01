@@ -49,6 +49,9 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+ <!-- carlife-->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <supports-screens
         android:anyDensity="true"
@@ -59,7 +62,7 @@
 
 
     <application
-        android:name="com.hangon.common.MyApplication"
+        android:name="com.hangon.saying.layout.Location"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -90,10 +93,7 @@
         <activity
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:name="com.hangon.user.activity.WelcomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity
@@ -109,6 +109,7 @@
 
         <activity android:name="com.hangon.home.activity.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
 
 
@@ -198,6 +199,43 @@
         </activity>
         <!-- alipay sdk end -->
 
+        <!--智能老司机朋友圈-->
+        <activity android:name="com.hangon.saying.activity.MainSaying"></activity>
+        <activity
+            android:name="com.hangon.saying.activity.TestPicActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+
+        </activity>
+
+        <activity
+            android:name="com.hangon.saying.activity.ImageGridActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.hangon.saying.activity.PublishedActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.hangon.saying.activity.PhotoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity android:name="com.hangon.saying.layout.TestSensorActivity"
+            >
+        </activity>
+        <activity
+            android:name="com.hangon.saying.layout.ViewPagerTestActivity"
+            >
+        </activity>
+        <activity
+            android:name="com.hangon.saying.viewPager.MainActivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -209,7 +247,6 @@
         <service android:name="com.hangon.fragment.music.MusicService"></service>
         <service android:name="com.hangon.weather.WeatherService"></service>
     </application>
-
     <supports-screens android:largeScreens="true"
         android:normalScreens="true" android:smallScreens="true"
         android:resizeable="true" android:anyDensity="true"/>

@@ -23,4 +23,5 @@
     <dimen name="main_line_height">2.7dp</dimen><!--8px-->
     <dimen name="main_matrix_width">95dp</dimen>
     <dimen name="text_size">32sp</dimen>
+
 </resources>

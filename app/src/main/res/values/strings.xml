@@ -19,4 +19,17 @@
     <string name="all_order">全部订单</string>
     <string name="nopay_order">未支付</string>
     <string name="pay_order">已支付</string>
+ <!-- carlife-->
+    <string name="hello_world">Hello world!</string>
+    <string name="czw">车周围</string>
+    <string name="qz">求助</string>
+    <string name="hello">Hello World, XListViewActivity!</string>
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+
+
 </resources>

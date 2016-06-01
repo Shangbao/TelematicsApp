@@ -75,7 +75,7 @@
       android:layout_width="200dp"
       android:layout_height="wrap_content"
       android:contentDescription="tab"
-      android:background="@drawable/a" >
+      android:background="@drawable/a1" >
   </ImageView>
 
   <View

@@ -35,6 +35,7 @@ import com.hangon.bean.map.Gastprice;
 import com.hangon.carInfoManage.activity.SetCarInfoActivity;
 import com.hangon.common.Constants;
 import com.hangon.common.DialogTool;
+import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.map.util.GasInfoUtil;
@@ -254,6 +255,9 @@ public class GasSiteDetailsActivity extends Activity {
         double b = Double.valueOf(appointGasSingleprice.getText().toString());
         String url = Constants.ADD_ORDER_INFO_URL;
         final Map map = new HashMap<>();
+        UserUtil.instance(GasSiteDetailsActivity.this);
+        int userId=UserUtil.getInstance().getIntegerConfig("userId");
+        map.put("userId",userId+"");
         map.put("gasStationAddress", mGasAddressDetails.getText().toString());
         map.put("gasStationName", mGasNameDetails.getText().toString());
         map.put("cusName", cusName.toString());

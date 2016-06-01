@@ -13,6 +13,7 @@ import com.example.fd.ourapplication.R;
 import com.google.gson.Gson;
 import com.hangon.common.Constants;
 import com.hangon.common.JsonUtil;
+import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.home.activity.HomeActivity;
@@ -113,7 +114,9 @@ public class ZnwhService extends Service {
     }
 
     public void getZnwhInfo(){
-        String url = Constants.GET_ZNWH_INFO_URL.trim()+ "?userId=" +1;
+        UserUtil.instance(ZnwhService.this);
+        int userId=UserUtil.getInstance().getIntegerConfig("userId");
+        String url = Constants.GET_ZNWH_INFO_URL.trim()+ "?userId=" +userId;
         VolleyRequest.RequestGet(ZnwhService.this, url, "getZnwhInfo", new VolleyInterface(ZnwhService.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
@@ -140,7 +143,9 @@ public class ZnwhService extends Service {
     }
 
     private void updateZnwhInfo(){
-        String url=Constants.UPDATE_ZNWH_INFO_URL+"?userId="+1;
+        UserUtil.instance(ZnwhService.this);
+        int userId=UserUtil.getInstance().getIntegerConfig("userId");
+        String url=Constants.UPDATE_ZNWH_INFO_URL+"?userId="+userId;
         VolleyRequest.RequestGet(ZnwhService.this, url, "updateZnwhInfo", new VolleyInterface(ZnwhService.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {

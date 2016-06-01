@@ -42,6 +42,7 @@ public class UserUtil {
     }
 
     public void saveLoginUserInfo(UserInfo loginUserInfo) {
+        saveIntegerConfig("userId",loginUserInfo.getUserId());
         saveStringConfig("userName", loginUserInfo.getUserName());
         saveStringConfig("userPass", loginUserInfo.getUserPass());
         saveStringConfig("nickname", loginUserInfo.getNickname());

@@ -7,6 +7,7 @@ import com.example.fd.ourapplication.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hangon.common.Constants;
+import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.order.util.BaseFragmentPagerAdapter;
@@ -64,7 +65,9 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
 
     //装载数据
     public void getData() {
-        String url = Constants.GET_YZF_ORDER_INFOS_URL;
+        UserUtil.instance(getActivity());
+        int userId = UserUtil.getInstance().getIntegerConfig("userId");
+        String url = Constants.GET_YZF_ORDER_INFOS_URL + "?userId=" + userId;
         VolleyRequest.RequestGet(getActivity(), url, "getData", new VolleyInterface(getActivity(), VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {

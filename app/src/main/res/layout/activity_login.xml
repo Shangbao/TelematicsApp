@@ -23,7 +23,7 @@
    <EditText
        android:id="@+id/lUserName"
 
-       android:drawableLeft="@drawable/a"
+       android:drawableLeft="@drawable/a1"
        android:hint="请输入您的手机号码"
        android:textSize="18sp"
        android:maxLength="11"

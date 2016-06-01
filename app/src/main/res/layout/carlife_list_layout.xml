@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="10dp">
+
+        <ImageView
+            android:id="@+id/saying_userimg"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/saying_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/saying_userimg"
+            android:text="暴走的飞憋"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/saying_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/saying_nickname"
+            android:layout_below="@+id/saying_nickname"
+            android:text="今天 15:90"
+            android:layout_marginTop="5dp"
+            android:textSize="15dp" />
+
+
+
+        <Button
+            android:id="@+id/saying_delete"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="删除"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+
+
+        <TextView
+            android:id="@+id/saying_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="2dp"
+            android:text="今天，一不小心踩到屎了。"
+            android:textSize="15dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <GridView
+                android:id="@+id/saying_gridview"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginLeft="5dp"
+                android:background="#ffffff"
+                android:cacheColorHint="#00000000"
+                android:horizontalSpacing="0dp"
+                android:numColumns="3"
+                android:scrollbars="none"
+                android:transcriptMode="alwaysScroll"
+                android:verticalSpacing="3dp"></GridView>
+
+            <TextView
+                android:id="@+id/saying_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
+                android:text="长春工业大学南湖校区男寝八栋"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
