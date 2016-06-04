@@ -157,8 +157,9 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         mLocationListener = new MyLocationListener();
         initView();
         initfindViewById();
+        /*
         asyncTask = new AnimAsyncTask(MapMainActivity.this, "正在加载中...");
-        asyncTask.execute();
+        asyncTask.execute();*/
 
         if (states == 1) {
             route_search.setVisibility(View.VISIBLE);
@@ -738,10 +739,10 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
 
     @Override
     protected void onDestroy() {
-        asyncTask.stopProgressDialog();
+       /* asyncTask.stopProgressDialog();
         if (asyncTask != null && !asyncTask.isCancelled()) {
             asyncTask.cancel(true);
-        }
+        }*/
         mMapView.onDestroy();
         super.onDestroy();
         mBitmapDescriptor.recycle();

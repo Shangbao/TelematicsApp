@@ -147,6 +147,10 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                         Toast.makeText(getActivity(), "当前没有可用网络", Toast.LENGTH_SHORT).show();
                     }
                     break;
+                case R.id.btnWeiZhang:
+                    intent=new Intent();
+                    intent.setClass(getActivity(),MainActivity.class);
+                    startActivity(intent);
             }
         }
 

@@ -96,7 +96,7 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
                 bundle.putSerializable("carMessage", carMessageList.get(position));
                 intent.putExtras(bundle);
                 startActivity(intent);
-                Log.e("aa", "" + position);
+                finish();
             }
 
             @Override
@@ -119,6 +119,7 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
                 bundle.putSerializable("carMessage", carMessageList.get(position));
                 intent.putExtras(bundle);
                 startActivity(intent);
+                finish();
             }
         });
         listView.setAdapter(adapter);
@@ -133,15 +134,12 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
                 Intent intent = new Intent();
                 intent.setClass(SetCarInfoActivity.this, AddCarMessageActivity.class);
                 startActivity(intent);
-                JudgeNet judgeNet = new JudgeNet();
-                if (judgeNet.getPersonalInformation() == 2) {
-                    finish();
-                }
+                finish();
                 break;
             case R.id.btnSao:
-                Intent intent1 = new Intent();
-                intent1.setClass(SetCarInfoActivity.this, CaptureActivity.class);
-                startActivity(intent1);
+                intent = new Intent();
+                startActivity(intent);
+                finish();
                 break;
         }
 

@@ -212,6 +212,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
                 break;
             case R.id.btn_share:
                 break;
+
         }
     }
 

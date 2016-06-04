@@ -76,7 +76,8 @@ public class MainActivity extends Activity {
         });
 
         short_name.setText(defaultChepai);
-        getWeizhangData("1");
+
+        getWeizhangData(Constants.USER_ID+"");
         // ********************************************************
         Log.d("初始化服务代码", "");
         Intent weizhangIntent = new Intent(this, WeizhangIntentService.class);
