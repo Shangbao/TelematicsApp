@@ -248,6 +248,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                     Intent toLogin = new Intent();
                     toLogin.setClass(RegisterActivity.this, LoginActivity.class);
                     startActivity(toLogin);
+                    finish();
                 }
 
             }
@@ -275,7 +276,6 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                     SMSSDK.getVerificationCode("86", iPhone);
                     cord.requestFocus();
                     getCord.setVisibility(View.GONE);
-
                 }
             }
 
