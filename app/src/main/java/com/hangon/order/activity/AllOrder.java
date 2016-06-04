@@ -91,6 +91,11 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
         getData();
     }
 
+    @Override
+    public void update(int totalItems) {
+
+    }
+
     public class AllOrderadapter extends BaseAdapter {
         List<OrderData> allOrderList;
 

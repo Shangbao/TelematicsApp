@@ -48,7 +48,6 @@ public class PhotoActivity extends Activity {
 		Button photo_bt_exit = (Button) findViewById(R.id.photo_bt_exit);
 		photo_bt_exit.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-
 				finish();
 			}
 		});

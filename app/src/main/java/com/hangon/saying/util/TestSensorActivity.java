@@ -1,12 +1,8 @@
-package com.hangon.saying.layout;
-
-import java.util.ArrayList;
-
+package com.hangon.saying.util;
 
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.hardware.Sensor;
@@ -17,10 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.fd.ourapplication.R;
 
@@ -75,7 +68,7 @@ public class TestSensorActivity  extends Activity {
 			float z = values[2]; // z轴方向的重力加速度，向上为正
 			Log.i(TAG, "x轴方向的重力加速度" + x +  "；y轴方向的重力加速度" + y +  "；z轴方向的重力加速度" + z);
 			// 一般在这三个方向的重力加速度达到40就达到了摇晃手机的状态。
-			int medumValue = 19;// 三星 i9250怎么晃都不会超过20，没办法，只设置19了
+			int medumValue = 30;// 三星 i9250怎么晃都不会超过20，没办法，只设置19了
 			if (Math.abs(x) > medumValue || Math.abs(y) > medumValue || Math.abs(z) > medumValue) {
 				vibrator.vibrate(200);
 				Message msg = new Message();

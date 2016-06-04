@@ -93,6 +93,11 @@ public class NotPay extends Fragment implements BaseFragmentPagerAdapter.UpdateA
         getData();
     }
 
+    @Override
+    public void update(int totalItems) {
+
+    }
+
     public class NotPayadapter extends BaseAdapter {
         List<OrderData> notpayList;
 

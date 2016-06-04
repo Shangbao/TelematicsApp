@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.common.Topbar;
-import com.hangon.saying.activity.MainSaying;
 import com.hangon.saying.viewPager.MainActivity;
 
 /**

@@ -1,6 +1,8 @@
 package com.hangon.saying.viewPager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -10,14 +12,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hangon.bean.saying.SayingVO;
 import com.hangon.common.Constants;
+import com.hangon.common.DialogTool;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.order.util.BaseFragmentPagerAdapter;
-import com.hangon.saying.layout.ViewPagerTestActivity;
 import com.hangon.saying.view.XListView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -25,25 +26,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class SearchFrage extends Fragment implements BaseFragmentPagerAdapter.UpdateAble, XListView.IXListViewListener {
-    ViewHorder vh;
-    List list = new ArrayList();
     View view;
     List<SayingVO> sayingList;
     private XListView mListView;
-    private Handler mHandler;
     private SayingAdpter adapter;
-    int image[] = {R.drawable.a, R.drawable.c, R.drawable.a, R.drawable.c, R.drawable.a, R.drawable.c};
+    private Handler mHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,29 +42,81 @@ public class SearchFrage extends Fragment implements BaseFragmentPagerAdapter.Up
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.carlife_search_fra,null);
-        mListView = (XListView) view.findViewById(R.id.zhoubian_list);
-        mListView.setPullLoadEnable(true);
-        getCzwDatas();
-        mListView.setXListViewListener(this);
-        geneItems();
+        view = inflater.inflate(R.layout.carlife_search_fra, null);
+        init();
         return view;
     }
 
+    //初始化
+    private void init() {
+        mHandler = new Handler();
+        mListView = (XListView) view.findViewById(R.id.zhoubian_list);
+        mListView.setPullLoadEnable(true);
+        getCzwDatas(0);
+        mListView.setXListViewListener(this);
+
+    }
+
+    private void delete(final int position) {
+        String url = Constants.DELETE_SAYING + "?sayingId=" + sayingList.get(position).getSayingId();
+
+        VolleyRequest.RequestGet(getActivity(), url, "deleteSaying", new VolleyInterface(getActivity(), VolleyInterface.mListener, VolleyInterface.mErrorListener) {
+            @Override
+            public void onMySuccess(String result) {
+                sayingList.remove(position);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                Toast.makeText(getActivity(), "网络异常，删除失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
-    private void getCzwDatas() {
-        String url = Constants.GET_CZW_SAYINGS;
+    private void getCzwDatas(final int totalItems) {
+        String url = Constants.GET_CZW_SAYINGS + "?totalItemCount=" + totalItems;
         VolleyRequest.RequestGet(getActivity(), url, "getCzwDatas", new VolleyInterface(getActivity(), VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
                 Log.e("getCzwDatas", result);
-                Gson gson = new Gson();
-                sayingList = new ArrayList<SayingVO>();
-                sayingList=gson.fromJson(result,new TypeToken<List<SayingVO>>(){}.getType());
-                adapter=new SayingAdpter(getActivity(),sayingList);
-                mListView.setAdapter(adapter);
+                if (result.equals("no_saying")) {
+                    Toast.makeText(getActivity(), "车友圈无人发表说说", Toast.LENGTH_SHORT).show();
+                } else if (result.equals("load_all")) {
+                    Toast.makeText(getActivity(), "已加载所有的说说", Toast.LENGTH_SHORT).show();
+                } else {
+                    Gson gson = new Gson();
+                    if (totalItems == 0) {
+                        sayingList = new ArrayList<SayingVO>();
+                        sayingList = gson.fromJson(result, new TypeToken<List<SayingVO>>() {
+                        }.getType());
+                        adapter = new SayingAdpter(getActivity(), sayingList);
+                        adapter.setBtnClickListener(new SayingAdpter.btnClickListener() {
+                            @Override
+                            public void btnDeleteClick(final int position) {
+                                DialogTool.createNormalDialog(getActivity(), "删除说说", "真的要删除吗?", "确认", "取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        delete(position);
+                                    }
+                                }, null).show();
+                            }
+                        });
+                        mListView.setAdapter(adapter);
+                    } else if (totalItems != 0) {
+                        List<SayingVO> tempList = new ArrayList<SayingVO>();
+                        tempList = gson.fromJson(result, new TypeToken<List<SayingVO>>() {
+                        }.getType());
+                        for (int i = 0; i < tempList.size(); i++) {
+                            sayingList.add(tempList.get(i));
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+
+                }
             }
+
             @Override
             public void onMyError(VolleyError error) {
 
@@ -82,93 +124,14 @@ public class SearchFrage extends Fragment implements BaseFragmentPagerAdapter.Up
         });
     }
 
-    public class Adapter extends BaseAdapter {
-        @Override
-        public int getCount() {
-            return list.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return list.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getActivity()).inflate(R.layout.carlife_list_layout, null);
-                vh = new ViewHorder();
-                vh.username = (TextView) convertView.findViewById(R.id.saying_nickname);
-                vh.gridView = (GridView) convertView.findViewById(R.id.saying_gridview);
-                convertView.setTag(vh);
-            } else {
-                vh = (ViewHorder) convertView.getTag();
-            }
-            vh.username.setText(list.get(position).toString());
-            vh.gridView.setAdapter(new GradAdapter());
-            vh.gridView.setOnItemClickListener(new OnItemClickListener() {
-                public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                        long arg3) {
-                    Intent intent = new Intent(getActivity(),
-                            ViewPagerTestActivity.class);
-                    intent.putExtra("ID", arg2);
-                    startActivity(intent);
-                }
-            });
-
-            return convertView;
-        }
-    }
-
-    class GradAdapter extends BaseAdapter {
-        @Override
-        public int getCount() {
-            return image.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return image[position];
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewGradHorder gradHorder;
-            if (convertView == null) {
-                gradHorder = new ViewGradHorder();
-                convertView = LayoutInflater.from(getActivity()).inflate(R.layout.carlife_grade_content, null);
-                gradHorder.img = (ImageView) convertView.findViewById(R.id.item_grida_image);
-                convertView.setTag(gradHorder);
-            } else {
-                gradHorder = (ViewGradHorder) convertView.getTag();
-            }
-            gradHorder.img.setImageResource(image[position]);
-            return convertView;
-        }
-    }
-
-    class ViewGradHorder {
-        ImageView img;
-    }
-
-    class ViewHorder {
-        TextView username;
-        GridView gridView;
-    }
 
     @Override
     public void update() {
+
+    }
+
+    @Override
+    public void update(int totalItems) {
 
     }
 
@@ -180,17 +143,19 @@ public class SearchFrage extends Fragment implements BaseFragmentPagerAdapter.Up
     private void onLoad() {
         mListView.stopRefresh();
         mListView.stopLoadMore();
-        mListView.setRefreshTime("刚刚");
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String str = simpleDateFormat.format(date);
+        mListView.setRefreshTime(str);
     }
 
     @Override
     public void onRefresh() {
-        geneItems();
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                geneItems();
-                mListView.setAdapter(adapter);
+                Log.e("mTotalItemCount", XListView.mTotalItemCount + "" + ""+sayingList.size());
+                init();
                 onLoad();
             }
         }, 2000);
@@ -198,12 +163,13 @@ public class SearchFrage extends Fragment implements BaseFragmentPagerAdapter.Up
 
     @Override
     public void onLoadMore() {
-        geneItems();
+
         mHandler.postDelayed(new Runnable() {
+
             @Override
             public void run() {
-                geneItems();
-                adapter.notifyDataSetChanged();
+                Log.e("mTotalItemCount", XListView.mTotalItemCount + "" + sayingList.size());
+                getCzwDatas(sayingList.size());
                 onLoad();
             }
         }, 2000);

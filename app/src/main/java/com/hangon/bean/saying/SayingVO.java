@@ -11,7 +11,7 @@ public class SayingVO {
     private int userId;
     private String nickName;
     private String userIconUrl;
-   // private Date postTime;
+    private String strTime;
     private String sayingContent;
     private String postAddress;
     private int sayingType;
@@ -25,8 +25,6 @@ public class SayingVO {
     public SayingVO() {
 
     }
-
-
 
     public int getSayingId() {
         return sayingId;
@@ -60,13 +58,13 @@ public class SayingVO {
         this.userIconUrl = userIconUrl;
     }
 
-   /* public Date getPostTime() {
-        return postTime;
+    public String getStrTime() {
+        return strTime;
     }
 
-    public void setPostTime(Date postTime) {
-        this.postTime = postTime;
-    }*/
+    public void setStrTime(String strTime) {
+        this.strTime = strTime;
+    }
 
     public String getSayingContent() {
         return sayingContent;

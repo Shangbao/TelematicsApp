@@ -6,7 +6,7 @@ package com.hangon.common;
 public class Constants {
     //网络请求URL
     //10.163.0.194   10.58.11.204   10.163.200.124  10.59.3.167
-    public static final String HOST_IP = "10.163.200.124";
+    public static final String HOST_IP = "10.59.3.167";
     //关于用户信息的网络请求地址
     public static final String LOGIN_URL = "http://" + HOST_IP + ":8080/wind/UserLogin?";
     public static final String REGISTER_URL = "http://" + HOST_IP + ":8080/wind/UserRegister?";
@@ -65,5 +65,10 @@ public class Constants {
 
     //动画参数
     public static final int VERSION = Integer.valueOf(android.os.Build.VERSION.SDK);
+
+    //用户id---及其重要
+    public static    int USER_ID=0;
+
+    public static  String SAYING_TYPE="";
 
 }

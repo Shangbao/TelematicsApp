@@ -50,6 +50,8 @@ public abstract class BaseFragmentPagerAdapter extends FragmentPagerAdapter {
 
     public interface UpdateAble {
         public void update();
+
+        public void update(int totalItems);
     }
 
 }

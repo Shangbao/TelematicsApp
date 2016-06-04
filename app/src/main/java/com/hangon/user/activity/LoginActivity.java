@@ -180,7 +180,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             }
         }
         UserUtil.getInstance().saveLoginUserInfo(userInfo);
-        Log.e("uuuuuu", UserUtil.getInstance().getIntegerConfig("userId")+"");
         //进行登录页面到主页面的跳转
         sendUserInfo(userInfo);
     }
@@ -189,21 +188,15 @@ public class LoginActivity extends Activity implements View.OnClickListener {
      * 从登录Activity到HomeActivity进行值传递
      */
     public void sendUserInfo(UserInfo userInfo) {
+        Constants.USER_ID=UserUtil.getInstance().getIntegerConfig("userId");
         Intent toHome = new Intent();
-        //装载数据
-        Bundle bundle = new Bundle();
-        bundle.putString("userName", userInfo.getUserName());
-        bundle.putString("nickname", userInfo.getNickname());
-        bundle.putString("sex", userInfo.getSex());
-        bundle.putInt("age", userInfo.getAge());
-        bundle.putString("driverNum", userInfo.getDriverNum());
-        toHome.putExtra("bundle", bundle);
         toHome.setClass(LoginActivity.this, HomeActivity.class);
         startActivity(toHome);
     }
 
     //   //读取图片并且加载链接
     private void loadUserIcon(String s) {
+        Log.e("loadUserIcon",s);
         String url = Constants.LOAD_USER_ICON_URL + s;
         ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
             @Override
@@ -225,6 +218,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         byte[] bytes;
         bytes = ImageUtil.getBitmapByte(bitmap);
         String userIconConten = ImageUtil.getStringFromByte(bytes);
+        Log.e("userIconConten",userIconConten);
         UserUtil.instance(LoginActivity.this);
         UserUtil.getInstance().saveStringConfig("userIconContent", userIconConten);
     }

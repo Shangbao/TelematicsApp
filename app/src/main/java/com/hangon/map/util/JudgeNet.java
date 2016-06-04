@@ -4,6 +4,7 @@ package com.hangon.map.util;
  * Created by Administrator on 2016/4/23.
  */
 public class JudgeNet {
+
     /**
      * 状态判断
      */

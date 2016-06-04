@@ -93,6 +93,11 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
         getData();
     }
 
+    @Override
+    public void update(int totalItems) {
+
+    }
+
     public class Payadapter extends BaseAdapter {
         List<OrderData> payOrderList;
 

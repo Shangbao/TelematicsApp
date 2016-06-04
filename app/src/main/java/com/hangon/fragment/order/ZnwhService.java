@@ -34,7 +34,7 @@ public class ZnwhService extends Service {
 
     int smallIcon = R.mipmap.ic_launcher;
 
-    private boolean flag = true;
+    private boolean flag = false;
 
     private int isGoodEngine, isGoodTran, isGoodLight;
     private int oldEngine = 1, oldTran = 1, oldLight = 1;

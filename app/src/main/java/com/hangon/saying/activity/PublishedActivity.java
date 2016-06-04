@@ -17,7 +17,7 @@ import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 
-import com.hangon.saying.layout.Location;
+import com.hangon.saying.util.Location;
 import com.hangon.saying.viewPager.MainActivity;
 
 import android.annotation.SuppressLint;
@@ -75,14 +75,20 @@ public class PublishedActivity extends Activity {
     }
 
     public void Init() {
-
         location_address_publish = (TextView) findViewById(R.id.location_address_publish);
         publishContent = (TextView) findViewById(R.id.publish_content);
         cancel_selectimg = (TextView) findViewById(R.id.cancel_selectimg);
         cancel_selectimg.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bimp.drr.clear();
+                Bimp.bmp.clear();
+                Bimp.max=0;
+                Intent intent=new Intent();
+                intent.setClass(PublishedActivity.this, MainActivity.class);
+                startActivity(intent);
                 finish();
+
             }
         });
         noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
@@ -106,7 +112,7 @@ public class PublishedActivity extends Activity {
         activity_selectimg_send = (TextView) findViewById(R.id.activity_selectimg_send);
         activity_selectimg_send.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), location_address_publish.getText().toString()+"ssss", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), location_address_publish.getText().toString() + "ssss", Toast.LENGTH_LONG).show();
                 List<String> list = new ArrayList<String>();
 
                 for (int i = 0; i < Bimp.drr.size(); i++) {
@@ -115,9 +121,15 @@ public class PublishedActivity extends Activity {
                             Bimp.drr.get(i).lastIndexOf("."));
                     list.add(FileUtils.SDPATH + Str + ".JPEG");
                 }
+
                 PostSaying();
             }
         });
+        if(Constants.SAYING_TYPE!=null&&!Constants.SAYING_TYPE.equals("")){
+            if(Constants.SAYING_TYPE.equals("2")){
+                publishContent.setHint("发送消息向车友圈求助.");
+            }
+        }
     }
 
     //网络请求发表说说
@@ -125,10 +137,11 @@ public class PublishedActivity extends Activity {
         Map map = new HashMap();
         UserUtil.instance(PublishedActivity.this);
         String userId = UserUtil.getInstance().getIntegerConfig("userId") + "";
+        Log.e("userId", userId);
         map.put("userId", userId);
-        map.put("postAddress", location_address_publish.getText().toString().trim()+"111123");
+        map.put("postAddress", location_address_publish.getText().toString().trim());
         map.put("sayingContent", publishContent.getText().toString().trim());
-        map.put("sayingType", "2");
+        map.put("sayingType", Constants.SAYING_TYPE);
         if (Bimp.bmp != null && Bimp.bmp.size() != 0) {
             for (int i = 0; i < Bimp.bmp.size(); i++) {
                 Bitmap bitmap = Bimp.bmp.get(i);
@@ -136,7 +149,7 @@ public class PublishedActivity extends Activity {
                 bytes = ImageUtil.getBitmapByte(bitmap);
                 String myImg = "img" + (i + 1);
                 String imgTemp = ImageUtil.getStringFromByte(bytes);
-                Log.e("PostSaying",myImg+"----"+imgTemp);
+                Log.e("PostSaying", myImg + "----" + imgTemp);
                 map.put(myImg, imgTemp);
             }
         }
@@ -147,14 +160,19 @@ public class PublishedActivity extends Activity {
                 // 高清的压缩图片全部就在  list 路径里面了
                 // 高清的压缩过的 bmp 对象  都在 Bimp.bmp里面
                 // 完成上传服务器后 .........
+                Bimp.bmp.clear();
+                Bimp.max=0;
+                Bimp.drr.clear();
                 FileUtils.deleteDir();
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                finish();
             }
 
             @Override
             public void onMyError(VolleyError error) {
+                Toast.makeText(PublishedActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(PublishedActivity.this, "网络异常，请重新发表", Toast.LENGTH_SHORT).show();
             }
         });
@@ -382,7 +400,7 @@ public class PublishedActivity extends Activity {
         if (true) {
             option.setAddrType("all");
         }
-       // option.setScanSpan(3000);
+        // option.setScanSpan(3000);
         //  option.setPoiNumber(10);
         //option.disableCache(true);
         mLocClient.setLocOption(option);

@@ -2,6 +2,7 @@ package com.hangon.saying.viewPager;
 
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,10 +35,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.fd.ourapplication.R;
+import com.hangon.common.Constants;
 import com.hangon.order.util.FragmentViewPagerAdapter;
 import com.hangon.saying.activity.PublishedActivity;
-import com.hangon.saying.layout.MenuHelper;
-import com.hangon.saying.layout.OnMenuClick;
+import com.hangon.saying.util.MenuHelper;
+import com.hangon.saying.util.OnMenuClick;
 
 /**
  * @author weizhi
@@ -88,6 +90,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
     private SensorManager sensorManager;
     private Vibrator vibrator;
     AlertDialog.Builder builder;
+    Dialog dialog;
     private static final String TAG = "TestSensorActivity";
     private static final int SENSOR_SHAKE = 10;
 
@@ -310,6 +313,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
 
     @Override
     public void onPopupMenuClick(int position) {
+        Constants.SAYING_TYPE=position+1+"";
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), PublishedActivity.class);
         startActivity(intent);
@@ -358,7 +362,8 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
             super.handleMessage(msg);
             switch (msg.what) {
                 case SENSOR_SHAKE:
-
+                    dialog=new Dialog(MainActivity.this);
+                    dialog.dismiss();
                     builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setTitle("紧急求救");
                     builder.setMessage("是否发起紧急求救?");
@@ -374,7 +379,8 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
 
                         }
                     });
-                    builder.create().show();
+                    dialog=builder.create();
+                    dialog.show();
 
                     break;
             }
