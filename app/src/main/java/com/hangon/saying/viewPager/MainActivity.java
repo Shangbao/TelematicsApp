@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -30,14 +31,27 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.android.volley.VolleyError;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.example.fd.ourapplication.R;
 import com.hangon.common.Constants;
+import com.hangon.common.ImageUtil;
+import com.hangon.common.UserUtil;
+import com.hangon.common.VolleyInterface;
+import com.hangon.common.VolleyRequest;
 import com.hangon.order.util.FragmentViewPagerAdapter;
+import com.hangon.saying.activity.Bimp;
+import com.hangon.saying.activity.FileUtils;
 import com.hangon.saying.activity.PublishedActivity;
+import com.hangon.saying.util.Location;
 import com.hangon.saying.util.MenuHelper;
 import com.hangon.saying.util.OnMenuClick;
 
@@ -46,7 +60,7 @@ import com.hangon.saying.util.OnMenuClick;
  * @version 1.0
  */
 public class MainActivity extends FragmentActivity implements OnMenuClick {
-    ///////////
+
     ImageView select_publish;
     // 下拉菜单shuju
     private MenuHelper mMenuHelper;
@@ -58,7 +72,9 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
     private TextView searchLife;
     //寻求帮助
     private TextView seekHelp;
-    //////
+
+    //辅助获得地址
+    TextView strText;
 
     //车周围
     private TextView czwTextView;
@@ -86,7 +102,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
 
     //切换器的适配器
     FragmentViewPagerAdapter adapter;
-
+    private LocationClient mLocClient;
     private SensorManager sensorManager;
     private Vibrator vibrator;
     AlertDialog.Builder builder;
@@ -101,10 +117,14 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.carlife_main);
-        context = this;
         //初始化TextView
         InitTextView();
+        mLocClient = ((Location) getApplication()).mLocationClient;
+        ((Location) getApplication()).mTv = strText;
+        setLocationOption();
+        mLocClient.start();
 
+        context = this;
         //初始化ImageView
         InitImageView();
 
@@ -164,6 +184,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
         //添加点击事件
         czwTextView.setOnClickListener(new MyOnClickListener(0));
         qzTextView.setOnClickListener(new MyOnClickListener(1));
+        strText = (TextView) findViewById(R.id.strText);
 
     }
 
@@ -313,7 +334,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
 
     @Override
     public void onPopupMenuClick(int position) {
-        Constants.SAYING_TYPE=position+1+"";
+        Constants.SAYING_TYPE = position + 1 + "";
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), PublishedActivity.class);
         startActivity(intent);
@@ -362,30 +383,91 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
             super.handleMessage(msg);
             switch (msg.what) {
                 case SENSOR_SHAKE:
-                    dialog=new Dialog(MainActivity.this);
-                    dialog.dismiss();
-                    builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setTitle("紧急求救");
-                    builder.setMessage("是否发起紧急求救?");
-                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                    dialog = new Dialog(MainActivity.this);
+                     if(!dialog.isShowing()){
+                       builder = new AlertDialog.Builder(MainActivity.this);
+                       builder.setTitle("紧急求救");
+                       builder.setMessage("是否发起紧急求救?");
+                       builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
 
-                        }
-                    });
-                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    dialog=builder.create();
-                    dialog.show();
-
+                           }
+                       });
+                       builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               Toast.makeText(MainActivity.this, strText.getText(), Toast.LENGTH_SHORT).show();
+                               PostSaying();
+                           }
+                       });
+                       dialog = builder.create();
+                       dialog.show();}
                     break;
             }
         }
 
     };
+
+    //获取当前位置
+    private void setLocationOption() {
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);
+        option.setCoorType("bd09ll");
+        //option.setPoiExtraInfo(true);
+        if (true) {
+            option.setAddrType("all");
+        }
+        // option.setScanSpan(3000);
+        //  option.setPoiNumber(10);
+        //option.disableCache(true);
+        mLocClient.setLocOption(option);
+    }
+
+    //网络请求发表说说
+    private void PostSaying() {
+        Map map = new HashMap();
+        String sayingContent = "我现在在" + strText.getText().toString() + "遇到了紧急情况,需要求助";
+        String userId = Constants.USER_ID + "";
+        Log.e("userId", userId);
+        map.put("userId", userId);
+        map.put("postAddress", strText.getText().toString().trim());
+        map.put("sayingContent", sayingContent);
+        map.put("sayingType", "3");
+
+        String url = Constants.ADD_SAYING;
+        VolleyRequest.RequestPost(MainActivity.this, url, "PostSaying", map, new VolleyInterface(MainActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
+            @Override
+            public void onMySuccess(String result) {
+                Toast.makeText(MainActivity.this, "已发出急救", Toast.LENGTH_SHORT).show();
+                InitImageView();
+                InitFragment();
+                InitViewPager();
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                Toast.makeText(MainActivity.this, "网络异常，发表失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mLocClient.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mLocClient.stop();
+    }
+
+    @Override
+    public void onDestroy() {
+        mLocClient.stop();
+        super.onDestroy();
+    }
 }
 

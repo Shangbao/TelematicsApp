@@ -165,7 +165,6 @@ public class SearchFrage extends Fragment implements BaseFragmentPagerAdapter.Up
     public void onLoadMore() {
 
         mHandler.postDelayed(new Runnable() {
-
             @Override
             public void run() {
                 Log.e("mTotalItemCount", XListView.mTotalItemCount + "" + sayingList.size());
