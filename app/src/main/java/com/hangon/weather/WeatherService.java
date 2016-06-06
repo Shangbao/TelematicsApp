@@ -7,8 +7,12 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.example.fd.ourapplication.R;
+import com.hangon.fragment.order.NotificationAdmain;
+import com.hangon.home.activity.HomeActivity;
 import com.mob.mobapi.API;
 import com.mob.mobapi.APICallback;
 import com.mob.mobapi.MobAPI;
@@ -21,6 +25,8 @@ import com.mob.tools.utils.Hashon;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Chuan on 2016/5/19.
@@ -31,13 +37,25 @@ public class WeatherService extends Service implements APICallback {
     private ArrayList<HashMap<String, Object>> results;
     private String city;
     private String temperature;
+    private String clearCar;
     private boolean flag = true;
+    private boolean isClear = false;
+
+    int smallIcon = R.mipmap.ic_launcher;
 
     private static final int updateWeather = 1;
     private static final int updateCity = 2;
+    private static final int updateClearCar = 3;
+
+    static int NOTIFICATION_ID = 13565400;
 
     public static final String ACTION_UPDATE_WEATHER = "com.hangon.weather.UPDATE_WEATHER";
     public static final String ACTION_UPDATE_CITY = "com.hangon.weather.UPDATE_CITY";
+    public static final String ACTION_UPDATE_CLEARCAR = "com.hangon.weather.UPDATE_CLEARCAR";
+
+    Intent clearIntent;
+    NotificationAdmain admain;
+    WeatherBinder binder;
 
     private Handler handler = new Handler() {
 
@@ -49,6 +67,8 @@ public class WeatherService extends Service implements APICallback {
                 case updateCity:
                     updateCity();
                     break;
+                case updateClearCar:
+                    updateClearCar();
             }
         }
     };
@@ -56,7 +76,8 @@ public class WeatherService extends Service implements APICallback {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        binder = new WeatherBinder();
+        return binder;
     }
 
     @Override
@@ -64,6 +85,8 @@ public class WeatherService extends Service implements APICallback {
         MobAPI.initSDK(this, "120b650027878");
         com.mob.mobapi.apis.Weather api = (com.mob.mobapi.apis.Weather) MobAPI.getAPI(com.mob.mobapi.apis.Weather.NAME);
         api.getSupportedCities(this);
+        clearIntent = new Intent(this, HomeActivity.class);
+        admain = new NotificationAdmain(this,NOTIFICATION_ID);
         new Thread() {
             public void run() {
                 while (flag) {
@@ -91,8 +114,13 @@ public class WeatherService extends Service implements APICallback {
         HashMap<String, Object> weather = results.get(0);
         city = com.mob.tools.utils.R.toString(weather.get("city"));
         temperature = com.mob.tools.utils.R.toString(weather.get("temperature"));
+        clearCar = com.mob.tools.utils.R.toString(weather.get("washIndex"));
         handler.sendEmptyMessage(updateWeather);
         handler.sendEmptyMessage(updateCity);
+        handler.sendEmptyMessage(updateClearCar);
+        if (!isClear && clearCar.equals("适宜")){
+            admain.normal_notification(clearIntent,smallIcon,"汽车智能维护","亲，今天的天气适合洗车哦！","洗车提示！");
+        }
     }
 
     public void updateWeahther() {
@@ -111,6 +139,14 @@ public class WeatherService extends Service implements APICallback {
         handler.sendEmptyMessageDelayed(updateCity, 1000);
     }
 
+    public void updateClearCar(){
+        Intent intent = new Intent();
+        intent.setAction(ACTION_UPDATE_CLEARCAR);
+        intent.putExtra(ACTION_UPDATE_CLEARCAR, clearCar);
+        sendBroadcast(intent);
+        handler.sendEmptyMessageDelayed(updateClearCar, 1000);
+    }
+
     @Override
     public void onSuccess(API api, int action, Map<String, Object> result) {
         switch (action) {
@@ -124,5 +160,23 @@ public class WeatherService extends Service implements APICallback {
     public void onError(API api, int i, Throwable details) {
         details.printStackTrace();
         Toast.makeText(this, "亲，查询不到你所要的城市天气！", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        flag = false;
+        isClear = false;
+        Log.e("结果:", "stopWeahther");
+    }
+
+    public class WeatherBinder extends Binder{
+        public void stopWeather(){
+            flag = false;
+        }
+
+        public void startWeather(){
+            flag = true;
+        }
     }
 }

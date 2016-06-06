@@ -12,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.common.Topbar;
 import com.hangon.saying.viewPager.MainActivity;
+import com.hangon.weather.WeatherService;
 
 /**
  * Created by Administrator on 2016/4/4.
@@ -32,6 +34,7 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
     private TextView tvIsEng;
     private TextView tvIsTran;
     private TextView tvIsLight;
+    private TextView tvClearcar;
     private Button btnSaying;
 
     @Nullable
@@ -40,10 +43,7 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
         znwhView = inflater.inflate(R.layout.fragment_znwh, container, false);
 //        Bundle bundle = getArguments();
         init();
-        receiver = new MyReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("com.hangon.fragment.order.ZnwhService");
-        getActivity().registerReceiver(receiver, filter);
+        registerReceiver();
         Topbar topbar = (Topbar) znwhView.findViewById(R.id.topbar);
         topbar.setBtnIsVisible(false);
         return znwhView;
@@ -56,6 +56,7 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
         tvIsEng = (TextView) znwhView.findViewById(R.id.znwh_iseng);
         tvIsTran = (TextView) znwhView.findViewById(R.id.znwh_istran);
         tvIsLight = (TextView) znwhView.findViewById(R.id.znwh_islight);
+        tvClearcar = (TextView) znwhView.findViewById(R.id.znwh_clear);
         btnSaying = (Button) znwhView.findViewById(R.id.btn_saying);
         btnSaying.setOnClickListener(this);
     }
@@ -77,29 +78,43 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void registerReceiver(){
+        receiver = new MyReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ZnwhService.ACTION_UPDATE_ZNWH);
+        intentFilter.addAction(WeatherService.ACTION_UPDATE_CLEARCAR);
+        getActivity().registerReceiver(receiver, intentFilter);
+    }
+
     public class MyReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Bundle bundle = intent.getExtras();
-            ZnwhInfoVO znwhInfoVO = (ZnwhInfoVO) bundle.getSerializable("ZnwhInfo");
-            //tvUserId.setText(znwhInfoVO.getUserId()+"");
-            tvMil.setText(znwhInfoVO.getMileage() + "");
-            tvGas.setText(znwhInfoVO.getOddGasAmount() + "");
-            if (znwhInfoVO.getIsGoodEngine() == 1) {
-                tvIsEng.setText("异常");
-            } else {
-                tvIsEng.setText("正常");
+            String action = intent.getAction();
+            if (ZnwhService.ACTION_UPDATE_ZNWH.equals(action)){
+                Bundle bundle = intent.getExtras();
+                ZnwhInfoVO znwhInfoVO = (ZnwhInfoVO) bundle.getSerializable("ZnwhInfo");
+                //tvUserId.setText(znwhInfoVO.getUserId()+"");
+                tvMil.setText(znwhInfoVO.getMileage() + "");
+                tvGas.setText(znwhInfoVO.getOddGasAmount() + "");
+                if (znwhInfoVO.getIsGoodEngine() == 1) {
+                    tvIsEng.setText("异常");
+                } else {
+                    tvIsEng.setText("正常");
+                }
+                if (znwhInfoVO.getIsGoodTran() == 1) {
+                    tvIsTran.setText("异常");
+                } else {
+                    tvIsTran.setText("正常");
+                }
+                if (znwhInfoVO.getIsGoodLight() == 1) {
+                    tvIsLight.setText("异常");
+                } else {
+                    tvIsLight.setText("正常");
+                }
             }
-            if (znwhInfoVO.getIsGoodTran() == 1) {
-                tvIsTran.setText("异常");
-            } else {
-                tvIsTran.setText("正常");
-            }
-            if (znwhInfoVO.getIsGoodLight() == 1) {
-                tvIsLight.setText("异常");
-            } else {
-                tvIsLight.setText("正常");
+            else if (WeatherService.ACTION_UPDATE_CLEARCAR.equals(action)){
+                tvClearcar.setText(intent.getStringExtra(WeatherService.ACTION_UPDATE_CLEARCAR));
             }
         }
     }

@@ -8,6 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.oneapm.agent.android.OneApmAgent;
+
 
 import com.example.fd.ourapplication.R;
 import com.hangon.common.Constants;
@@ -24,6 +26,7 @@ public class WelcomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        OneApmAgent.init(this.getApplicationContext()).setToken("71926B35FCD0424A06C12AFDD8E21A0258").start();
 
         ImageView welcomeLogo = (ImageView) findViewById(R.id.welcomeLogo);
         Animation welcomeAnim = AnimationUtils.loadAnimation(WelcomeActivity.this, R.anim.welcome_anim);

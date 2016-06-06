@@ -66,11 +66,6 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     private  int currIndex = 0;//当前播放的索引
 
     int playMode=Constants.SEQUENCE_MODEL;//控制播放模式
-
-    private int state= Constants.IDLE;//播放状态
-
-    private boolean flag=true;//标志
-
     int mStartItem;//音乐播放列表窗口可见的第一项
     int mEndItem;//音乐播放列表窗口可见的最后项
 
@@ -253,7 +248,6 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         super.onDestroy();
         getActivity().unregisterReceiver(progressReceiver);
         getActivity().unbindService(conn);
-        flag=false;
     }
 
     class ProgressReceiver extends BroadcastReceiver {

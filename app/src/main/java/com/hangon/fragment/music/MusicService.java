@@ -270,4 +270,11 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         mediaPlayer.setOnCompletionListener(this);
         mediaPlayer.setOnErrorListener(this);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        flag = false;
+        mediaPlayer = null;
+    }
 }

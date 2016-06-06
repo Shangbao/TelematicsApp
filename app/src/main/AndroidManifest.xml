@@ -25,7 +25,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION"/>
@@ -93,10 +92,7 @@
         <activity
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:name="com.hangon.user.activity.WelcomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity
@@ -112,7 +108,10 @@
 
         <activity android:name="com.hangon.home.activity.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
 
@@ -184,6 +183,8 @@
         </activity>
         <activity android:name="com.hangon.weather.SelectCity">
         </activity>
+        <activity android:name="com.hangon.video.VideoActivity">
+        </activity>
 
         <!--支付宝支付页面-->
         <activity android:name="com.hangon.alipay.PayDemoActivity">
@@ -247,6 +248,7 @@
         <service android:name="com.hangon.fragment.order.ZnwhService"></service>
         <service android:name="com.hangon.fragment.music.MusicService"></service>
         <service android:name="com.hangon.weather.WeatherService"></service>
+        <service android:name="com.hangon.video.VideoService"></service>
     </application>
     <supports-screens android:largeScreens="true"
         android:normalScreens="true" android:smallScreens="true"

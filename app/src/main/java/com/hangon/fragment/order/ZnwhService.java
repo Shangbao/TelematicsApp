@@ -17,8 +17,16 @@ import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.home.activity.HomeActivity;
+import com.mob.mobapi.MobAPI;
+import com.mob.mobapi.apis.Weather;
+import com.mob.tools.network.KVPair;
+import com.mob.tools.network.NetworkHelper;
+import com.mob.tools.utils.Hashon;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Chuan on 2016/5/9.
@@ -29,6 +37,8 @@ public class ZnwhService extends Service {
     Intent znwhIntent;
     ZnwhInfoVO znwhInfoVO;//智能维护信息;
     static int NOTIFICATION_ID = 13565400;
+
+    public static final String ACTION_UPDATE_ZNWH = "com.hangon.fragment.order.ZnwhService";
 
     private Thread thread;
 
@@ -129,7 +139,7 @@ public class ZnwhService extends Service {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("ZnwhInfo", znwhInfoVO);
                 intent.putExtras(bundle);
-                intent.setAction("com.hangon.fragment.order.ZnwhService");
+                intent.setAction(ACTION_UPDATE_ZNWH);
                 sendBroadcast(intent);
 
             }

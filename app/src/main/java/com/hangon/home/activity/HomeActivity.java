@@ -58,25 +58,26 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     //tab中的四个图片对应的文字
     private ImageView carImageView, musicImageView, znwhImageView, userImageView;
 
-//    private ServiceConnection conn = new ServiceConnection() {
-//        @Override
-//        public void onServiceConnected(ComponentName name, IBinder service) {
-//            binder = (WeatherService.MyBinder) service;
-//        }
-//
-//        @Override
-//        public void onServiceDisconnected(ComponentName name) {
-//            Toast.makeText(HomeActivity.this, "亲，恐怕无法更新天气！", Toast.LENGTH_SHORT).show();
-//        }
-//    };
+    WeatherService.WeatherBinder binder;
+
+    private ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            binder = (WeatherService.WeatherBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Toast.makeText(HomeActivity.this, "天气部分出现错误!", Toast.LENGTH_SHORT).show();
+        }
+    };
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         weatherIntent = new Intent(this, WeatherService.class);
-        startService(weatherIntent);
-
+        bindService(weatherIntent, conn, Service.BIND_AUTO_CREATE);
         initView();
         initFragment();
         initClickEvent();
@@ -305,7 +306,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopService(weatherIntent);
+        binder.stopWeather();
+        unbindService(conn);
     }
 
     /**
