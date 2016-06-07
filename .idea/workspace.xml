@@ -18,111 +18,102 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7adea74-816a-4b40-850a-9e4c60715e91" name="Default" comment="退出登录bug修复">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugin/class.rewriter.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/clxx_01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/clxx_03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/clxx_04.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/clxx_09.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugin/com.onepam.gradle.plugin-3.0.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/czs_01.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/czs_03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/czs_07.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/czs_11.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/czs_15.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/czs_19.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/czs_23.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/czs_26.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/czs_29.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/czs_32.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/dd_03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/dd_06.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/dd_08.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ddgl_03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ddgl_07.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ddgl_09.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ddgl_14.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ddgl_16.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/dl_01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/dl_03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/dl_04.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/dl_08.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/dl_12.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/dl_13.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_04.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_07.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_10.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_15.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_19.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_23.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_27.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_31.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_35.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_37.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_39.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_45.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_48.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_50.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_52.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_53.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_54.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/grzx_55.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/jyz_03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/jyz_05.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/jyz_10.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/jyz_14.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/jyz_16.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/libs/oneapm-android-agent.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tq.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tq_03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tq_07.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tq_11.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tq_15.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tq_19.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tq_23.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tq_25.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tq_28.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tq_30.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tzk.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tzk_07.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tzk_11.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wdyy_03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wdyy_07.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wdyy_10.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wdyy_12.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wdyy_15.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wdyy_22.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wdyy_25.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wdyy_28.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wdyy_31.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wdyy_34.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wdyy_39.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wh_03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wh_07.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/wzcx.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zc_03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zc_07.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zc_10.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zc_14.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zc_18.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zc_21.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zc_22.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zwjyz_03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zwjyz_07.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zwjyz_10.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zwjyz_15.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zwjyz_19.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zwjyz_22.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/zwjyz_25.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/oneapm.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/hangon/fragment/userinfo/UserFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/hangon/fragment/userinfo/UserFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/hangon/fragment/order/ZnwhService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/hangon/fragment/order/ZnwhService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_gai_car_message.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_gai_car_message.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_map_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_map_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="c7adea74-816a-4b40-850a-9e4c60715e91" name="Default" comment="UI图片上传">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/hangon/home/activity/Test.java" />
+      <change type="NEW" beforePath="" afterPath="G:\android_workspace\OurApplication\app\src\main\res\drawable\show_hide.xml" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\clxx_01.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\clxx_03.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\clxx_04.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\clxx_09.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\czs_01.jpg" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\czs_03.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\czs_07.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\czs_11.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\czs_15.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\czs_19.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\czs_23.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\czs_26.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\czs_29.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\czs_32.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\dd_03.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\dd_06.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\dd_08.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\ddgl_03.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\ddgl_07.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\ddgl_09.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\ddgl_14.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\ddgl_16.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\dl_01.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\dl_03.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\dl_04.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\dl_08.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\dl_12.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\dl_13.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_03.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_04.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_07.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_10.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_15.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_19.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_23.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_27.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_31.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_35.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_37.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_39.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_45.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_48.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_50.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_52.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_53.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_54.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\grzx_55.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\jyz_03.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\jyz_05.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\jyz_10.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\jyz_14.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\jyz_16.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tq.jpg" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tq_03.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tq_07.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tq_11.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tq_15.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tq_19.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tq_23.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tq_25.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tq_28.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tq_30.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tzk.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tzk_07.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\tzk_11.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wdyy_03.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wdyy_07.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wdyy_10.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wdyy_12.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wdyy_15.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wdyy_22.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wdyy_25.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wdyy_28.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wdyy_31.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wdyy_34.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wdyy_39.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wh_03.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wh_07.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\wzcx.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zc_03.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zc_07.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zc_10.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zc_14.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zc_18.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zc_21.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zc_22.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zwjyz_03.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zwjyz_07.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zwjyz_10.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zwjyz_15.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zwjyz_19.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zwjyz_22.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\android_workspace\OurApplication\app\src\main\res\drawable-xhdpi\zwjyz_25.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="OurApplication.iws" />
@@ -4371,6 +4362,28 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hangon" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OurApplication" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -4583,7 +4596,13 @@
       <option name="project" value="LOCAL" />
       <updated>1465218787700</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="退出登录bug修复">
+      <created>1465301817442</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1465301817442</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -4929,11 +4948,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/onekeyshare/src/main/res/drawable-xhdpi/ssdk_oks_classic_qzone.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tzk_07.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
