@@ -58,21 +58,6 @@ public class ZnwhService extends Service {
     public IBinder onBind(Intent intent) {
         admain = new NotificationAdmain(this,NOTIFICATION_ID);
         znwhIntent = new Intent(this, HomeActivity.class);
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(flag){
-                    getZnwhInfo();
-                    updateZnwhInfo();
-                    try{
-                        Thread.sleep(2000);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        thread.start();
         myBinder = new MyBinder();
         return myBinder;
     }
@@ -176,6 +161,21 @@ public class ZnwhService extends Service {
 
         public void on(){
             flag = true;
+            thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while(flag){
+                        getZnwhInfo();
+                        updateZnwhInfo();
+                        try{
+                            Thread.sleep(2000);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+            thread.start();
         }
     }
 }

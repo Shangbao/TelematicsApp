@@ -151,10 +151,8 @@
                 android:layout_centerVertical="true"
                 android:text="监听汽车异常"/>
 
-
             <Switch
                 android:id="@+id/switch_znwh"
-                android:checked="true"
                 android:layout_marginLeft="200dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

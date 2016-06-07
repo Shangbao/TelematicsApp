@@ -178,8 +178,8 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    znwhBinder.on();
                     getActivity().bindService(znwhIntent, znwhConn, Service.BIND_AUTO_CREATE);
+                    znwhBinder.on();
                 } else {
                     znwhBinder.off();
                     getActivity().unbindService(znwhConn);
