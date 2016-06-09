@@ -69,8 +69,7 @@ public class UpdateUserActivity extends Activity {
                 //跳转到用户信息页面
                 Intent intent=new Intent();
                 intent.putExtra("id",4);
-                intent.setClass(UpdateUserActivity.this, HomeActivity.class);
-                startActivity(intent);
+                setResult(RESULT_OK, intent);
                 UpdateUserActivity.this.finish();
             }
 

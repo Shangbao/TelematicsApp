@@ -21,6 +21,7 @@ import com.hangon.carInfoManage.activity.AddCarMessageActivity;
 import com.hangon.carInfoManage.activity.SetCarInfoActivity;
 import com.hangon.common.Topbar;
 import com.hangon.fragment.music.MusicService;
+import com.hangon.home.activity.HomeActivity;
 import com.hangon.map.activity.BestRouteActivity;
 import com.hangon.map.activity.MapMainActivity;
 import com.hangon.map.util.JudgeNet;
@@ -125,7 +126,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                 case R.id.btnSetCarInfo:
                     intent = new Intent();
                     intent.setClass(getActivity(), SetCarInfoActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, HomeActivity.INTENT_SETCARINFO);
                     break;
 
                 case R.id.btnBestWay:
@@ -150,7 +151,8 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                 case R.id.btnWeiZhang:
                     intent=new Intent();
                     intent.setClass(getActivity(),MainActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, HomeActivity.INTENT_WZCX);
+                    break;
             }
         }
 

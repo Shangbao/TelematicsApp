@@ -40,6 +40,7 @@ import com.hangon.common.Topbar;
 import com.hangon.common.UserUtil;
 import com.hangon.fragment.music.MusicImage;
 import com.hangon.fragment.order.ZnwhService;
+import com.hangon.home.activity.HomeActivity;
 import com.hangon.user.activity.LoginActivity;
 import com.hangon.video.VideoActivity;
 import com.hangon.video.VideoService;
@@ -171,7 +172,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
             public void rightClick() {
                 Intent toUpdateUserInfo = new Intent();
                 toUpdateUserInfo.setClass(getActivity(), UpdateUserActivity.class);
-                startActivity(toUpdateUserInfo);
+                startActivityForResult(toUpdateUserInfo, HomeActivity.INTENT_UPDATEUSER);
             }
         });
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -240,7 +241,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
             case R.id.toSetHeadIcon:
                 Intent toSetHeadIcon = new Intent();
                 toSetHeadIcon.setClass(getActivity(), UserIconActivity.class);
-                startActivity(toSetHeadIcon);
+                startActivityForResult(toSetHeadIcon, HomeActivity.INTENT_USERICON);
                 break;
             case R.id.btnReturnLogin:
                 DialogTool.createNormalDialog(getActivity(), "退出登录", "你确定要退出登录吗?", "取消", "确认", null, new DialogInterface.OnClickListener() {

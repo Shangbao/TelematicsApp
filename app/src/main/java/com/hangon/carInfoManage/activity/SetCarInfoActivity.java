@@ -72,8 +72,7 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
             public void leftClick() {
                 Intent intent = new Intent();
                 intent.putExtra("id", 1);
-                intent.setClass(SetCarInfoActivity.this, HomeActivity.class);
-                startActivity(intent);
+                SetCarInfoActivity.this.setResult(RESULT_OK, intent);
                 SetCarInfoActivity.this.finish();
             }
 
@@ -137,9 +136,8 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
                 finish();
                 break;
             case R.id.btnSao:
-                intent = new Intent();
+                intent = new Intent(SetCarInfoActivity.this, CaptureActivity.class);
                 startActivity(intent);
-                finish();
                 break;
         }
 

@@ -3,7 +3,7 @@
     android:id="@+id/weather_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_fine_day"
+    android:background="@drawable/tq"
     android:orientation="vertical"
     tools:context=".Weather" >
 
@@ -103,6 +103,15 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp" >
 
+            <ImageView
+                android:id="@+id/weather_icon"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:scaleType="centerInside" />
+
             <TextView
                 android:id="@+id/current_temperature"
                 android:layout_width="wrap_content"
@@ -121,14 +130,6 @@
                 android:textColor="@color/white"
                 android:textSize="30sp" />
 
-            <ImageView
-                android:id="@+id/weather_icon"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:scaleType="centerInside" />
         </RelativeLayout>
 
         <View
@@ -221,7 +222,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/weather_forcast_bg"
+        android:background="@color/tq_item_color"
         android:orientation="vertical" >
 
         <RelativeLayout

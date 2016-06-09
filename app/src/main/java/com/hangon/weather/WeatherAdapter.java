@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fd.ourapplication.R;
@@ -29,11 +30,11 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
         TextView date = (TextView) view.findViewById(R.id.weather_forecast_date);
         TextView weather = (TextView) view.findViewById(R.id.weather_forecast_weather);
         TextView temperature = (TextView) view.findViewById(R.id.weather_forecast_temperature);
-        TextView wind = (TextView) view.findViewById(R.id.weather_forecast_wind);
+        ImageView icon = (ImageView) view.findViewById(R.id.weather_forecast_img);
         date.setText(iweather.getDate());
         weather.setText(iweather.getWeather());
         temperature.setText(iweather.getTemperature());
-        wind.setText(iweather.getWind());
+        String weatherIcon = iweather.getWeather();
         return view;
     }
 }

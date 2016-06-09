@@ -60,8 +60,7 @@ public class UserIconActivity extends Activity implements OnClickListener {
 
                Intent intent = new Intent();
                intent.putExtra("id", 4);
-               intent.setClass(UserIconActivity.this, HomeActivity.class);
-               startActivity(intent);
+               setResult(RESULT_OK, intent);
                UserIconActivity.this.finish();
            }
 

@@ -62,6 +62,8 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
 
     private Time time;
 
+    public final static int SELECT_CITY = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,8 +141,8 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
         time.setToNow();
         if (currentWeather.contains("晴")) {
             if (time.hour >= 7 && time.hour < 19) {
-                weatherBg.setBackgroundResource(R.drawable.bg_fine_day);
-                weatherIcon.setImageResource(R.drawable.weather_img_fine_day);
+                weatherBg.setBackgroundResource(R.drawable.tq);
+                weatherIcon.setImageResource(R.drawable.tq_07);
             } else {
                 weatherBg.setBackgroundResource(R.drawable.bg_fine_night);
                 weatherIcon.setImageResource(R.drawable.weather_img_fine_night);
@@ -250,7 +252,7 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
             case R.id.city:
                 intent = new Intent();
                 intent.setClass(WeatherActivity.this, SelectCity.class);
-                WeatherActivity.this.startActivityForResult(intent, 1);
+                WeatherActivity.this.startActivityForResult(intent, SELECT_CITY);
                 break;
         }
     }

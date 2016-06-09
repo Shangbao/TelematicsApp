@@ -60,6 +60,11 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
     WeatherService.WeatherBinder binder;
 
+    public final static int INTENT_SETCARINFO = 1;
+    public final static int INTENT_WZCX = 2;
+    public final static int INTENT_USERICON = 3;
+    public final static int INTENT_UPDATEUSER = 4;
+
     private ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -81,12 +86,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         initView();
         initFragment();
         initClickEvent();
-        int position = getIntent().getIntExtra("id", 0);
-        if (position != 0) {
-            getTab(position);
-        } else {
-            getTab(1);
-        }
     }
 
     /**
@@ -308,6 +307,52 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         super.onDestroy();
         binder.stopWeather();
         unbindService(conn);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case INTENT_SETCARINFO:
+                if(resultCode == RESULT_OK){
+                    int position = data.getIntExtra("id", 0);
+                    if (position != 0) {
+                        getTab(position);
+                    } else {
+                        getTab(1);
+                    }
+                }
+                break;
+            case INTENT_WZCX:
+                if (resultCode == RESULT_OK){
+                    int position = data.getIntExtra("id", 0);
+                    if (position != 0) {
+                        getTab(position);
+                    } else {
+                        getTab(1);
+                    }
+                }
+                break;
+            case INTENT_USERICON:
+                if (resultCode == RESULT_OK){
+                    int position = data.getIntExtra("id", 0);
+                    if (position != 0) {
+                        getTab(position);
+                    } else {
+                        getTab(1);
+                    }
+                }
+                break;
+            case INTENT_UPDATEUSER:
+                if (resultCode == RESULT_OK){
+                    int position = data.getIntExtra("id", 0);
+                    if (position != 0) {
+                        getTab(position);
+                    } else {
+                        getTab(1);
+                    }
+                }
+                break;
+        }
     }
 
     /**
