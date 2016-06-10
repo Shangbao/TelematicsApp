@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,11 +35,11 @@ public class CityList extends Activity {
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.csy_titlebar);
 
         //标题
-        TextView txtTitle = (TextView) findViewById(R.id.txtTitle);
+        TextView txtTitle = (TextView) findViewById(R.id.topbar_title);
         txtTitle.setText("选择查询地-城市");
 
         //返回按钮
-        Button btnBack = (Button) findViewById(R.id.btnBack);
+        ImageButton btnBack = (ImageButton) findViewById(R.id.topbar_left);
         btnBack.setVisibility(View.VISIBLE);
         btnBack.setOnClickListener(new OnClickListener() {
             @Override
@@ -46,6 +47,9 @@ public class CityList extends Activity {
                 finish();
             }
         });
+
+        ImageButton rightBtn = (ImageButton) findViewById(R.id.topbar_right);
+        rightBtn.setVisibility(View.INVISIBLE);
 
 
         Bundle bundle = getIntent().getExtras();

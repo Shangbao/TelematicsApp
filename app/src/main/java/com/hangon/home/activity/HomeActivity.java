@@ -376,7 +376,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                         getTab(1);
                     }
                 }
-
                 break;
         }
     }

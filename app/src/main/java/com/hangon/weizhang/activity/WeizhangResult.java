@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -42,11 +43,11 @@ public class WeizhangResult extends Activity {
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.csy_titlebar);
 
         // 标题
-        TextView txtTitle = (TextView) findViewById(R.id.txtTitle);
+        TextView txtTitle = (TextView) findViewById(R.id.topbar_title);
         txtTitle.setText("违章查询结果");
 
         // 返回按钮
-        Button btnBack = (Button) findViewById(R.id.btnBack);
+        ImageButton btnBack = (ImageButton) findViewById(R.id.topbar_left);
         btnBack.setVisibility(View.VISIBLE);
         btnBack.setOnClickListener(new OnClickListener() {
             @Override
@@ -54,6 +55,9 @@ public class WeizhangResult extends Activity {
                 finish();
             }
         });
+
+        ImageButton rightBtn = (ImageButton) findViewById(R.id.topbar_right);
+        rightBtn.setVisibility(View.INVISIBLE);
 
         popLoader = (View) findViewById(R.id.popLoader);
         popLoader.setVisibility(View.VISIBLE);

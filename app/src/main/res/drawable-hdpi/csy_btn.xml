@@ -8,7 +8,7 @@
     </item>
     <item>
         <shape>
-            <solid android:color="@color/csy_green" />
+            <solid android:color="@color/csy_green_low" />
             <corners android:radius="4.0dip" />
         </shape>
     </item>
