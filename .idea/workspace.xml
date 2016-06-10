@@ -4574,7 +4574,13 @@
       <option name="project" value="LOCAL" />
       <updated>1465562961329</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="邱勇关于主页调整完毕">
+      <created>1465563011055</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1465563011055</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
