@@ -24,12 +24,14 @@ public class Topbar extends RelativeLayout {
     private int leftTextColor;
     private Drawable leftBackground;
     private String leftText;
+    private Drawable leftSrc;
 
 
     //右边button
     private int rightTextColor;
     private Drawable rightBackground;
     private String rightText;
+    private Drawable rightSrc;
 
 
     //标题
@@ -60,12 +62,12 @@ public class Topbar extends RelativeLayout {
         leftTextColor = typedArray.getColor(R.styleable.Topbar_leftTextColor, 0);
         leftBackground = typedArray.getDrawable(R.styleable.Topbar_leftBackground);
         leftText = typedArray.getString(R.styleable.Topbar_leftText);
-
+        leftSrc=typedArray.getDrawable(R.styleable.Topbar_leftSrc);
 
         rightTextColor = typedArray.getColor(R.styleable.Topbar_rightTextColor, 0);
         rightBackground = typedArray.getDrawable(R.styleable.Topbar_rightBackground);
         rightText = typedArray.getString(R.styleable.Topbar_rightText);
-
+        rightSrc=typedArray.getDrawable(R.styleable.Topbar_rightSrc);
 
         titleTextSize = typedArray.getDimension(R.styleable.Topbar_mTitleTextSize, 0);
         titleTextColor = typedArray.getColor(R.styleable.Topbar_mTitleTextColor, 0);
@@ -82,7 +84,6 @@ public class Topbar extends RelativeLayout {
         leftButton.setTextColor(leftTextColor);
         leftButton.setBackground(leftBackground);
         leftButton.setText(leftText);
-
 
         rightButton.setTextColor(rightTextColor);
         rightButton.setBackground(rightBackground);

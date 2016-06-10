@@ -1,19 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<shape
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval"
-    android:useLevel="false" >
-    <solid android:color="#73f5b9" />
-    <padding
-        android:left="2dp"
-        android:top="1dp"
-        android:right="2dp"
-        android:bottom="1dp" />
-    <solid
-        android:color="#73f5b9" />
-    <stroke
-        android:width="0.5dp"
-        android:color="#706d67" />
-    <size android:width="15dp"
-        android:height="15dp" />
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners
+        android:bottomLeftRadius="15dp"
+        android:bottomRightRadius="5dp"
+        android:topLeftRadius="5dp"
+        android:topRightRadius="15dp" />
+
+
+    <gradient
+        android:centerColor="#da4655"
+        android:endColor="#da4655"
+        android:startColor="#da4655"></gradient>
+
+
 </shape>

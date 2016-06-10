@@ -17,6 +17,8 @@ import android.view.View.OnTouchListener;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
+import com.example.fd.ourapplication.R;
+
 /**
  * 缩放图片的View
  * 
@@ -62,7 +64,7 @@ public class ClipZoomImageView extends ImageView implements
 	private boolean isCanDrag;
 	private int lastPointerCount;
 	/**
-	 * 水平方向与View的边�?
+	 * 水平方向与View的边�
 	 */
 	private int mHorizontalPadding;
 

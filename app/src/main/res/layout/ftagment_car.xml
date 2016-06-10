@@ -1,111 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/czs_01"
+    android:orientation="vertical"
+    android:paddingLeft="30dp">
 
- <LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="40dp"
-     android:background="#1e1f22">
-     <com.hangon.common.Topbar
-         android:id="@+id/carTopbar"
-         android:layout_width="match_parent"
-         android:layout_height="40dp"
-         custom:mTitleTextSize="10sp"
-         custom:mTitle="车助手"
-         custom:mTitleTextColor="#ffffff"
-         >
-     </com.hangon.common.Topbar>
- </LinearLayout>
 
     <RelativeLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="horizontal">
-        <LinearLayout
+        android:id="@+id/r1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp">
+
+        <ImageView
             android:id="@+id/btnSstq"
-            android:layout_width="130dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:textSize="18sp"
-            android:background="@drawable/btn_sy_car2">
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@drawable/tq_07" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/weather_text" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/city_text"/>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnSetCarInfo"
-            android:layout_marginTop="70dp"
-            android:layout_width="130dp"
-            android:layout_marginLeft="10dp"
-            android:textSize="18sp"
+        <TextView
+            android:id="@+id/city_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btnSstq"
-            android:background="@drawable/btn_sy_car2"
-            android:text="车辆管理"/>
+            android:layout_marginTop="5dp"
+            android:text="长春"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btnBestWay"
-            android:text="最优路线"
-            android:textSize="18sp"
-            android:layout_width="190dp"
-            android:layout_height="190dp"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/btn_sy_car"
-            android:layout_marginLeft="200dp"/>
+        <TextView
+            android:id="@+id/weather_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnSstq"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/city_text"
+            android:text="晴"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_marginTop="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        >
+    <RelativeLayout
+        android:id="@+id/r2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/r1"
+        android:layout_marginTop="40dp">
 
-        <RelativeLayout
-            android:layout_weight="1"
+        <ImageView
+            android:id="@+id/btnSetCarInfo"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:background="@drawable/czs_07" />
+
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/btnWeiZhang"
-                android:text="违章管理"
-                android:textSize="18sp"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:background="@drawable/btn_sy_car1"
-                android:layout_centerInParent="true"
-                />
-        </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnSetCarInfo"
+            android:layout_marginTop="5dp"
+            android:text="车辆管理"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+    </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_weight="1"
+    <RelativeLayout
+        android:id="@+id/btnBestWay"
+        android:layout_width="200dp"
+        android:layout_height="240dp"
+        android:layout_above="@+id/btnYyjy"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/btn_sy_car">
+
+        <ImageView
+            android:id="@+id/imgView2"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/czs_11" />
+
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/btnYyjy"
-                android:text="预约加油"
-                android:textSize="18sp"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:background="@drawable/btn_sy_car1"
-                android:layout_centerInParent="true"
-                />
-        </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgView2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="最优路线"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
 
-    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/btnWeiZhang"
+        android:layout_width="105dp"
+        android:layout_height="95dp"
+        android:layout_above="@+id/btnYyjy"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@+id/btnBestWay"
+        android:background="@drawable/btn_sy_car1">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/imgView3"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/czs_15" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgView3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="违章管理"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btnYyjy"
+        android:layout_width="105dp"
+        android:layout_height="125dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="112dp"
+        android:background="@drawable/btn_sy_car2">
+
+        <ImageView
+            android:id="@+id/imgView4"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/czs_19" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgView4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="预约加油"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

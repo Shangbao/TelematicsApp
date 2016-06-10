@@ -50,7 +50,7 @@ public class MusicImage extends ImageView {
 
     private void setCustomAttributes(AttributeSet attrs) {
         TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.roundedimageview);
-        mBorderThickness = a.getDimensionPixelSize(R.styleable.roundedimageview_border_thickness, 0);
+        mBorderThickness = a.getDimensionPixelSize(R.styleable.roundedimageview_border_thickness, 100);
         mBorderOutsideColor = a.getColor(R.styleable.roundedimageview_border_outside_color, defaultColor);
         mBorderInsideColor = a.getColor(R.styleable.roundedimageview_border_inside_color, defaultColor);
     }

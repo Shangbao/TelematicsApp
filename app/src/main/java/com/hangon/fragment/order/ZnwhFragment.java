@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,10 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
     private TextView tvIsLight;
     private TextView tvClearcar;
     private Button btnSaying;
+    private RelativeLayout layout;
+
+    ImageButton topbarLeft, topbarRight;
+    TextView topbarTitle;
 
     @Nullable
     @Override
@@ -44,8 +50,6 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
 //        Bundle bundle = getArguments();
         init();
         registerReceiver();
-        Topbar topbar = (Topbar) znwhView.findViewById(R.id.topbar);
-        topbar.setBtnIsVisible(false);
         return znwhView;
     }
 
@@ -57,8 +61,15 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
         tvIsTran = (TextView) znwhView.findViewById(R.id.znwh_istran);
         tvIsLight = (TextView) znwhView.findViewById(R.id.znwh_islight);
         tvClearcar = (TextView) znwhView.findViewById(R.id.znwh_clear);
-        btnSaying = (Button) znwhView.findViewById(R.id.btn_saying);
-        btnSaying.setOnClickListener(this);
+        layout= (RelativeLayout) znwhView.findViewById(R.id.btn_saying);
+
+        topbarLeft= (ImageButton) znwhView.findViewById(R.id.topbar_left);
+        topbarRight= (ImageButton) znwhView.findViewById(R.id.topbar_right);
+        topbarTitle= (TextView) znwhView.findViewById(R.id.topbar_title);
+        topbarLeft.setVisibility(View.GONE);
+        topbarRight.setVisibility(View.GONE);
+        topbarTitle.setText("智能生活");
+        layout.setOnClickListener(this);
     }
 
     @Override

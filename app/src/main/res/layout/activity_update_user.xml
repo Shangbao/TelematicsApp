@@ -1,157 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#e0e0e0"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="40dp"
-        android:background="#000000">
-        <com.hangon.common.Topbar
-            android:id="@+id/updateUserTopbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            custom:leftText="BACK"
-            custom:leftTextColor="#ffffff"
-            custom:mTitle="编辑用户信息"
-            custom:mTitleTextColor="#ffffff"
-            custom:mTitleTextSize="8sp"
-            custom:rightText="确定"
-            custom:rightTextColor="#ffffff"
-            ></com.hangon.common.Topbar>
-    </LinearLayout>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#666666"/>
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#ffffff">
+        android:layout_height="65dp"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <ImageView
+            android:id="@+id/img11"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/grzx_15" />
+
         <TextView
+            android:id="@+id/img12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
             android:layout_centerVertical="true"
-            android:textSize="17sp"
-            android:layout_marginLeft="10dp"
-            android:text="昵称"/>
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/uNickname"
+            android:text="昵     称"
+            android:textColor="#a3a3a3"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/uNickname"
-            android:layout_width="220dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="110dp"
-            android:textSize="17sp"
+            android:background="@drawable/btn_login2"
+            android:inputType="text"
             android:singleLine="true"
-            android:background="#00ffffff"
-            android:inputType="text"/>
+            android:textColor="#A3A3A3"
+            android:textSize="14sp" />
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#a3a3a3" />
     </RelativeLayout>
 
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#666666"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#ffffff">
+        android:layout_height="65dp"
+        android:background="#ffffff"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <ImageView
+            android:id="@+id/img21"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/grzx_23" />
+
         <TextView
+            android:id="@+id/img22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
             android:layout_centerVertical="true"
-            android:textSize="17sp"
-            android:layout_marginLeft="10dp"
-            android:text="性别"/>
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/uSex"
+            android:text="性     别"
+            android:textColor="#a3a3a3"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/uSex"
-            android:layout_width="220dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="110dp"
-            android:textSize="17sp"
-            android:singleLine="true"
+            android:background="@drawable/btn_login2"
+            android:inputType="text"
             android:maxLength="1"
-            android:background="#00ffffff"
-            android:inputType="text"/>
+            android:singleLine="true"
+            android:textColor="#A3A3A3"
+            android:textSize="14sp" />
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#a3a3a3" />
     </RelativeLayout>
 
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#666666"/>
 
     <RelativeLayout
-
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#ffffff">
+        android:layout_height="65dp"
+        android:background="#ffffff"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <ImageView
+            android:id="@+id/img31"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/grzx_27" />
+
         <TextView
+            android:id="@+id/img32"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
             android:layout_centerVertical="true"
-            android:textSize="17sp"
-            android:layout_marginLeft="10dp"
-            android:text="年龄"/>
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/uAge"
+            android:text="年     龄"
+            android:textColor="#a3a3a3"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/uAge"
-            android:layout_width="220dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="110dp"
-            android:textSize="17sp"
+            android:background="@drawable/btn_login2"
+            android:inputType="text"
             android:singleLine="true"
-            android:background="#00ffffff"
-            android:inputType="text"/>
-    </RelativeLayout>
+            android:textColor="#A3A3A3"
+            android:textSize="14sp" />
 
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#666666"/>
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#a3a3a3" />
+    </RelativeLayout>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#ffffff">
+        android:layout_height="65dp"
+        android:background="#ffffff"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <ImageView
+            android:id="@+id/img41"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/grzx_31" />
+
         <TextView
-            android:id="@+id/t2"
+            android:id="@+id/img42"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
             android:layout_centerVertical="true"
-            android:textSize="17sp"
-            android:layout_marginLeft="10dp"
-            android:text="驾驶证号"/>
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/uDriverNum"
+            android:text="驾驶证号"
+            android:textColor="#a3a3a3"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/uDriverNum"
-            android:layout_width="220dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="110dp"
-            android:textSize="17sp"
+            android:background="@drawable/btn_login2"
+            android:inputType="text"
             android:singleLine="true"
-            android:background="#00ffffff"
-            android:inputType="text"/>
+            android:textColor="#A3A3A3"
+            android:textSize="14sp" />
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#a3a3a3" />
     </RelativeLayout>
 
-    <ProgressBar
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#666666"/>
+        android:layout_height="match_parent"
+        android:background="#ffffff"></LinearLayout>
 
 
 </LinearLayout>

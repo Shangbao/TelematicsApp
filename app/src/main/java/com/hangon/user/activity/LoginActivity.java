@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.fd.ourapplication.R;
 
 import com.hangon.bean.user.UserInfo;
+import com.hangon.common.CleanableEditText;
 import com.hangon.common.ConnectionUtil;
 import com.hangon.common.Constants;
 import com.hangon.common.ImageUtil;
@@ -41,9 +43,9 @@ import java.util.Map;
  * Created by Administrator on 2016/3/31.
  */
 public class LoginActivity extends Activity implements View.OnClickListener {
-    private EditText lUserName;//登录时的用户账号
-    private EditText lUserPass;//登录时的用户密码
-    private Button userLogin;//登录按钮
+    private CleanableEditText lUserName;//登录时的用户账号
+    private CleanableEditText lUserPass;//登录时的用户密码
+    private ImageButton userLogin;//登录按钮
     private Button toRegister;//注册按钮
 
     public static String autoLogin;//判断是否自动登录
@@ -60,9 +62,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
      * 初始化组件和一些值和对象
      */
     private void init() {
-        lUserName = (EditText) findViewById(R.id.lUserName);
-        lUserPass = (EditText) findViewById(R.id.lUserPass);
-        userLogin = (Button) findViewById(R.id.userLogin);
+        lUserName = (CleanableEditText) findViewById(R.id.lUserName);
+        lUserPass = (CleanableEditText) findViewById(R.id.lUserPass);
+        userLogin = (ImageButton) findViewById(R.id.userLogin);
         toRegister = (Button) findViewById(R.id.userRegister);
         userLogin.setOnClickListener(this);
         toRegister.setOnClickListener(this);

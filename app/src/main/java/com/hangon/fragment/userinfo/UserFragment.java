@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -55,7 +56,7 @@ import java.util.Objects;
 /**
  * Created by Administrator on 2016/4/4.
  */
-public class UserFragment extends Fragment  implements View.OnClickListener{
+public class UserFragment extends Fragment implements View.OnClickListener {
     View userView;
     ListView userInfoList;
     UserInfo userInfo;//用户信息
@@ -75,6 +76,9 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
     ZnwhService.MyBinder znwhBinder;
     VideoService.VideoBinder videoBinder;
 
+    ImageButton topbarLeft, topbarRight;
+    TextView topbarTitle;
+
     Intent znwhIntent;
     Intent videoIntent;
 
@@ -88,7 +92,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Toast.makeText(getActivity(),"智能维护开启失败！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "智能维护开启失败！", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -100,18 +104,18 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Toast.makeText(getActivity(),"亲，行车记录暂时无法使用哦！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "亲，行车记录暂时无法使用哦！", Toast.LENGTH_SHORT).show();
         }
     };
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        userView=inflater.inflate(R.layout.fragment_user,container,false);
+        userView = inflater.inflate(R.layout.fragment_user, container, false);
         init();
         registerReceiver();
         UserUtil.instance(getActivity());
-        userInfo=UserUtil.getInstance().getUserInfo4Login();
-        Log.e("ee", userInfo.toString());
+        userInfo = UserUtil.getInstance().getUserInfo4Login();
         homeNickName.setText(userInfo.getNickname());
         homePhoneNum.setText(userInfo.getUserName());
         getUserIconFromCookies();
@@ -130,32 +134,30 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
     }
 
     //获取内存里面的图片信息
-    private void getUserIconFromCookies(){
+    private void getUserIconFromCookies() {
         UserUtil.instance(getActivity());
-        String s=UserUtil.getInstance().getStringConfig("userIconContent");
-        if(s==null||s.isEmpty()){
-            Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
-            Bitmap bitmap1=ImageUtil.getRoundedCornerBitmap(bitmap,100);
+        String s = UserUtil.getInstance().getStringConfig("userIconContent");
+        if (s == null || s.isEmpty()) {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+            Bitmap bitmap1 = ImageUtil.getRoundedCornerBitmap(bitmap, 100);
             homeHeadIcon.setImageBitmap(bitmap1);
-        }else {
-            byte[] bytes=ImageUtil.getStringByte(s);
-            Bitmap bitmap=ImageUtil.getBitmapFromByte(bytes);
-            Bitmap bitmap1=ImageUtil.getRoundedCornerBitmap(bitmap,100);
+        } else {
+            byte[] bytes = ImageUtil.getStringByte(s);
+            Bitmap bitmap = ImageUtil.getBitmapFromByte(bytes);
+            Bitmap bitmap1 = ImageUtil.getRoundedCornerBitmap(bitmap, 100);
             homeHeadIcon.setImageBitmap(bitmap);
         }
     }
-    
+
     //初始化组件
-    private void init(){
-        userInfoList= (ListView) userView.findViewById(R.id.userInfoList);
-        userTopbar= (Topbar) userView.findViewById(R.id.userTopbar);
-        userTopbar.setLeftIsVisible(false);
-        homeNickName= (TextView) userView.findViewById(R.id.homeNickName);
-        homePhoneNum= (TextView) userView.findViewById(R.id.homePhoneNum);
-        homeHeadIcon= (MusicImage) userView.findViewById(R.id.homeHeadIcon);
-        toSetHeadIcon= (ImageView) userView.findViewById(R.id.toSetHeadIcon);
-        btnReturnLogin= (Button) userView.findViewById(R.id.btnReturnLogin);
-        btnShare= (Button) userView.findViewById(R.id.btn_share);
+    private void init() {
+        userInfoList = (ListView) userView.findViewById(R.id.userInfoList);
+        homeNickName = (TextView) userView.findViewById(R.id.homeNickName);
+        homePhoneNum = (TextView) userView.findViewById(R.id.homePhoneNum);
+        homeHeadIcon = (MusicImage) userView.findViewById(R.id.homeHeadIcon);
+        toSetHeadIcon = (ImageView) userView.findViewById(R.id.toSetHeadIcon);
+        btnReturnLogin = (Button) userView.findViewById(R.id.btnReturnLogin);
+        btnShare = (Button) userView.findViewById(R.id.btn_share);
         ckBtn = (Button) userView.findViewById(R.id.ck_video);
         aSwitch = (Switch) userView.findViewById(R.id.switch_znwh);
         bSwitch = (Switch) userView.findViewById(R.id.switch_xcjly);
@@ -163,18 +165,20 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
         btnReturnLogin.setOnClickListener(this);
         btnShare.setOnClickListener(this);
         toSetHeadIcon.setOnClickListener(this);
-        userTopbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
+        topbarLeft = (ImageButton) userView.findViewById(R.id.topbar_left);
+        topbarRight = (ImageButton) userView.findViewById(R.id.topbar_right);
+        topbarTitle = (TextView) userView.findViewById(R.id.topbar_title);
+        topbarRight.setBackgroundResource(R.drawable.grzx_03);
+        topbarLeft.setVisibility(View.GONE);
+        topbarRight.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void leftClick() {
-            }
-
-            @Override
-            public void rightClick() {
+            public void onClick(View v) {
                 Intent toUpdateUserInfo = new Intent();
                 toUpdateUserInfo.setClass(getActivity(), UpdateUserActivity.class);
                 startActivityForResult(toUpdateUserInfo, HomeActivity.INTENT_UPDATEUSER);
             }
         });
+
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -190,7 +194,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
         bSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     videoBinder.record();
                 } else {
                     videoBinder.stop();
@@ -203,35 +207,35 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
     }
 
     //给用户信息列表设置适配器
-    private void setUserAdapter(){
-        String [] x=new String[]{"img","userInfoKey","userInfoValue"};
-        int [] y=new int[]{R.id.userImageView,R.id.userInfoKey,R.id.userInfoValue};
-        SimpleAdapter adapter=new SimpleAdapter(getActivity(),getData(),R.layout.item_user_info,x,y);
+    private void setUserAdapter() {
+        String[] x = new String[]{"img", "userInfoKey", "userInfoValue"};
+        int[] y = new int[]{R.id.userImageView, R.id.userInfoKey, R.id.userInfoValue};
+        SimpleAdapter adapter = new SimpleAdapter(getActivity(), getData(), R.layout.item_user_info, x, y);
         userInfoList.setAdapter(adapter);
     }
 
     //获取用户列表的数据
-    private List<Map<String,Object>> getData(){
-      List<Map<String,Object>> list=new ArrayList<Map<String, Object>>();
-        Map<String,Object> map=new HashMap<String, Object>();
+    private List<Map<String, Object>> getData() {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        Map<String, Object> map = new HashMap<String, Object>();
 
         map.put("img", R.drawable.user_icon1);
         map.put("userInfoKey", "性别");
-        map.put("userInfoValue",userInfo.getSex());
+        map.put("userInfoValue", userInfo.getSex());
         list.add(map);
 
-        map=new HashMap<String, Object>();
+        map = new HashMap<String, Object>();
         map.put("img", R.drawable.user_icon2);
         map.put("userInfoKey", "年龄");
-        map.put("userInfoValue",userInfo.getAge());
+        map.put("userInfoValue", userInfo.getAge());
         list.add(map);
 
-        map=new HashMap<String, Object>();
+        map = new HashMap<String, Object>();
         map.put("img", R.drawable.user_icon3);
-        map.put("userInfoKey","驾驶证号");
-        map.put("userInfoValue",userInfo.getDriverNum());
+        map.put("userInfoKey", "驾驶证号");
+        map.put("userInfoValue", userInfo.getDriverNum());
         list.add(map);
-        return  list;
+        return list;
     }
 
     @Override
@@ -265,17 +269,17 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
     }
 
     //清除存在内存卡里面的登录信息
-    private void clearCookies(){
+    private void clearCookies() {
         UserUtil.instance(getActivity());
         UserUtil.getInstance().saveBooleanConfig("isSave", false);
         UserUtil.getInstance().saveStringConfig("userPass", "");
-        Intent intent=new Intent();
+        Intent intent = new Intent();
         intent.setClass(getActivity(), LoginActivity.class);
         startActivity(intent);
     }
 
     //禁止listview滑动
-    private void banListViewSlide(){
+    private void banListViewSlide() {
         userInfoList.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -290,7 +294,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
         });
     }
 
-    private void registerReceiver(){
+    private void registerReceiver() {
         progressReceiver = new ProgressReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(VideoActivity.ACTION_STOP);
@@ -302,7 +306,7 @@ public class UserFragment extends Fragment  implements View.OnClickListener{
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if(VideoActivity.ACTION_STOP.equals(action)){
+            if (VideoActivity.ACTION_STOP.equals(action)) {
                 bSwitch.setChecked(false);
                 videoBinder.stop();
                 Toast.makeText(getActivity(), "行车记录成功，请进入内存设备查看！", Toast.LENGTH_SHORT).show();

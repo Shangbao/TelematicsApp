@@ -17,14 +17,6 @@ public class ZnwhInfoVO implements Serializable {
 
     }
 
-    public ZnwhInfoVO(int userId, double mileage, int oddGasAmount, int isGoodEngine, int isGoodTran, int isGoodLight) {
-        this.userId = userId;
-        this.mileage = mileage;
-        this.oddGasAmount = oddGasAmount;
-        this.isGoodEngine = isGoodEngine;
-        this.isGoodTran = isGoodTran;
-        this.isGoodLight = isGoodLight;
-    }
 
     public int getUserId() {
         return userId;
@@ -74,15 +66,5 @@ public class ZnwhInfoVO implements Serializable {
         this.isGoodLight = isGoodLight;
     }
 
-    @Override
-    public String toString() {
-        return "ZnwhInfoVO{" +
-                "userId=" + userId +
-                ", mileage=" + mileage +
-                ", oddGasAmount=" + oddGasAmount +
-                ", isGoodEngine=" + isGoodEngine +
-                ", isGoodTran=" + isGoodTran +
-                ", isGoodLight=" + isGoodLight +
-                '}';
-    }
+
 }

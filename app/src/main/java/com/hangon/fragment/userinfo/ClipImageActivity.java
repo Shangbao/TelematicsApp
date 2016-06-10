@@ -39,7 +39,6 @@ public class ClipImageActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.user_crop_image);
 
@@ -64,7 +63,6 @@ public class ClipImageActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		if (v.getId() == R.id.okBtn) {
 			Bitmap bitmap = mClipImageLayout.clip();
 

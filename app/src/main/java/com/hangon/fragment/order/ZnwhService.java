@@ -115,18 +115,18 @@ public class ZnwhService extends Service {
         VolleyRequest.RequestGet(ZnwhService.this, url, "getZnwhInfo", new VolleyInterface(ZnwhService.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
-                Log.d("res", result);
+                Log.d("res11", result);
                 Gson gson=new Gson();
-                znwhInfoVO= (ZnwhInfoVO) JsonUtil.jsonToBean(result,ZnwhInfoVO.class);
-                Log.e("aaa",znwhInfoVO.getMileage()+"");
-                reflush(znwhInfoVO);//发送通知
-                Intent intent = new Intent();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("ZnwhInfo", znwhInfoVO);
-                intent.putExtras(bundle);
-                intent.setAction(ACTION_UPDATE_ZNWH);
-                sendBroadcast(intent);
-
+                if(result!=null&&!result.equals("")){
+                    znwhInfoVO= (ZnwhInfoVO) JsonUtil.jsonToBean(result,ZnwhInfoVO.class);
+                    reflush(znwhInfoVO);//发送通知
+                    Intent intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("ZnwhInfo", znwhInfoVO);
+                    intent.putExtras(bundle);
+                    intent.setAction(ACTION_UPDATE_ZNWH);
+                    sendBroadcast(intent);
+                }
             }
 
             @Override

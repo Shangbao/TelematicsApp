@@ -2,25 +2,26 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/czs_01">
 
-   <FrameLayout
-      android:id="@+id/content"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_above="@+id/bottomArea"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentRight="true"
-       android:layout_alignParentTop="true"
-       android:background="#FFFFFF"
-       />
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomArea"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        />
 
     <RelativeLayout
         android:id="@+id/bottomArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true">
+        android:layout_alignParentLeft="true"
+        >
 
         <!--tab分割线-->
 
@@ -28,7 +29,7 @@
             android:id="@+id/tabTop"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#b6b6b6"/>
+            />
 
         <!-- tab的四个按钮-->
         <LinearLayout
@@ -39,7 +40,7 @@
             android:layout_below="@+id/tabTop"
             android:layout_marginTop="1dp"
             android:gravity="center_horizontal">
-         <!-- 关于车内容的按钮-->
+            <!-- 关于车内容的按钮-->
             <FrameLayout
                 android:id="@+id/carLayout"
                 android:layout_width="match_parent"
@@ -53,7 +54,7 @@
                     android:layout_width="96px"
                     android:layout_height="84px"
                     android:layout_gravity="top|center"
-                    android:src="@drawable/login_pic"
+                    android:src="@drawable/czs_23"
                     />
                 <TextView
                     android:id="@+id/carTextView"
@@ -61,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:text="车助手"
-                    android:textColor="#666666"
+                    android:textColor="#ffffff"
                     android:textSize="13sp"
                     />
             </FrameLayout>
@@ -80,7 +81,7 @@
                     android:layout_width="96px"
                     android:layout_height="84px"
                     android:layout_gravity="top|center"
-                    android:src="@drawable/ic_launcher"
+                    android:src="@drawable/czs_29"
                     />
                 <TextView
                     android:id="@+id/musicTextView"
@@ -88,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:text="我的音乐"
-                    android:textColor="#45c01a"
+                    android:textColor="#ffffff"
                     android:textSize="13sp"
                     />
             </FrameLayout>
@@ -107,7 +108,7 @@
                     android:layout_width="96px"
                     android:layout_height="84px"
                     android:layout_gravity="top|center"
-                    android:src="@drawable/ic_launcher"
+                    android:src="@drawable/czs_26"
                     />
                 <TextView
                     android:id="@+id/znwhTextView"
@@ -115,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:text="智能维护"
-                    android:textColor="#45c01a"
+                    android:textColor="#ffffff"
                     android:textSize="13sp"
                     />
             </FrameLayout>
@@ -134,7 +135,7 @@
                     android:layout_width="96px"
                     android:layout_height="84px"
                     android:layout_gravity="top|center"
-                    android:src="@drawable/ic_launcher"
+                    android:src="@drawable/czs_32"
                     />
                 <TextView
                     android:id="@+id/userTextView"
@@ -142,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:text="个人中心"
-                    android:textColor="#45c01a"
+                    android:textColor="#ffffff"
                     android:textSize="13sp"
                     />
             </FrameLayout>
@@ -150,7 +151,6 @@
 
 
         </LinearLayout>
-
 
     </RelativeLayout>
 </RelativeLayout>

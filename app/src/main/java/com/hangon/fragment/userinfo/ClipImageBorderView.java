@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.example.fd.ourapplication.R;
+
 /**
  * @ClassName: ClipImageBorderView
  * @Description:
@@ -41,6 +43,7 @@ public class ClipImageBorderView extends View {
 
 	public ClipImageBorderView(Context context) {
 		this(context, null);
+
 	}
 
 	public ClipImageBorderView(Context context, AttributeSet attrs) {
@@ -66,6 +69,7 @@ public class ClipImageBorderView extends View {
 		mVerticalPadding = (getHeight() - mWidth) / 2;
 		mPaint.setColor(Color.parseColor("#aa000000"));
 		mPaint.setStyle(Style.FILL);
+		/*
 		// 绘制左边1
 		canvas.drawRect(0, 0, mHorizontalPadding, getHeight(), mPaint);
 		// 绘制右边2
@@ -78,6 +82,7 @@ public class ClipImageBorderView extends View {
 		canvas.drawRect(mHorizontalPadding, getHeight() - mVerticalPadding,
 				getWidth() - mHorizontalPadding, getHeight(), mPaint);
 		// 绘制外边�?
+		*/
 		mPaint.setColor(mBorderColor);
 		mPaint.setStrokeWidth(mBorderWidth);
 		mPaint.setStyle(Style.STROKE);

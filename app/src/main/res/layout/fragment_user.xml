@@ -4,80 +4,73 @@
     xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#efeff4"
+    android:background="#e0e0e0"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#1e1f22">
-        <com.hangon.common.Topbar
-            android:id="@+id/userTopbar"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            custom:mTitleTextSize="10sp"
-            custom:mTitleTextColor="#ffffff"
-            custom:mTitle="个人中心"
-            custom:rightTextColor="#ffffff"
-            custom:rightText="编辑">
-        </com.hangon.common.Topbar>
-    </LinearLayout>
-
+    <include android:id="@+id/topbar" layout="@layout/topbar"/>
 
     <LinearLayout
-       android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/layout_border"
+        android:layout_marginTop="10dp"
+        android:background="#019b79"
         android:orientation="horizontal">
 
         <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_width="60dp"
-            android:layout_height="60dp">
+            >
+
             <com.hangon.fragment.music.MusicImage
                 android:id="@+id/homeHeadIcon"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_launcher"
+                android:background="@drawable/grzx_07"
                 imagecontrol:border_inside_color="#fff7f2e9"
                 imagecontrol:border_outside_color="#ffd5d1c8"
-                imagecontrol:border_thickness="2dp"/>
+                imagecontrol:border_thickness="2dp" />
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
             android:layout_width="210dp"
             android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/homeNickName"
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="#ffffff"
                 android:text="纯天然。"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+
                 <TextView
-                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="手机号："
-                    android:textSize="15sp"/>
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/homePhoneNum"
-                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="13166837709"
-                    android:textSize="15sp"/>
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -85,15 +78,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/toSetHeadIcon"
-                android:background="@drawable/user_008"
-                android:layout_centerInParent="true"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                />
+                android:layout_centerInParent="true"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/grzx_10" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -101,124 +94,128 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp">
+
         <TextView
-            android:layout_marginLeft="30dp"
-            android:layout_centerVertical="true"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
             android:text="用户"
             android:textColor="#666666"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
     </RelativeLayout>
 
     <ListView
-        android:background="#ffffff"
         android:id="@+id/userInfoList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:background="#ffffff"></ListView>
 
 
     <RelativeLayout
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp">
+
         <TextView
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
             android:text="设置"
             android:textColor="#666666"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:padding="5dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
-                android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="监听汽车异常"/>
+                android:layout_marginLeft="20dp"
+                android:text="监听汽车异常" />
 
             <Switch
                 android:id="@+id/switch_znwh"
-                android:layout_marginLeft="200dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOff="关闭"
-                android:textOn="开启"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"/>
+                android:layout_marginLeft="200dp"
+                android:textOff="关闭"
+                android:textOn="开启" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp">
+
             <TextView
                 android:id="@+id/xcjl_tv"
-                android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="行车记录"/>
+                android:layout_marginLeft="20dp"
+                android:text="行车记录" />
 
             <Button
                 android:id="@+id/ck_video"
-                android:layout_toRightOf="@+id/xcjl_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="查看记录"/>
+                android:layout_toRightOf="@+id/xcjl_tv"
+                android:text="查看记录" />
 
             <Switch
                 android:id="@+id/switch_xcjly"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
-                android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="分享app"/>
+                android:layout_marginLeft="20dp"
+                android:text="分享app" />
 
 
             <Button
                 android:id="@+id/btn_share"
                 android:layout_width="wrap_content"
-                android:background="@drawable/btn_login1"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn_login1"
                 android:text="分享" />
         </RelativeLayout>
 
         <Button
             android:id="@+id/btnReturnLogin"
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:background="@drawable/btn_login1"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/btn_login1"
             android:text="退出登录" />
 
 

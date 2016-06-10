@@ -1,11 +1,14 @@
 package com.hangon.fragment.userinfo;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -30,10 +33,16 @@ public class UpdateUserActivity extends Activity {
     EditText uSex;
     EditText uAge;
     EditText uDriverNum;
-    Topbar updateUserTopbar;
+
+    ImageButton topbarLeft, topbarRight;
+    TextView topbarTitle;
+
 
     UserInfo userInfo;
     String userName;
+
+    public final static int RESULT_UPDATE = -2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,155 +53,162 @@ public class UpdateUserActivity extends Activity {
     }
 
     //初始化组件
-    private void init(){
-        uNickname= (EditText) findViewById(R.id.uNickname);
-        uSex= (EditText) findViewById(R.id.uSex);
-        uAge= (EditText) findViewById(R.id.uAge);
-        uDriverNum= (EditText) findViewById(R.id.uDriverNum);
-        updateUserTopbar= (Topbar) findViewById(R.id.updateUserTopbar);
+    private void init() {
+        uNickname = (EditText) findViewById(R.id.uNickname);
+        uSex = (EditText) findViewById(R.id.uSex);
+        uAge = (EditText) findViewById(R.id.uAge);
+        uDriverNum = (EditText) findViewById(R.id.uDriverNum);
+        topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
+        topbarRight = (ImageButton) findViewById(R.id.topbar_right);
+        topbarTitle = (TextView) findViewById(R.id.topbar_title);
+        topbarRight.setBackgroundResource(R.drawable.grzx_04);
+
+        topbarTitle.setText("编辑用户信息");
     }
 
-    private void initEditext(){
+    private void initEditext() {
         UserUtil.instance(UpdateUserActivity.this);
-        UserInfo userInfo=UserUtil.getInstance().getUserInfo();
+        UserInfo userInfo = UserUtil.getInstance().getUserInfo();
         uNickname.setText(userInfo.getNickname());
         uSex.setText(userInfo.getSex());
-        uAge.setText(userInfo.getAge()+"");
+        uAge.setText(userInfo.getAge() + "");
         uDriverNum.setText(userInfo.getDriverNum());
     }
 
     //标题栏的点击栏
-    private void topbarClick(){
-        updateUserTopbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
+    private void topbarClick() {
+        topbarLeft.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void leftClick() {
+            public void onClick(View v) {
                 //跳转到用户信息页面
-                Intent intent=new Intent();
-                intent.putExtra("id",4);
+                Intent intent = new Intent();
+                intent.putExtra("id", 4);
                 setResult(RESULT_OK, intent);
                 UpdateUserActivity.this.finish();
             }
+        });
 
+        topbarRight.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void rightClick() {
+            public void onClick(View v) {
                 DialogTool.createNormalDialog(UpdateUserActivity.this, "编辑用户信息", "你确定要修改吗?", "确定", "取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (judgeEditext()){
+                        if (judgeEditext()) {
                             makeUser();
                             //发送要更新的信息
                             postUpdateUser();
+                            //跳转到用户信息页面
+                            Intent intent = new Intent();
+//                            Bundle bundle = new Bundle();
+//                            bundle.putSerializable("userinfo", userInfo);
+//                            intent.putExtras(bundle);
+                            intent.putExtra("id", 4);
+                            setResult(RESULT_UPDATE, intent);
+                            UpdateUserActivity.this.finish();
                         }
                     }
                 }, null).show();
             }
         });
+
     }
 
-    private boolean judgeEditext(){
-        boolean state=false;
-        String nickname=uNickname.getText().toString().trim();
-        String sex=uSex.getText().toString().trim();
-        String driverNum=uDriverNum.getText().toString().trim();
-        String age=uAge.getText().toString().trim();
+    private boolean judgeEditext() {
+        boolean state = false;
+        String nickname = uNickname.getText().toString().trim();
+        String sex = uSex.getText().toString().trim();
+        String driverNum = uDriverNum.getText().toString().trim();
+        String age = uAge.getText().toString().trim();
 
-        if(!nickname.isEmpty()){
-            if (nickname.length()<2){
-                Toast.makeText(UpdateUserActivity.this,"昵称必须大于两位",Toast.LENGTH_SHORT).show();
-                state=false;
-                return  false;
-            }
-        }
-
-        if (!sex.isEmpty()){
-            if (!(sex.equals("男")&&!sex.equals("女"))){
-                Toast.makeText(UpdateUserActivity.this,"性别必须为男|女",Toast.LENGTH_SHORT).show();
-                state=false;
+        if (!nickname.isEmpty()) {
+            if (nickname.length() < 2) {
+                Toast.makeText(UpdateUserActivity.this, "昵称必须大于两位", Toast.LENGTH_SHORT).show();
+                state = false;
                 return false;
             }
         }
 
-        if(!age.isEmpty()){
-            if (Integer.parseInt(age)<=0&&Integer.parseInt(age)>140){
-                Toast.makeText(UpdateUserActivity.this,"年龄必须在0-140之间",Toast.LENGTH_SHORT).show();
-                state=false;
+        if (!sex.isEmpty()) {
+            if (!(sex.equals("男") && !sex.equals("女"))) {
+                Toast.makeText(UpdateUserActivity.this, "性别必须为男|女", Toast.LENGTH_SHORT).show();
+                state = false;
                 return false;
             }
         }
 
-        if(!driverNum.isEmpty()){
-            if (driverNum.length() !=18){
-                Toast.makeText(UpdateUserActivity.this,"身份证号必须为18位",Toast.LENGTH_SHORT).show();
-                state=false;
+        if (!age.isEmpty()) {
+            if (Integer.parseInt(age) <= 0 && Integer.parseInt(age) > 140) {
+                Toast.makeText(UpdateUserActivity.this, "年龄必须在0-140之间", Toast.LENGTH_SHORT).show();
+                state = false;
                 return false;
             }
         }
 
-        if(nickname.isEmpty()&&sex.isEmpty()&&driverNum.isEmpty()&&age.isEmpty()){
-            Toast.makeText(UpdateUserActivity.this,"不能全部都为空",Toast.LENGTH_SHORT).show();
-            state=false;
+        if (!driverNum.isEmpty()) {
+            if (driverNum.length() != 18) {
+                Toast.makeText(UpdateUserActivity.this, "身份证号必须为18位", Toast.LENGTH_SHORT).show();
+                state = false;
+                return false;
+            }
+        }
+
+        if (nickname.isEmpty() && sex.isEmpty() && driverNum.isEmpty() && age.isEmpty()) {
+            Toast.makeText(UpdateUserActivity.this, "不能全部都为空", Toast.LENGTH_SHORT).show();
+            state = false;
             return state;
         }
 
-        if(nickname.length()>=2||sex.equals("男")||sex.equals("女")||driverNum.length()==18||Integer.parseInt(age)>0||Integer.parseInt(age)<=140){
-            state=true;
+        if (nickname.length() >= 2 || sex.equals("男") || sex.equals("女") || driverNum.length() == 18 || Integer.parseInt(age) > 0 || Integer.parseInt(age) <= 140) {
+            state = true;
         }
         return state;
     }
 
     //把editext里的值封装到一个对象
-    private void makeUser(){
+    private void makeUser() {
         UserUtil.instance(UpdateUserActivity.this);
-        userName=  UserUtil.getInstance().getStringConfig("userName");
-        UserInfo user=new UserInfo();
+        userName = UserUtil.getInstance().getStringConfig("userName");
+        UserInfo user = new UserInfo();
         user.setNickname(uNickname.getText().toString());
         user.setSex(uSex.getText().toString());
-        if(uAge.getText().toString().isEmpty()){
+        if (uAge.getText().toString().isEmpty()) {
             user.setAge(-1);
-        }else {
+        } else {
             user.setAge(Integer.parseInt(uAge.getText().toString()));
         }
         user.setDriverNum(uDriverNum.getText().toString());
         user.setUserName(userName);
-        userInfo=user;
+        userInfo = user;
     }
 
 
-   //发送更新信息
-    private void postUpdateUser(){
-    String url= Constants.UPDATE_USER_URL;
-        Map<String,Object> map=new HashMap<String,Object>();
+    //发送更新信息
+    private void postUpdateUser() {
+        String url = Constants.UPDATE_USER_URL;
+        Map<String, Object> map = new HashMap<String, Object>();
 
 
-        map.put("userName",userInfo.getUserName());
-        map.put("sex",userInfo.getSex());
-        map.put("nickname",userInfo.getNickname());
-        map.put("age",userInfo.getAge()+"");
-        map.put("driverNum",userInfo.getDriverNum());
+        map.put("userName", userInfo.getUserName());
+        map.put("sex", userInfo.getSex());
+        map.put("nickname", userInfo.getNickname());
+        map.put("age", userInfo.getAge() + "");
+        map.put("driverNum", userInfo.getDriverNum());
 
-        VolleyRequest.RequestPost(UpdateUserActivity.this, url, "postUpdateUser", map, new VolleyInterface(UpdateUserActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
+        VolleyRequest.RequestPost(UpdateUserActivity.this, url, "postUpdateUser", map, new VolleyInterface(UpdateUserActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
-            if(result.equals("ok")){
-                //保存用户信息到cookies
-                UserUtil.getInstance().saveUpdateUserInfo(userInfo);
-                //跳转到用户信息页面
-                Intent intent=new Intent();
-                intent.putExtra("id",4);
-                intent.setClass(UpdateUserActivity.this, HomeActivity.class);
-                startActivity(intent);
-             }
-
+                if (result.equals("ok")) {
+                    //保存用户信息到cookies
+                    UserUtil.getInstance().saveUpdateUserInfo(userInfo);
+                }
             }
 
             @Override
             public void onMyError(VolleyError error) {
-            Toast.makeText(UpdateUserActivity.this,"网络异常，请重新提交.",Toast.LENGTH_SHORT);
+                Toast.makeText(UpdateUserActivity.this, "网络异常，请重新提交.", Toast.LENGTH_SHORT);
             }
         });
     }
-
-
-
 
 }

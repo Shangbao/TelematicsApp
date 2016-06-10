@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -45,8 +47,8 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
 
     Button btnShou;
     Button btnSao;
-    Topbar topbar;
-
+    ImageButton topbarLeft, topbarRight;
+    TextView topbarTitle;
     List<CarMessageVO> carMessageList;//车辆信息列表数据
     Gson gson;//解析json数据
 
@@ -62,25 +64,25 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
     private void init() {
         btnSao = (Button) findViewById(R.id.btnSao);
         btnShou = (Button) findViewById(R.id.btnShou);
-        topbar = (Topbar) findViewById(R.id.addCarMessageTopbar);
+
         btnSao.setOnClickListener(this);
         btnShou.setOnClickListener(this);
         listView = (ListView) findViewById(R.id.carInfoList);
-        topbar.setRightIsVisible(false);
-        topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
+        topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
+        topbarTitle = (TextView) findViewById(R.id.topbar_title);
+        topbarRight = (ImageButton) findViewById(R.id.topbar_right);
+        topbarRight.setVisibility(View.GONE);
+        topbarTitle.setText("车辆管理");
+        topbarLeft.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void leftClick() {
+            public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("id", 1);
                 SetCarInfoActivity.this.setResult(RESULT_OK, intent);
                 SetCarInfoActivity.this.finish();
             }
-
-            @Override
-            public void rightClick() {
-
-            }
         });
+
     }
 
     //初始化适配器
@@ -147,8 +149,8 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
     //获取车辆信息列表
     private void getCarMessageList() {
         UserUtil.instance(SetCarInfoActivity.this);
-        String userId=UserUtil.getInstance().getIntegerConfig("userId")+"";
-        String url = Constants.GET_CAR_INFO_URL+"?userId="+userId;
+        String userId = UserUtil.getInstance().getIntegerConfig("userId") + "";
+        String url = Constants.GET_CAR_INFO_URL + "?userId=" + userId;
         VolleyRequest.RequestGet(SetCarInfoActivity.this, url, "getCarMessageList", new VolleyInterface(SetCarInfoActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
 
             @Override

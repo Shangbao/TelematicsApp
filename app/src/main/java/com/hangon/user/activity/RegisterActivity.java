@@ -2,6 +2,7 @@ package com.hangon.user.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.test.LoaderTestCase;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.fd.ourapplication.R;
+import com.hangon.common.CleanableEditText;
 import com.hangon.common.Constants;
 import com.hangon.common.MyApplication;
 import com.hangon.common.Topbar;
@@ -47,13 +51,15 @@ import static com.mob.tools.utils.R.getStringRes;
  * Created by Administrator on 2016/3/31.
  */
 public class RegisterActivity extends Activity implements View.OnClickListener {
-    private EditText rUserName;
+    private CleanableEditText rUserName;
     private EditText cord;
     private TextView now;
     private Button getCord;
-    private Button saveCord;
-    private EditText rUserPass;
-    private Topbar registerTopbar;
+    private ImageButton saveCord;
+    private CleanableEditText rUserPass;
+
+    private ImageButton topbarLeft,topbarRight;
+    private TextView topbarTitle;
 
     private String iPhone;
     private String iCord;
@@ -86,29 +92,28 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     }
 
     private void init() {
-        rUserName = (EditText) findViewById(R.id.rUserName);
+        rUserName = (CleanableEditText) findViewById(R.id.rUserName);
         cord = (EditText) findViewById(R.id.cord);
         now = (TextView) findViewById(R.id.now);
         getCord = (Button) findViewById(R.id.getCord);
 
-        saveCord = (Button) findViewById(R.id.saveCord);
-        rUserPass = (EditText) findViewById(R.id.rUserPass);
-        registerTopbar = (Topbar) findViewById(R.id.registerTopbar);
+        saveCord = (ImageButton) findViewById(R.id.saveCord);
+        rUserPass = (CleanableEditText) findViewById(R.id.rUserPass);
+        topbarLeft= (ImageButton) findViewById(R.id.topbar_left);
+        topbarRight= (ImageButton) findViewById(R.id.topbar_right);
+        topbarTitle= (TextView) findViewById(R.id.topbar_title);
         getCord.setOnClickListener(this);
         saveCord.setOnClickListener(this);
 
-        registerTopbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
+        topbarTitle.setText("注  册");
+        topbarRight.setVisibility(View.GONE);
+        topbarLeft.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void leftClick() {
+            public void onClick(View v) {
                 RegisterActivity.this.finish();
-            }
-
-            @Override
-            public void rightClick() {
 
             }
         });
-
 
     }
 

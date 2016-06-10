@@ -384,25 +384,26 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
             switch (msg.what) {
                 case SENSOR_SHAKE:
                     dialog = new Dialog(MainActivity.this);
-                     if(!dialog.isShowing()){
-                       builder = new AlertDialog.Builder(MainActivity.this);
-                       builder.setTitle("紧急求救");
-                       builder.setMessage("是否发起紧急求救?");
-                       builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                           @Override
-                           public void onClick(DialogInterface dialog, int which) {
+                    if (!dialog.isShowing()) {
+                        builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setTitle("紧急求救");
+                        builder.setMessage("是否发起紧急求救?");
+                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                           }
-                       });
-                       builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                           @Override
-                           public void onClick(DialogInterface dialog, int which) {
-                               Toast.makeText(MainActivity.this, strText.getText(), Toast.LENGTH_SHORT).show();
-                               PostSaying();
-                           }
-                       });
-                       dialog = builder.create();
-                       dialog.show();}
+                            }
+                        });
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MainActivity.this, strText.getText(), Toast.LENGTH_SHORT).show();
+                                PostSaying();
+                            }
+                        });
+                        dialog = builder.create();
+                        dialog.show();
+                    }
                     break;
             }
         }

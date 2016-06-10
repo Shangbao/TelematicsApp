@@ -1,60 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:background="#e0e0e0"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/layout"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#1e1f22"
-        >
-        <com.hangon.common.Topbar
-            android:id="@+id/addCarMessageTopbar"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            custom:mTitle="管理车辆信息"
-            custom:mTitleTextColor="#ffffff"
-            custom:mTitleTextSize="10dp"
-            custom:leftText="BACK"
-            custom:leftTextColor="#ffffff"
-            >
-        </com.hangon.common.Topbar>
-    </LinearLayout>
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar"></include>
 
     <ListView
         android:id="@+id/carInfoList"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
+        android:background="#ffffff"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout">
+        android:layout_below="@+id/topbar">
     </ListView>
 
     <Button
         android:id="@+id/btnShou"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="40dp"
-        android:background="@drawable/btn_login2"
+        android:background="@drawable/btn_sztx"
         android:text="手动添加新车辆"
-        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
         android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
         android:layout_above="@+id/btnSao"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="20dp"
         />
 
     <Button
         android:id="@+id/btnSao"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="40dp"
-        android:background="@drawable/btn_login2"
+        android:background="@drawable/btn_sztx"
         android:text="扫一扫添加新车辆"
-        android:textSize="15sp"
+        android:textSize="16sp"
         android:textColor="#ffffff"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="30dp"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         />
 
 

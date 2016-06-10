@@ -1,6 +1,8 @@
 package com.hangon.bean.user;
 
-public class UserInfo {
+import java.io.Serializable;
+
+public class UserInfo implements Serializable {
     private int userId;//用户id
     private String userName;//用户名
     private String userPass;//密码

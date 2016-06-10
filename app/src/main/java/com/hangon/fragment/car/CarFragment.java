@@ -12,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,125 +47,122 @@ import java.util.Map;
  * Created by Administrator on 2016/4/4.
  */
 public class CarFragment extends Fragment implements View.OnClickListener {
-        View  carView;
+    View carView;
 
-        Topbar carTopbar;//标题栏
-        LinearLayout btnSstq;//扫一扫实时天气
-        Button btnSetCarInfo;//车辆信息管理
-        Button btnBestWay;//最优路线
-        Button btnWeizhang;//违章查询
-        Button btnYyjy;//预约加油按钮
+    Topbar carTopbar;//标题栏
+    ImageView btnSstq;//扫一扫实时天气
+    ImageView btnSetCarInfo;//车辆信息管理
+    RelativeLayout btnBestWay;//最优路线
+    RelativeLayout btnWeizhang;//违章查询
+    RelativeLayout btnYyjy;//预约加油按钮
 
-        TextView tvWeather;
-        TextView tvCity;
+    TextView tvWeather;
+    TextView tvCity;
 
-        private String ip;
-
-
-        Intent intent;//用于跳转
-
-        JudgeNet judgeNet;//判断网络状态
-        String judgeNetState;//判断网络是否可用参数
-        /**
-         * 判断网络是否可用
-         */
-        NetReceiver mReceiver ;
-        IntentFilter mFilter;
-
-        private ProgressReceiver progressReceiver;
-        private String city,weather;
+    private String ip;
 
 
+    Intent intent;//用于跳转
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            carView=inflater.inflate(R.layout.ftagment_car,container,false);
-            init();
-            mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-            getActivity().registerReceiver(mReceiver, mFilter);
-            registerReceiver();
-            return  carView;
-        }
+    JudgeNet judgeNet;//判断网络状态
+    String judgeNetState;//判断网络是否可用参数
+    /**
+     * 判断网络是否可用
+     */
+    NetReceiver mReceiver;
+    IntentFilter mFilter;
 
-        //初始化组件与实例化
-        public void init(){
-            //实例化
-            btnSstq= (LinearLayout) carView.findViewById(R.id.btnSstq);
-            btnSetCarInfo= (Button) carView.findViewById(R.id.btnSetCarInfo);
-            btnBestWay= (Button) carView.findViewById(R.id.btnBestWay);
-            btnWeizhang= (Button) carView.findViewById(R.id.btnWeiZhang);
-            btnYyjy= (Button) carView.findViewById(R.id.btnYyjy);
-            tvWeather = (TextView) carView.findViewById(R.id.weather_text);
-            tvCity = (TextView) carView.findViewById(R.id.city_text);
+    private ProgressReceiver progressReceiver;
+    private String city, weather;
 
-            //设置监听事件
-            btnBestWay.setOnClickListener(this);
-            btnSetCarInfo.setOnClickListener(this);
-            btnSstq.setOnClickListener(this);
-            btnWeizhang.setOnClickListener(this);
-           btnYyjy.setOnClickListener(this);
 
-            mReceiver=new NetReceiver();//网络接受
-            mFilter=new IntentFilter();
-            judgeNet=new JudgeNet();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        carView = inflater.inflate(R.layout.ftagment_car, container, false);
+        init();
+        mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        getActivity().registerReceiver(mReceiver, mFilter);
+        registerReceiver();
+        return carView;
+    }
 
-            //标题栏
-            carTopbar= (Topbar) carView.findViewById(R.id.carTopbar);
-            carTopbar.setBtnIsVisible(false);
-        }
+    //初始化组件与实例化
+    public void init() {
+        //实例化
+        btnSstq = (ImageView) carView.findViewById(R.id.btnSstq);
+        btnSetCarInfo = (ImageView) carView.findViewById(R.id.btnSetCarInfo);
+        btnBestWay = (RelativeLayout) carView.findViewById(R.id.btnBestWay);
+        btnWeizhang = (RelativeLayout) carView.findViewById(R.id.btnWeiZhang);
+        btnYyjy = (RelativeLayout) carView.findViewById(R.id.btnYyjy);
+        tvWeather = (TextView) carView.findViewById(R.id.weather_text);
+        tvCity = (TextView) carView.findViewById(R.id.city_text);
 
-        @Override
-        //点击事件
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.btnSstq:
-                    Intent intent = new Intent();
-                    intent.setClass(getActivity(), WeatherActivity.class);
-                    intent.putExtra("city", city);
-                    startActivity(intent);
-                    break;
+        //设置监听事件
+        btnBestWay.setOnClickListener(this);
+        btnSetCarInfo.setOnClickListener(this);
+        btnSstq.setOnClickListener(this);
+        btnWeizhang.setOnClickListener(this);
+        btnYyjy.setOnClickListener(this);
 
-                case R.id.btnSetCarInfo:
+        mReceiver = new NetReceiver();//网络接受
+        mFilter = new IntentFilter();
+        judgeNet = new JudgeNet();
+
+
+    }
+
+    @Override
+    //点击事件
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnSstq:
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), WeatherActivity.class);
+                intent.putExtra("city", city);
+                startActivity(intent);
+                break;
+
+            case R.id.btnSetCarInfo:
+                intent = new Intent();
+                intent.setClass(getActivity(), SetCarInfoActivity.class);
+                startActivityForResult(intent, HomeActivity.INTENT_SETCARINFO);
+                break;
+
+            case R.id.btnBestWay:
+                judgeNetState = mReceiver.getNetType();
+                intent = new Intent();
+                intent.setClass(getActivity(), BestRouteActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.btnYyjy:
+                judgeNetState = mReceiver.getNetType();
+                if (judgeNetState.equals("mobilenet") || judgeNetState.equals("wifinet")) {
+                    judgeNet.setStates(2);
+                    Log.e("bbb", judgeNet.getStates() + "");
                     intent = new Intent();
-                    intent.setClass(getActivity(), SetCarInfoActivity.class);
-                    startActivityForResult(intent, HomeActivity.INTENT_SETCARINFO);
-                    break;
-
-                case R.id.btnBestWay:
-                    judgeNetState = mReceiver.getNetType();
-                    intent = new Intent();
-                    intent.setClass(getActivity(), BestRouteActivity.class);
+                    intent.setClass(getActivity(), MapMainActivity.class);
                     startActivity(intent);
-                    break;
-
-                case R.id.btnYyjy:
-                    judgeNetState = mReceiver.getNetType();
-                    if (judgeNetState.equals("mobilenet") || judgeNetState.equals("wifinet")) {
-                        judgeNet.setStates(2);
-                        Log.e("bbb", judgeNet.getStates() + "");
-                        intent = new Intent();
-                        intent.setClass(getActivity(), MapMainActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(getActivity(), "当前没有可用网络", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case R.id.btnWeiZhang:
-                    intent=new Intent();
-                    intent.setClass(getActivity(),MainActivity.class);
-                    startActivityForResult(intent, HomeActivity.INTENT_WZCX);
-                    break;
-            }
+                } else {
+                    Toast.makeText(getActivity(), "当前没有可用网络", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.btnWeiZhang:
+                intent = new Intent();
+                intent.setClass(getActivity(), MainActivity.class);
+                startActivityForResult(intent, HomeActivity.INTENT_WZCX);
+                break;
         }
+    }
 
-        @Override
-        public void onDestroy() {
-            super.onDestroy();
-            getActivity().unregisterReceiver(mReceiver);
-            getActivity().unregisterReceiver(progressReceiver);
-        }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(mReceiver);
+        getActivity().unregisterReceiver(progressReceiver);
+    }
 
-    private void registerReceiver(){
+    private void registerReceiver() {
         progressReceiver = new ProgressReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(WeatherService.ACTION_UPDATE_WEATHER);
@@ -176,10 +175,10 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if(WeatherService.ACTION_UPDATE_WEATHER.equals(action)){
+            if (WeatherService.ACTION_UPDATE_WEATHER.equals(action)) {
                 weather = intent.getStringExtra(WeatherService.ACTION_UPDATE_WEATHER);
                 tvWeather.setText(weather);
-            }else if(WeatherService.ACTION_UPDATE_CITY.equals(action)){
+            } else if (WeatherService.ACTION_UPDATE_CITY.equals(action)) {
                 //Retrive the current music and get the title to show on top of the screen.
                 city = intent.getStringExtra(WeatherService.ACTION_UPDATE_CITY);
                 tvCity.setText(city);

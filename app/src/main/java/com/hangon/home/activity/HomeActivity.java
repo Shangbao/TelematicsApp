@@ -15,6 +15,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.hangon.fragment.car.CarFragment;
 import com.hangon.fragment.music.MusicFragment;
 import com.hangon.fragment.order.ZnwhFragment;
 import com.hangon.fragment.order.ZnwhService;
+import com.hangon.fragment.userinfo.UpdateUserActivity;
 import com.hangon.fragment.userinfo.UserFragment;
 import com.hangon.order.activity.PersonalInformationData;
 import com.hangon.weather.Weather;
@@ -47,6 +49,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     private Fragment znwhFragment = new ZnwhFragment();
     private Fragment userFragment = new UserFragment();
     private Intent weatherIntent;
+    private RelativeLayout bottomArea;
+    private ImageView tabTop;
 
     //tab中的四个帧布局
     private FrameLayout carFrameLayout, musicFrameLayout, znwhFrameLayout, userFrameLayout;
@@ -104,9 +108,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         if (!znwhFragment.isAdded()) {
             transaction.add(R.id.content, znwhFragment);
             transaction.hide(znwhFragment);
-//            Intent intent = getIntent();
-//            Bundle bundle = intent.getBundleExtra("ZnwhInfo");
-//            znwhFragment.setArguments(bundle);
         }
         if (!userFragment.isAdded()) {
             transaction.add(R.id.content, userFragment);
@@ -148,6 +149,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         musicTextView = (TextView) findViewById(R.id.musicTextView);
         znwhTextView = (TextView) findViewById(R.id.znwhTextView);
         userTextView = (TextView) findViewById(R.id.userTextView);
+        bottomArea = (RelativeLayout) findViewById(R.id.bottomArea);
+        tabTop = (ImageView) findViewById(R.id.tabTop);
     }
 
     /**
@@ -225,10 +228,14 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
             case 3:
                 clickTab(znwhFragment);
+                bottomArea.setBackgroundColor(Color.WHITE);
+                tabTop.setVisibility(View.VISIBLE);
                 break;
 
             case 4:
                 clickTab(userFragment);
+                bottomArea.setBackgroundColor(Color.WHITE);
+                tabTop.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -238,23 +245,40 @@ public class HomeActivity extends Activity implements View.OnClickListener {
      * 清除之前所有的样式
      */
     private void clearSelected() {
-        if (!carFragment.isHidden()) {
-            carImageView.setImageResource(R.drawable.ic_launcher);
-            carTextView.setTextColor(Color.parseColor("#45C01A"));
-        }
-        if (!musicFragment.isHidden()) {
-            musicImageView.setImageResource(R.drawable.ic_launcher);
-            musicTextView.setTextColor(Color.parseColor("#45C01A"));
-        }
-        if (!znwhFragment.isHidden()) {
-            znwhImageView.setImageResource(R.drawable.ic_launcher);
-            znwhTextView.setTextColor(Color.parseColor("#45C01A"));
-        }
 
-        if (!userFragment.isHidden()) {
-            userImageView.setImageResource(R.drawable.ic_launcher);
-            userTextView.setTextColor(Color.parseColor("#45C01A"));
-        }
+            carImageView.setImageResource(R.drawable.grzx_45);
+            carTextView.setTextColor(Color.parseColor("#555555"));
+
+
+            musicImageView.setImageResource(R.drawable.grzx_48);
+            musicTextView.setTextColor(Color.parseColor("#555555"));
+
+
+            znwhImageView.setImageResource(R.drawable.grzx_50);
+            znwhTextView.setTextColor(Color.parseColor("#555555"));
+
+
+
+            userImageView.setImageResource(R.drawable.grzx_15);
+            userTextView.setTextColor(Color.parseColor("#555555"));
+
+    }
+
+    /**
+     * 清除之前所有的样式
+     */
+    private void clearSelected1() {
+        bottomArea.setBackground(null);
+        tabTop.setVisibility(View.GONE);
+        carImageView.setImageResource(R.drawable.czs_23);
+        carTextView.setTextColor(Color.parseColor("#ffffff"));
+        musicImageView.setImageResource(R.drawable.czs_29);
+        musicTextView.setTextColor(Color.parseColor("#ffffff"));
+        znwhImageView.setImageResource(R.drawable.czs_26);
+        znwhTextView.setTextColor(Color.parseColor("#ffffff"));
+        userImageView.setImageResource(R.drawable.czs_32);
+        userTextView.setTextColor(Color.parseColor("#ffffff"));
+
     }
 
     /**
@@ -264,23 +288,23 @@ public class HomeActivity extends Activity implements View.OnClickListener {
      */
     private void changeTabStyle(Fragment tabFragment) {
         if (tabFragment instanceof CarFragment) {
-            carImageView.setImageResource(R.drawable.login_pic);
-            carTextView.setTextColor(Color.parseColor("#999999"));
+            clearSelected1();
         }
 
         if (tabFragment instanceof MusicFragment) {
             musicImageView.setImageResource(R.drawable.login_pic);
-            musicTextView.setTextColor(Color.parseColor("#999999"));
+            musicTextView.setTextColor(Color.parseColor("#019b79"));
         }
 
         if (tabFragment instanceof ZnwhFragment) {
-            znwhImageView.setImageResource(R.drawable.login_pic);
-            znwhTextView.setTextColor(Color.parseColor("#999999"));
+            znwhImageView.setImageResource(R.drawable.wh_07);
+            znwhTextView.setTextColor(Color.parseColor("#019b79"));
+
         }
 
         if (tabFragment instanceof UserFragment) {
-            userImageView.setImageResource(R.drawable.login_pic);
-            userTextView.setTextColor(Color.parseColor("#999999"));
+            userImageView.setImageResource(R.drawable.grzx_52);
+            userTextView.setTextColor(Color.parseColor("#019b79"));
         }
     }
 
@@ -311,9 +335,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
+        switch (requestCode) {
             case INTENT_SETCARINFO:
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     int position = data.getIntExtra("id", 0);
                     if (position != 0) {
                         getTab(position);
@@ -323,7 +347,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                 }
                 break;
             case INTENT_WZCX:
-                if (resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     int position = data.getIntExtra("id", 0);
                     if (position != 0) {
                         getTab(position);
@@ -333,7 +357,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                 }
                 break;
             case INTENT_USERICON:
-                if (resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     int position = data.getIntExtra("id", 0);
                     if (position != 0) {
                         getTab(position);
@@ -343,7 +367,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                 }
                 break;
             case INTENT_UPDATEUSER:
-                if (resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
+                    initFragment();
                     int position = data.getIntExtra("id", 0);
                     if (position != 0) {
                         getTab(position);
@@ -351,6 +376,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                         getTab(1);
                     }
                 }
+
                 break;
         }
     }

@@ -1,115 +1,164 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#019b79"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
-    <com.hangon.common.Topbar
-        android:id="@+id/registerTopbar"
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar"></include>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        custom:mTitleTextColor="#000000"
-        custom:mTitleTextSize="13sp"
-        custom:mTitle="注册"
-        custom:leftTextColor="#000000"
-        custom:leftBackground="@drawable/register01"
-        >
-    </com.hangon.common.Topbar>
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#666666"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp">'
 
- <LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:padding="20dp"
-     android:orientation="vertical">'
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp">
 
-     <EditText
-         android:id="@+id/rUserName"
-         android:background="#ffffff"
-         android:hint="输入你要注册的手机号"
-         android:layout_width="match_parent"
-         android:layout_height="50dp"
-         android:textSize="15sp"
-         android:maxLength="11"
-         android:numeric="integer"
-         android:drawableLeft="@drawable/login_003"
-         />
+            <ImageView
+                android:id="@+id/img11"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/zc_07" />
 
-     <LinearLayout
-         android:layout_marginTop="20dp"
-         android:orientation="horizontal"
-         android:layout_width="match_parent"
-         android:layout_height="50dp">
+            <ImageView
+                android:id="@+id/img12"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img11"
+                android:background="@drawable/zc_10" />
 
-         <EditText
-             android:id="@+id/cord"
-             android:background="#ffffff"
-             android:textSize="15sp"
-             android:hint="请输入您收到的验证码"
-             android:phoneNumber="true"
-             android:layout_width="220dp"
-             android:layout_height="match_parent"
-             android:maxLength="4"
-             android:numeric="integer"
-             android:drawableLeft="@drawable/login_003"/>
+            <com.hangon.common.CleanableEditText
+                android:id="@+id/rUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img12"
+                android:hint="请输入您要注册的手机号"
+                android:maxLength="11"
+                android:numeric="integer"
+                android:shadowColor="#ffffff"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:drawableRight="@drawable/zc_13"
+                android:textSize="14sp" />
+        </RelativeLayout>
 
-         <TextView
-             android:id="@+id/now"
-             android:visibility="gone"
-             android:textSize="15sp"
-             android:layout_marginLeft="20dp"
-             android:gravity="center"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp">
 
-         <Button
-             android:id="@+id/getCord"
-             android:layout_marginLeft="30dp"
-             android:background="@drawable/btn_login2"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:text="获取验证码"
-             android:textColor="#ffffff"
-             android:textSize="15sp"
-             />
-     </LinearLayout>
+            <ImageView
+                android:id="@+id/img31"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/zc_14" />
 
-     <EditText
-         android:id="@+id/rUserPass"
-         android:hint="请设置账户密码6-12位"
-         android:background="#ffffff"
-         android:layout_width="match_parent"
-         android:layout_height="50dp"
-         android:textSize="15sp"
-         android:layout_marginTop="20dp"
-         android:drawableLeft="@drawable/login_003"
-         android:password="true"
-         android:maxLength="12"
-         />
+            <ImageView
+                android:id="@+id/img32"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img31"
+                android:background="@drawable/zc_10" />
 
-     <Button
-         android:id="@+id/saveCord"
-         android:layout_width="match_parent"
-         android:layout_height="40dp"
-         android:layout_marginTop="25dp"
-         android:text="完成"
-         android:textSize="20sp"
-         android:textColor="#ffffff"
-         android:background="@drawable/btn_login2"
-         />
+            <EditText
+                android:id="@+id/cord"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img32"
+                android:hint="请输入收到的验证码"
+                android:maxLength="4"
+                android:numeric="integer"
+                android:phoneNumber="true"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:textSize="14sp" />
 
 
+            <TextView
+                android:id="@+id/now"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/cord"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/getCord"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/now"
+                android:background="@drawable/btn_register"
+                android:text="获取验证码"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp">
+
+            <ImageView
+                android:id="@+id/img21"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/zc_18" />
+
+            <ImageView
+                android:id="@+id/img22"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img21"
+                android:background="@drawable/zc_10" />
+
+            <com.hangon.common.CleanableEditText
+                android:id="@+id/rUserPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img22"
+                android:drawableRight="@drawable/zc_13"
+                android:hint="请设置6-12位账户密码"
+                android:maxLength="12"
+                android:password="true"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:textSize="14sp" />
+        </RelativeLayout>
 
 
- </LinearLayout>
+        <ImageButton
+            android:id="@+id/saveCord"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/zc_22"
+            android:textSize="20sp" />
 
-
+    </LinearLayout>
 
 
 </LinearLayout>

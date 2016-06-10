@@ -9,7 +9,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:scaleType="fitXY"
-        android:src="@drawable/a1" >
+        android:src="@drawable/bg_cloudy_day" >
     </ImageView>
 
 </LinearLayout>

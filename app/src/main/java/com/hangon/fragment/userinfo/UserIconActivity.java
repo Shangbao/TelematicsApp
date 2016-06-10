@@ -20,7 +20,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
@@ -42,6 +44,9 @@ public class UserIconActivity extends Activity implements OnClickListener {
     public static final String TMP_PATH = "clip_temp.jpg";
     ImageView imageView;
 
+    ImageButton topbarLeft, topbarRight;
+    TextView topbarTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,23 +58,22 @@ public class UserIconActivity extends Activity implements OnClickListener {
         imageView = (ImageView) findViewById(R.id.imageView);
 
 
-        Topbar topbar= (Topbar) findViewById(R.id.userIconTopbar);
-       topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
-           @Override
-           public void leftClick() {
+        topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
+        topbarRight = (ImageButton) findViewById(R.id.topbar_right);
+        topbarTitle = (TextView) findViewById(R.id.topbar_title);
+        topbarRight.setBackgroundResource(R.drawable.grzx_03);
+        topbarTitle.setText("设置头像");
+        topbarLeft.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("id", 4);
+                setResult(RESULT_OK, intent);
+                UserIconActivity.this.finish();
+            }
+        });
 
-               Intent intent = new Intent();
-               intent.putExtra("id", 4);
-               setResult(RESULT_OK, intent);
-               UserIconActivity.this.finish();
-           }
-
-           @Override
-           public void rightClick() {
-
-           }
-       });
-        topbar.setRightIsVisible(false);
+      topbarRight.setVisibility(View.GONE);
         getUserIconFromCookies();
 
     }
@@ -92,14 +96,14 @@ public class UserIconActivity extends Activity implements OnClickListener {
         switch (requestCode) {
             case CROP_RESULT_CODE:
                 String path = data.getStringExtra(ClipImageActivity.RESULT_PATH);
-                Log.e("xxxx",path);
+                Log.e("xxxx", path);
                 Bitmap photo = BitmapFactory.decodeFile(path);
-                if(photo!=null){
+                if (photo != null) {
                     saveIconToCookies(photo);
                     postIconBytes(photo);
                 }
 
-                 getUserIconFromCookies();
+                getUserIconFromCookies();
                 break;
             case START_ALBUM_REQUESTCODE:
                 startCropImageActivity(getFilePath(data.getData()));
@@ -112,41 +116,41 @@ public class UserIconActivity extends Activity implements OnClickListener {
     }
 
     //获取内存里面的图片信息
-    private void getUserIconFromCookies(){
+    private void getUserIconFromCookies() {
         UserUtil.instance(UserIconActivity.this);
-        String s=UserUtil.getInstance().getStringConfig("userIconContent");
-        if(s==null||s.equals("")){
-            Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
-            Bitmap bitmap1=ImageUtil.getRoundedCornerBitmap(bitmap,100);
+        String s = UserUtil.getInstance().getStringConfig("userIconContent");
+        if (s == null || s.equals("")) {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+            Bitmap bitmap1 = ImageUtil.getRoundedCornerBitmap(bitmap, 100);
             imageView.setImageBitmap(bitmap1);
-        }else {
-            byte[] bytes=ImageUtil.getStringByte(s);
-            Bitmap bitmap=ImageUtil.getBitmapFromByte(bytes);
-            Bitmap bitmap1=ImageUtil.getRoundedCornerBitmap(bitmap,100);
+        } else {
+            byte[] bytes = ImageUtil.getStringByte(s);
+            Bitmap bitmap = ImageUtil.getBitmapFromByte(bytes);
+            Bitmap bitmap1 = ImageUtil.getRoundedCornerBitmap(bitmap, 100);
             imageView.setImageBitmap(bitmap);
         }
     }
 
     //把获取的图片保存到cookies里面
-    private void saveIconToCookies(Bitmap bitmap){
+    private void saveIconToCookies(Bitmap bitmap) {
         byte[] bytes;
-        bytes=ImageUtil.getBitmapByte(bitmap);
-    String userIconConten= ImageUtil.getStringFromByte(bytes);
+        bytes = ImageUtil.getBitmapByte(bitmap);
+        String userIconConten = ImageUtil.getStringFromByte(bytes);
         UserUtil.instance(UserIconActivity.this);
-        UserUtil.getInstance().saveStringConfig("userIconContent",userIconConten);
+        UserUtil.getInstance().saveStringConfig("userIconContent", userIconConten);
     }
 
     //发送图片的二进制码
-    private void postIconBytes(Bitmap bitmap){
-       String url= Constants.ADD_USER_ICON_URL;
-        Map<String,Object> map=new HashMap<String,Object>();
+    private void postIconBytes(Bitmap bitmap) {
+        String url = Constants.ADD_USER_ICON_URL;
+        Map<String, Object> map = new HashMap<String, Object>();
         UserUtil.instance(UserIconActivity.this);
-       String userName= UserUtil.getInstance().getStringConfig("userName");
-        map.put("userName",userName);
+        String userName = UserUtil.getInstance().getStringConfig("userName");
+        map.put("userName", userName);
         byte[] bytes;
-        bytes=ImageUtil.getBitmapByte(bitmap);
-        String userIconContent=ImageUtil.getStringFromByte(bytes);
-        map.put("userIconContent",userIconContent);
+        bytes = ImageUtil.getBitmapByte(bitmap);
+        String userIconContent = ImageUtil.getStringFromByte(bytes);
+        map.put("userIconContent", userIconContent);
 
         VolleyRequest.RequestPost(UserIconActivity.this, url, "potsUserIcon", map, new VolleyInterface(UserIconActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
@@ -194,8 +198,6 @@ public class UserIconActivity extends Activity implements OnClickListener {
     }
 
     /**
-     *
-     *
      * @param mUri
      * @return
      */
