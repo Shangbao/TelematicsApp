@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +46,7 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
 
     public static Weather context;
 
-    private LinearLayout weatherBg;
+    private RelativeLayout weatherBg;
     private LinearLayout titleBarLayout;
     private LinearLayout currentWeatherLayout;
     private ScrollView scrollView;
@@ -68,6 +69,8 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_weather);
+        LinearLayout tqLinList = (LinearLayout) findViewById(R.id.tq_lin_list);
+        tqLinList.getBackground().setAlpha(153);
         init();
         MobAPI.initSDK(this, "120b650027878");
         Weather api = (Weather) MobAPI.getAPI(Weather.NAME);
@@ -76,6 +79,7 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
         time = new Time();
 
         intent = getIntent();
+        city = intent.getStringExtra("city");
         if(city == null){
             new Thread(){
                 public void run() {
@@ -96,6 +100,8 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
                 }
 
             }.start();
+        }else {
+            api.queryByCityName(city, WeatherActivity.this);
         }
     }
 
@@ -103,8 +109,7 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
         for(HashMap<String,Object> week : weeks){
             com.hangon.weather.Weather weather = new com.hangon.weather.Weather(com.mob.tools.utils.R.toString(week.get("week")),
                     com.mob.tools.utils.R.toString(week.get("dayTime")),
-                    com.mob.tools.utils.R.toString(week.get("temperature")),
-                    com.mob.tools.utils.R.toString(week.get("wind")));
+                    com.mob.tools.utils.R.toString(week.get("temperature")));
             weathers.add(weather);
         }
     }
@@ -227,7 +232,7 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
 
         tvWind = (TextView) findViewById(R.id.wind);
         tvDate = (TextView) findViewById(R.id.date);
-        weatherBg = (LinearLayout) findViewById(R.id.weather_bg);
+        weatherBg = (RelativeLayout) findViewById(R.id.weather_bg);
         weatherForcastList = (ListView) findViewById(R.id.weather_forecast_list);
         tvCity.setOnClickListener(this);
     }

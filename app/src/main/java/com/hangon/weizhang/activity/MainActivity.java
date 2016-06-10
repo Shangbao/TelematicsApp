@@ -12,6 +12,7 @@ import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,8 @@ public class MainActivity extends Activity {
     // 行驶证图示
     private View popXSZ;
 
+    Intent intent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +59,15 @@ public class MainActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.csy_activity_main);
         init();
+//        intent = getIntent();
+//        query_city.setText(intent.getStringExtra("city"));
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.csy_titlebar);
         // 标题
-        TextView txtTitle = (TextView) findViewById(R.id.txtTitle);
+        TextView txtTitle = (TextView) findViewById(R.id.topbar_title);
         txtTitle.setText("车辆违章查询");
 
         // 返回按钮
-        Button btnBack = (Button) findViewById(R.id.btnBack);
+        ImageButton btnBack = (ImageButton) findViewById(R.id.topbar_left);
         btnBack.setVisibility(View.VISIBLE);
         btnBack.setOnClickListener(new OnClickListener() {
             @Override
@@ -73,6 +78,9 @@ public class MainActivity extends Activity {
                 MainActivity.this.finish();
             }
         });
+
+        ImageButton rightBtn = (ImageButton) findViewById(R.id.topbar_right);
+        rightBtn.setVisibility(View.INVISIBLE);
 
         short_name.setText(defaultChepai);
 
@@ -157,7 +165,6 @@ public class MainActivity extends Activity {
                 if (result) {
                     intent.setClass(MainActivity.this, WeizhangResult.class);
                     startActivity(intent);
-
                 }
             }
         });

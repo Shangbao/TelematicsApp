@@ -133,6 +133,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         getActivity().unbindService(videoConn);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    }
+
     //获取内存里面的图片信息
     private void getUserIconFromCookies() {
         UserUtil.instance(getActivity());

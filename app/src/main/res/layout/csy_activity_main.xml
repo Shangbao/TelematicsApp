@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/csy_bg_body">
 
-    <include android:id="@+id/titbar" layout="@layout/csy_titlebar" />
+    <include android:id="@+id/titbar" layout="@layout/topbar" />
 
     <!-- 查询表单 -->
     <LinearLayout
@@ -26,17 +26,32 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/csy_item_h"
-                android:layout_gravity="center_vertical" >
+                android:layout_gravity="center_vertical">
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="200dp"
+                    android:layout_height="@dimen/csy_btn_h"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/bg_wzcxcity"
+                    android:orientation="horizontal"
+                    android:padding="1.0dp">
+                    <TextView
+                        android:id="@+id/cx_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_wzcxcity_tv"
+                        style="@style/csy_textbox1"
+                        android:hint="@string/csy_cxdz_tip" />
 
-                <TextView
-                    android:id="@+id/cx_city"
-                    style="@style/csy_textbox1"
-                    android:hint="@string/csy_cxdz_tip" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8.0dp"
+                        android:src="@drawable/csy_arr_drop" />
+                </LinearLayout>
 
-                <ImageView
-                    style="@style/csy_row_icon"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/csy_arr_right" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -54,18 +69,20 @@
                 android:layout_gravity="center_vertical" >
 
                 <LinearLayout
+                    android:id="@+id/chebai_lin"
                     android:layout_width="@dimen/csy_item_h"
                     android:layout_height="fill_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/csy_select"
+                    android:background="@drawable/bg_wzcxcity"
                     android:orientation="horizontal" >
 
                     <TextView
                         android:id="@+id/chepai_sz"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:layout_marginLeft="@dimen/csy_pd"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/bg_wzcxcity_tv"
                         android:gravity="center_vertical"
                         android:textColor="@color/csy_text"
                         android:textSize="@dimen/csy_text_ts" />
@@ -81,8 +98,10 @@
                 <EditText
                     android:id="@+id/chepai_number"
                     style="@style/csy_textbox"
-                    android:layout_marginLeft="@dimen/csy_item_h"
+                    android:background="@drawable/bg_wzcxedit"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="@dimen/csy_pd"
+                    android:layout_toRightOf="@+id/chebai_lin"
                     android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:gravity="center"
                     android:hint="@string/csy_chepai_tip"
@@ -107,7 +126,12 @@
 
                 <EditText
                     android:id="@+id/chejia_number"
-                    style="@style/csy_textbox1" />
+                    android:singleLine="true"
+                    android:background="@drawable/bg_wzcxedit"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/csy_text_ts"
+                    android:paddingLeft="10dp"
+                    style="@style/csy_textbox" />
 
                 <ImageView
                     android:id="@+id/ico_chejia"
@@ -133,7 +157,12 @@
 
                 <EditText
                     android:id="@+id/engine_number"
-                    style="@style/csy_textbox1" />
+                    android:singleLine="true"
+                    android:background="@drawable/bg_wzcxedit"
+                    android:textSize="@dimen/csy_text_ts"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="10dp"
+                    style="@style/csy_textbox" />
 
                 <ImageView
                     android:id="@+id/ico_engine"

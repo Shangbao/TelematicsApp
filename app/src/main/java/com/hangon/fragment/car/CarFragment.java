@@ -73,7 +73,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
     IntentFilter mFilter;
 
     private ProgressReceiver progressReceiver;
-    private String city, weather;
+    private String city = null, weather;
 
 
     @Override

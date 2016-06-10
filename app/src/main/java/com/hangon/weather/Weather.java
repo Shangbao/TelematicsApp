@@ -7,16 +7,15 @@ public class Weather {
     private String date;
     private String weather;
     private String temperature;
-    private String wind;
+    private int weatherIcon;
 
     public Weather() {
     }
 
-    public Weather(String date, String weather, String temperature, String wind) {
+    public Weather(String date, String weather, String temperature) {
         this.date = date;
         this.weather = weather;
         this.temperature = temperature;
-        this.wind = wind;
     }
 
     public String getDate() {
@@ -31,7 +30,4 @@ public class Weather {
         return temperature;
     }
 
-    public String getWind() {
-        return wind;
-    }
 }
