@@ -15,8 +15,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -60,7 +62,7 @@ public class AddCarMessageActivity extends Activity {
     private EditText phone_num;
     private EditText cus_name;
 
-    private EditText car_num_pre;
+    private Spinner car_num_pre;
     private EditText car_num_edit;
     private EditText car_enginenum_edit;
     private EditText car_chassis_number;
@@ -73,14 +75,15 @@ public class AddCarMessageActivity extends Activity {
     private Spinner trans_spinner;
     private Spinner light_spinner;
 
-    Topbar topbar;
-
 
     private List<String> carName = null;
     private List<String> carType = null;
 
     private ArrayAdapter<String> carNameAdapter;
     private ArrayAdapter<String> carTypeAdapter;
+
+    ImageButton topbarLeft, topbarRight;
+    TextView topbarTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,38 +93,7 @@ public class AddCarMessageActivity extends Activity {
         //获得车品牌数据
         getBrandInfoList();//获取车型号数据
         setSpinnerListener();//为车型号设置监听事件
-
-        //标题栏
-        topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
-            @Override
-            public void leftClick() {
-                Intent intent = new Intent(AddCarMessageActivity.this, SetCarInfoActivity.class);
-                startActivity(intent);
-                AddCarMessageActivity.this.finish();
-            }
-
-            @Override
-            public void rightClick() {
-                DialogTool.createNormalDialog(AddCarMessageActivity.this, "保存车辆信息", "你确定要保存吗?", "取消", "确认", null, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        if (false == judge()) {
-                            Toast.makeText(AddCarMessageActivity.this, "亲，请完整填写信息！", Toast.LENGTH_SHORT).show();
-                        } else {
-                            getData();
-                            addCarInfo();
-                            JudgeNet judgeNet = new JudgeNet();
-                            if (judgeNet.getPersonalInformation() == 2) {
-                                judgeNet.setPersonalInformation(0);
-                                finish();
-
-                            }
-                        }
-                    }
-                }).show();
-            }
-        });
+        setRegion(car_gas_edit);
 
 
     }
@@ -141,7 +113,7 @@ public class AddCarMessageActivity extends Activity {
         //为车品牌和车类型添加适配器
         carNameAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, carName);
         car_name_spinner.setAdapter(carNameAdapter);
-        carTypeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, carType);
+        carTypeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, carType);
         car_type_spinner.setAdapter(carTypeAdapter);
     }
 
@@ -151,7 +123,8 @@ public class AddCarMessageActivity extends Activity {
         car_type_spinner = (Spinner) findViewById(R.id.car_type_spinner);
         carFlag = (ImageView) findViewById(R.id.carFlag);
         province = (Spinner) findViewById(R.id.car_province);
-        car_num_pre = (EditText) findViewById(R.id.pre);
+
+        car_num_pre = (Spinner) findViewById(R.id.pre);
         car_num_edit = (EditText) findViewById(R.id.car_number);
 
         phone_num = (EditText) findViewById(R.id.phone_num);
@@ -167,9 +140,39 @@ public class AddCarMessageActivity extends Activity {
         engine_spinner = (Spinner) findViewById(R.id.engine_is_good);
         trans_spinner = (Spinner) findViewById(R.id.trans_is_good);
         light_spinner = (Spinner) findViewById(R.id.light_is_good);
-        topbar = (Topbar) findViewById(R.id.addCarMessageTopbar);
 
-        setRegion(car_gas_edit);
+        topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
+        topbarRight = (ImageButton) findViewById(R.id.topbar_right);
+        topbarTitle = (TextView) findViewById(R.id.topbar_title);
+        topbarTitle.setText("添加车辆信息");
+
+        topbarLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddCarMessageActivity.this, SetCarInfoActivity.class);
+                startActivity(intent);
+                AddCarMessageActivity.this.finish();
+            }
+        });
+
+        topbarRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogTool.createNormalDialog(AddCarMessageActivity.this, "添加车辆信息", "你确定要添加吗?", "取消", "确认", null, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (judge() == false) {
+                            Toast.makeText(AddCarMessageActivity.this, "亲，请完整填写信息！", Toast.LENGTH_SHORT).show();
+                        } else {
+                            getData();
+                            addCarInfo();
+                        }
+
+                    }
+                }).show();
+            }
+        });
     }
 
     //为spinner设置监听事件
@@ -224,7 +227,7 @@ public class AddCarMessageActivity extends Activity {
         carMessageVO.setName(cus_name.getText().toString().trim());
 
         carMessageVO.setProvinceIndex(province.getSelectedItemPosition());
-        carMessageVO.setCarLicenceTail(car_num_pre.getText().toString() + car_num_edit.getText().toString().trim());
+        carMessageVO.setCarLicenceTail(car_num_pre.getSelectedItem().toString() + car_num_edit.getText().toString().trim());
         carMessageVO.setChassisNum(car_chassis_number.getText().toString().trim());
         carMessageVO.setEngineNum(car_enginenum_edit.getText().toString().trim());
 

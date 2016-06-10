@@ -1,460 +1,474 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
-    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity" >
+    android:background="#e0e0e0"
+    android:orientation="vertical">
 
 
-    <LinearLayout
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#1e1f22"
-        >
-        <com.hangon.common.Topbar
-            android:id="@+id/addCarMessageTopbar"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            custom:mTitle="添加新车辆"
-            custom:mTitleTextColor="#ffffff"
-            custom:mTitleTextSize="10dp"
-            custom:leftText="BACK"
-            custom:leftTextColor="#ffffff"
-            custom:rightText="保存"
-            custom:rightTextColor="#ffffff"
-            >
-        </com.hangon.common.Topbar>
-    </LinearLayout>
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:background="#ffffff">
+
+        <ImageView
+            android:id="@+id/carFlag"
+            android:layout_width="45dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp" />
+
+        <Spinner
+            android:id="@+id/car_name_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/carFlag"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/car_type_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/car_name_spinner"
+            android:spinnerMode="dropdown" />
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#d6cdcd"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <RelativeLayout
-            android:id="@+id/car_message_layout"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/editext_border"
-            >
-
-            <com.hangon.fragment.music.MusicImage
-                android:id="@+id/carFlag"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                imagecontrol:border_inside_color="#fff7f2e9"
-                imagecontrol:border_outside_color="#ffd5d1c8"
-                imagecontrol:border_thickness="2dp"
-                android:background="@drawable/ic_launcher"/>
-
-            <Spinner
-                android:id="@+id/car_name_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/carFlag"
-                android:spinnerMode="dropdown"
-                android:layout_marginLeft="20dp"
-                android:background="#00ffffff"
-                />
-
-            <Spinner
-                android:id="@+id/car_type_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/car_name_spinner"
-                android:layout_marginLeft="5dp"
-                android:spinnerMode="dropdown"
-                android:background="#00ffffff"
-                />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/car_number_layout"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:background="#ffffff">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:layout_centerVertical="true"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
-                android:text="车主姓名"/>
-
-            <EditText
-                android:id="@+id/cus_name"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="95dp"
-                android:singleLine="true"
-                android:background="#00ffffff"
-                android:maxLength="5"
-                android:inputType="text"/>
-        </RelativeLayout>
-
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#666666"/>
-
-        <RelativeLayout
-            android:layout_below="@+id/car_number_layout"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:background="#ffffff">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:layout_centerVertical="true"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
-                android:text="手机号码"/>
-
-            <EditText
-                android:id="@+id/phone_num"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="95dp"
-                android:singleLine="true"
-                android:background="#00ffffff"
-                android:maxLength="11"
-                android:inputType="number"/>
-        </RelativeLayout>
-
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#666666"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_height="wrap_content"
             android:background="#ffffff"
-            >
-            <TextView
-                android:id="@+id/t1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:textSize="15sp"
-                android:textColor="#000000"
-                android:layout_marginLeft="10dp"
-                android:text="车牌号" />
+            android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/car_province"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="90dp"
-               android:spinnerMode="dropdown"
-                android:background="#00ffffff"
-                android:entries="@array/province"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp">
 
-            <EditText
-                android:id="@+id/pre"
-                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:maxLength="1"
-                android:layout_width="36dp"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/car_province"
-                android:layout_marginLeft="25dp"
-                android:layout_centerVertical="true"
-                android:textSize="13sp"
-                android:hint="区域"
-                android:background="#00ffffff"
-                />
+                <TextView
+                    android:id="@+id/t11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="车主姓名:"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/car_number"
-                android:layout_width="100dp"
-                android:maxLength="6"
+                <com.hangon.common.CleanableEditText
+                    android:id="@+id/cus_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/t11"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/editext_clgl"
+                    android:drawableRight="@drawable/zc_03"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp"
+                    android:singleLine="true"
+                    android:maxLength="5"
+                    android:inputType="text"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/t12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="手机号码:"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
+
+                <com.hangon.common.CleanableEditText
+                    android:id="@+id/phone_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/t12"
+                    android:background="@drawable/editext_clgl"
+                    android:drawableRight="@drawable/zc_03"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp"
+                    android:singleLine="true"
+                    android:maxLength="11"
+                    android:inputType="number"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/car_province"
-                android:layout_marginLeft="70dp"
-                android:textSize="13sp"
-                android:background="#00ffffff"
-                android:hint="车牌尾号数字"
-                android:inputType="text"/>
-        </RelativeLayout>
-        <ProgressBar
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/t13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="车  牌  号:"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
+
+
+                <Spinner
+                    android:id="@+id/car_province"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/t13"
+                    android:entries="@array/province"
+                    android:spinnerMode="dropdown" />
+
+                <Spinner
+                    android:id="@+id/pre"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/car_province"
+                    android:entries="@array/area"
+                    android:layout_marginLeft="5dp"
+                    android:spinnerMode="dropdown"
+                    />
+
+
+                <EditText
+                    android:id="@+id/car_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/pre"
+                    android:background="@drawable/editext_clgl"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="#a3a3a3"
+                    android:inputType="text"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/t14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="发动机号:"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
+
+                <com.hangon.common.CleanableEditText
+                    android:id="@+id/car_engine_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_toRightOf="@+id/t14"
+                    android:background="@drawable/editext_clgl"
+                    android:drawableRight="@drawable/zc_03"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp"
+                    android:singleLine="true"
+                    android:inputType="text"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/t15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="车  架  号:"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
+
+                <com.hangon.common.CleanableEditText
+                    android:id="@+id/car_chassis_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/t15"
+                    android:background="@drawable/editext_clgl"
+                    android:drawableRight="@drawable/zc_03"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp"
+                    android:singleLine="true"
+                    android:inputType="text"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/t16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="车身级别:"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/door_count"
+                    android:layout_width="35dp"
+                    android:layout_height="23dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/t16"
+                    android:background="@drawable/editext_clgl"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:layout_marginBottom="8dp"
+                    android:numeric="integer"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/doortxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_toRightOf="@+id/door_count"
+                    android:layout_alignParentBottom="true"
+                    android:text="门数"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/seat_count"
+                    android:layout_width="35dp"
+                    android:layout_height="23dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="8dp"
+                    android:layout_toRightOf="@+id/doortxt"
+                    android:background="@drawable/editext_clgl"
+                    android:maxLength="3"
+                    android:numeric="integer"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/seat_count"
+                    android:text="座位数"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#666666"/>
-
-
-        <RelativeLayout
-            android:layout_below="@+id/car_number_layout"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:background="#ffffff">
-            <TextView
-                android:id="@+id/t2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:layout_centerVertical="true"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
-                android:text="发动机号"/>
-
-            <EditText
-                android:id="@+id/car_engine_number"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="95dp"
-                android:singleLine="true"
-                android:background="#00ffffff"
-                android:inputType="text"/>
-        </RelativeLayout>
-
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#666666"/>
-
-        <RelativeLayout
-            android:layout_below="@+id/car_number_layout"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:background="#ffffff">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:layout_centerVertical="true"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
-                android:text="车架号"/>
-
-            <EditText
-                android:id="@+id/car_chassis_number"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="95dp"
-                android:singleLine="true"
-                android:background="#00ffffff"
-                android:inputType="text"/>
-        </RelativeLayout>
-
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#666666"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:background="#ffffff">
-            <TextView
-                android:id="@+id/t3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:layout_centerVertical="true"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
-                android:text="车身级别"/>
-
-            <EditText
-                android:numeric="integer"
-                android:id="@+id/door_count"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="95dp"
-                android:layout_centerVertical="true"
-                android:maxLength="2"
-                android:hint="门数"
-                android:textSize="13sp"
-                android:background="#00ffffff"
-                android:inputType="number" />
-
-            <EditText
-                android:id="@+id/seat_count"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:numeric="integer"
-                android:layout_toRightOf="@+id/t3"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="120dp"
-                android:textSize="13sp"
-                android:hint="座位数"
-                android:maxLength="3"
-                android:background="#00ffffff"
-                 />
-        </RelativeLayout>
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#666666"/>
-
-        <RelativeLayout
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
             android:background="#ffffff"
-            >
-            <TextView
-                android:id="@+id/t4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:layout_centerVertical="true"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
-                android:text="里程数"/>
-            <EditText
-                android:id="@+id/car_mileage"
-                android:inputType="number"
+            android:orientation="vertical"
+            android:padding="0dp">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="95dp"
-                android:layout_centerVertical="true"
-                android:background="#00ffffff"
-                android:textSize="14sp"
-                android:hint="默认千米计算"/>
-        </RelativeLayout>
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                >
 
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#666666"/>
+                <TextView
+                    android:id="@+id/t21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="里    程    数:"
+                    android:inputType="number"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:background="#ffffff">
+                <com.hangon.common.CleanableEditText
+                    android:id="@+id/car_mileage"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_toRightOf="@+id/t21"
+                    android:background="@drawable/editext_clgl"
+                    android:drawableRight="@drawable/zc_03"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/t5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:layout_centerVertical="true"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
-                android:text="剩余汽油量"/>
 
-            <EditText
-                android:id="@+id/car_gas"
-                android:inputType="number"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="95dp"
-                android:layout_centerVertical="true"
-                android:background="#00ffffff"
-                android:hint="默认百分比计算"
-                android:textSize="14sp" />
-        </RelativeLayout>
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#666666"/>
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:background="#ffffff">
+                <TextView
+                    android:id="@+id/t22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="剩余汽油量:"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:layout_centerVertical="true"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
-                android:text="发动机性能"/>
-            <Spinner
-                android:id="@+id/engine_is_good"
+                <com.hangon.common.CleanableEditText
+                    android:id="@+id/car_gas"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dp"
+                    android:inputType="number"
+                    android:layout_marginBottom="8dp"
+                    android:layout_toRightOf="@+id/t22"
+                    android:background="@drawable/editext_clgl"
+                    android:drawableRight="@drawable/zc_03"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_marginLeft="90dp"
-                android:layout_centerVertical="true"
-                android:spinnerMode="dropdown"
-                android:background="#00ffffff"
-                android:entries="@array/performance"/>
-        </RelativeLayout>
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp">
 
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#666666"/>
+                <TextView
+                    android:id="@+id/t23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="发动机性能:"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:background="#ffffff">
+                <Spinner
+                    android:id="@+id/engine_is_good"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/t23"
+                    android:entries="@array/performance"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:layout_centerVertical="true"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
-                android:text="变速器性能"/>
-            <Spinner
-                android:id="@+id/trans_is_good"
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_marginLeft="90dp"
-                android:layout_centerVertical="true"
-                android:spinnerMode="dropdown"
-                android:background="#00ffffff"
-                android:entries="@array/performance"/>
-        </RelativeLayout>
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp">
 
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#666666"/>
+                <TextView
+                    android:id="@+id/t24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="变速器性能:"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:background="#ffffff">
+                <Spinner
+                    android:id="@+id/trans_is_good"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/t24"
+                    android:entries="@array/performance"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:layout_centerVertical="true"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
-                android:text="车灯状态"/>
-            <Spinner
-                android:id="@+id/light_is_good"
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_marginLeft="90dp"
-                android:layout_centerVertical="true"
-                android:spinnerMode="dropdown"
-                android:background="#00ffffff"
-                android:entries="@array/performance"/>
-        </RelativeLayout>
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp">
 
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#666666"/>
+                <TextView
+                    android:id="@+id/t25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="车  灯状  况:"
+                    android:textColor="#a3a3a3"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/light_is_good"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/t25"
+                    android:entries="@array/performance"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>
 

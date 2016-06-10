@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -52,7 +54,8 @@ public class ScanCarMessageActivity extends Activity {
 
     private TextView state;
 
-    private Topbar topbar;
+    ImageButton topbarLeft,topbarRight;
+    TextView topbarTitle;
 
     CarMessageVO carMessageVO;
 
@@ -84,21 +87,21 @@ public class ScanCarMessageActivity extends Activity {
         light_is_good = (TextView) findViewById(R.id.light_is_good);//车灯的状况
 
         state = (TextView) findViewById(R.id.state);
-        topbar = (Topbar) findViewById(R.id.scanCarMessageTopbar);
-        topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
+
+        topbarLeft= (ImageButton) findViewById(R.id.topbar_left);
+        topbarRight= (ImageButton) findViewById(R.id.topbar_right);
+        topbarTitle= (TextView) findViewById(R.id.topbar_title);
+        topbarTitle.setText("查看车辆信息");
+
+        topbarRight.setVisibility(View.GONE);
+        topbarLeft.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void leftClick() {
+            public void onClick(View v) {
                 Intent intent = new Intent(ScanCarMessageActivity.this, SetCarInfoActivity.class);
                 startActivity(intent);
                 ScanCarMessageActivity.this.finish();
             }
-
-            @Override
-            public void rightClick() {
-
-            }
         });
-        topbar.setRightIsVisible(false);
     }
 
     private void setValue() {
