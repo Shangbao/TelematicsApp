@@ -163,6 +163,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center">
         <CheckBox
+            style="@style/CustomCheckboxTheme"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="wrap_content"

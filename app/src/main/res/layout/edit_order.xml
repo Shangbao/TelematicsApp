@@ -19,21 +19,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
            <LinearLayout
+
                android:background="#cccccc"
                android:layout_width="match_parent"
                android:layout_height="match_parent"
                android:layout_weight="10">
                 <CheckBox
+                    android:layout_marginLeft="5dp"
            android:id="@+id/all_selected"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_gravity="center_vertical"
+                    style="@style/CustomCheckboxTheme"
            />
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="全选"
-           android:textSize="20dp"
+           android:textSize="18sp"
            android:layout_gravity="center_vertical"
            />
            </LinearLayout>
@@ -43,6 +46,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
                 <ListView
+                    android:layout_marginLeft="5dp"
                     android:choiceMode="multipleChoice"
                     android:id="@+id/edit_order"
                     android:layout_width="match_parent"

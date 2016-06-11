@@ -71,4 +71,9 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:scaleType">center</item>
     </style>
+
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbok_style</item>
+    </style>
+
 </resources>

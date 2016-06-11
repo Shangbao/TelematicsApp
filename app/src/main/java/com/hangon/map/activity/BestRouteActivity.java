@@ -135,7 +135,7 @@ public class BestRouteActivity extends Activity implements
         topLeft=(ImageButton)findViewById(R.id.topbar_left);
         topRight=(ImageButton)findViewById(R.id.topbar_right);
         topTittle=(TextView)findViewById(R.id.topbar_title);
-
+       topRight.setBackgroundResource(R.drawable.sousuo);
         startPosition = (AutoCompleteTextView) findViewById(R.id.start_position);
         endPosition = (AutoCompleteTextView) findViewById(R.id.end_position);
         siteSwap = (ImageView) findViewById(R.id.site_swap);

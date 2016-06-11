@@ -146,7 +146,7 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
             if ((payOrderList.get(position).getOrderState() == 2)) {
                // vh.list_gasorder_status.setText("已加油");
                 vh.gaslist_cancel_order.setVisibility(View.GONE);
-                vh.gaslist_payment_order.setImageResource(R.drawable.ddgl_14);//删除订单
+                vh.gaslist_payment_order.setImageResource(R.drawable.ddgldele);//删除订单
                 vh.qrSweep.setVisibility(View.GONE);
             }
             if ((payOrderList.get(position).getOrderState() == 1)) {

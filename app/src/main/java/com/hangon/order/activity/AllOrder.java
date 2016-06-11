@@ -141,7 +141,7 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
             if (allOrderList.get(position).getOrderState() == 2) {
                // vh.list_gasorder_status.setText("已加油");
                 vh.gaslist_cancel_order.setVisibility(View.GONE);
-                vh.gaslist_payment_order.setImageResource(R.drawable.ddgl_14);
+                vh.gaslist_payment_order.setImageResource(R.drawable.ddgldele);
                 vh.qrSweep.setVisibility(View.GONE);
             } else if (allOrderList.get(position).getOrderState() == 1) {
                // vh.list_gasorder_status.setText("已支付未加油");

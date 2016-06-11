@@ -132,20 +132,27 @@
     <ImageView
         android:id="@+id/route_search"
         android:layout_marginTop="250dp"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/road_cond"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="56dp"
-        android:src="@drawable/map_route4" />
-    <ImageView
-
-        android:id="@+id/location_position"
-        android:layout_width="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_height="60dp"
+        android:src="@drawable/maproute" />
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#ffffff"
         android:layout_marginBottom="60dp"
-        android:layout_weight="6"
-        android:scaleType="fitXY"
-        android:background="@drawable/location_position" />
+        android:layout_alignParentBottom="true"
+        >
+        <ImageView
+            android:id="@+id/location_position"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="6"
+            android:scaleType="fitXY"
+            android:background="@drawable/dw" />
+    </LinearLayout>
+
 </RelativeLayout>
