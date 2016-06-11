@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,7 +28,10 @@ public class ImageGridActivity extends Activity {
 	public static final String EXTRA_IMAGE_LIST = "imagelist";
 	// ArrayList<Entity> dataList;
 	List<ImageItem> dataList;
-	TextView cancel_image_grid;
+	//topbar
+	private ImageButton topLeft;
+	private TextView topTittle;
+	private ImageButton cancel_image_grid;
 	GridView gridView;
 	ImageGridAdapter adapter;
 	AlbumHelper helper;
@@ -88,7 +92,11 @@ public class ImageGridActivity extends Activity {
 
 
 	private void initView() {
-		cancel_image_grid=(TextView)findViewById(R.id.cancel_image_grid);
+		cancel_image_grid=(ImageButton)findViewById(R.id.topbar_right);
+		topLeft=(ImageButton)findViewById(R.id.topbar_left);
+		topTittle=(TextView)findViewById(R.id.topbar_title);
+		topLeft.setVisibility(View.GONE);
+		topTittle.setText("相册");
 		cancel_image_grid.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

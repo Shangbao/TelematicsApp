@@ -58,15 +58,16 @@ public class GasInfoAdpter extends SimpleAdapter {
         vh.gaslat = (TextView) v.findViewById(R.id.gaslist_lat);
         vh.gaslon = (TextView) v.findViewById(R.id.gaslist_lon);
         vh.gasbrandname = (TextView) v.findViewById(R.id.gaslist_brandname);
+        vh.distancemeter=(TextView)v.findViewById(R.id.distance_meter);
         HashMap map = (HashMap) gaslist.get(position);
         vh.gasname.setText(map.get("gasname").toString());
         vh.gasaddress.setText(map.get("gasaddress").toString());
         vh.gasdistance.setText(map.get("gasdistance").toString());
-        //vh.gaslat.setText(map.get("gaslat").toString());
-        //vh.gaslon.setText(map.get("gaslon").toString());
-        //vh.gasbrandname.setText(map.get("gasbrandname").toString());
         if (position == fals) {
-            vh.rl.setBackgroundColor(Color.argb(1000, 234, 230, 231));
+           vh.gasname.setTextColor(Color.argb(255,13,141,13));
+            vh.gasaddress.setTextColor(Color.argb(255,13,141,13));
+            vh.gasdistance.setTextColor(Color.argb(255, 13, 141, 13));
+            vh.distancemeter.setTextColor(Color.argb(255,13,141,13));
         }
         return v;
     }
@@ -110,5 +111,6 @@ public class GasInfoAdpter extends SimpleAdapter {
         TextView gasprice;
         TextView gasbrandname;
         TextView gascode;
+        TextView distancemeter;
     }
 }

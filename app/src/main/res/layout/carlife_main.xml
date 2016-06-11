@@ -5,45 +5,15 @@
     android:orientation="vertical"
       android:id="@+id/zhoubian">
   
-          <RelativeLayout
-              android:background="#0000ff"
-              android:layout_width="match_parent"
-              android:layout_height="50dp" >
-              <TextView
-                  android:id="@+id/textView1"
-                  android:layout_width="80dp"
-                  android:layout_height="match_parent"
-                  android:gravity="center"
-                  android:text="返回"
-                  android:textColor="#ffffff"
-                  android:textSize="15dp" />
-              <ImageView
-                  android:id="@+id/select_publish"
-                  android:layout_width="60dp"
-                  android:layout_height="match_parent"
-                  android:layout_alignParentRight="true"
-                  android:layout_alignParentTop="true"
-                  android:gravity="center"
-                  android:textColor="#ffffff"
-                  android:src="@drawable/icon_addpic_unfocused"
-                  android:textSize="20dp" />
-
-              <TextView
-                  android:layout_width="100dp"
-                  android:layout_height="match_parent"
-                  android:layout_alignParentTop="true"
-                  android:layout_centerHorizontal="true"
-                  android:gravity="center"
-                  android:text="车生活"
-                  android:textColor="#ffffff"
-                  android:textSize="20dp" />
-          </RelativeLayout>
+         <include
+             android:id="@+id/toolbar"
+             layout="@layout/topbar"/>
     
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/top_tab_height"
-        android:background="@color/main_top_color" >
+        android:background="#faa24b" >
         <TextView
             android:id="@+id/czw_text"
             android:layout_width="fill_parent"
@@ -52,8 +22,9 @@
             android:gravity="center"
             android:text="@string/czw"
             android:textStyle="bold"
-            android:textColor="@color/main_top_tab_color"
-            android:textSize="@dimen/main_top_tab_text_size" />
+            android:textColor="#ffffff"
+            android:background="#12a89d"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/qz_text"
@@ -63,8 +34,8 @@
             android:gravity="center"
             android:text="@string/qz"
             android:textStyle="bold"
-            android:textColor="@color/main_top_tab_color"
-            android:textSize="@dimen/main_top_tab_text_size" />
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,7 +43,7 @@
         android:layout_height="@dimen/main_line_height"
         android:layout_gravity="bottom"
         android:orientation="vertical"
-        android:background="@color/main_top_color"
+
         >
 
         <ImageView
@@ -85,8 +56,9 @@
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/main_top_color"/>
+        android:layout_height="2dp"
+        android:background="#e0e0e0"
+       />
 
 
     <android.support.v4.view.ViewPager

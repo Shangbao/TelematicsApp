@@ -5,38 +5,53 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="#0000ff"
-        >
-        <com.hangon.common.Topbar
-            android:id="@+id/edittopbar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            custom:mTitle="编辑订单"
-            custom:mTitleTextSize="15dp"
-            custom:mTitleTextColor="#ffffff"
-            custom:rightText="取消"
-            custom:rightTextColor="#ffffff"
-            >
-        </com.hangon.common.Topbar>
-        </LinearLayout>
+    <include android:id="@+id/toolbar"
+              layout="@layout/topbar"/>
+
         <LinearLayout
-            android:layout_marginTop="48dp"
+            android:orientation="vertical"
+            android:layout_marginTop="45dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ListView
-                android:choiceMode="multipleChoice"
-                android:id="@+id/edit_order"
+           <LinearLayout
+               android:background="#cccccc"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_weight="10">
+                <CheckBox
+           android:id="@+id/all_selected"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center_vertical"
+           />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="全选"
+           android:textSize="20dp"
+           android:layout_gravity="center_vertical"
+           />
+           </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-            </ListView>
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ListView
+                    android:choiceMode="multipleChoice"
+                    android:id="@+id/edit_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    >
+                </ListView>
+            </LinearLayout>
+
         </LinearLayout>
     <LinearLayout
         android:layout_alignParentBottom="true"
@@ -46,27 +61,18 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         >
-        <CheckBox
-            android:id="@+id/all_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="全选"
-            android:textSize="20dp"
-            android:layout_gravity="center_vertical"
-            />
-        <TextView
+
             android:id="@+id/delete_order_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="删除"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="260dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:text="删    除"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:background="#ff0000"
             />
     </LinearLayout>
     </RelativeLayout>

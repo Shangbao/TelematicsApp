@@ -4,83 +4,166 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:layout_marginLeft="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="50dp" >
 
+        android:id="@+id/order_appoint_alert"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <LinearLayout
+
+            android:background="#ee745f"
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="预约订单"
+                android:textSize="18sp"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                android:gravity="center"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+<LinearLayout
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <TextView
+
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:text="     油号："
+            android:textSize="14sp"
             android:gravity="center"
-            android:text="加油类型："
-            android:textSize="15dp" />
-
+            />
         <TextView
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:text="#e39"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
             android:id="@+id/appoint_gastype"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="15dp" />
+            android:textSize="14sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <TextView
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:text="单价："
+            android:textSize="14sp"
             android:gravity="center"
-            android:text="单价/升："
-            android:textSize="15dp" />
-
+            />
         <TextView
             android:gravity="center_vertical"
-            android:layout_marginLeft="-20dp"
             android:id="@+id/appoint_gassingleprice"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="￥5.97"
-            android:textSize="15dp" />
+            android:textSize="14sp" />
     </LinearLayout>
+</LinearLayout>
+            <LinearLayout
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
 
-    <LinearLayout
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
+        android:layout_height="match_parent"
+        android:text="加油数量："
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        />
+    <EditText
+        android:id="@+id/alert_appoint_gaslitre"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:hint="升数"
+        android:textSize="14sp" />
+</LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="金额："
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        />
+                    <TextView
+                        android:gravity="center_vertical"
+                        android:id="@+id/alert_appoint_gasmoney"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:hint="金额 "
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <RelativeLayout
+                android:paddingTop="5dp"
+                android:paddingRight="60dp"
+                android:paddingLeft="60dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-            android:layout_marginLeft="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="请输入油量/金额："
-            android:textSize="15dp" />
 
-        <EditText
-            android:id="@+id/alert_appoint_gaslitre"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:hint="请输入升数"
-            android:textSize="15dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="升"
-            android:textSize="15dp"
-            />
-        <EditText
-            android:id="@+id/alert_appoint_gasmoney"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:hint="请输入金额 "
-            android:textSize="15dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="元"
-            android:textSize="15dp"
-            />
+                  <ImageView
+                      android:layout_alignParentLeft="true"
+                      android:layout_marginTop="5dp"
+                      android:id="@+id/appoint_order_yes"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:background="@drawable/jyz_14"
+                      />
+
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/appoint_order_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/jyz_16"
+                        android:layout_marginLeft="20dp"
+                        />
+                </RelativeLayout>
+
+        </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

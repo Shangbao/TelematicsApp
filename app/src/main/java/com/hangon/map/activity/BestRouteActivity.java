@@ -3,7 +3,6 @@ package com.hangon.map.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,11 +11,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.search.core.CityInfo;
@@ -49,7 +48,10 @@ import java.util.List;
 public class BestRouteActivity extends Activity implements
         OnGetGeoCoderResultListener, OnGetPoiSearchResultListener,
         OnGetSuggestionResultListener {
-    Topbar bestWayTopbar;//标题栏
+    //topbar
+    private ImageButton topLeft;
+    private ImageButton topRight;
+    private TextView topTittle;
     AutoCompleteTextView startPosition;//起点
     AutoCompleteTextView endPosition;//终点
     ImageView siteSwap;//地址互换
@@ -130,12 +132,14 @@ public class BestRouteActivity extends Activity implements
 
     //初始化组件
     private void init() {
-        bestWayTopbar = (Topbar) findViewById(R.id.bestWayTopbar);
+        topLeft=(ImageButton)findViewById(R.id.topbar_left);
+        topRight=(ImageButton)findViewById(R.id.topbar_right);
+        topTittle=(TextView)findViewById(R.id.topbar_title);
+
         startPosition = (AutoCompleteTextView) findViewById(R.id.start_position);
         endPosition = (AutoCompleteTextView) findViewById(R.id.end_position);
         siteSwap = (ImageView) findViewById(R.id.site_swap);
         searchPositionList = (ListView) findViewById(R.id.searchPositionList);
-        bestWayTopbar = (Topbar) findViewById(R.id.bestWayTopbar);
         RouteListener routeListener = new RouteListener();
         PoiSearchListenerEnd end = new PoiSearchListenerEnd();
         PoiSearchListenerStart start = new PoiSearchListenerStart();
@@ -149,14 +153,19 @@ public class BestRouteActivity extends Activity implements
     }
 
     private void queryStart() {
-        bestWayTopbar.setLeftIsVisible(false);
-        bestWayTopbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
+        topTittle.setText("最优路线");
+        topLeft.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void leftClick() {
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(BestRouteActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
-
+        });
+        topRight.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void rightClick() {
+            public void onClick(View v) {
                 judgeNetState = mReceiver.getNetType();
                 if (judgeNetState.equals("mobilenet") || judgeNetState.equals("wifinet")) {
                     judgeNet.setStates(1);
@@ -194,7 +203,6 @@ public class BestRouteActivity extends Activity implements
             }
         });
     }
-
     public class RouteListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {

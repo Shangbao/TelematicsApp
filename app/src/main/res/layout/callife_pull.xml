@@ -6,7 +6,7 @@
     <TextView
         android:id="@+id/select_text"
         android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:padding="8dp"
         android:text="test"
         android:textSize="15dp" >

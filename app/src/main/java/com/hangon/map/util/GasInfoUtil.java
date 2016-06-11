@@ -212,10 +212,9 @@ public class GasInfoUtil implements Serializable {
     }
 
     public static List<Datas> gasinfo = new ArrayList<Datas>();
-
     public static void VolleyGet(final Context context) {
         try {
-            String url = "http://apis.juhe.cn/oil/local?key=f76a41676986a78971d9ab2265dbe714&lon="
+            String url = "http://apis.juhe.cn/oil/local?key=787c15622433cef327bc543f86862ad0&lon="
                     + locationlongtitude
                     + "&lat="
                     + locationlatitude

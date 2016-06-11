@@ -1,35 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    >
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e0e0e0"
+        />
 <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="50dp">
+    android:layout_height="45dp">
    <LinearLayout
        android:layout_weight="1"
        android:layout_width="match_parent"
        android:layout_height="match_parent">
        <TextView
+           android:textColor="#000000"
            android:id="@+id/gas_type"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:gravity="center"
            android:text="#00"
-           android:textSize="15dp"
+           android:textSize="14sp"
            />
    </LinearLayout>
+    <View
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#e0e0e0"
+        />
     <LinearLayout
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
+            android:textColor="#000000"
             android:id="@+id/gas_type_singleprice"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="15"
-            android:textSize="15dp"
+            android:textSize="14sp"
             />
     </LinearLayout>
 </LinearLayout>

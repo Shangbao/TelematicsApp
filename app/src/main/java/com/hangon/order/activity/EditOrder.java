@@ -1,6 +1,8 @@
 package com.hangon.order.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,12 +25,9 @@ import com.example.fd.ourapplication.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hangon.common.Constants;
-import com.hangon.common.Topbar;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.order.util.Bean;
-import com.hangon.order.util.GasOrderAdapter;
-import com.hangon.order.util.OnItemclick;
 import com.hangon.order.util.OrderData;
 
 import java.util.ArrayList;
@@ -34,11 +35,17 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by fd on 2016/5/8.
  */
 public class EditOrder extends Activity {
+    //订单编辑标题栏
+    private ImageButton topbarLeft;
+    private ImageButton topbarRight;
+    private TextView topbarTittle;
     EditOrderAdapter adapter;
     List<OrderData> orderList;
     int judge = 1;
@@ -46,14 +53,14 @@ public class EditOrder extends Activity {
     private ArrayList<HashMap<String, String>> arrayList;
     //订单编辑
     TextView deleteEdit;
-    CheckBox allOrderSelected;
-    Topbar editTopBar;
+    Dialog dialog,dialog1;
     ListView editOrderList;
     ViewHolder viewHolder;
     //记录选中的条目数量
     private int checkNum;
     //显示选中数目
     private TextView tv_show;
+    CheckBox allOrderSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,27 +71,31 @@ public class EditOrder extends Activity {
     }
 
     private void initFindViewById() {
+        getData();
+        //topbarID
+        topbarLeft=(ImageButton)findViewById(R.id.topbar_left);
+        topbarRight=(ImageButton)findViewById(R.id.topbar_right);
+        topbarTittle=(TextView)findViewById(R.id.topbar_title);
+        topbarTittle.setText("编辑订单");
+       topbarLeft.setVisibility(View.GONE);
+        topbarRight.setImageResource(R.drawable.zc_13);
+        topbarRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               finish();
+            }
+        });
         deleteEdit = (TextView) findViewById(R.id.delete_order_edit);
         allOrderSelected = (CheckBox) findViewById(R.id.all_selected);
         editOrderList = (ListView) findViewById(R.id.edit_order);
-        editTopBar = (Topbar) findViewById(R.id.edittopbar);
-        editTopBar.setLeftIsVisible(false);
-        editTopBar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
-            @Override
-            public void leftClick() {
-
-            }
-
-            @Override
-            public void rightClick() {
-                finish();
-            }
-        });
-        getData();
         //全选按钮
         allOrderSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (arrayList == null || arrayList.size() == 0) {
+                    Toast.makeText(EditOrder.this, "可删除列表为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (allOrderSelected.isChecked()) {
                     for (int i = 0; i < arrayList.size(); i++) {
                         arrayList.get(i).put("flag", "true");
@@ -111,7 +122,8 @@ public class EditOrder extends Activity {
             @Override
             public void onClick(View v) {
 
-                ArrayList list = new ArrayList<Bean>();
+               final  ArrayList list = new ArrayList<Bean>();
+                if(arrayList==null||arrayList.size()==0)return;
                 Toast.makeText(getApplicationContext(), arrayList.size() + "", Toast.LENGTH_SHORT).show();
                 for (int i = 0; i < arrayList.size(); i++) {
                     if (arrayList.get(i).get("flag").equals("true")) {
@@ -119,7 +131,31 @@ public class EditOrder extends Activity {
                         list.add(bean);
                     }
                 }
-                PostVolley(list);
+                if(list!=null||list.size()!=0){
+                    View cancelView1=LayoutInflater.from(EditOrder.this).inflate(R.layout.order_alert,null);
+                    ImageView cancelYes1=(ImageView)cancelView1.findViewById(R.id.calcel_order_yes);
+                    ImageView cancelNo1=(ImageView)cancelView1.findViewById(R.id.calcel_order_no);
+                    TextView alertContent1=(TextView)cancelView1.findViewById(R.id.alert_content);
+                    dialog=new Dialog(EditOrder.this);
+                    AlertDialog.Builder builder=new AlertDialog.Builder(EditOrder.this);
+                    builder.setView(cancelView1);
+                    dialog=builder.create();
+                    dialog.show();
+                    alertContent1.setText("是否删除订单？");
+                    cancelYes1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            PostVolley(list);
+                            dialog.dismiss();
+                        }
+                    });
+                    cancelNo1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
                 Iterator<HashMap<String, String>> iterator = arrayList.iterator();
                 while (iterator.hasNext()) {
                     int i = 0;
@@ -128,13 +164,8 @@ public class EditOrder extends Activity {
                         iterator.remove();
                     }
                 }
-                checkNum = 0;
-                DataChange();
-                Intent intent = new Intent();
-                intent.setClass(getApplicationContext(), MainOrderActivity.class);
-                startActivity(intent);
-                finish();
-            }
+
+            }}
         });
         editOrderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -158,7 +189,8 @@ public class EditOrder extends Activity {
     //装载数据
     public void getData() {
         Toast.makeText(getApplicationContext(), "ALLPRDERGETGETDATA", Toast.LENGTH_SHORT).show();
-        String url = Constants.GET_ORDER_INFOS_URL;
+       String userId=Constants.USER_ID+"";
+        String url = Constants.GET_ORDER_INFOS_URL+"?userId="+userId;
         VolleyRequest.RequestGet(getApplicationContext(), url, "getData", new VolleyInterface(getApplicationContext(), VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
@@ -242,13 +274,12 @@ public class EditOrder extends Activity {
                 viewHolder = new ViewHolder();
                 convertView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.orderlist_edit4, null);
                 viewHolder.list_gasname = (TextView) convertView.findViewById(R.id.list_editorder_gasname);
-                viewHolder.list_gaslitre = (TextView) convertView.findViewById(R.id.list_gaslitre_edit);
-                viewHolder.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_editorder_status);
-                viewHolder.list_gassumprice = (TextView) convertView.findViewById(R.id.list_gassumprice_edit);
+//                viewHolder.list_gaslitre = (TextView) convertView.findViewById(R.id.list_gaslitre_edit);
+//                viewHolder.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_editorder_status);
+//                viewHolder.list_gassumprice = (TextView) convertView.findViewById(R.id.list_gassumprice_edit);
                 viewHolder.list_gastype = (TextView) convertView.findViewById(R.id.list_gastype_edit);
                 viewHolder.list_ordertime = (TextView) convertView.findViewById(R.id.list_ordertime_edit);
                 viewHolder.item_cb = (CheckBox) convertView.findViewById(R.id.item_cb);
-                viewHolder.linearLayout = (LinearLayout) convertView.findViewById(R.id.liner_edit);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
@@ -256,18 +287,16 @@ public class EditOrder extends Activity {
             viewHolder.list_gasname.setText(list.get(position).get("gasname").toString());
             viewHolder.list_gastype.setText(list.get(position).get("gastype").toString());
             viewHolder.list_ordertime.setText(list.get(position).get("gasordertime").toString());
-            viewHolder.list_gaslitre.setText(list.get(position).get("gasLitre").toString());
-            viewHolder.list_gasorder_status.setText(list.get(position).get("gasstate").toString());
-            viewHolder.list_gassumprice.setText(list.get(position).get("gassumprice").toString());
+//            viewHolder.list_gaslitre.setText(list.get(position).get("gasLitre").toString());
+//            viewHolder.list_gasorder_status.setText(list.get(position).get("gasstate").toString());
+//            viewHolder.list_gassumprice.setText(list.get(position).get("gassumprice").toString());
             viewHolder.item_cb.setVisibility(View.VISIBLE);
             viewHolder.item_cb.setChecked(list.get(position).get("flag").equals("true"));
             if (viewHolder.item_cb.isChecked()) {
-                viewHolder.linearLayout.setBackgroundColor(Color.BLACK);
                 notifyDataSetChanged();
+
             }
             if (!viewHolder.item_cb.isChecked()) {
-                viewHolder.linearLayout.setBackgroundColor(Color.WHITE);
-                notifyDataSetChanged();
             }
             return convertView;
         }
@@ -282,11 +311,17 @@ public class EditOrder extends Activity {
         VolleyRequest.RequestPost(getApplicationContext(), url, "PostVolley", map, new VolleyInterface(getApplicationContext(), VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
-                Intent confirm = new Intent();
-                confirm.setClass(getApplicationContext(), Success.class);
-                //confirm.putExtra("orderdata",bundle);
-                //startActivity(confirm);
-                //  finish();
+                dialog1=new Dialog(EditOrder.this);
+                AlertDialog.Builder builder=new AlertDialog.Builder(EditOrder.this);
+                builder.setView(LayoutInflater.from(EditOrder.this).inflate(R.layout.delete_alert_success, null));
+                dialog1=builder.create();
+                dialog1.show();
+                Timer timer=new Timer();
+                timer.schedule(new wait(), 2000);
+
+                checkNum = 0;
+                DataChange();
+
             }
 
             @Override
@@ -305,7 +340,7 @@ public class EditOrder extends Activity {
         /**
          * 支付状态
          */
-        TextView list_gasorder_status;
+      //  TextView list_gasorder_status;
         /**
          * 订单时间
          */
@@ -313,19 +348,30 @@ public class EditOrder extends Activity {
         /**
          * 加油类型
          */
-        TextView list_gastype;
+       TextView list_gastype;
         /**
          * 加油升数
          */
-        TextView list_gaslitre;
+       // TextView list_gaslitre;
         /**
          * 总金额
          */
-        TextView list_gassumprice;
+       // TextView list_gassumprice;
         /**
          * 复选框
          */
         CheckBox item_cb;
         LinearLayout linearLayout;
+    }
+    class wait extends TimerTask {
+
+        @Override
+        public void run() {
+            dialog1.dismiss();
+            Intent intent = new Intent();
+            intent.setClass(getApplicationContext(), MainOrderActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

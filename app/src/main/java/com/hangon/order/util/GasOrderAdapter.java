@@ -56,7 +56,7 @@ public class GasOrderAdapter extends BaseAdapter {
 			vh.list_gaslitre = (TextView) convertView.findViewById(R.id.list_gaslitre);
 			vh.list_gastype = (TextView) convertView.findViewById(R.id.list_gastype);
 			vh.list_ordertime = (TextView) convertView.findViewById(R.id.list_ordertime);
-			vh.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_gasorder_status);
+			//vh.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_gasorder_status);
 			vh.gaslist_cancel_order = (TextView) convertView.findViewById(R.id.gaslist_cancel_order);
 			vh.gaslist_payment_order = (TextView) convertView.findViewById(R.id.gaslist_payment_order);
 			vh.item_cb=(CheckBox)convertView.findViewById(R.id.item_cb);

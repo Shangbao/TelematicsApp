@@ -2,6 +2,7 @@ package com.hangon.order.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,13 +19,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.common.Topbar;
 import com.hangon.map.activity.MapMainActivity;
 import com.hangon.map.util.JudgeNet;
+import com.hangon.map.util.NetReceiver;
 import com.hangon.order.util.FragmentViewPagerAdapter;
 
 import java.util.ArrayList;
@@ -34,9 +38,10 @@ import java.util.TimerTask;
 
 public class MainOrderActivity extends FragmentActivity {
     //订单管理标题栏
-    Topbar orderTopbar;
-    //全部订单
-    private TextView all_orderTextView;
+    private ImageButton topbarLeft;
+    private ImageButton topbarRight;
+    private TextView topbarTittle;
+
     //未支付订单
     private TextView nopay_orderTextView;
     //已支付订单
@@ -69,7 +74,15 @@ public class MainOrderActivity extends FragmentActivity {
 
     //切换器的适配器
     FragmentViewPagerAdapter adapter;
-
+   //周围加油站
+    LinearLayout btnZwjyz;
+    /**
+     * 判断网络是否可用
+     */
+    NetReceiver mReceiver ;
+    IntentFilter mFilter;
+    //全部订单
+    private TextView all_orderTextView;
     public static final String TAG = "OrderMainActivity";
 
     private Handler mHandler = new Handler() {
@@ -125,7 +138,45 @@ public class MainOrderActivity extends FragmentActivity {
      * 初始化头标
      */
     private void InitTextView() {
+        //topbarID
+        topbarLeft=(ImageButton)findViewById(R.id.topbar_left);
+        topbarRight=(ImageButton)findViewById(R.id.topbar_right);
+        topbarTittle=(TextView)findViewById(R.id.topbar_title);
+        topbarTittle.setText("我的订单");
+        topbarLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JudgeNet judgeNet=new JudgeNet();
+                judgeNet.setStates(2);
+                Intent intent=new Intent();
+                intent.setClass(MainOrderActivity.this, MapMainActivity.class);
+                startActivity(intent);
+            }
+        });
+        topbarRight.setBackgroundResource(R.drawable.grzx_03);
 
+        topbarRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(MainOrderActivity.this, EditOrder.class);
+                startActivity(intent);
+            }
+        });
+        //周围加油站
+        btnZwjyz=(LinearLayout)findViewById(R.id.btnZwjyz);
+        btnZwjyz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             JudgeNet judgeNet=new JudgeNet();
+                    judgeNet.setStates(2);
+                    Log.e("bbb", judgeNet.getStates() + "");
+                    Intent intent=new Intent();
+                    intent.setClass(MainOrderActivity.this, MapMainActivity.class);
+                    startActivity(intent);
+
+            }
+        });
         //图片头标
         all_orderTextView = (TextView) findViewById(R.id.all_order_text);
         //电影头标
@@ -134,29 +185,12 @@ public class MainOrderActivity extends FragmentActivity {
         pay_orderTextView = (TextView) findViewById(R.id.pay_order_text);
 
         //标题栏
-        orderTopbar = (Topbar) findViewById(R.id.order_Topbar);
+
         //添加点击事件
         all_orderTextView.setOnClickListener(new MyOnClickListener(0));
         nopay_orderTextView.setOnClickListener(new MyOnClickListener(1));
         pay_orderTextView.setOnClickListener(new MyOnClickListener(2));
-        orderTopbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
-            @Override
-            public void leftClick() {
-                JudgeNet judgeNet = new JudgeNet();
-                judgeNet.setStates(2);
-                Intent intent = new Intent();
-                intent.setClass(MainOrderActivity.this, MapMainActivity.class);
-                startActivity(intent);
-                finish();
-            }
 
-            @Override
-            public void rightClick() {
-                Intent intent = new Intent();
-                intent.setClass(MainOrderActivity.this, EditOrder.class);
-                startActivity(intent);
-            }
-        });
     }
 
     /**
@@ -176,7 +210,7 @@ public class MainOrderActivity extends FragmentActivity {
 
         //将顶部文字恢复默认值
         resetTextViewTextColor();
-        all_orderTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color_2));
+        all_orderTextView.setTextColor(getResources().getColor(R.color.indictor_selected_text));
 
         //设置viewpager页面滑动监听事件
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
@@ -254,11 +288,14 @@ public class MainOrderActivity extends FragmentActivity {
                     if (currIndex == 1) {
                         animation = new TranslateAnimation(position_one, 0, 0, 0);
                         resetTextViewTextColor();
-                        all_orderTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color_2));
+                        all_orderTextView.setTextColor(getResources().getColor(R.color.indictor_selected_text));
+                        all_orderTextView.setBackgroundColor(getResources().getColor(R.color.indictor_selected));
+
                     } else if (currIndex == 2) {//从页卡1跳转转到页卡3
                         animation = new TranslateAnimation(position_two, 0, 0, 0);
                         resetTextViewTextColor();
-                        all_orderTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color_2));
+                        all_orderTextView.setTextColor(getResources().getColor(R.color.indictor_selected_text));
+                        all_orderTextView.setBackgroundColor(getResources().getColor(R.color.indictor_selected));
                     }
                     break;
 
@@ -268,11 +305,13 @@ public class MainOrderActivity extends FragmentActivity {
                     if (currIndex == 0) {
                         animation = new TranslateAnimation(offset, position_one, 0, 0);
                         resetTextViewTextColor();
-                        nopay_orderTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color_2));
+                        nopay_orderTextView.setTextColor(getResources().getColor(R.color.indictor_selected_text));
+                        nopay_orderTextView.setBackgroundColor(getResources().getColor(R.color.indictor_selected));
                     } else if (currIndex == 2) { //从页卡1跳转转到页卡2
                         animation = new TranslateAnimation(position_two, position_one, 0, 0);
                         resetTextViewTextColor();
-                        nopay_orderTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color_2));
+                        nopay_orderTextView.setTextColor(getResources().getColor(R.color.indictor_selected_text));
+                        nopay_orderTextView.setBackgroundColor(getResources().getColor(R.color.indictor_selected));
                     }
                     break;
 
@@ -282,11 +321,13 @@ public class MainOrderActivity extends FragmentActivity {
                     if (currIndex == 0) {
                         animation = new TranslateAnimation(offset, position_two, 0, 0);
                         resetTextViewTextColor();
-                        pay_orderTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color_2));
+                        pay_orderTextView.setTextColor(getResources().getColor(R.color.indictor_selected_text));
+                        pay_orderTextView.setBackgroundColor(getResources().getColor(R.color.indictor_selected));
                     } else if (currIndex == 1) {//从页卡1跳转转到页卡2
                         animation = new TranslateAnimation(position_one, position_two, 0, 0);
                         resetTextViewTextColor();
-                        pay_orderTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color_2));
+                        pay_orderTextView.setTextColor(getResources().getColor(R.color.indictor_selected_text));
+                        pay_orderTextView.setBackgroundColor(getResources().getColor(R.color.indictor_selected));
                     }
                     break;
             }
@@ -325,9 +366,12 @@ public class MainOrderActivity extends FragmentActivity {
      * 将顶部文字恢复默认值
      */
     private void resetTextViewTextColor() {
-        all_orderTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color));
-        nopay_orderTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color));
-        pay_orderTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color));
+        all_orderTextView.setTextColor(getResources().getColor(R.color.indictor_noselected_text));
+        nopay_orderTextView.setTextColor(getResources().getColor(R.color.indictor_noselected_text));
+        pay_orderTextView.setTextColor(getResources().getColor(R.color.indictor_noselected_text));
+        all_orderTextView.setBackgroundColor(getResources().getColor(R.color.indictor_noselected));
+        nopay_orderTextView.setBackgroundColor(getResources().getColor(R.color.indictor_noselected));
+        pay_orderTextView.setBackgroundColor(getResources().getColor(R.color.indictor_noselected));
     }
 
     class wait extends TimerTask {

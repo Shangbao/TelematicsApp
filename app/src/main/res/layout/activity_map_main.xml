@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="#ffffff" >
 
     <com.baidu.mapapi.map.MapView
@@ -10,16 +11,20 @@
         android:layout_height="fill_parent"
         android:background="#ffffff"
         android:clickable="true" />
-
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/topbar"
+        />
     <Button
         android:id="@+id/road_cond"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:layout_marginTop="47dp"
-        android:background="@drawable/map_btn_its_close" />
+        android:background="@drawable/zwjyz_10" />
 
     <ListView
+        android:background="#ffffff"
         android:id="@+id/gaslist"
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -30,52 +35,99 @@
         >
     </ListView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentLeft="true"
-        android:layout_above="@+id/liner"
-        android:background="#ffffff" >
 
-        <ImageView
-            android:id="@+id/location_position"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="6"
-            android:scaleType="fitXY"
-            android:src="@drawable/location_position" />
 
-        <Button
-          android:id="@+id/show_hide"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/map_button_style"
-            android:text="显示列表         "
-            android:textColor="#3333ff"
-            android:textSize="17dp" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:id="@+id/liner"
+
+
+
+    <FrameLayout
+        android:id="@+id/fragmentlayout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="#ffffff"
         android:layout_alignParentBottom="true"
         >
-        <Button
-            android:id="@+id/btnZwjyz"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text=""/>
-        <Button
+        <LinearLayout
             android:id="@+id/btnOrder"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-</LinearLayout>
+            android:layout_gravity="right"
+            android:orientation="vertical"
+            android:background="#71b383"
+            android:layout_marginTop="20dp"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            >
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:src="@drawable/zwjyz_25"/>
+            <TextView
+                android:layout_marginTop="3dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="订单管理"
+                android:textSize="8dp"
+                android:textColor="#ffffff"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnZwjyz"
+            android:orientation="vertical"
+            android:background="#239db5"
+            android:layout_marginTop="20dp"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            >
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:src="@drawable/zwjyz_22"/>
+            <TextView
+                android:layout_marginTop="3dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="周围加油站"
+                android:textSize="8dp"
+                android:textColor="#ffffff"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/show_hide"
+            android:orientation="vertical"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/show_hide_jyz"
+            >
+            <ImageView
+                android:id="@+id/image"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/zwjyz_19"
+                />
+            <TextView
+                android:id="@+id/show_hide_listtext"
+                android:layout_marginTop="3dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="显示列表"
+                android:textSize="8sp"
+                android:textColor="#ffffff"
+
+                />
+        </LinearLayout>
+
+    </FrameLayout>
+
 
     <ImageView
         android:id="@+id/route_search"
@@ -86,5 +138,14 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="56dp"
         android:src="@drawable/map_route4" />
+    <ImageView
 
+        android:id="@+id/location_position"
+        android:layout_width="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="60dp"
+        android:layout_marginBottom="60dp"
+        android:layout_weight="6"
+        android:scaleType="fitXY"
+        android:background="@drawable/location_position" />
 </RelativeLayout>

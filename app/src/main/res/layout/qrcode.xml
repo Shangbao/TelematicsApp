@@ -3,11 +3,27 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:weightSum="1">
     <LinearLayout
+        android:background="#12a89d"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="扫描二维码"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#ffffff"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="60dp">
 
         <LinearLayout
             android:layout_weight="1"
@@ -19,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="姓名："
-                android:textSize="20dp"
+                android:textSize="14sp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 />
@@ -29,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="zhangsan"
-                android:textSize="20dp"
+                android:textSize="14sp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 />
@@ -45,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="状态："
-                android:textSize="20dp"
+                android:textSize="14sp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 />
@@ -55,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="未付款"
-                android:textSize="20dp"
+                android:textSize="14sp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 />
@@ -69,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="类型："
-                android:textSize="20dp"
+                android:textSize="14sp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 />
@@ -79,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="E97#"
-                android:textSize="20dp"
+                android:textSize="14sp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 />
@@ -88,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="总价格："
-                android:textSize="20dp"
+                android:textSize="14sp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 />
@@ -98,14 +114,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="100"
-                android:textSize="20dp"
+                android:textSize="14sp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 />
         </LinearLayout>
     </LinearLayout>
 <ImageView
+    android:layout_gravity="center"
     android:id="@+id/qrcode_img"
-    android:layout_width="match_parent"
-    android:layout_height="385dp" />
+    android:layout_width="250dp"
+    android:layout_height="250dp" />
 </LinearLayout>

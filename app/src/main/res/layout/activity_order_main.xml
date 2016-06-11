@@ -3,44 +3,35 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#1e1f22">
-        <com.hangon.common.Topbar
-            android:id="@+id/order_Topbar"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            custom:mTitleTextSize="10sp"
-            custom:mTitleTextColor="#ffffff"
-            custom:mTitle="订单管理"
-            custom:leftText="BACK"
-            custom:leftTextColor="#ffffff"
-            custom:rightTextColor="#ffffff"
-            custom:rightText="编辑"
-            ></com.hangon.common.Topbar>
-    </LinearLayout>
+    >
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/topbar"
+></include>
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/top_tab_height"
-        android:background="@color/main_top_color" >
+        android:background="#0d8d0d"
+       >
 
         <TextView
+            android:background="@color/indictor_selected"
             android:id="@+id/all_order_text"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="@string/all_order"
+            android:text="全部订单"
             android:textStyle="bold"
-            android:textColor="@color/main_top_tab_color"
+            android:textColor="@color/indictor_selected_text"
             android:textSize="@dimen/main_top_tab_text_size" />
 
         <TextView
+            android:background="#ffffff"
             android:id="@+id/nopay_order_text"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -48,10 +39,11 @@
             android:gravity="center"
             android:text="@string/nopay_order"
             android:textStyle="bold"
-            android:textColor="@color/main_top_tab_color"
+            android:textColor="@color/indictor_noselected_text"
             android:textSize="@dimen/main_top_tab_text_size" />
 
         <TextView
+            android:background="#ffffff"
             android:id="@+id/pay_order_text"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -59,7 +51,7 @@
             android:gravity="center"
             android:text="@string/pay_order"
             android:textStyle="bold"
-            android:textColor="@color/main_top_tab_color"
+            android:textColor="@color/indictor_selected_text"
             android:textSize="@dimen/main_top_tab_text_size" />
     </LinearLayout>
 
@@ -68,7 +60,7 @@
         android:layout_height="@dimen/main_line_height"
         android:layout_gravity="bottom"
         android:orientation="vertical"
-        android:background="@color/main_top_color"
+        android:background="@color/white"
         >
 
         <ImageView
@@ -78,13 +70,6 @@
             android:scaleType="matrix"
             android:src="@color/matrix_color" />
     </LinearLayout>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/main_top_color"/>
-
-
     <android.support.v4.view.ViewPager
         android:id="@+id/vPager"
         android:layout_width="fill_parent"
@@ -94,4 +79,81 @@
         android:background="@color/white"
         android:flipInterval="30"
         android:persistentDrawingCache="animation" />
+    <FrameLayout
+        android:id="@+id/fragmentlayout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        >
+        <LinearLayout
+            android:id="@+id/btnOrder"
+            android:layout_gravity="right"
+            android:orientation="vertical"
+            android:background="#71b383"
+            android:layout_marginTop="20dp"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            >
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:src="@drawable/zwjyz_25"/>
+            <TextView
+                android:layout_marginTop="3dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="订单管理"
+                android:textSize="8dp"
+                android:textColor="#ffffff"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnZwjyz"
+            android:orientation="vertical"
+            android:background="#239db5"
+            android:layout_marginTop="20dp"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            >
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:src="@drawable/zwjyz_22"/>
+            <TextView
+                android:layout_marginTop="3dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="周围加油站"
+                android:textSize="8dp"
+                android:textColor="#ffffff"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/show_hide"
+            android:orientation="vertical"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/show_hide_jyz"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="订单中心"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+
+    </FrameLayout>
 </LinearLayout>

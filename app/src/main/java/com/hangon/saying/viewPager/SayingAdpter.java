@@ -1,8 +1,10 @@
 package com.hangon.saying.viewPager;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -72,11 +75,11 @@ public class SayingAdpter extends BaseAdapter {
         if (convertView == null) {
             vh = new ViewHorder();
             convertView = LayoutInflater.from(context).inflate(R.layout.carlife_list_layout, null);
-            vh.saying_qz_flg= (ImageView) convertView.findViewById(R.id.saying_qz_flg);
+            vh.saying_qz_flg=(ImageView)convertView.findViewById(R.id.saying_qz_flg);
             vh.saying_userimg = (ImageView) convertView.findViewById(R.id.saying_userimg);
             vh.saying_nickname = (TextView) convertView.findViewById(R.id.saying_nickname);
             vh.saying_time = (TextView) convertView.findViewById(R.id.saying_time);
-            vh.saying_delete = (Button) convertView.findViewById(R.id.saying_delete);
+            vh.saying_delete = (ImageView) convertView.findViewById(R.id.saying_delete);
             vh.saying_content = (TextView) convertView.findViewById(R.id.saying_content);
             vh.gridView = (GridView) convertView.findViewById(R.id.saying_gridview);
             vh.saying_address = (TextView) convertView.findViewById(R.id.saying_address);
@@ -85,17 +88,18 @@ public class SayingAdpter extends BaseAdapter {
             vh = (ViewHorder) convertView.getTag();
         }
         getImg(list.get(position).getUserIconUrl().trim().toString());
-        Log.e("getImg",list.get(position).getUserIconUrl());
+        Log.e("getImg", list.get(position).getUserIconUrl());
         vh.saying_nickname.setText(list.get(position).getNickName().toString());
         vh.saying_content.setText(list.get(position).getSayingContent().trim().toString());
+
         vh.saying_time.setText(list.get(position).getStrTime());
         vh.saying_address.setText(list.get(position).getPostAddress());
         if(list.get(position).getSayingType()==1){
-            vh.saying_qz_flg.setVisibility(View.GONE);
+           vh.saying_delete.setVisibility(View.GONE);
         }else if(list.get(position).getSayingType()==2){
-            vh.saying_qz_flg.setImageResource(R.drawable.app_logo);
+            vh.saying_qz_flg.setBackgroundResource(R.drawable.ss_02);
         }else if(list.get(position).getSayingType()==3){
-            vh.saying_qz_flg.setImageResource(R.drawable.addgas);
+            vh.saying_qz_flg.setBackgroundResource(R.drawable.ss_03);
         }
 
         if(list.get(position).getUserId()==Constants.USER_ID){
@@ -129,6 +133,10 @@ public class SayingAdpter extends BaseAdapter {
 
         if (list.get(position).getImg4() != null && !list.get(position).getImg4().equals("")) {
             mList.add(list.get(position).getImg4());
+            ViewGroup.MarginLayoutParams marginLayoutParams=new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,620);
+            marginLayoutParams.setMargins(marginLayoutParams.leftMargin+50, 5, marginLayoutParams.rightMargin+50, marginLayoutParams.bottomMargin);
+          vh.gridView.setLayoutParams(new LinearLayout.LayoutParams(marginLayoutParams));
+        //vh.gridView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,620));
             Log.e("getImg4", list.get(position).getImg4());
         }
 
@@ -160,12 +168,12 @@ public class SayingAdpter extends BaseAdapter {
         ImageView saying_userimg;
         TextView saying_nickname;
         TextView saying_time;
-        Button saying_delete;
+        ImageView saying_delete;
         TextView saying_content;
         TextView saying_gridview;
         TextView saying_address;
-        ImageView saying_qz_flg;
         GridView gridView;
+        ImageView saying_qz_flg;
     }
 
     public void getImg(String path) {
@@ -183,5 +191,14 @@ public class SayingAdpter extends BaseAdapter {
         });
         MyApplication.getHttpQueues().add(request);
     }
+//设置页面边距
+    private void setLayoutX(View view, int top){
+        ViewGroup.MarginLayoutParams marginLayoutParams=new ViewGroup.MarginLayoutParams(view.getLayoutParams());
+        marginLayoutParams.setMargins(marginLayoutParams.leftMargin,top,marginLayoutParams.rightMargin,marginLayoutParams.bottomMargin);
+    }
+    //dp 转换为像素
+    public int dip2px(){
 
+        return 0;
+    }
 }

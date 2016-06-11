@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.fd.ourapplication.R;
@@ -25,7 +26,11 @@ public class TestPicActivity extends Activity {
 	AlbumHelper helper;
 	public static final String EXTRA_IMAGE_LIST = "imagelist";
 	public static Bitmap bimap;
-	private TextView cancel_image_bucket;
+	//topbar
+	private ImageButton topLeft;
+	private TextView topTittle;
+	private ImageButton cancel_image_bucket;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,7 +61,11 @@ public class TestPicActivity extends Activity {
 	 * 初始化view视图
 	 */
 	private void initView() {
-		cancel_image_bucket=(TextView)findViewById(R.id.cancel_image_bucket);
+		topLeft=(ImageButton)findViewById(R.id.topbar_left);
+		topTittle=(TextView)findViewById(R.id.topbar_title);
+		topTittle.setText("相册");
+		topLeft.setVisibility(View.GONE);
+		cancel_image_bucket=(ImageButton)findViewById(R.id.topbar_right);
 		cancel_image_bucket.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

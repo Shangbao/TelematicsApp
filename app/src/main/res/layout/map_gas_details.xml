@@ -5,241 +5,242 @@
     android:orientation="vertical"
     android:background="#ffffff"
     >
+    <include android:id="@+id/toolbar"
+        layout="@layout/topbar"/>
+<View
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    android:background="#e0e0e0">
 
+</View>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="9"
-        android:background="#0000ff" >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="长春加油站"
-            android:textColor="#ffffff"
-            android:textSize="20dp" />
-    </LinearLayout>
 
-    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#666666"
-            android:drawingCacheQuality="low" />
-
+        >
         <LinearLayout
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:layout_weight="3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
+            android:layout_height="match_parent">
             <LinearLayout
+              android:orientation="horizontal"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:orientation="vertical" >
-
+                android:layout_height="match_parent">
+              <LinearLayout
+                  android:layout_gravity="center"
+                  android:layout_weight="3"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+                  <ImageView
+                      android:layout_marginLeft="30dp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center"
+                      android:background="@drawable/jyz_03"
+                      />
+              </LinearLayout>
                 <LinearLayout
+                    android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" >
-
+                    android:layout_height="match_parent">
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="4" >
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/map_gas_site" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical"
                         android:layout_weight="1"
-                        android:orientation="vertical" >
-
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                     <TextView
+                         android:id="@+id/gasNameDetails"
+                         android:gravity="center_vertical"
+                         android:text="长春加油站"
+                         android:layout_weight="1"
+                         android:textSize="14sp"
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent" />
                         <TextView
-                            android:id="@+id/gasNameDetails"
-                            android:layout_width="200dp"
-                            android:layout_height="20dp"
-                            android:gravity="center_vertical"
-                            android:text="长春加油站"
-                            android:textSize="15dp" />
-
-                        <TextView
+                            android:layout_marginTop="-5dp"
                             android:id="@+id/gasAreanameDetails"
-                            android:layout_width="200dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="0dp"
-                            android:gravity="center_vertical"
-                            android:text="中国石化"
-                            android:textSize="12dp" />
+                            android:text="中石化"
+                            android:paddingLeft="10dp"
+                            android:textSize="12sp"
+                            android:layout_weight="2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <View
+                        android:layout_marginTop="20dp"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#cccccc"
+                        android:layout_marginBottom="20dp"
+                        />
+
+                    <LinearLayout
+                        android:layout_weight="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
                         <ImageView
                             android:id="@+id/GasStartRoute"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_marginLeft="200dp"
-                            android:layout_marginTop="-30dp"
-                            android:src="@drawable/map_route4" />
-                    </LinearLayout>
-                </LinearLayout>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="2"
-                    android:orientation="vertical" >
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#666666"
-                        android:drawingCacheQuality="low" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal" >
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1" >
-
-                            <TextView
-                                android:id="@+id/gasAddressDetails"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="10dp"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="长春市朝阳区长春工业大xue"
-                                android:textSize="12dp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="5" >
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1" >
-
-                                <TextView
-                                    android:id="@+id/gasDistanceDetails"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="26"
-                                    android:gravity="center"
-                                    android:text="16.901"
-                                    android:textSize="8dp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1" >
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="3dp"
-                                    android:gravity="center_vertical"
-                                    android:text="km"
-                                    android:textSize="10dp" />
-                            </LinearLayout>
-                        </LinearLayout>
+                            android:background="@drawable/jyz_05"
+                             android:layout_gravity="center"
+                            android:layout_marginLeft="30dp"
+                            />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-
+            <View
+               android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#e0e0e0"/>
             <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/gasAddressDetails"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="长春市南关区长春工业大学北湖校区男寝八栋"
+
+                />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    >
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                         <TextView
+                             android:id="@+id/gasDistanceDetails"
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:text="500"
+                             android:textSize="14sp"
+                             android:gravity="center"
+                             />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                      <TextView
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:text="米"
+                          android:textSize="14sp"
+                          android:gravity="center"
+                          android:layout_marginRight="3dp"
+                          />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#e0e0e0">
+
+        </View>
+        <LinearLayout
+            android:background="#e0e0e0"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="油价详情"
+                    android:textSize="15sp"
+                    android:textColor="#000000"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#e0e0e0"/>
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="6"
-                    android:background="#cccccc" >
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="   油价详情"
-                        android:textSize="15dp" />
-                </LinearLayout>
-
-                <LinearLayout
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical" >
+                >
                <LinearLayout
+                   android:background="#ffffff"
+                   android:orientation="horizontal"
+                   android:layout_weight="8"
                    android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                  android:layout_weight="5">
-                   <LinearLayout
+                   android:layout_height="match_parent">
+                   <TextView
                        android:layout_weight="1"
                        android:layout_width="match_parent"
-                       android:layout_height="match_parent">
-                       <TextView
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           android:text="油号"
-                           android:textSize="15dp"
-                           android:gravity="center"
-                           />
-                   </LinearLayout>
-                   <LinearLayout
+                       android:layout_height="match_parent"
+                       android:text="油号"
+                       android:textSize="18sp"
+                       android:gravity="center"/>
+                   <View
+                       android:layout_marginBottom="2dp"
+                       android:layout_marginTop="2dp"
+                       android:background="#e0e0e0"
+                       android:layout_width="1dp"
+                       android:layout_height="match_parent"/>
+                   <TextView
                        android:layout_weight="1"
                        android:layout_width="match_parent"
-                       android:layout_height="match_parent">
-                       <TextView
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           android:text="单价"
-                           android:textSize="15dp"
-                           android:gravity="center"
-
-                           />
-                   </LinearLayout>
+                       android:layout_height="match_parent"
+                       android:text="单价"
+                       android:textSize="18sp"
+                       android:gravity="center"/>
                </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-                     <ListView
-                         android:id="@+id/gas_type_list"
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent">
 
-                     </ListView>
-                    </LinearLayout>
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-                </LinearLayout>
+               <LinearLayout
+                   android:layout_weight="1"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
+                   <ListView
+                       android:divider="@null"
+                       android:background="#ffffff"
+                       android:id="@+id/gas_type_list"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"/>
+               </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
 
+
+
+</LinearLayout>

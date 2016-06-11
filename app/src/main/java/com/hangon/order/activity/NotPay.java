@@ -1,13 +1,10 @@
 package com.hangon.order.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -17,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,10 +29,7 @@ import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.order.util.BaseFragmentPagerAdapter;
-import com.hangon.order.util.DialogTool;
-import com.hangon.order.util.GasOrderAdapter;
 import com.hangon.order.util.Judge;
-import com.hangon.order.util.OnItemclick;
 import com.hangon.order.util.OrderData;
 import com.xys.libzxing.zxing.encoding.EncodingUtils;
 
@@ -52,6 +45,7 @@ public class NotPay extends Fragment implements BaseFragmentPagerAdapter.UpdateA
     ViewHolder vh;
     Context context;
     NotPayadapter notPayadapter;
+    Dialog dialog;
 
 
     @Override
@@ -79,7 +73,6 @@ public class NotPay extends Fragment implements BaseFragmentPagerAdapter.UpdateA
                 }.getType());
                 notPayadapter = new NotPayadapter(list);
                 mOrderNotPayList.setAdapter(notPayadapter);
-                mOrderNotPayList.setOnItemClickListener(new OnItemclick(getActivity(), list));
             }
 
             @Override
@@ -130,11 +123,9 @@ public class NotPay extends Fragment implements BaseFragmentPagerAdapter.UpdateA
                 vh.list_gaslitre = (TextView) convertView.findViewById(R.id.list_gaslitre);
                 vh.list_gastype = (TextView) convertView.findViewById(R.id.list_gastype);
                 vh.list_ordertime = (TextView) convertView.findViewById(R.id.list_ordertime);
-                vh.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_gasorder_status);
-                vh.gaslist_cancel_order = (TextView) convertView.findViewById(R.id.gaslist_cancel_order);
-                vh.gaslist_payment_order = (TextView) convertView.findViewById(R.id.gaslist_payment_order);
-                vh.item_cb = (CheckBox) convertView.findViewById(R.id.item_cb);
-                vh.qrSweep = (TextView) convertView.findViewById(R.id.list_sweep_code);
+                vh.gaslist_cancel_order = (ImageView) convertView.findViewById(R.id.gaslist_cancel_order);
+                vh.gaslist_payment_order = (ImageView) convertView.findViewById(R.id.gaslist_payment_order);
+                vh.qrSweep = (ImageView) convertView.findViewById(R.id.list_sweep_code);
                 convertView.setTag(vh);
             } else {
                 vh = (ViewHolder) convertView.getTag();
@@ -150,9 +141,9 @@ public class NotPay extends Fragment implements BaseFragmentPagerAdapter.UpdateA
             vh.list_ordertime.setText(notpayList.get(position).getStrTime());
             vh.list_gastype.setText(notpayList.get(position).getGasType());
             if ((notpayList.get(position).getOrderState() == 0)) {
-                vh.list_gasorder_status.setText("未支付");
                 vh.gaslist_cancel_order.setVisibility(View.VISIBLE);
-                vh.gaslist_payment_order.setText("付款");
+                vh.gaslist_cancel_order.setImageResource(R.drawable.ddgl_14);
+                vh.gaslist_payment_order.setImageResource(R.drawable.ddgl_16);
             }
             notifyDataSetChanged();
             return convertView;
@@ -167,11 +158,24 @@ public class NotPay extends Fragment implements BaseFragmentPagerAdapter.UpdateA
 
             @Override
             public void onClick(View v) {
+
                 switch (v.getId()) {
+
                     case R.id.gaslist_cancel_order:
-                        DialogTool.createNormalDialog(context, "取消订单", "确定取消吗？", "确定", "取消", new DialogInterface.OnClickListener() {
+                        View cancelView=LayoutInflater.from(getActivity()).inflate(R.layout.order_alert,null);
+                        ImageView cancelYes=(ImageView)cancelView.findViewById(R.id.calcel_order_yes);
+                        ImageView cancelNo=(ImageView)cancelView.findViewById(R.id.calcel_order_no);
+                        TextView alertContent=(TextView)cancelView.findViewById(R.id.alert_content);
+                        dialog=new Dialog(getActivity());
+                        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                        builder.setView(cancelView);
+                        dialog=builder.create();
+                        dialog.show();
+                        alertContent.setText("是否取消订单？");
+                        cancelYes.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onClick(View v) {
+                                dialog.dismiss();
                                 int orderId = notpayList.get(position).getOrderId();
                                 String url = Constants.DELETE_ORDER_INFO_URL + "?orderId=" + orderId + "";
                                 VolleyRequest.RequestGet(context, url, "aaa", new VolleyInterface(context, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
@@ -187,7 +191,13 @@ public class NotPay extends Fragment implements BaseFragmentPagerAdapter.UpdateA
                                     }
                                 });
                             }
-                        }, null).show();
+                        });
+                       cancelNo.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View v) {
+                               dialog.dismiss();
+                           }
+                       });
                         break;
                     case R.id.gaslist_payment_order:
                         Intent intent = new Intent(getActivity(), PayDemoActivity.class);
@@ -205,25 +215,15 @@ public class NotPay extends Fragment implements BaseFragmentPagerAdapter.UpdateA
                         TextView gasSumPrice = (TextView) view.findViewById(R.id.qr_gassumprice);
                         TextView gasState = (TextView) view.findViewById(R.id.qr_state);
 
-                        String tradState = "";
-                        if (notpayList.get(position).getOrderState() == 2) {
-                            tradState = "已加油";
-                        } else if (notpayList.get(position).getOrderState() == 1) {
-                            tradState = "已支付未加油";
-                        } else if (notpayList.get(position).getOrderState() == 0) {
-                            tradState = "未支付";
-                        }
-
-                        gasState.setText(tradState);
                         cusname.setText(notpayList.get(position).getCusName());
                         gastype.setText(notpayList.get(position).getGasType());
                         gasSumPrice.setText(notpayList.get(position).getGasSumPrice());
 
                         ImageView QR = (ImageView) view.findViewById(R.id.qrcode_img);
                         QR.setImageBitmap(QRcode);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setView(view);
-                        builder.create().show();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                        builder1.setView(view);
+                        builder1.create().show();
                         break;
 
                 }
@@ -260,17 +260,13 @@ public class NotPay extends Fragment implements BaseFragmentPagerAdapter.UpdateA
         /**
          * 取消订单
          */
-        TextView gaslist_cancel_order;
+       ImageView gaslist_cancel_order;
         /**
          * 付款项（当已经完结时，会将其改为删除按钮）
          */
-        TextView gaslist_payment_order;
-        /**
-         * 复选框
-         */
-        CheckBox item_cb;
+       ImageView gaslist_payment_order;
         //扫码加油
-        TextView qrSweep;
+       ImageView qrSweep;
     }
 
 

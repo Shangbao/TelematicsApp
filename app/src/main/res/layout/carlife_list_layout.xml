@@ -6,78 +6,83 @@
 
 
     <RelativeLayout
+        android:layout_marginTop="4dp"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="10dp">
 
         <ImageView
+            android:layout_marginTop="5dp"
             android:id="@+id/saying_userimg"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ddgl_16" />
 
         <TextView
+            android:textColor="#567c93"
             android:id="@+id/saying_nickname"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/saying_userimg"
             android:text="暴走的飞憋"
-            android:textSize="20dp" />
-
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp" />
         <TextView
+            android:layout_marginLeft="5dp"
             android:id="@+id/saying_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/saying_nickname"
-            android:layout_below="@+id/saying_nickname"
-            android:text="今天 15:90"
+            android:text="2015-05-05 12：51"
+            android:textSize="10sp"
+            android:gravity="center"
             android:layout_marginTop="5dp"
-            android:textSize="15dp" />
-
-
-
-        <Button
+            android:layout_below="@+id/saying_nickname"
+            android:layout_toRightOf="@+id/saying_userimg"
+            android:layout_toEndOf="@+id/saying_userimg" />
+        <ImageView
+            android:layout_marginTop="5dp"
             android:id="@+id/saying_delete"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/ss_04"
             android:layout_alignParentRight="true"
-            android:text="删除"
-            android:textColor="#000000"
-            android:textSize="15dp" />
+            />
 
         <ImageView
+            android:layout_marginTop="10dp"
             android:id="@+id/saying_qz_flg"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_below="@+id/saying_delete"
-            android:src="@drawable/ic_launcher"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ss_02"
+            android:layout_gravity="right"
             android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
             />
     </RelativeLayout>
 
 
-
-        <TextView
+    <TextView
             android:id="@+id/saying_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
             android:text="今天，一不小心踩到屎了。"
+        android:textColor="#000000"
             android:textSize="15dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
             <GridView
                 android:id="@+id/saying_gridview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
                 android:background="#ffffff"
                 android:cacheColorHint="#00000000"
                 android:horizontalSpacing="0dp"
@@ -86,15 +91,34 @@
                 android:transcriptMode="alwaysScroll"
                 android:verticalSpacing="3dp"></GridView>
 
-            <TextView
-                android:id="@+id/saying_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="3dp"
-                android:text="长春工业大学南湖校区男寝八栋"
-                android:textSize="15dp" />
-        </LinearLayout>
+
+
+
+           <RelativeLayout
+               android:layout_marginTop="3dp"
+               android:layout_marginLeft="15dp"
+               android:layout_weight="1"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
+               <ImageView
+                   android:layout_width="15dp"
+                   android:layout_height="15dp"
+                   android:background="@drawable/ss_05"
+                   android:id="@+id/imageView3" />
+               <TextView
+                   android:layout_marginTop="3dp"
+                   android:id="@+id/saying_address"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="吉林省长春市延安大街"
+                   android:textSize="10sp"
+                   android:gravity="center"
+                   android:layout_marginLeft="5dp"
+                   android:layout_marginStart="5dp"
+                   android:layout_alignParentTop="true"
+                   android:layout_toRightOf="@+id/imageView3"
+                   android:layout_toEndOf="@+id/imageView3" />
+           </RelativeLayout>
 
     </LinearLayout>
 

@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,6 +48,7 @@ import com.hangon.common.ImageUtil;
 import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
+import com.hangon.fragment.order.ZnwhFragment;
 import com.hangon.order.util.FragmentViewPagerAdapter;
 import com.hangon.saying.activity.Bimp;
 import com.hangon.saying.activity.FileUtils;
@@ -60,8 +62,10 @@ import com.hangon.saying.util.OnMenuClick;
  * @version 1.0
  */
 public class MainActivity extends FragmentActivity implements OnMenuClick {
-
-    ImageView select_publish;
+  //topbar
+    private ImageButton topLeft;
+    private ImageButton topRight;
+    private TextView topTittle;
     // 下拉菜单shuju
     private MenuHelper mMenuHelper;
     //整个布局
@@ -148,9 +152,9 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
         /**
          * 设置为竖屏
          */
-        if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+//        if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
+//        }
         if (sensorManager != null) {// 注册监听器
             sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
             // 第一个参数是Listener，第二个参数是所得传感器类型，第三个参数值获取传感器信息的频率
@@ -162,13 +166,29 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
      * 初始化头标
      */
     private void InitTextView() {
-        select_publish = (ImageView) findViewById(R.id.select_publish);
+
+        /////
         container = (LinearLayout) findViewById(R.id.zhoubian);
         menuData = new ArrayList<String>();
         menuData.add("写心情");
         menuData.add("周边求助");
-        mMenuHelper = new MenuHelper(this, select_publish, this, menuData, container);
-        select_publish.setOnClickListener(new OnClickListener() {
+        //topbar
+        topLeft=(ImageButton)findViewById(R.id.topbar_left);
+        topRight=(ImageButton)findViewById(R.id.topbar_right);
+        topTittle=(TextView)findViewById(R.id.topbar_title);
+        topTittle.setText("车生活");
+        topRight.setBackgroundResource(R.drawable.ss_01);
+        mMenuHelper = new MenuHelper(this, topRight, this, menuData, container);
+        topLeft.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent intent=new Intent();
+                intent.setClass(context, ZnwhFragment.class);
+                startActivity(intent);
+
+            }
+        });
+        topRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 mMenuHelper.showMenu();
@@ -205,8 +225,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
 
         //将顶部文字恢复默认值
         resetTextViewTextColor();
-        czwTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color_2));
-
+       czwTextView.setBackgroundColor(getResources().getColor(R.color.main_top_color_selected));
         //设置viewpager页面滑动监听事件
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
     }
@@ -282,7 +301,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
                     if (currIndex == 1) {
                         animation = new TranslateAnimation(position_one, 0, 0, 0);
                         resetTextViewTextColor();
-                        czwTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color_2));
+                        czwTextView.setBackgroundColor(getResources().getColor(R.color.main_top_color_selected));
                     }
 
                     //当前为页卡2
@@ -290,7 +309,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
                     if (currIndex == 0) {
                         animation = new TranslateAnimation(offset, position_one, 0, 0);
                         resetTextViewTextColor();
-                        qzTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color_2));
+                        qzTextView.setBackgroundColor(getResources().getColor(R.color.main_top_color_selected));
                     }
             }
             currIndex = position;
@@ -328,8 +347,8 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
      * 将顶部文字恢复默认值
      */
     private void resetTextViewTextColor() {
-        czwTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color));
-        qzTextView.setTextColor(getResources().getColor(R.color.main_top_tab_color));
+        czwTextView.setBackgroundColor(getResources().getColor(R.color.main_top_tab_color));
+        qzTextView.setBackgroundColor(getResources().getColor(R.color.main_top_tab_color));
     }
 
     @Override
@@ -364,6 +383,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
             int medumValue = 19;// 三星 i9250怎么晃都不会超过20，没办法，只设置19了
             if (Math.abs(x) > medumValue || Math.abs(y) > medumValue || Math.abs(z) > medumValue) {
                 vibrator.vibrate(200);
+                Toast.makeText(getApplicationContext(),"SuCCess",Toast.LENGTH_SHORT).show();
                 Message msg = new Message();
                 msg.what = SENSOR_SHAKE;
                 handler.sendMessage(msg);
@@ -372,6 +392,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
+            Toast.makeText(getApplicationContext(),"Sssssssssssssssss",Toast.LENGTH_SHORT).show();
         }
     };
     /**
@@ -441,6 +462,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
             @Override
             public void onMySuccess(String result) {
                 Toast.makeText(MainActivity.this, "已发出急救", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
                 InitImageView();
                 InitFragment();
                 InitViewPager();

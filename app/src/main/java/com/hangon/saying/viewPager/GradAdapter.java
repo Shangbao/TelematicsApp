@@ -3,6 +3,8 @@ package com.hangon.saying.viewPager;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,7 +79,9 @@ public class GradAdapter extends BaseAdapter {
         ImageRequest request=new ImageRequest(url, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap bitmap) {
-                gradHolder.img.setImageBitmap(bitmap);
+                //gradHolder.img.setImageBitmap(bitmap);
+                Drawable drawable=new BitmapDrawable(bitmap);
+                gradHolder.img.setBackground(drawable);
             }
         }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
             @Override

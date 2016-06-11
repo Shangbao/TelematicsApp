@@ -6,8 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +19,9 @@ import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +31,7 @@ import com.example.fd.ourapplication.R;
 import com.hangon.common.Constants;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
+import com.hangon.order.activity.MainOrderActivity;
 import com.hangon.order.util.DialogTool;
 import com.hangon.order.util.OrderData;
 
@@ -37,6 +43,12 @@ public class PayDemoActivity extends FragmentActivity {
     String describeValue = "";
     String priceValue = "";
     OrderData orderData;
+    Dialog dialog;
+    //topbar
+    //topbar
+    private ImageButton topbarLeft;
+    private ImageButton topbarRight;
+    private TextView topbarTittle;
     private static final int SDK_PAY_FLAG = 1;
 
     private static final int SDK_CHECK_FLAG = 2;
@@ -111,6 +123,18 @@ public class PayDemoActivity extends FragmentActivity {
      * 初始化
      */
     private void init() {
+        //topbarID
+        topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
+        topbarRight = (ImageButton) findViewById(R.id.topbar_right);
+        topbarTittle = (TextView) findViewById(R.id.topbar_title);
+        topbarTittle.setText("订单支付");
+        topbarRight.setVisibility(View.GONE);
+        topbarLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         product_subject = (TextView) findViewById(R.id.product_subject);
         product_price = (TextView) findViewById(R.id.product_price);
         product_describe = (TextView) findViewById(R.id.product_describe);
@@ -311,9 +335,14 @@ public class PayDemoActivity extends FragmentActivity {
         VolleyRequest.RequestGet(PayDemoActivity.this, url, "", new VolleyInterface(PayDemoActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
-                Intent intent = new Intent();
-                intent.setClass(PayDemoActivity.this, PaySuccess.class);
-                startActivity(intent);
+               dialog=new Dialog(PayDemoActivity.this);
+                AlertDialog.Builder builder=new AlertDialog.Builder(PayDemoActivity.this);
+                builder.setView(LayoutInflater.from(PayDemoActivity.this).inflate(R.layout.payorder_success_alert,null));
+                dialog=builder.create();
+                dialog.show();
+                Timer timer=new Timer();
+                timer.schedule(new wait(), 2000);
+
             }
 
             @Override
@@ -322,5 +351,15 @@ public class PayDemoActivity extends FragmentActivity {
             }
         });
     }
+    class wait extends TimerTask {
 
+        @Override
+        public void run() {
+            dialog.dismiss();
+            Intent intent=new Intent();
+            intent.setClass(PayDemoActivity.this, MainOrderActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 }

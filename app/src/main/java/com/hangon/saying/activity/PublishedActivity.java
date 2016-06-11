@@ -242,7 +242,7 @@ public class PublishedActivity extends Activity {
 
             if (position == Bimp.bmp.size()) {
                 holder.image.setImageBitmap(BitmapFactory.decodeResource(
-                        getResources(), R.drawable.icon_addpic_unfocused));
+                        getResources(), R.drawable.ss_06));
                 if (position == 6) {
                     holder.image.setVisibility(View.GONE);
                 }
@@ -343,6 +343,7 @@ public class PublishedActivity extends Activity {
                     .findViewById(R.id.item_popupwindows_Photo);
             Button bt3 = (Button) view
                     .findViewById(R.id.item_popupwindows_cancel);
+
             bt1.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
                     photo();

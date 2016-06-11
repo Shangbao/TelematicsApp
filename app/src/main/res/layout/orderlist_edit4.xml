@@ -3,27 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/liner_edit"
+
     >
 
-    <LinearLayout
-
+   <!-- <LinearLayout
+         android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="30dp" >
+        android:layout_height="25dp" >
         <LinearLayout
             android:layout_marginLeft="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
 
-            <TextView
-                android:id="@+id/list_editorder_gasname"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:gravity="center_vertical"
-                android:text="长春工业大学南湖校区男寝八栋加油站"
-                android:textSize="12dp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -32,108 +25,235 @@
             android:layout_weight="6" >
 
             <TextView
+                android:textColor="#000000"
                 android:id="@+id/list_editorder_status"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
                 android:gravity="center"
                 android:text="待支付"
-                android:textColor="#33ffff"
-                android:textSize="12dp" />
+
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+ <LinearLayout
+     android:orientation="horizontal"
+     android:layout_width="match_parent"
+     android:layout_height="40dp">
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_weight="10"
+         >
+         <CheckBox
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:id="@+id/item_cb"
+             android:layout_marginTop="-8dp"
+
+             />
+     </LinearLayout>
+     <RelativeLayout
+         android:layout_weight="1"
+         android:background="#ffffff"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content" >
+
+         <TextView
+             android:textColor="#000000"
+             android:id="@+id/ordertimetext"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="1dp"
+             android:text="下单时间:"
+             android:textSize="12dp" />
+
+         <TextView
+             android:textColor="#000000"
+             android:id="@+id/list_ordertime_edit"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentTop="true"
+             android:layout_marginLeft="5dp"
+             android:layout_toRightOf="@+id/ordertimetext"
+             android:text="2016-08-12  12:00"
+             android:textSize="12dp" />
+
+         <TextView
+             android:textColor="#000000"
+             android:id="@+id/gastypetext"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_alignParentTop="true"
+             android:layout_marginRight="50dp"
+             android:text="加油类型："
+             android:textSize="12dp" />
+
+         <TextView
+             android:textColor="#000000"
+             android:id="@+id/list_gastype_edit"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_alignParentTop="true"
+             android:layout_marginRight="20dp"
+             android:text="E97"
+             android:textSize="12dp" />
+
+         <TextView
+             android:textColor="#000000"
+             android:id="@+id/gaslitretext"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignLeft="@+id/ordertimetext"
+             android:layout_below="@+id/ordertimetext"
+             android:layout_marginTop="5dp"
+             android:text="加油升数:"
+             android:textSize="12dp" />
+
+         <TextView
+             android:textColor="#000000"
+             android:id="@+id/gassumpricetext"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignBaseline="@+id/list_gaslitre_edit"
+             android:layout_alignBottom="@+id/list_gaslitre_edit"
+             android:layout_alignLeft="@+id/gastypetext"
+             android:text="加油总价:"
+             android:textSize="12sp" />
+
+         <TextView
+             android:layout_marginLeft="-3dp"
+             android:layout_marginTop="20dp"
+             android:id="@+id/list_gassumprice_edit"
+             android:layout_width="80dp"
+             android:layout_height="wrap_content"
+             android:layout_alignLeft="@+id/list_gastype_edit"
+             android:text="￥11111"
+             android:textColor="#000000"
+             android:textSize="12sp" />
+
+         <TextView
+             android:textColor="#000000"
+             android:id="@+id/list_gaslitre_edit"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignLeft="@+id/list_ordertime_edit"
+             android:layout_alignTop="@+id/gaslitretext"
+             android:text="18"
+             android:textSize="12sp" />
+
+     </RelativeLayout>
+ </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#e0e0e0"
+        />-->
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+    <LinearLayout
+        android:layout_marginLeft="0dp"
+        android:layout_weight="10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+        <CheckBox
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_cb"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                 <TextView
+                    android:gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:id="@+id/list_editorder_gasname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="hahhahahahhahahhahahhaha"
+                    android:textSize="14sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:textColor="#000000"
+                    android:id="@+id/gastypetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="加油类型："
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:textColor="#000000"
+                    android:id="@+id/list_gastype_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#E97"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="0dp"
+            android:background="#e0e0e0"
+            />
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+              <TextView
+                  android:layout_marginTop="3dp"
+                  android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:text="下单时间："
+                  android:textSize="12sp"
+                  android:textColor="#000000"
+                  />
+            <TextView
+                android:layout_marginTop="3dp"
+                android:textColor="#000000"
+                android:id="@+id/list_ordertime_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/ordertimetext"
+                android:text="2016-08-12  12:00"
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_marginLeft="30dp"
+</LinearLayout>
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/ordertimetext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="下单时间:"
-            android:textSize="12dp" />
-
-        <TextView
-            android:id="@+id/list_ordertime_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@+id/ordertimetext"
-            android:text="2016-08-12  12:00"
-            android:textSize="12dp" />
-
-        <TextView
-            android:id="@+id/gastypetext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="50dp"
-            android:text="加油类型："
-            android:textSize="12dp" />
-
-        <TextView
-            android:id="@+id/list_gastype_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="20dp"
-            android:text="E97"
-            android:textSize="12dp" />
-
-        <TextView
-            android:id="@+id/gaslitretext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ordertimetext"
-            android:layout_below="@+id/ordertimetext"
-            android:layout_marginTop="5dp"
-            android:text="加油升数:"
-            android:textSize="12dp" />
-
-        <TextView
-            android:id="@+id/gassumpricetext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/list_gaslitre_edit"
-            android:layout_alignBottom="@+id/list_gaslitre_edit"
-            android:layout_alignLeft="@+id/gastypetext"
-            android:text="加油总价:"
-            android:textSize="12dp" />
-
-        <TextView
-            android:layout_marginLeft="-3dp"
-            android:layout_marginTop="20dp"
-            android:id="@+id/list_gassumprice_edit"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/list_gastype_edit"
-            android:text="￥11111"
-            android:textSize="12dp" />
-
-        <TextView
-            android:id="@+id/list_gaslitre_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/list_ordertime_edit"
-            android:layout_alignTop="@+id/gaslitretext"
-            android:text="18"
-            android:textSize="12dp" />
-
-    </RelativeLayout>
-    <CheckBox
-        android:layout_marginTop="-60dp"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/item_cb"
-        android:clickable="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:gravity="center_vertical"
+        android:layout_height="3dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="0dp"
+        android:background="#e0e0e0"
         />
 </LinearLayout>

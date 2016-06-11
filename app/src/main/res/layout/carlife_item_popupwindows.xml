@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#ff495a" />
+            android:background="#e0e0e0" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:background="@drawable/bt_nobgd"
-                android:textColor="#585858"
+                android:textColor="#67c7bc"
                 android:textSize="18sp"
                 android:text="拍照" />
         </LinearLayout>
@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:background="@drawable/bt_nobgd"
-                android:textColor="#585858"
+                android:textColor="#67c7bc"
                 android:textSize="18sp"
                 android:text="从相册中选取" />
         </LinearLayout>
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:background="@drawable/bt_nobgd"
-            android:textColor="#585858"
+            android:textColor="#67c7bc"
             android:textSize="18sp"
             android:text="取消" />
     </LinearLayout>

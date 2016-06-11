@@ -11,16 +11,13 @@ import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.order.util.BaseFragmentPagerAdapter;
-import com.hangon.order.util.DialogTool;
-import com.hangon.order.util.GasOrderAdapter;
 import com.hangon.order.util.Judge;
-import com.hangon.order.util.OnItemclick;
 import com.hangon.order.util.OrderData;
 import com.xys.libzxing.zxing.encoding.EncodingUtils;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,7 +26,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -50,7 +46,7 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
     View payorder;
     ViewHolder vh;
     Context context;
-
+  Dialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,7 +71,6 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                 Log.e("PayOrder", result);
                 List<OrderData> list = gson.fromJson(result, new TypeToken<List<OrderData>>() {
                 }.getType());
-                mOrderPayList.setOnItemClickListener(new OnItemclick(getActivity(), list));
                 adapter = new Payadapter(list);
                 mOrderPayList.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -130,10 +125,10 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                 vh.list_gaslitre = (TextView) convertView.findViewById(R.id.list_gaslitre);
                 vh.list_gastype = (TextView) convertView.findViewById(R.id.list_gastype);
                 vh.list_ordertime = (TextView) convertView.findViewById(R.id.list_ordertime);
-                vh.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_gasorder_status);
-                vh.gaslist_cancel_order = (TextView) convertView.findViewById(R.id.gaslist_cancel_order);
-                vh.gaslist_payment_order = (TextView) convertView.findViewById(R.id.gaslist_payment_order);
-                vh.qrSweep = (TextView) convertView.findViewById(R.id.list_sweep_code);
+               // vh.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_gasorder_status);
+                vh.gaslist_cancel_order = (ImageView) convertView.findViewById(R.id.gaslist_cancel_order);
+                vh.gaslist_payment_order = (ImageView) convertView.findViewById(R.id.gaslist_payment_order);
+                vh.qrSweep = (ImageView) convertView.findViewById(R.id.list_sweep_code);
                 convertView.setTag(vh);
             } else {
                 vh = (ViewHolder) convertView.getTag();
@@ -149,14 +144,14 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
             vh.list_gastype.setText(payOrderList.get(position).getGasType());
 
             if ((payOrderList.get(position).getOrderState() == 2)) {
-                vh.list_gasorder_status.setText("已加油");
+               // vh.list_gasorder_status.setText("已加油");
                 vh.gaslist_cancel_order.setVisibility(View.GONE);
-                vh.gaslist_payment_order.setText("删除订单");
+                vh.gaslist_payment_order.setImageResource(R.drawable.ddgl_14);//删除订单
                 vh.qrSweep.setVisibility(View.GONE);
             }
             if ((payOrderList.get(position).getOrderState() == 1)) {
-                vh.list_gasorder_status.setText("已支付未加油");
-                vh.gaslist_payment_order.setText("扫码加油");
+               // vh.list_gasorder_status.setText("已支付未加油");
+                vh.gaslist_payment_order.setImageResource(R.drawable.ddgl_03);
                 vh.gaslist_cancel_order.setVisibility(View.GONE);
                 vh.gaslist_payment_order.setVisibility(View.VISIBLE);
                 vh.qrSweep.setVisibility(View.GONE);
@@ -175,14 +170,25 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
 
             @Override
             public void onClick(View v) {
+
                 switch (v.getId()) {
                     case R.id.gaslist_payment_order:
                         if (payOrderList.get(position).getOrderState() == 2) {
-                            DialogTool.createNormalDialog(context, "删除订单", "确定删除吗？", "取消", "确定", null, new DialogInterface.OnClickListener() {
+                            View cancelView=LayoutInflater.from(getActivity()).inflate(R.layout.order_alert,null);
+                            ImageView cancelYes=(ImageView)cancelView.findViewById(R.id.calcel_order_yes);
+                            ImageView cancelNo=(ImageView)cancelView.findViewById(R.id.calcel_order_no);
+                            TextView alertContent=(TextView)cancelView.findViewById(R.id.alert_content);
+                            dialog=new Dialog(getActivity());
+                            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                            builder.setView(cancelView);
+                            dialog=builder.create();
+                            dialog.show();
+                            alertContent.setText("是否删除订单？");
+                            cancelYes.setOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                                public void onClick(View v) {
+                                    dialog.dismiss();
                                     int orderId = payOrderList.get(position).getOrderId();
-
                                     String url = Constants.DELETE_ORDER_INFO_URL + "?orderId=" + orderId + "";
                                     VolleyRequest.RequestGet(context, url, "aaa", new VolleyInterface(context, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
                                         @Override
@@ -197,7 +203,13 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                                         }
                                     });
                                 }
-                            }).show();
+                            });
+                            cancelNo.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
                         }
                         if (payOrderList.get(position).getOrderState() == 1) {
                             String URL = "htttp://" + Constants.HOST_IP + ":8080/wind/UserLogin?orderId=" + payOrderList.get(position).getOrderId() + "&orderState=" + payOrderList.get(position).getOrderState();
@@ -223,9 +235,9 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                             gasState.setText(tradState);
 
                             QR.setImageBitmap(QRcode);
-                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setView(view);
-                            builder.create().show();
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                            builder1.setView(view);
+                            builder1.create().show();
                         }
                         break;
 
@@ -239,9 +251,9 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                         gasSumPrice.setText(payOrderList.get(position).getGasSumPrice());
                         ImageView QR = (ImageView) view.findViewById(R.id.qrcode_img);
                         QR.setImageResource(R.drawable.ic_launcher);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setView(view);
-                        builder.create().show();
+                        AlertDialog.Builder builder2 = new AlertDialog.Builder(getActivity());
+                        builder2.setView(view);
+                        builder2.create().show();
                         break;
                 }
             }
@@ -257,7 +269,7 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
         /**
          * 支付状态
          */
-        TextView list_gasorder_status;
+      //  TextView list_gasorder_status;
         /**
          * 订单时间
          */
@@ -277,13 +289,13 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
         /**
          * 取消订单
          */
-        TextView gaslist_cancel_order;
+        ImageView gaslist_cancel_order;
         /**
          * 付款项（当已经完结时，会将其改为删除按钮）
          */
-        TextView gaslist_payment_order;
+        ImageView gaslist_payment_order;
         //扫码加油
-        TextView qrSweep;
+        ImageView qrSweep;
     }
 
     @Override

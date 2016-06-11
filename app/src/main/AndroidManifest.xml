@@ -70,7 +70,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="RpxKCahEQC1rPmDNZWZyKPy9CGuKmxol" />
+            android:value="Akghpf3XZ9zcUlgEmzrPZhLeDcBwzajY" />
 
         <!--微信分享回调-->
         <activity
@@ -173,13 +173,9 @@
         </activity>
         <service android:name="com.cheshouye.api.client.WeizhangIntentService" />
 
-        <activity android:name="com.hangon.order.activity.AppointMentOrderDetails"/>
-        <activity android:name="com.hangon.order.activity.PayOrderDetails"/>
-        <activity android:name="com.hangon.order.activity.AppointmentOrder"/>
         <activity android:name="com.hangon.order.activity.MainOrderActivity">
 
         </activity>
-        <activity android:name="com.hangon.order.activity.PersonalInformation"/>
         <activity android:name="com.hangon.order.activity.EditOrder"/>
         <activity android:name="com.hangon.order.activity.Success"/>
 

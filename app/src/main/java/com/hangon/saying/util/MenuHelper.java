@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,14 +76,15 @@ public class MenuHelper {
         });
     }
 
-    public void showMenu() {
+    public void  showMenu() {
         adapter.notifyDataSetChanged();
         if (popupWindow.isShowing()) {
             popupWindow.dismiss();
         } else {
             popupWindow.setOutsideTouchable(true);
             popupWindow.setTouchable(true);
-            popupWindow.showAsDropDown(topView, 0, 0);
+            popupWindow.showAsDropDown(topView);
+            popupWindow.showAtLocation(topView, Gravity.CENTER, 100, 0);
             if (container != null) {
                 //container.getForeground().setAlpha(120);
             }
