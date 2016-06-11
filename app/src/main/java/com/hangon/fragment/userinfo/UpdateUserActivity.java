@@ -100,9 +100,6 @@ public class UpdateUserActivity extends Activity {
                             postUpdateUser();
                             //跳转到用户信息页面
                             Intent intent = new Intent();
-//                            Bundle bundle = new Bundle();
-//                            bundle.putSerializable("userinfo", userInfo);
-//                            intent.putExtras(bundle);
                             intent.putExtra("id", 4);
                             setResult(RESULT_UPDATE, intent);
                             UpdateUserActivity.this.finish();
@@ -111,7 +108,6 @@ public class UpdateUserActivity extends Activity {
                 }, null).show();
             }
         });
-
     }
 
     private boolean judgeEditext() {

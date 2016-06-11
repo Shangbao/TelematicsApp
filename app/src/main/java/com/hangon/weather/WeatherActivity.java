@@ -106,7 +106,11 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
     }
 
     private void initWeather(){
-        for(HashMap<String,Object> week : weeks){
+        HashMap<String,Object> today = weeks.get(0);
+        com.hangon.weather.Weather todayWeather = new com.hangon.weather.Weather(com.mob.tools.utils.R.toString(today.get("week")), currentWeather, com.mob.tools.utils.R.toString(today.get("temperature")));
+        weathers.add(todayWeather);
+        for(int i = 1;i < weeks.size(); i++){
+            HashMap<String,Object> week = weeks.get(i);
             com.hangon.weather.Weather weather = new com.hangon.weather.Weather(com.mob.tools.utils.R.toString(week.get("week")),
                     com.mob.tools.utils.R.toString(week.get("dayTime")),
                     com.mob.tools.utils.R.toString(week.get("temperature")));
@@ -145,79 +149,68 @@ public class WeatherActivity extends Activity implements APICallback,View.OnClic
     private void updateWeatherImage() {
         time.setToNow();
         if (currentWeather.contains("晴")) {
-            if (time.hour >= 7 && time.hour < 19) {
-                weatherBg.setBackgroundResource(R.drawable.tq);
-                weatherIcon.setImageResource(R.drawable.tq_07);
-            } else {
-                weatherBg.setBackgroundResource(R.drawable.bg_fine_night);
-                weatherIcon.setImageResource(R.drawable.weather_img_fine_night);
-            }
+            weatherBg.setBackgroundResource(R.drawable.tq);
+            weatherIcon.setImageResource(R.drawable.tq_07);
         } else if (currentWeather.contains("多云")) {
-            if (time.hour >= 7 && time.hour < 19) {
-                weatherBg.setBackgroundResource(R.drawable.bg_cloudy_day);
-                weatherIcon.setImageResource(R.drawable.weather_img_cloudy_day);
-            } else {
-                weatherBg.setBackgroundResource(R.drawable.bg_cloudy_night);
-                weatherIcon
-                        .setImageResource(R.drawable.weather_img_cloudy_night);
-            }
+            weatherBg.setBackgroundResource(R.drawable.tq);
+            weatherIcon.setImageResource(R.drawable.dtq_15);
         } else if (currentWeather.contains("阴")) {
-            weatherBg.setBackgroundResource(R.drawable.bg_overcast);
-            weatherIcon.setImageResource(R.drawable.weather_img_overcast);
+            weatherBg.setBackgroundResource(R.drawable.tq);
+            weatherIcon.setImageResource(R.drawable.dtq_30);
         } else if (currentWeather.contains("雷")) {
-            weatherBg.setBackgroundResource(R.drawable.bg_thunder_storm);
-            weatherIcon.setImageResource(R.drawable.weather_img_thunder_storm);
+            weatherBg.setBackgroundResource(R.drawable.tq_lei);
+            weatherIcon.setImageResource(R.drawable.dtq_28);
         } else if (currentWeather.contains("雨")) {
-            weatherBg.setBackgroundResource(R.drawable.bg_rain);
+            weatherBg.setBackgroundResource(R.drawable.tq_yu);
             if (currentWeather.contains("小雨")) {
-                weatherIcon.setImageResource(R.drawable.weather_img_rain_small);
+                weatherIcon.setImageResource(R.drawable.dtq_23);
             } else if (currentWeather.contains("中雨")) {
                 weatherIcon
-                        .setImageResource(R.drawable.weather_img_rain_middle);
+                        .setImageResource(R.drawable.dtq_23);
             } else if (currentWeather.contains("大雨")) {
-                weatherIcon.setImageResource(R.drawable.weather_img_rain_big);
+                weatherIcon.setImageResource(R.drawable.dtq_25);
             } else if (currentWeather.contains("暴雨")) {
-                weatherIcon.setImageResource(R.drawable.weather_img_rain_storm);
+                weatherIcon.setImageResource(R.drawable.dtq_25);
             } else if (currentWeather.contains("雨夹雪")) {
-                weatherIcon.setImageResource(R.drawable.weather_img_rain_snow);
+                weatherIcon.setImageResource(R.drawable.dtq_25);
             } else if (currentWeather.contains("冻雨")) {
-                weatherIcon.setImageResource(R.drawable.weather_img_sleet);
+                weatherIcon.setImageResource(R.drawable.dtq_25);
             } else {
                 weatherIcon
-                        .setImageResource(R.drawable.weather_img_rain_middle);
+                        .setImageResource(R.drawable.dtq_23);
             }
         } else if (currentWeather.contains("雪")
                 || currentWeather.contains("冰雹")) {
-            weatherBg.setBackgroundResource(R.drawable.bg_snow);
+            weatherBg.setBackgroundResource(R.drawable.tq_yu);
             if (currentWeather.contains("小雪")) {
-                weatherIcon.setImageResource(R.drawable.weather_img_snow_small);
+                weatherIcon.setImageResource(R.drawable.dtq_23);
             } else if (currentWeather.contains("中雪")) {
                 weatherIcon
-                        .setImageResource(R.drawable.weather_img_snow_middle);
+                        .setImageResource(R.drawable.dtq_23);
             } else if (currentWeather.contains("大雪")) {
-                weatherIcon.setImageResource(R.drawable.weather_img_snow_big);
+                weatherIcon.setImageResource(R.drawable.dtq_25);
             } else if (currentWeather.contains("暴雪")) {
-                weatherIcon.setImageResource(R.drawable.weather_img_snow_storm);
+                weatherIcon.setImageResource(R.drawable.dtq_25);
             } else if (currentWeather.contains("冰雹")) {
-                weatherIcon.setImageResource(R.drawable.weather_img_hail);
+                weatherIcon.setImageResource(R.drawable.dtq_25);
             } else {
                 weatherIcon
-                        .setImageResource(R.drawable.weather_img_snow_middle);
+                        .setImageResource(R.drawable.dtq_23);
             }
         } else if (currentWeather.contains("雾")) {
-            weatherBg.setBackgroundResource(R.drawable.bg_fog);
-            weatherIcon.setImageResource(R.drawable.weather_img_fog);
+            weatherBg.setBackgroundResource(R.drawable.tq_yu);
+            weatherIcon.setImageResource(R.drawable.dtq_30);
         } else if (currentWeather.contains("霾")) {
-            weatherBg.setBackgroundResource(R.drawable.bg_haze);
-            weatherIcon.setImageResource(R.drawable.weather_img_fog);
+            weatherBg.setBackgroundResource(R.drawable.tq_yu);
+            weatherIcon.setImageResource(R.drawable.dtq_30);
         } else if (currentWeather.contains("沙尘暴")
                 || currentWeather.contains("浮尘")
                 || currentWeather.contains("扬沙")) {
-            weatherBg.setBackgroundResource(R.drawable.bg_sand_storm);
-            weatherIcon.setImageResource(R.drawable.weather_img_sand_storm);
+            weatherBg.setBackgroundResource(R.drawable.tq_yu);
+            weatherIcon.setImageResource(R.drawable.dtq_30);
         } else {
-            weatherBg.setBackgroundResource(R.drawable.bg_na);
-            weatherIcon.setImageResource(R.drawable.weather_img_fine_day);
+            weatherBg.setBackgroundResource(R.drawable.tq);
+            weatherIcon.setImageResource(R.drawable.tq_07);
         }
     }
 

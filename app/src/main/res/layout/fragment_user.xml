@@ -28,7 +28,6 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/grzx_07"
                 imagecontrol:border_inside_color="#fff7f2e9"
                 imagecontrol:border_outside_color="#ffd5d1c8"
                 imagecontrol:border_thickness="2dp" />

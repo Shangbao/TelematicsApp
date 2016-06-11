@@ -63,6 +63,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     private ImageView carImageView, musicImageView, znwhImageView, userImageView;
 
     WeatherService.WeatherBinder binder;
+    FragmentTransaction transaction;
 
     public final static int INTENT_SETCARINFO = 1;
     public final static int INTENT_WZCX = 2;
@@ -96,7 +97,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
      * 初始化所有的fragment
      */
     private void initFragment() {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction = getFragmentManager().beginTransaction();
         if (!carFragment.isAdded()) {
             transaction.add(R.id.content, carFragment);
             transaction.hide(carFragment);
@@ -364,11 +365,23 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                     } else {
                         getTab(1);
                     }
+                    Log.d("结果返回", "头像" );
+                }
+                else{
+                    Log.d("结果返回", "假头像" );
                 }
                 break;
             case INTENT_UPDATEUSER:
                 if (resultCode == RESULT_OK) {
-                    initFragment();
+                    int position = data.getIntExtra("id", 0);
+                    if (position != 0) {
+                        getTab(position);
+                    } else {
+                        getTab(1);
+                    }
+                }
+                else if (resultCode == UpdateUserActivity.RESULT_UPDATE){
+                    transaction.replace(R.id.content, userFragment).commit();
                     int position = data.getIntExtra("id", 0);
                     if (position != 0) {
                         getTab(position);
@@ -377,6 +390,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                     }
                 }
                 break;
+
         }
     }
 

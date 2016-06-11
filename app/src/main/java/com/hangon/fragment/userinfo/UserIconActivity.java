@@ -79,6 +79,12 @@ public class UserIconActivity extends Activity implements OnClickListener {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("头像avtivity", "onDestroy: ");
+    }
+
+    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.albumBtn) {
             startAlbum();

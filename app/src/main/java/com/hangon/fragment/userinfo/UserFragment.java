@@ -52,6 +52,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Administrator on 2016/4/4.
@@ -67,8 +69,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     ImageView toSetHeadIcon;//头像设置
     Switch aSwitch;//智能维护启动按钮
     Switch bSwitch;//行车记录启动按钮
-
-    Topbar userTopbar;//标题栏
 
     Button btnShare;//分享APP
     Button btnReturnLogin;//退出登录
@@ -135,8 +135,15 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        switch (requestCode){
+            case HomeActivity.INTENT_UPDATEUSER:
+                if (resultCode == UpdateUserActivity.RESULT_UPDATE){
+                }
+                break;
+        }
     }
+
+
 
     //获取内存里面的图片信息
     private void getUserIconFromCookies() {
