@@ -39,6 +39,8 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
     private TextView tvIsTran;
     private TextView tvIsLight;
     private TextView tvClearcar;
+    private TextView tvAir;
+    private TextView tvExe;
     private Button btnSaying;
     private RelativeLayout layout;
 
@@ -63,6 +65,8 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
         tvIsTran = (TextView) znwhView.findViewById(R.id.znwh_istran);
         tvIsLight = (TextView) znwhView.findViewById(R.id.znwh_islight);
         tvClearcar = (TextView) znwhView.findViewById(R.id.znwh_clear);
+        tvAir = (TextView) znwhView.findViewById(R.id.znwh_kqzl);
+        tvExe = (TextView) znwhView.findViewById(R.id.znwh_ydzs);
         layout= (RelativeLayout) znwhView.findViewById(R.id.btn_saying);
 
         topbarLeft= (ImageButton) znwhView.findViewById(R.id.topbar_left);
@@ -95,6 +99,8 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ZnwhService.ACTION_UPDATE_ZNWH);
         intentFilter.addAction(WeatherService.ACTION_UPDATE_CLEARCAR);
+        intentFilter.addAction(WeatherService.ACTION_UPDATE_AIR);
+        intentFilter.addAction(WeatherService.ACTION_UPDATE_EXE);
         getActivity().registerReceiver(receiver, intentFilter);
     }
 
@@ -124,9 +130,12 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
                 } else {
                     tvIsLight.setText("正常");
                 }
-            }
-            else if (WeatherService.ACTION_UPDATE_CLEARCAR.equals(action)){
+            } else if (WeatherService.ACTION_UPDATE_CLEARCAR.equals(action)){
                 tvClearcar.setText(intent.getStringExtra(WeatherService.ACTION_UPDATE_CLEARCAR));
+            } else if (WeatherService.ACTION_UPDATE_AIR.equals(action)){
+                tvAir.setText(intent.getStringExtra(WeatherService.ACTION_UPDATE_AIR));
+            } else if (WeatherService.ACTION_UPDATE_EXE.equals(action)){
+                tvExe.setText(intent.getStringExtra(WeatherService.ACTION_UPDATE_EXE));
             }
         }
     }

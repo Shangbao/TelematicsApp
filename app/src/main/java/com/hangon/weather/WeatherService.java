@@ -38,6 +38,8 @@ public class WeatherService extends Service implements APICallback {
     private String city;
     private String temperature;
     private String clearCar;
+    private String airCondition;
+    private String exerciseIndex;
     private boolean flag = true;
     private boolean isClear = false;
 
@@ -46,12 +48,16 @@ public class WeatherService extends Service implements APICallback {
     private static final int updateWeather = 1;
     private static final int updateCity = 2;
     private static final int updateClearCar = 3;
+    private static final int updateAirCondition = 4;
+    private static final int updateExerciseIndex = 5;
 
     static int NOTIFICATION_ID = 13565400;
 
     public static final String ACTION_UPDATE_WEATHER = "com.hangon.weather.UPDATE_WEATHER";
     public static final String ACTION_UPDATE_CITY = "com.hangon.weather.UPDATE_CITY";
     public static final String ACTION_UPDATE_CLEARCAR = "com.hangon.weather.UPDATE_CLEARCAR";
+    public static final String ACTION_UPDATE_AIR = "com.hangon.weather.UPDATE_AIR";
+    public static final String ACTION_UPDATE_EXE = "com.hangon.weather.UPDATE_EXE";
 
     Intent clearIntent;
     NotificationAdmain admain;
@@ -69,6 +75,13 @@ public class WeatherService extends Service implements APICallback {
                     break;
                 case updateClearCar:
                     updateClearCar();
+                    break;
+                case updateAirCondition:
+                    updateAirCondition();
+                    break;
+                case updateExerciseIndex:
+                    updateExerciseIndex();
+                    break;
             }
         }
     };
@@ -115,9 +128,14 @@ public class WeatherService extends Service implements APICallback {
         city = com.mob.tools.utils.R.toString(weather.get("city"));
         temperature = com.mob.tools.utils.R.toString(weather.get("temperature"));
         clearCar = com.mob.tools.utils.R.toString(weather.get("washIndex"));
+        airCondition = com.mob.tools.utils.R.toString(weather.get("airCondition"));
+        exerciseIndex = com.mob.tools.utils.R.toString(weather.get("exerciseIndex"));
+
         handler.sendEmptyMessage(updateWeather);
         handler.sendEmptyMessage(updateCity);
         handler.sendEmptyMessage(updateClearCar);
+        handler.sendEmptyMessage(updateAirCondition);
+        handler.sendEmptyMessage(updateExerciseIndex);
         if (!isClear && clearCar.equals("适宜")){
             admain.normal_notification(clearIntent,smallIcon,"汽车智能维护","亲，今天的天气适合洗车哦！","洗车提示！");
         }
@@ -146,6 +164,24 @@ public class WeatherService extends Service implements APICallback {
         sendBroadcast(intent);
         handler.sendEmptyMessageDelayed(updateClearCar, 1000);
     }
+
+    public void updateAirCondition(){
+        Intent intent = new Intent();
+        intent.setAction(ACTION_UPDATE_AIR);
+        intent.putExtra(ACTION_UPDATE_AIR, airCondition);
+        sendBroadcast(intent);
+        handler.sendEmptyMessageDelayed(updateAirCondition, 1000);
+    }
+
+    public void updateExerciseIndex(){
+        Intent intent = new Intent();
+        intent.setAction(ACTION_UPDATE_EXE);
+        intent.putExtra(ACTION_UPDATE_EXE, exerciseIndex);
+        sendBroadcast(intent);
+        handler.sendEmptyMessageDelayed(updateAirCondition, 1000);
+    }
+
+
 
     @Override
     public void onSuccess(API api, int action, Map<String, Object> result) {

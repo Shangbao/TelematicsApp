@@ -36,6 +36,8 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * Created by Administrator on 2016/4/1.
  */
@@ -71,8 +73,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     public final static int INTENT_WZCX = 2;
     public final static int INTENT_USERICON = 3;
     public final static int INTENT_UPDATEUSER = 4;
-    public final static int INTENT_MUSIC = 5;
-    public final static int INTENT_SAYING= 6;
+    public final static int INTENT_SAYING= 5;
 
     private ServiceConnection conn = new ServiceConnection() {
         @Override
@@ -90,6 +91,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        ShareSDK.initSDK(this);
         weatherIntent = new Intent(this, WeatherService.class);
         bindService(weatherIntent, conn, Service.BIND_AUTO_CREATE);
         initView();
@@ -336,13 +338,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
+        ShareSDK.stopSDK(this);
         binder.stopWeather();
         unbindService(conn);
     }
@@ -358,6 +356,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                     } else {
                         getTab(1);
                     }
+                    Log.d("车辆管理", "onActivityResult: ");
                 }
                 break;
             case INTENT_WZCX:
@@ -368,6 +367,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                     } else {
                         getTab(1);
                     }
+                    Log.d("违章管理", "onActivityResult: ");
                 }
                 break;
             case INTENT_USERICON:
@@ -379,9 +379,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                         getTab(1);
                     }
                     Log.d("结果返回", "头像" );
-                }
-                else{
-                    Log.d("结果返回", "假头像" );
                 }
                 break;
             case INTENT_UPDATEUSER:
@@ -396,17 +393,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                 }
                 else if (resultCode == UpdateUserActivity.RESULT_UPDATE){
                     transaction.replace(R.id.content, userFragment).commit();
-                    int position = data.getIntExtra("id", 0);
-                    if (position != 0) {
-                        getTab(position);
-                    } else {
-                        getTab(1);
-                    }
-                }
-                break;
-
-            case INTENT_MUSIC:
-                if (resultCode == RESULT_OK) {
                     int position = data.getIntExtra("id", 0);
                     if (position != 0) {
                         getTab(position);

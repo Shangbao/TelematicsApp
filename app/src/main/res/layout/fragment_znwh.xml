@@ -202,11 +202,11 @@
                     android:id="@+id/t21"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="气        候:"
+                    android:text="空气质量:"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/znwh_qh"
+                    android:id="@+id/znwh_kqzl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -224,11 +224,11 @@
                     android:id="@+id/t22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="温        度:"
+                    android:text="运动指数:"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/znwh_wd"
+                    android:id="@+id/znwh_ydzs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
