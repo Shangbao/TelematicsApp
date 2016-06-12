@@ -59,7 +59,6 @@ public class MusicAdapter extends BaseAdapter {
             viewHold.number = (CircleView) convertView.findViewById(R.id.item_num);
             viewHold.title = (TextView) convertView
                     .findViewById(R.id.item_title);
-            viewHold.time = (TextView) convertView.findViewById(R.id.item_time);
             viewHold.singer = (TextView) convertView
                     .findViewById(R.id.item_singer);
             convertView.setTag(viewHold);
@@ -69,22 +68,22 @@ public class MusicAdapter extends BaseAdapter {
         viewHold.number.setText(list.get(position).getNumber());
         viewHold.title.setText(list.get(position).getTitle());
         viewHold.singer.setText(list.get(position).getSinger());
-        viewHold.time.setText(MusicUtil.toTime((int) list.get(position)
-                .getTime()));
+
+        if (list.size() > 2) {
+            if (position % 2 == 1) {
+                convertView.setBackgroundColor(convertView.getResources().getColor(R.color.item_music));
+            }
+        }
 
         if (position == currIndex) {
-            viewHold.title.setTextColor(Color.BLUE);
-            viewHold.singer.setTextColor(Color.BLUE);
-            viewHold.time.setTextColor(Color.BLUE);
-            viewHold.number.setText("");
-            viewHold.number.setBackgroundResource(R.drawable.ic_launcher);
-
+            viewHold.title.setTextColor(convertView.getResources().getColor(R.color.item_music_selected));
+            viewHold.singer.setTextColor(convertView.getResources().getColor(R.color.item_music_selected));
+            viewHold.number.setTextColor(convertView.getResources().getColor(R.color.item_music_selected));
+           // viewHold.number.setText(""+currIndex);
         } else {
-            viewHold.number.setTextColor(Color.GRAY);
+            viewHold.number.setTextColor(Color.BLACK);
             viewHold.title.setTextColor(Color.BLACK);
-            viewHold.singer.setTextColor(Color.GRAY);
-            viewHold.time.setTextColor(Color.BLACK);
-            viewHold.number.setBackgroundResource(0);
+            viewHold.singer.setTextColor(Color.BLACK);
         }
         return convertView;
     }
@@ -92,7 +91,6 @@ public class MusicAdapter extends BaseAdapter {
     class ViewHold {
         TextView title;
         TextView singer;
-        TextView time;
         CircleView number;
     }
 

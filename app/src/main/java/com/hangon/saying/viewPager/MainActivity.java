@@ -182,10 +182,11 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
         topLeft.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent=new Intent();
-                intent.setClass(context, ZnwhFragment.class);
-                startActivity(intent);
 
+                Intent intent = new Intent();
+                intent.putExtra("id", 3);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
         topRight.setOnClickListener(new OnClickListener() {

@@ -62,7 +62,6 @@ public class UpdateUserActivity extends Activity {
         topbarRight = (ImageButton) findViewById(R.id.topbar_right);
         topbarTitle = (TextView) findViewById(R.id.topbar_title);
         topbarRight.setBackgroundResource(R.drawable.grzx_04);
-
         topbarTitle.setText("编辑用户信息");
     }
 

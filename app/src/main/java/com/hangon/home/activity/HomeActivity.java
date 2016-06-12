@@ -52,6 +52,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     private RelativeLayout bottomArea;
     private ImageView tabTop;
 
+    public static int FragmentIndex;
+
     //tab中的四个帧布局
     private FrameLayout carFrameLayout, musicFrameLayout, znwhFrameLayout, userFrameLayout;
 
@@ -69,6 +71,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     public final static int INTENT_WZCX = 2;
     public final static int INTENT_USERICON = 3;
     public final static int INTENT_UPDATEUSER = 4;
+    public final static int INTENT_MUSIC = 5;
+    public final static int INTENT_SAYING= 6;
 
     private ServiceConnection conn = new ServiceConnection() {
         @Override
@@ -91,13 +95,18 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         initView();
         initFragment();
         initClickEvent();
+        Intent intent = getIntent();
+        if (intent != null) {
+            int postion = intent.getIntExtra("id", 0);
+            getTab(postion);
+        }
     }
 
     /**
      * 初始化所有的fragment
      */
     private void initFragment() {
-        transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (!carFragment.isAdded()) {
             transaction.add(R.id.content, carFragment);
             transaction.hide(carFragment);
@@ -175,6 +184,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.musicLayout:
+                HomeActivity.FragmentIndex = position;
                 position = 2;
                 getTab(position);
                 break;
@@ -225,6 +235,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
             case 2:
                 clickTab(musicFragment);
+                bottomArea.setVisibility(View.GONE);
                 break;
 
             case 3:
@@ -259,6 +270,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             znwhTextView.setTextColor(Color.parseColor("#555555"));
 
 
+        userImageView.setImageResource(R.drawable.grzx_15);
+        userTextView.setTextColor(Color.parseColor("#555555"));
 
             userImageView.setImageResource(R.drawable.grzx_15);
             userTextView.setTextColor(Color.parseColor("#555555"));
@@ -373,6 +386,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                 break;
             case INTENT_UPDATEUSER:
                 if (resultCode == RESULT_OK) {
+                    initFragment();
                     int position = data.getIntExtra("id", 0);
                     if (position != 0) {
                         getTab(position);
@@ -382,6 +396,28 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                 }
                 else if (resultCode == UpdateUserActivity.RESULT_UPDATE){
                     transaction.replace(R.id.content, userFragment).commit();
+                    int position = data.getIntExtra("id", 0);
+                    if (position != 0) {
+                        getTab(position);
+                    } else {
+                        getTab(1);
+                    }
+                }
+                break;
+
+            case INTENT_MUSIC:
+                if (resultCode == RESULT_OK) {
+                    int position = data.getIntExtra("id", 0);
+                    if (position != 0) {
+                        getTab(position);
+                    } else {
+                        getTab(1);
+                    }
+                }
+                break;
+
+            case INTENT_SAYING:
+                if (resultCode == RESULT_OK) {
                     int position = data.getIntExtra("id", 0);
                     if (position != 0) {
                         getTab(position);

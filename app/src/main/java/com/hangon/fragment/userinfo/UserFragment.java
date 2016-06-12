@@ -39,6 +39,8 @@ import com.hangon.common.DialogTool;
 import com.hangon.common.ImageUtil;
 import com.hangon.common.Topbar;
 import com.hangon.common.UserUtil;
+import com.hangon.common.VolleyInterface;
+import com.hangon.common.VolleyRequest;
 import com.hangon.fragment.music.MusicImage;
 import com.hangon.fragment.order.ZnwhService;
 import com.hangon.home.activity.HomeActivity;
@@ -135,14 +137,13 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
+        switch (requestCode) {
             case HomeActivity.INTENT_UPDATEUSER:
-                if (resultCode == UpdateUserActivity.RESULT_UPDATE){
+                if (resultCode == UpdateUserActivity.RESULT_UPDATE) {
                 }
                 break;
         }
     }
-
 
 
     //获取内存里面的图片信息
@@ -194,13 +195,12 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    getActivity().bindService(znwhIntent, znwhConn, Service.BIND_AUTO_CREATE);
-                    znwhBinder.on();
-                } else {
-                    znwhBinder.off();
-                    getActivity().unbindService(znwhConn);
+                if(isChecked){
+                    judgeCarExist(true);
+                }else {
+                    judgeCarExist(false);
                 }
+
             }
         });
         bSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -324,5 +324,35 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), "行车记录成功，请进入内存设备查看！", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void judgeCarExist(final boolean flag) {
+        String url = Constants.QUERY_CAR_URL;
+        Map map = new HashMap();
+        map.put("userId", Constants.USER_ID + "");
+        VolleyRequest.RequestPost(getActivity(), url, "judgeCarExist", map, new VolleyInterface(getActivity(), VolleyInterface.mListener, VolleyInterface.mErrorListener) {
+            @Override
+            public void onMySuccess(String result) {
+                if (result.equals("exist")) {
+                   if(flag==true){
+                       getActivity().bindService(znwhIntent, znwhConn, Service.BIND_AUTO_CREATE);
+                       znwhBinder.on();
+                   }else if(flag ==false){
+                       getActivity().unbindService(znwhConn);
+                       znwhBinder.off();
+                   }
+                    aSwitch.setChecked(true);
+                } else if (result.equals("noexist")) {
+                    aSwitch.setChecked(false);
+                    Toast.makeText(getActivity(), "无默认车辆,请设置默认车辆", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                aSwitch.setChecked(false);
+                Toast.makeText(getActivity(), "网络或者服务器异常", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

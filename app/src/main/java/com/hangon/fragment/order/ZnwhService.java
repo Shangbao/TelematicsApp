@@ -154,6 +154,7 @@ public class ZnwhService extends Service {
         });
     }
 
+
     public class MyBinder extends Binder{
         public void off(){
             flag = false;

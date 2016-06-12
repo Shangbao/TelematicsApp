@@ -60,6 +60,10 @@
     <!-- carlife-->
     <color name="item_press">#019b79</color>
     <color name="home_bg">#00ffffff</color>
+
+    <color name="seekbar_thumb">#fffb6e52</color>
+    <color name="item_music">#f7f7f7</color>
+    <color name="item_music_selected">#019b79</color>
     <!--   <color name="white">#ffffff</color> -->
     <color name="indictor_selected">#f5f5f5</color>
     <color name="indictor_selected_text">#e54125</color>

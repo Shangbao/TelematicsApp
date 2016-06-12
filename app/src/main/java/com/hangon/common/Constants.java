@@ -26,6 +26,8 @@ public class Constants {
     public static final String MY_ADD_CAR_INFO_URL = "http://" + HOST_IP + ":8080/wind/Car/MyAddCarInfo?";
     //获取默认车辆的违章信息违章地址
     public static final String GET_WEIZHANG_INFO_URL = "http://" + HOST_IP + ":8080/wind/Car/GetWeiZhangInfo?";
+    public static final String QUERY_CAR_URL = "http://" + HOST_IP + ":8080/wind/Car/QueryCar";
+
 
     //关于订单的网络请求地址
     public static final String ADD_ORDER_INFO_URL = "http://" + HOST_IP + ":8080/wind/Order/AddOrderInfo";

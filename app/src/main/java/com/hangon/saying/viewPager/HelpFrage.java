@@ -28,7 +28,6 @@ import java.util.Date;
 import java.util.List;
 
 
-
 public class HelpFrage extends Fragment implements BaseFragmentPagerAdapter.UpdateAble, XListView.IXListViewListener {
     View view;
     List<SayingVO> sayingList;
@@ -144,9 +143,9 @@ public class HelpFrage extends Fragment implements BaseFragmentPagerAdapter.Upda
     private void onLoad() {
         mListView.stopRefresh();
         mListView.stopLoadMore();
-        Date date=new Date();
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String str=simpleDateFormat.format(date);
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String str = simpleDateFormat.format(date);
         mListView.setRefreshTime(str);
     }
 

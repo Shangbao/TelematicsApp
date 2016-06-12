@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.SeekBar;
 
 import com.hangon.bean.music.Music;
@@ -24,7 +25,7 @@ import java.util.concurrent.Executors;
  */
 public class MusicService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
 
-    private MediaPlayer mediaPlayer = new MediaPlayer();//音乐播放器
+    private static MediaPlayer mediaPlayer = new MediaPlayer();//音乐播放器
 
     private int playMode = Constants.SEQUENCE_MODEL;//控制播放模式
     private int currIndex = 0;//当前播放的索引
@@ -217,7 +218,12 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         return false;
     }
 
-    class MyBinder extends Binder {
+    public class MyBinder extends Binder {
+        public void toStartActivity() {
+            handler.sendEmptyMessage(updateCurrentMusic);
+            handler.sendEmptyMessage(updateDuration);
+        }
+
         public void startPlay(int currIndex) {
             play(currIndex);
         }
@@ -266,6 +272,9 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         super.onCreate();
         list = new ArrayList<Music>();
         list = MusicUtil.getMusicData(MusicService.this);
+        Log.e("listsize", list.size() + "");
+
+
         start(currIndex);
         mediaPlayer.setOnCompletionListener(this);
         mediaPlayer.setOnErrorListener(this);

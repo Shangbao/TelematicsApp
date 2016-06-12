@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.example.fd.ourapplication.R;
 import com.hangon.common.Topbar;
+import com.hangon.fragment.userinfo.UserIconActivity;
+import com.hangon.home.activity.HomeActivity;
 import com.hangon.saying.viewPager.MainActivity;
 import com.hangon.weather.WeatherService;
 
@@ -84,8 +86,7 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_saying:
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                startActivityForResult(intent, HomeActivity.INTENT_SAYING);
         }
     }
 
