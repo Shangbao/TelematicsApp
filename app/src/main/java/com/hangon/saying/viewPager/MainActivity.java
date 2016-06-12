@@ -451,7 +451,9 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
     private void PostSaying() {
         Map map = new HashMap();
         String sayingContent = "我现在在" + strText.getText().toString() + "遇到了紧急情况,需要求助";
-        String userId = Constants.USER_ID + "";
+        UserUtil.instance(this);
+
+        String userId = UserUtil.getInstance().getIntegerConfig("userId")+"";
         Log.e("userId", userId);
         map.put("userId", userId);
         map.put("postAddress", strText.getText().toString().trim());

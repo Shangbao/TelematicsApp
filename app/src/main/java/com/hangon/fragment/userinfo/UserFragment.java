@@ -329,7 +329,9 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private void judgeCarExist(final boolean flag) {
         String url = Constants.QUERY_CAR_URL;
         Map map = new HashMap();
-        map.put("userId", Constants.USER_ID + "");
+        UserUtil.instance(getActivity());
+        String userId=UserUtil.getInstance().getIntegerConfig("userId")+"";
+        map.put("userId",userId);
         VolleyRequest.RequestPost(getActivity(), url, "judgeCarExist", map, new VolleyInterface(getActivity(), VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
