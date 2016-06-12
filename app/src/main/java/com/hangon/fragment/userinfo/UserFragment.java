@@ -184,7 +184,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        aSwitch.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
@@ -358,7 +358,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                        getActivity().unbindService(znwhConn);
                        znwhBinder.off();
                    }
-                    aSwitch.setChecked(true);
+                   // aSwitch.setChecked(true);
                 } else if (result.equals("noexist")) {
                     aSwitch.setChecked(false);
                     Toast.makeText(getActivity(), "无默认车辆,请设置默认车辆", Toast.LENGTH_SHORT).show();

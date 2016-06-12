@@ -1,6 +1,8 @@
 package com.hangon.user.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.test.LoaderTestCase;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +36,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.fd.ourapplication.R;
 import com.hangon.common.CleanableEditText;
 import com.hangon.common.Constants;
+import com.hangon.common.DialogTool;
 import com.hangon.common.MyApplication;
 import com.hangon.common.Topbar;
 import com.hangon.common.VolleyInterface;
@@ -40,6 +44,8 @@ import com.hangon.common.VolleyRequest;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
@@ -65,7 +71,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     private String iCord;
     private int time = 60;
     private boolean flag = true;
-
+   private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,11 +143,17 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                 break;
             //保存验证码
             case R.id.saveCord:
+                AlertDialog.Builder builder=new AlertDialog.Builder(RegisterActivity.this);
+                dialog=new Dialog(RegisterActivity.this);
+                builder.setView(LayoutInflater.from(RegisterActivity.this).inflate(R.layout.actiity_dialog_tip, null));
+                dialog=builder.create();
+
                 if (!TextUtils.isEmpty(cord.getText().toString().trim())) {
                     if (cord.getText().toString().trim().length() == 4) {
                         iCord = cord.getText().toString().trim();
                         flag = false;
                         if (!TextUtils.isEmpty(rUserPass.getText().toString().trim())) {
+                           dialog.dismiss();
                             if (rUserPass.getText().toString().trim().length() < 6 || rUserPass.getText().toString().trim().length() > 12) {
                                 Toast.makeText(RegisterActivity.this, "密码需在6-12位之间！", Toast.LENGTH_LONG).show();
                                 rUserPass.requestFocus();
@@ -174,12 +186,11 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
                 if (time > 0) {
-                    now.setText("验证码已发送" + time + "秒");
+                    now.setText(time+"秒后可重新发送");
                     time--;
                     handlerText.sendEmptyMessageDelayed(1, 1000);
                 } else {
                     getCord.setText("重新发送");
-
                     time = 60;
                     now.setVisibility(View.GONE);
                     getCord.setVisibility(View.VISIBLE);
@@ -240,6 +251,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
 
     //添加用户
     private void addUserInfo() {
+        dialog.show();
         String url = Constants.REGISTER_URL;
         Map<String, Object> map = new HashMap<>();
         map.put("userName", rUserName.getText().toString());
@@ -249,10 +261,12 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
             public void onMySuccess(String result) {
                 Log.e("aaa", result);
                 if (result.equals("OK")) {
+                    Timer timer=new Timer();
+                    timer.schedule(new wait(), 2000);
                     Toast.makeText(RegisterActivity.this, "注册成功。", Toast.LENGTH_SHORT).show();
-                    Intent toLogin = new Intent();
-                    toLogin.setClass(RegisterActivity.this, LoginActivity.class);
-                    startActivity(toLogin);
+//                    Intent toLogin = new Intent();
+//                    toLogin.setClass(RegisterActivity.this, LoginActivity.class);
+//                    startActivity(toLogin);
                     finish();
                 }
 
@@ -261,6 +275,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
             @Override
             public void onMyError(VolleyError error) {
                 Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_SHORT);
+                Timer timer=new Timer();
+                timer.schedule(new wait(), 2000);
             }
         });
     }
@@ -295,5 +311,13 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     protected void onDestroy() {
         super.onDestroy();
         SMSSDK.unregisterAllEventHandler();
+    }
+    class wait extends TimerTask {
+
+        @Override
+        public void run() {
+            dialog.dismiss();
+
+        }
     }
 }

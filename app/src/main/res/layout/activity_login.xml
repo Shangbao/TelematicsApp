@@ -30,7 +30,7 @@
         <LinearLayout
             android:id="@+id/login_layout1"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginTop="45dp"
             android:background="@drawable/btn_login1"
             android:gravity="center"
@@ -62,7 +62,7 @@
         <LinearLayout
             android:id="@+id/login_layout2"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_below="@+id/login_layout1"
             android:layout_marginTop="15dp"
             android:background="@drawable/btn_login1"
@@ -94,7 +94,7 @@
         <ImageButton
             android:id="@+id/userLogin"
             android:layout_width="125dp"
-            android:layout_height="27dp"
+            android:layout_height="35dp"
             android:layout_below="@+id/login_layout2"
             android:layout_centerInParent="true"
             android:layout_marginTop="30dp"

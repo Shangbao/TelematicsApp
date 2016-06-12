@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -68,6 +69,7 @@ import com.hangon.map.util.GasInfoUtil;
 import com.hangon.map.util.IOExceptionHandle;
 import com.hangon.map.util.JudgeNet;
 import com.hangon.order.activity.MainOrderActivity;
+import com.hangon.saying.viewPager.MainActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -213,7 +215,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                 }
                 GasInfoUtil.VolleyGet(getApplicationContext());
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(1200);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -558,6 +560,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                         intent.putExtra("mGasList", bundle);
                         intent.setClass(MapMainActivity.this, GasSiteDetailsActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 };
                 mInfoWindow = new InfoWindow(BitmapDescriptorFactory
@@ -630,6 +633,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                 intent.putExtra("mGasList", bundle);
                 intent.setClass(MapMainActivity.this, GasSiteDetailsActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -759,6 +763,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                     Intent intent = new Intent();
                     intent.setClass(MapMainActivity.this, BestRouteActivity.class);
                     startActivity(intent);
+                    finish();
             }
         }
     }
@@ -806,4 +811,5 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         BaiduMapRoutePlan.finish(this);
         BaiduMapPoiSearch.finish(this);
     }
+
 }

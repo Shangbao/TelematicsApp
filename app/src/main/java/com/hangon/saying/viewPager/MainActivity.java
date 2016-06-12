@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -44,14 +43,10 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.example.fd.ourapplication.R;
 import com.hangon.common.Constants;
-import com.hangon.common.ImageUtil;
 import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
-import com.hangon.fragment.order.ZnwhFragment;
 import com.hangon.order.util.FragmentViewPagerAdapter;
-import com.hangon.saying.activity.Bimp;
-import com.hangon.saying.activity.FileUtils;
 import com.hangon.saying.activity.PublishedActivity;
 import com.hangon.saying.util.Location;
 import com.hangon.saying.util.MenuHelper;
@@ -87,7 +82,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
     //实现Tab滑动效果
     private ViewPager mViewPager;
     //动画图片
-    private ImageView cursor;
+   // private ImageView cursor;
 
     //动画图片偏移量
     private int offset = 0;
@@ -226,7 +221,8 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
 
         //将顶部文字恢复默认值
         resetTextViewTextColor();
-       czwTextView.setBackgroundColor(getResources().getColor(R.color.main_top_color_selected));
+       czwTextView.setBackgroundColor(getResources().getColor(R.color.indictor_selected));
+        czwTextView.setTextColor(getResources().getColor((R.color.indictor_selected_text)));
         //设置viewpager页面滑动监听事件
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
     }
@@ -235,7 +231,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
      * 初始化动画
      */
     private void InitImageView() {
-        cursor = (ImageView) findViewById(R.id.cursor);
+      //  cursor = (ImageView) findViewById(R.id.cursor);
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -245,7 +241,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
         bmpW = (screenW / 2);
 
         //设置动画图片宽度
-        setBmpW(cursor, bmpW);
+       // setBmpW(cursor, bmpW);
         offset = 0;
 
         //动画图片偏移量赋值
@@ -302,7 +298,8 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
                     if (currIndex == 1) {
                         animation = new TranslateAnimation(position_one, 0, 0, 0);
                         resetTextViewTextColor();
-                        czwTextView.setBackgroundColor(getResources().getColor(R.color.main_top_color_selected));
+                        czwTextView.setBackgroundColor(getResources().getColor(R.color.indictor_selected));
+                        czwTextView.setTextColor(getResources().getColor((R.color.indictor_selected_text)));
                     }
 
                     //当前为页卡2
@@ -311,12 +308,13 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
                         animation = new TranslateAnimation(offset, position_one, 0, 0);
                         resetTextViewTextColor();
                         qzTextView.setBackgroundColor(getResources().getColor(R.color.main_top_color_selected));
+                        qzTextView.setTextColor(getResources().getColor((R.color.indictor_selected_text)));
                     }
             }
             currIndex = position;
             animation.setFillAfter(true);// true:图片停在动画结束位置
             animation.setDuration(300);
-            cursor.startAnimation(animation);
+        //    cursor.startAnimation(animation);
 
         }
 
@@ -348,16 +346,21 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
      * 将顶部文字恢复默认值
      */
     private void resetTextViewTextColor() {
-        czwTextView.setBackgroundColor(getResources().getColor(R.color.main_top_tab_color));
-        qzTextView.setBackgroundColor(getResources().getColor(R.color.main_top_tab_color));
+        czwTextView.setBackgroundColor(getResources().getColor(R.color.indictor_noselected));
+        qzTextView.setBackgroundColor(getResources().getColor(R.color.indictor_noselected));
+        czwTextView.setTextColor(getResources().getColor((R.color.indictor_noselected_text)));
+       qzTextView.setTextColor(getResources().getColor((R.color.indictor_noselected_text)));
     }
 
     @Override
     public void onPopupMenuClick(int position) {
         Constants.SAYING_TYPE = position + 1 + "";
+
         Intent intent = new Intent();
-        intent.setClass(getApplicationContext(), PublishedActivity.class);
+        intent.setClass(MainActivity.this, PublishedActivity.class);
         startActivity(intent);
+        finish();
+
     }
 
     @Override
@@ -466,9 +469,13 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
             public void onMySuccess(String result) {
                 Toast.makeText(MainActivity.this, "已发出急救", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
-                InitImageView();
-                InitFragment();
-                InitViewPager();
+                Intent intent=new Intent();
+                intent.setClass(MainActivity.this,MainActivity.class);
+                startActivity(intent);
+
+//                InitImageView();
+//               InitFragment();
+//                InitViewPager();
             }
 
             @Override
@@ -494,6 +501,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
     public void onDestroy() {
         mLocClient.stop();
         super.onDestroy();
+        finish();
     }
 }
 

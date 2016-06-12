@@ -124,7 +124,7 @@
                         android:textSize="14sp"
                         android:gravity="center"
                         />
-                    <TextView
+                    <EditText
                         android:gravity="center_vertical"
                         android:id="@+id/alert_appoint_gasmoney"
                         android:layout_width="match_parent"

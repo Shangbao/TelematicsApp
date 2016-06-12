@@ -78,7 +78,7 @@ public class GasSiteDetailsActivity extends Activity {
     //获取加油升数
     //升数
     private EditText mGasLitre;
-    private TextView mGasmoney;
+    private EditText mGasmoney;
     private TextView appointGastype;
     private TextView appointGasSingleprice;
     ViewHorder viewHorder;
@@ -156,7 +156,7 @@ public class GasSiteDetailsActivity extends Activity {
                 appointGasSingleprice = (TextView) alertView.findViewById(R.id.appoint_gassingleprice);
                 appointGastype = (TextView) alertView.findViewById(R.id.appoint_gastype);
                 mGasLitre = (EditText) alertView.findViewById(R.id.alert_appoint_gaslitre);
-                mGasmoney = (TextView) alertView.findViewById(R.id.alert_appoint_gasmoney);
+                mGasmoney = (EditText) alertView.findViewById(R.id.alert_appoint_gasmoney);
                 //Yes or NO
                 ImageView orderYes = (ImageView) alertView.findViewById(R.id.appoint_order_yes);
                 ImageView orderNo = (ImageView) alertView.findViewById(R.id.appoint_order_no);

@@ -134,7 +134,9 @@
 
         </activity>
 
-        <activity android:name="com.hangon.map.activity.MapMainActivity">
+        <activity android:name="com.hangon.map.activity.MapMainActivity"
+            android:launchMode="singleInstance"
+            >
 
         </activity>
 
@@ -160,7 +162,9 @@
 
         </activity>
 
-        <activity android:name="com.hangon.weizhang.activity.MainActivity">
+        <activity android:name="com.hangon.weizhang.activity.MainActivity"
+            android:launchMode="singleInstance"
+            >
 
         </activity>
 
@@ -174,7 +178,9 @@
         </activity>
         <service android:name="com.cheshouye.api.client.WeizhangIntentService" />
 
-        <activity android:name="com.hangon.order.activity.MainOrderActivity">
+        <activity android:name="com.hangon.order.activity.MainOrderActivity"
+            android:launchMode="singleInstance"
+            >
 
         </activity>
         <activity android:name="com.hangon.order.activity.EditOrder"/>

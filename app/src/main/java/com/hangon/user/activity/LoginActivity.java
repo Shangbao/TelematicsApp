@@ -1,12 +1,15 @@
 package com.hangon.user.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +41,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Administrator on 2016/3/31.
@@ -47,7 +52,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private CleanableEditText lUserPass;//登录时的用户密码
     private ImageButton userLogin;//登录按钮
     private Button toRegister;//注册按钮
-
+   private Dialog dialog;
     public static String autoLogin;//判断是否自动登录
 
     @Override
@@ -93,8 +98,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
      * 初始化点击事件按钮的点击事件
      */
     public void onClick(View v) {
+        AlertDialog.Builder builder=new AlertDialog.Builder(LoginActivity.this);
         switch (v.getId()) {
             case R.id.userLogin:
+                dialog=new Dialog(LoginActivity.this);
+                builder.setView(LayoutInflater.from(LoginActivity.this).inflate(R.layout.actiity_dialog_tip, null));
+                dialog=builder.create();
+
                 if (ConnectionUtil.isConn(LoginActivity.this) == false) {
                     ConnectionUtil.setNetworkMethod(LoginActivity.this);
                 } else {
@@ -105,6 +115,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 Intent toRegister = new Intent();
                 toRegister.setClass(LoginActivity.this, RegisterActivity.class);
                 startActivity(toRegister);
+
                 break;
         }
     }
@@ -113,9 +124,16 @@ public class LoginActivity extends Activity implements View.OnClickListener {
      * 获得登录信息并且解析
      */
     private void login() {
-        if (lUserName.length() != 11) {
+     if(lUserName.getText().toString().trim().equals("")||lUserPass.getText().toString().trim().equals("")){
+            Toast.makeText(LoginActivity.this, "账号或密码不能为空.", Toast.LENGTH_SHORT).show();
+         return;
+        }
+       else if (lUserName.length() != 11) {
             Toast.makeText(LoginActivity.this, "账号或者密码错误,请重新输入.", Toast.LENGTH_SHORT).show();
-        } else {
+            return;
+        }
+        else {
+            dialog.show();
             //url="http://10.163.0.194:8080/wind/UserLogin?userName=13166837709&userPass=123456";
             String url = Constants.LOGIN_URL;
             Log.e("yyy", url);
@@ -139,6 +157,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         finishedLogin(user);
                         LoginActivity.this.finish();
                     } else {
+                        Timer timer=new Timer();
+                        timer.schedule(new wait(), 2000);
                         Toast.makeText(LoginActivity.this, "账号或者密码错误,请重新输入.", Toast.LENGTH_SHORT).show();
                     }
                     Log.e("xxx", userInfo);
@@ -224,5 +244,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         UserUtil.instance(LoginActivity.this);
         UserUtil.getInstance().saveStringConfig("userIconContent", userIconConten);
     }
+    class wait extends TimerTask {
 
+        @Override
+        public void run() {
+            dialog.dismiss();
+
+        }
+    }
 }

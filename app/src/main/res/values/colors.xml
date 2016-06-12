@@ -53,18 +53,20 @@
     <color name="tq_item_color">#4282A6</color>
 
     <color name="main_top_color">#f7614d</color>
-    <color name="main_top_tab_color">#faa24b</color>
-    <color name="main_top_color_selected">#12a89d</color>
+    <color name="main_top_tab_color">#ffffff</color>
+    <color name="main_top_color_selected">#f5f5f5</color>
     <color name="matrix_color">#ffffff</color>
     <color name="main_top_tab_color_2">#ffffff</color>
     <!-- carlife-->
     <color name="item_press">#019b79</color>
+    <color name="item_nopress">#ffffff</color>
     <color name="home_bg">#00ffffff</color>
 
     <color name="seekbar_thumb">#fffb6e52</color>
     <color name="item_music">#f7f7f7</color>
     <color name="item_music_selected">#019b79</color>
     <!--   <color name="white">#ffffff</color> -->
+    <!-- dingdan-->
     <color name="indictor_selected">#f5f5f5</color>
     <color name="indictor_selected_text">#e54125</color>
     <color name="indictor_noselected">#ffffff</color>

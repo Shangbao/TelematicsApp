@@ -158,7 +158,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     //获取音乐歌曲列表并添加适配器
     private void setMusicAdapter() {
         list = new ArrayList<Music>();
-        list = MusicUtil.getMusicData(getActivity());
+        list =MusicUtil.getMusicData(getActivity());
         musicAdapter = new MusicAdapter(list, getActivity(), currIndex);
         songList.setAdapter(musicAdapter);
     }

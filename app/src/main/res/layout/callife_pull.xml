@@ -5,10 +5,10 @@
     android:background="@drawable/bg_item" >
     <TextView
         android:id="@+id/select_text"
-        android:layout_width="100dp"
+        android:layout_width="110dp"
         android:layout_height="40dp"
-        android:padding="8dp"
+        android:padding="4dp"
         android:text="test"
-        android:textSize="15dp" >
+        android:textSize="14sp" >
     </TextView>
 </FrameLayout>

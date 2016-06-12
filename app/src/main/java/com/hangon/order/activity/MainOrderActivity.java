@@ -174,6 +174,7 @@ public class MainOrderActivity extends FragmentActivity {
                     Intent intent=new Intent();
                     intent.setClass(MainOrderActivity.this, MapMainActivity.class);
                     startActivity(intent);
+                    finish();
 
             }
         });

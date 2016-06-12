@@ -96,6 +96,7 @@ public class SayingAdpter extends BaseAdapter {
         vh.saying_address.setText(list.get(position).getPostAddress());
         if(list.get(position).getSayingType()==1){
            vh.saying_delete.setVisibility(View.GONE);
+            vh.saying_qz_flg.setVisibility(View.GONE);
         }else if(list.get(position).getSayingType()==2){
             vh.saying_qz_flg.setBackgroundResource(R.drawable.ss_02);
         }else if(list.get(position).getSayingType()==3){
@@ -153,7 +154,6 @@ public class SayingAdpter extends BaseAdapter {
             vh.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                         long arg3) {
-
                     Intent intent = new Intent(context,
                             ViewPagerTestActivity.class);
                     intent.putExtra("ID", arg2);

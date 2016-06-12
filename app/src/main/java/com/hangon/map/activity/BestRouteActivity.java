@@ -181,7 +181,7 @@ public class BestRouteActivity extends Activity implements
                             @Override
                             public void run() {
                                 try {
-                                    Thread.sleep(1000);
+                                    Thread.sleep(1300);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -194,6 +194,7 @@ public class BestRouteActivity extends Activity implements
                                 intent.putExtra("address", addressdata);
                                 intent.setClass(BestRouteActivity.this, MapMainActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         }).start();
                     }

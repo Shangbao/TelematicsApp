@@ -70,14 +70,15 @@
             android:id="@+id/saying_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="2dp"
             android:text="今天，一不小心踩到屎了。"
         android:textColor="#000000"
-            android:textSize="15dp" />
+            android:textSize="14sp" />
 
 
             <GridView
+                android:layout_marginTop="5dp"
                 android:id="@+id/saying_gridview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -95,11 +96,11 @@
 
 
            <RelativeLayout
-               android:layout_marginTop="3dp"
+               android:layout_marginTop="10dp"
                android:layout_marginLeft="15dp"
-               android:layout_weight="1"
+
                android:layout_width="match_parent"
-               android:layout_height="match_parent">
+               android:layout_height="wrap_content">
                <ImageView
                    android:layout_width="15dp"
                    android:layout_height="15dp"
@@ -119,7 +120,14 @@
                    android:layout_toRightOf="@+id/imageView3"
                    android:layout_toEndOf="@+id/imageView3" />
            </RelativeLayout>
-
+           <View
+               android:layout_marginLeft="15dp"
+               android:layout_marginRight="15dp"
+               android:layout_marginTop="5dp"
+               android:layout_width="match_parent"
+               android:layout_height="2dp"
+               android:background="#e0e0e0"
+               />
     </LinearLayout>
 
 

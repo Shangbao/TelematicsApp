@@ -92,12 +92,13 @@
 
             <TextView
                 android:id="@+id/now"
+                android:textColor="#ffffff"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/cord"
                 android:gravity="center"
-                android:textSize="12sp"
+                android:textSize="8sp"
                 android:visibility="gone" />
 
             <Button
