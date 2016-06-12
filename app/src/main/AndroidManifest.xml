@@ -231,7 +231,6 @@
         </activity>
         <activity
             android:name="com.hangon.saying.viewPager.MainActivity"
-            android:launchMode="singleTop"
             >
 
         </activity>

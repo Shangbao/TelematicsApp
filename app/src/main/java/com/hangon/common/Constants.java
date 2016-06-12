@@ -45,6 +45,8 @@ public class Constants {
     //说说图片地址
     public static final String LOAD_SAYING_IMG_URL="http://" + HOST_IP + ":8080/wind/img/saying_img";
 
+    public static final String SHARE_APP_URL="http://" + HOST_IP + ":8080/wind/img/background/ccut_znlsj.apk";
+
     //关于车友圈说说的地址
     public static final String GET_QZ_SAYINGS ="http://" + HOST_IP + ":8080/wind/Saying/GetQzSayings";
     public static final String GET_CZW_SAYINGS ="http://" + HOST_IP + ":8080/wind/Saying/GetCzwSayings";
