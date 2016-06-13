@@ -125,7 +125,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
             case R.id.btnSetCarInfo:
                 intent = new Intent();
                 intent.setClass(getActivity(), SetCarInfoActivity.class);
-                startActivityForResult(intent, HomeActivity.INTENT_SETCARINFO);
+                getActivity().startActivityForResult(intent, HomeActivity.INTENT_SETCARINFO);
                 break;
 
             case R.id.btnBestWay:
@@ -150,7 +150,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
             case R.id.btnWeiZhang:
                 intent = new Intent();
                 intent.setClass(getActivity(), MainActivity.class);
-                startActivityForResult(intent, HomeActivity.INTENT_WZCX);
+                getActivity().startActivityForResult(intent, HomeActivity.INTENT_WZCX);
                 break;
         }
     }

@@ -73,7 +73,7 @@ public class UserIconActivity extends Activity implements OnClickListener {
             }
         });
 
-      topbarRight.setVisibility(View.GONE);
+        topbarRight.setVisibility(View.GONE);
         getUserIconFromCookies();
 
     }

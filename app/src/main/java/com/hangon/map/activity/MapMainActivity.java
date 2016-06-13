@@ -287,9 +287,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         topLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
-                intent.setClass(MapMainActivity.this, HomeActivity.class);
-                startActivity(intent);
                 finish();
             }
         });

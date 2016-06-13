@@ -356,7 +356,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                     } else {
                         getTab(1);
                     }
-                    Log.d("车辆管理", "onActivityResult: ");
                 }
                 break;
             case INTENT_WZCX:
@@ -367,41 +366,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                     } else {
                         getTab(1);
                     }
-                    Log.d("违章管理", "onActivityResult: ");
                 }
                 break;
-            case INTENT_USERICON:
-                if (resultCode == RESULT_OK) {
-                    int position = data.getIntExtra("id", 0);
-                    if (position != 0) {
-                        getTab(position);
-                    } else {
-                        getTab(1);
-                    }
-                    Log.d("结果返回", "头像" );
-                }
-                break;
-            case INTENT_UPDATEUSER:
-                if (resultCode == RESULT_OK) {
-                    initFragment();
-                    int position = data.getIntExtra("id", 0);
-                    if (position != 0) {
-                        getTab(position);
-                    } else {
-                        getTab(1);
-                    }
-                }
-                else if (resultCode == UpdateUserActivity.RESULT_UPDATE){
-                    transaction.replace(R.id.content, userFragment).commit();
-                    int position = data.getIntExtra("id", 0);
-                    if (position != 0) {
-                        getTab(position);
-                    } else {
-                        getTab(1);
-                    }
-                }
-                break;
-
             case INTENT_SAYING:
                 if (resultCode == RESULT_OK) {
                     int position = data.getIntExtra("id", 0);
