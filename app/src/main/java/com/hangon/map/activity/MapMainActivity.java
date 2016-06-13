@@ -378,8 +378,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
     // 起始位置终点位置数据接收
     public void receive() {
         if (states == 0 || judgeNet.getAppointRoute() == 1) {
-            Toast.makeText(MapMainActivity.this, "sssss", Toast.LENGTH_LONG).show();
-
             return;
         } else {
             Bundle bundle = this.getIntent().getExtras().getBundle("address");
@@ -461,7 +459,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
     public void onGetDrivingRouteResult(DrivingRouteResult result) {
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(MapMainActivity.this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
-//            AnimAsyncTask.progress = 1;
             show_hideText.setText("");
 
         }
@@ -551,7 +548,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                         Bundle bundle = new Bundle();
                         bundle.putDouble("gaslat", info.getLat());
                         bundle.putDouble("gaslon", info.getLon());
-
                         bundle.putInt("position", position);
                         Intent intent = new Intent();
                         intent.putExtra("mGasList", bundle);
@@ -606,10 +602,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                 TextView gasdistance = (TextView) v.findViewById(R.id.gaslist_distance);
                 TextView gasaddress = (TextView) v.findViewById(R.id.gaslist_address);
                 TextView distancemeter=(TextView)v.findViewById(R.id.distance_meter);
-                gasname.setTextColor(Color.argb(255, 13, 141, 13));
-                gasaddress.setTextColor(Color.argb(255, 13, 141, 13));
-                gasdistance.setTextColor(Color.argb(255, 13, 141, 13));
-                distancemeter.setTextColor(Color.argb(255,13,141,13));
             }
         });
 
@@ -676,7 +668,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         if (judgeNet.getAppointRoute() == 1) {
             Bundle bundle = this.getIntent().getBundleExtra("endaddress");
             String Address = bundle.get("endaddress").toString();
-            Toast.makeText(MapMainActivity.this,Address,Toast.LENGTH_SHORT).show();
             mGeoCoder.geocode(new GeoCodeOption().city("")
                     .address(Address));
         } else if ("我的位置".equals(start_position)) {
@@ -798,10 +789,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
 
     @Override
     protected void onDestroy() {
-       /* asyncTask.stopProgressDialog();
-        if (asyncTask != null && !asyncTask.isCancelled()) {
-            asyncTask.cancel(true);
-        }*/
+
         mMapView.onDestroy();
         super.onDestroy();
         mBitmapDescriptor.recycle();

@@ -75,5 +75,4 @@
     <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbok_style</item>
     </style>
-
 </resources>

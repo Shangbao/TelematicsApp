@@ -72,7 +72,6 @@ public class ImageGridActivity extends Activity {
 				for (; it.hasNext();) {
 					list.add(it.next());
 				}
-
 				if (Bimp.act_bool) {
 					Intent intent = new Intent(ImageGridActivity.this,
 							PublishedActivity.class);
@@ -100,6 +99,9 @@ public class ImageGridActivity extends Activity {
 		cancel_image_grid.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Intent intent=new Intent();
+				intent.setClass(ImageGridActivity.this,TestPicActivity.class);
+				startActivity(intent);
              finish();				
 			}
 		});
@@ -119,12 +121,6 @@ public class ImageGridActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-
-				// if(dataList.get(position).isSelected()){
-				// dataList.get(position).setSelected(false);
-				// }else{
-				// dataList.get(position).setSelected(true);
-				// }
 
 				adapter.notifyDataSetChanged();
 			}

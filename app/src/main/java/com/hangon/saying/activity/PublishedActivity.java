@@ -113,7 +113,7 @@ public class PublishedActivity extends Activity {
         activity_selectimg_send = (TextView) findViewById(R.id.activity_selectimg_send);
         activity_selectimg_send.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), location_address_publish.getText().toString() + "ssss", Toast.LENGTH_LONG).show();
+
                 List<String> list = new ArrayList<String>();
 
                 for (int i = 0; i < Bimp.drr.size(); i++) {
@@ -138,7 +138,7 @@ public class PublishedActivity extends Activity {
         Map map = new HashMap();
         UserUtil.instance(PublishedActivity.this);
         String userId = UserUtil.getInstance().getIntegerConfig("userId") + "";
-        Log.e("userId", userId);
+//        Log.e("userId", userId);
         map.put("userId", userId);
         map.put("postAddress", location_address_publish.getText().toString().trim());
         map.put("sayingContent", publishContent.getText().toString().trim());
@@ -173,7 +173,6 @@ public class PublishedActivity extends Activity {
 
             @Override
             public void onMyError(VolleyError error) {
-                Toast.makeText(PublishedActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(PublishedActivity.this, "网络异常，请重新发表", Toast.LENGTH_SHORT).show();
             }
         });

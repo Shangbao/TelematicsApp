@@ -225,6 +225,7 @@ public class BestRouteActivity extends Activity implements
         public void onTextChanged(CharSequence s, int start, int before,
                                   int count) {
             String a = "";
+
             mPoiSearch.searchInCity((new PoiCitySearchOption()).city(a)
                     .keyword(startPosition.getText().toString())
                     .pageNum(load_Index));

@@ -267,7 +267,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
 //                    Intent toLogin = new Intent();
 //                    toLogin.setClass(RegisterActivity.this, LoginActivity.class);
 //                    startActivity(toLogin);
-                    finish();
+
                 }
 
             }
@@ -317,7 +317,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         @Override
         public void run() {
             dialog.dismiss();
-
+            finish();
         }
     }
 }

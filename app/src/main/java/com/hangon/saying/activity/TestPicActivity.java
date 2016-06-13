@@ -99,6 +99,7 @@ public class TestPicActivity extends Activity {
 				intent.putExtra(TestPicActivity.EXTRA_IMAGE_LIST,
 						(Serializable) dataList.get(position).imageList);
 				startActivity(intent);
+				finish();
 			}
 
 		});

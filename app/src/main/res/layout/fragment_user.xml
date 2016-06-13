@@ -4,8 +4,12 @@
     xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:wison="http://schemas.android.com/apk/res-auto"
+
     android:background="#e0e0e0"
-    android:orientation="vertical">
+    android:orientation="vertical"
+
+    >
 
     <include android:id="@+id/topbar" layout="@layout/topbar"/>
 
@@ -90,43 +94,16 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
-            android:text="用户"
-            android:textColor="#666666"
-            android:textSize="20sp" />
-    </RelativeLayout>
-
     <ListView
+        android:divider="@null"
+        android:layout_marginTop="5dp"
         android:id="@+id/userInfoList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:background="#ffffff"></ListView>
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
-            android:text="设置"
-            android:textColor="#666666"
-            android:textSize="20sp" />
-    </RelativeLayout>
-
     <LinearLayout
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
@@ -143,22 +120,35 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:text="监听汽车异常" />
+                android:text="监听汽车异常:"
+                android:textSize="16sp"
+                />
+            <com.kyleduo.switchbutton.SwitchButton
 
-            <Switch
-                android:id="@+id/switch_znwh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:id="@+id/switch_znwh"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 android:layout_marginLeft="200dp"
-                android:textOff="关闭"
-                android:textOn="开启" />
-        </RelativeLayout>
 
+                />
+
+        </RelativeLayout>
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="2dp"
+       android:background="#e0e0e0"
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="10dp"
+       />
         <RelativeLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/xcjl_tv"
@@ -167,54 +157,74 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:text="行车记录" />
+                android:textSize="16sp"
+                android:text="行车记录：" />
 
             <Button
                 android:id="@+id/ck_video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/xcjl_tv"
-                android:text="查看记录" />
+                android:text="查看记录"
+                android:visibility="gone"
+                />
 
-            <Switch
-                android:id="@+id/switch_xcjly"
+            <com.kyleduo.switchbutton.SwitchButton
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
-        </RelativeLayout>
+                android:layout_marginLeft="200dp"
+                android:id="@+id/switch_xcjly"
 
+                />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#e0e0e0"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
         <RelativeLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/btn_share"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:text="分享app" />
 
 
-            <Button
-                android:id="@+id/btn_share"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/btn_login1"
-                android:text="分享" />
         </RelativeLayout>
-
-        <Button
-            android:id="@+id/btnReturnLogin"
+        <View
             android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#e0e0e0"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/btnReturnLogin"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/btn_login1"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
             android:text="退出登录" />
 
 

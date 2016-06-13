@@ -38,4 +38,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile files('libs/apache-mime4j-0.6.jar')
     compile project(':sharesdk')
+    compile 'com.kyleduo.switchbutton:library:1.4.1'
 }

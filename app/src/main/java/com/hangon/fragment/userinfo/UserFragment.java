@@ -16,7 +16,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,19 +26,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
 import com.example.fd.ourapplication.R;
 import com.hangon.bean.user.UserInfo;
 import com.hangon.common.Constants;
 import com.hangon.common.DialogTool;
 import com.hangon.common.ImageUtil;
-import com.hangon.common.Topbar;
+import com.hangon.common.MySwitchs;
 import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
@@ -49,13 +45,12 @@ import com.hangon.home.activity.HomeActivity;
 import com.hangon.user.activity.LoginActivity;
 import com.hangon.video.VideoActivity;
 import com.hangon.video.VideoService;
-import com.hangon.weather.WeatherService;
+import com.kyleduo.switchbutton.SwitchButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -74,11 +69,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     TextView homePhoneNum;//手机号
     MusicImage homeHeadIcon;//头像显示
     ImageView toSetHeadIcon;//头像设置
-    Switch aSwitch;//智能维护启动按钮
-    Switch bSwitch;//行车记录启动按钮
+   SwitchButton aSwitch;//智能维护启动按钮
+   SwitchButton bSwitch;//行车记录启动按钮
 
-    Button btnShare;//分享APP
-    Button btnReturnLogin;//退出登录
+    TextView btnShare;//分享APP
+    TextView btnReturnLogin;//退出登录
     Button ckBtn;
     ZnwhService.MyBinder znwhBinder;
     VideoService.VideoBinder videoBinder;
@@ -186,11 +181,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         homePhoneNum = (TextView) userView.findViewById(R.id.homePhoneNum);
         homeHeadIcon = (MusicImage) userView.findViewById(R.id.homeHeadIcon);
         toSetHeadIcon = (ImageView) userView.findViewById(R.id.toSetHeadIcon);
-        btnReturnLogin = (Button) userView.findViewById(R.id.btnReturnLogin);
-        btnShare = (Button) userView.findViewById(R.id.btn_share);
+        btnReturnLogin = (TextView) userView.findViewById(R.id.btnReturnLogin);
+        btnShare = (TextView) userView.findViewById(R.id.btn_share);
         ckBtn = (Button) userView.findViewById(R.id.ck_video);
-        aSwitch = (Switch) userView.findViewById(R.id.switch_znwh);
-        bSwitch = (Switch) userView.findViewById(R.id.switch_xcjly);
+        aSwitch = (SwitchButton) userView.findViewById(R.id.switch_znwh);
+        bSwitch = (SwitchButton) userView.findViewById(R.id.switch_xcjly);
         ckBtn.setOnClickListener(this);
         btnReturnLogin.setOnClickListener(this);
         btnShare.setOnClickListener(this);
@@ -280,19 +275,18 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
 
-        map.put("img", R.drawable.user_icon1);
+        map.put("img", R.drawable.grzx_23);
         map.put("userInfoKey", "性别");
         map.put("userInfoValue", userInfo.getSex());
         list.add(map);
-
         map = new HashMap<String, Object>();
-        map.put("img", R.drawable.user_icon2);
+        map.put("img", R.drawable.grzx_27);
         map.put("userInfoKey", "年龄");
         map.put("userInfoValue", userInfo.getAge());
         list.add(map);
 
         map = new HashMap<String, Object>();
-        map.put("img", R.drawable.user_icon3);
+        map.put("img", R.drawable.grzx_31);
         map.put("userInfoKey", "驾驶证号");
         map.put("userInfoValue", userInfo.getDriverNum());
         list.add(map);

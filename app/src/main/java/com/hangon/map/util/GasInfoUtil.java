@@ -22,7 +22,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 /**
  * Created by Administrator on 2016/4/23.
  */
@@ -231,21 +230,18 @@ public class GasInfoUtil implements Serializable {
                                 Gson gson = new Gson();
                                 Status status = gson.fromJson(response, Status.class);
                                 if (status.getResult() != null) {
-                                    Toast.makeText(context, "111111",
-                                            Toast.LENGTH_LONG).show();
                                     gasinfo = status.getResult().getData();
                                     Collections.sort(gasinfo);
                                 } else if (status.getResult() == null) {
                                     Toast.makeText(context, "抱歉，查找失败",
                                             Toast.LENGTH_LONG).show();
-                                    AnimAsyncTask.progress = 1;
                                 }
                             }
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    Toast.makeText(context, volleyError.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"网络错误", Toast.LENGTH_SHORT).show();
                 }
             });
             request.setTag("StringReqGet");
@@ -254,10 +250,8 @@ public class GasInfoUtil implements Serializable {
         }catch (Exception e){
             e.printStackTrace();
             Toast.makeText(context,"网络错误",Toast.LENGTH_SHORT).show();
-            AnimAsyncTask.progress=1;
         }
     }
-
     public static List<GasInfoUtil> infos = new ArrayList<GasInfoUtil>();
     public static List<Datas> getGasinfo() {
         return gasinfo;
