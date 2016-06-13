@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/item_grida_image"
         android:layout_width="107dp"
         android:layout_height="107dp"

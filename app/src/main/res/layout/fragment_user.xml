@@ -122,6 +122,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:text="监听汽车异常:"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 />
             <com.kyleduo.switchbutton.SwitchButton
@@ -159,6 +160,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:textSize="16sp"
+                android:textColor="#000000"
                 android:text="行车记录：" />
 
             <Button
@@ -167,6 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/xcjl_tv"
                 android:text="查看记录"
+                android:textColor="#000000"
                 android:visibility="gone"
                 />
 
@@ -193,7 +196,9 @@
         <RelativeLayout
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:textColor="#000000">
 
             <TextView
                 android:id="@+id/btn_share"
@@ -205,8 +210,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
+                android:textColor="#000000"
                 android:text="分享app" />
-
 
         </RelativeLayout>
         <View
@@ -225,6 +230,7 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
+            android:textColor="#000000"
             android:textSize="16sp"
             android:text="退出登录" />
 

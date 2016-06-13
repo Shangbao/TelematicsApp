@@ -41,8 +41,7 @@ import java.util.Set;
  * Created by Administrator on 2016/4/26.
  */
 public class SetCarInfoActivity extends Activity implements View.OnClickListener {
-
-
+    public final static int INTEBNT_SAO = 1;
     ListView listView;//车辆信息列表
     SetCarInfoAdapter adapter;//车辆信息适配器
 
@@ -140,12 +139,35 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
                 break;
             case R.id.btnSao:
                 intent = new Intent(SetCarInfoActivity.this, CaptureActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, SetCarInfoActivity.INTEBNT_SAO);
                 break;
         }
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Intent intent = data;
+        Bundle bundle = intent.getExtras();
+        String result = bundle.getString("result").trim();
+        saoAdd(result);
+    }
+
+    private void saoAdd(String aimUrl) {
+        String url = Constants.MY_ADD_CAR_INFO_URL + aimUrl;
+        VolleyRequest.RequestGet(SetCarInfoActivity.this, url, "saoAdd", new VolleyInterface(SetCarInfoActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
+            @Override
+            public void onMySuccess(String result) {
+                init();
+                getCarMessageList();
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                Toast.makeText(SetCarInfoActivity.this, "网络或者服务器异常,扫描二维码添加失败,请重试", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     //获取车辆信息列表
     private void getCarMessageList() {

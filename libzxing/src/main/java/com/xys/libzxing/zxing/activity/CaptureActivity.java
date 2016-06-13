@@ -174,7 +174,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         if (holder == null) {
-            Log.e(TAG, "*** WARNING *** surfaceCreated() gave us a null surface!");
         }
         if (!isHasSurface) {
             isHasSurface = true;
@@ -217,31 +216,23 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             throw new IllegalStateException("No SurfaceHolder provided");
         }
         if (cameraManager.isOpen()) {
-            Log.w(TAG, "initCamera() while already open -- late SurfaceView callback?");
             return;
         }
         try {
             cameraManager.openDriver(surfaceHolder);
-            // Creating the handler starts the preview, which can also throw a
-            // RuntimeException.
             if (handler == null) {
                 handler = new CaptureActivityHandler(this, cameraManager, DecodeThread.ALL_MODE);
             }
 
             initCrop();
         } catch (IOException ioe) {
-            Log.w(TAG, ioe);
             displayFrameworkBugMessageAndExit();
         } catch (RuntimeException e) {
-            // Barcode Scanner has seen crashes in the wild of this variety:
-            // java.?lang.?RuntimeException: Fail to connect to camera service
-            Log.w(TAG, "Unexpected error initializing camera", e);
             displayFrameworkBugMessageAndExit();
         }
     }
 
     private void displayFrameworkBugMessageAndExit() {
-        // camera error
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.app_name));
         builder.setMessage("Camera error");

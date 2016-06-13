@@ -69,6 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="行驶公里数:"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
 
                 <TextView
@@ -78,6 +79,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/t11"
                     android:text="无"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
             </RelativeLayout>
 
@@ -91,6 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="剩余汽油量:"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
 
                 <TextView
@@ -100,6 +103,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/t12"
                     android:text="无"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
             </RelativeLayout>
 
@@ -113,6 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="变速器状况:"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
 
                 <TextView
@@ -121,6 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/t31"
+                    android:textColor="#000000"
                     android:text="无"
                     android:textSize="16sp" />
             </RelativeLayout>
@@ -134,6 +140,7 @@
                     android:id="@+id/t41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     android:text="车 灯  状 况:"
                     android:textSize="16sp" />
 
@@ -143,6 +150,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/t41"
+                    android:textColor="#000000"
                     android:text="无"
                     android:textSize="16sp" />
             </RelativeLayout>
@@ -157,6 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="引 擎  状 况:"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
 
                 <TextView
@@ -166,6 +175,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/t51"
                     android:text="无"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
             </RelativeLayout>
         </LinearLayout>
@@ -203,6 +213,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="空气质量:"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
 
                 <TextView
@@ -212,6 +223,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/t21"
                     android:text="无"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
             </RelativeLayout>
 
@@ -225,6 +237,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="运动指数:"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
 
                 <TextView
@@ -234,6 +247,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/t22"
                     android:text="无"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
             </RelativeLayout>
 
@@ -247,6 +261,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="洗车指数:"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
 
                 <TextView
@@ -256,6 +271,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/t23"
                     android:text="无"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
             </RelativeLayout>
 

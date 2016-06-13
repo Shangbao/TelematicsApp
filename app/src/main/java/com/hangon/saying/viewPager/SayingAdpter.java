@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -148,6 +149,7 @@ public class SayingAdpter extends BaseAdapter {
         //vh.gridView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,620));
             Log.e("getImg4", list.get(position).getImg4());
         }
+
         if (list.get(position).getImg5() != null && !list.get(position).getImg5().equals("")) {
             mList.add(list.get(position).getImg5());
         }
@@ -161,12 +163,15 @@ public class SayingAdpter extends BaseAdapter {
             vh.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                         long arg3) {
+
                     Intent intent = new Intent(context,
                             ViewPagerTestActivity.class);
                     intent.putExtra("ID", arg2);
                     context.startActivity(intent);
                 }
             });
+        } else {
+            vh.gridView.setVisibility(View.GONE);
         }
         return convertView;
     }
@@ -177,7 +182,6 @@ public class SayingAdpter extends BaseAdapter {
         TextView saying_time;
         ImageView saying_delete;
         TextView saying_content;
-        TextView saying_gridview;
         TextView saying_address;
         GridView gridView;
         ImageView saying_qz_flg;
