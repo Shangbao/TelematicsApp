@@ -1,6 +1,7 @@
 package com.hangon.map.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -8,15 +9,21 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.textservice.SuggestionsInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.search.core.CityInfo;
 import com.baidu.mapapi.search.core.PoiInfo;
@@ -34,11 +41,13 @@ import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
+import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.example.fd.ourapplication.R;
 import com.hangon.common.Topbar;
 import com.hangon.home.activity.HomeActivity;
 import com.hangon.map.util.JudgeNet;
 import com.hangon.map.util.NetReceiver;
+import com.hangon.saying.util.Location;
 
 import java.util.List;
 
@@ -48,6 +57,8 @@ import java.util.List;
 public class BestRouteActivity extends Activity implements
         OnGetGeoCoderResultListener, OnGetPoiSearchResultListener,
         OnGetSuggestionResultListener {
+    //地址
+    private TextView cityAddress;
     //topbar
     private ImageButton topLeft;
     private ImageButton topRight;
@@ -59,7 +70,7 @@ public class BestRouteActivity extends Activity implements
     private String text;//???
     GeoCoder mGeoCoder = null;//地理编码
     JudgeNet judgeNet;//判断网络函数
-
+    double lat,lon;
     /**
      * POI检索
      */
@@ -67,7 +78,7 @@ public class BestRouteActivity extends Activity implements
     List<CityInfo> listcityinfo;
     private PoiSearch mPoiSearch = null;
 
-    private SuggestionSearch mSuggestionSearch = null;//检索建议
+
 
     /**
      * 搜索列表
@@ -76,6 +87,12 @@ public class BestRouteActivity extends Activity implements
     ListView searchPositionList;
     private int load_Index = 0;
     private static StringBuilder sb;
+
+    private SuggestionSearch mSuggestionSearch = null;//检索建议
+    List<SuggestionResult.SuggestionInfo> suggestionsInfoList=null;
+    String flag="";
+    String endAdd;
+    String startAdd;
 
     private String gasaddress;//接受加油站地址
 
@@ -89,12 +106,16 @@ public class BestRouteActivity extends Activity implements
      * 判断网络状态参数
      */
     String judgeNetState;
-
+    private LocationClient mLocClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SDKInitializer.initialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_best_way);
+        mLocClient = ((Location) getApplication()).mLocationClient;
+        ((Location) getApplication()).mTv =cityAddress;
+        setLocationOption();
+        mLocClient.start();
 
         mReceiver = new NetReceiver();
         mFilter = new IntentFilter();
@@ -132,6 +153,7 @@ public class BestRouteActivity extends Activity implements
 
     //初始化组件
     private void init() {
+        cityAddress=(TextView)findViewById(R.id.cityaddress);
         topLeft=(ImageButton)findViewById(R.id.topbar_left);
         topRight=(ImageButton)findViewById(R.id.topbar_right);
         topTittle=(TextView)findViewById(R.id.topbar_title);
@@ -215,7 +237,6 @@ public class BestRouteActivity extends Activity implements
         public void afterTextChanged(Editable s) {
 
         }
-
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count,
                                       int after) {
@@ -224,12 +245,15 @@ public class BestRouteActivity extends Activity implements
         @Override
         public void onTextChanged(CharSequence s, int start, int before,
                                   int count) {
-            String a = "";
+            if(s.length()<=0) return;
+            mSuggestionSearch.requestSuggestion((new SuggestionSearchOption()).keyword(s.toString()).city(cityAddress.getText().toString()));
 
-            mPoiSearch.searchInCity((new PoiCitySearchOption()).city(a)
-                    .keyword(startPosition.getText().toString())
-                    .pageNum(load_Index));
-            sb = new StringBuilder();
+          ////////////////
+
+//            mPoiSearch.searchInCity((new PoiCitySearchOption()).city(cityAddress.getText().toString())
+//                    .keyword(startPosition.getText().toString())
+//                    .pageNum(load_Index));
+//            sb = new StringBuilder();
             searchPositionList.setVisibility(View.VISIBLE);
         }
     }
@@ -248,13 +272,16 @@ public class BestRouteActivity extends Activity implements
         @Override
         public void onTextChanged(CharSequence s, int start, int before,
                                   int count) {
-            String a = "";
-            mPoiSearch.searchInCity((new PoiCitySearchOption())
-                    .city(a)
-                    .keyword(endPosition.getText().toString())
-                    .pageNum(load_Index));
+            if(s.length()<=0) return;
+            mSuggestionSearch.requestSuggestion((new SuggestionSearchOption()).keyword(s.toString()).city(cityAddress.getText().toString()));
 
-            sb = new StringBuilder();
+
+//            mPoiSearch.searchInCity((new PoiCitySearchOption())
+//                    .city(cityAddress.getText().toString())
+//                    .keyword(endPosition.getText().toString())
+//                    .pageNum(load_Index));
+//
+//            sb = new StringBuilder();
             searchPositionList.setVisibility(View.VISIBLE);
         }
     }
@@ -264,28 +291,12 @@ public class BestRouteActivity extends Activity implements
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             try {
-                ListView listView = (ListView) parent;
                 if (startPosition.hasFocus()) {
-                    int a = (listpoiinfo.get(position).name).length();
-                    if ((listpoiinfo.get(position).name).equals(listpoiinfo
-                            .get(position).address.subSequence(0, a))) {
-                        startPosition.setText("");
-                        startPosition.setText(listpoiinfo.get(position).address);
-                    } else {
-                        startPosition.setText("");
-                        startPosition.setText(listpoiinfo.get(position).name + " "
-                                + listpoiinfo.get(position).address);
-                    }
+                   startPosition.setText(suggestionsInfoList.get(position).key+" "+suggestionsInfoList.get(position).city+suggestionsInfoList.get(position).district);
+
                 } else if (endPosition.hasFocus()) {
-                    int b = (listpoiinfo.get(position).name).length();
-                    if ((listpoiinfo.get(position).name).equals(listpoiinfo
-                            .get(position).address.subSequence(0, b))) {
-                        endPosition.setText(listpoiinfo.get(position).address);
-                    } else {
-                        endPosition.setText("");
-                        endPosition.setText(listpoiinfo.get(position).name + " "
-                                + listpoiinfo.get(position).address);
-                    }
+                    endPosition.setText(suggestionsInfoList.get(position).key+" "+suggestionsInfoList.get(position).city+suggestionsInfoList.get(position).district);
+
                 }
             } catch (StringIndexOutOfBoundsException e) {
 
@@ -335,6 +346,10 @@ public class BestRouteActivity extends Activity implements
         if (suggestionResult == null || suggestionResult.getAllSuggestions() == null) {
             return;
         }
+        suggestionsInfoList=suggestionResult.getAllSuggestions();
+        adapter = new PoiSearchAdapter(this, suggestionsInfoList);
+        searchPositionList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         for (SuggestionResult.SuggestionInfo info : suggestionResult.getAllSuggestions()) {
             if (info.key != null) {
             }
@@ -369,8 +384,7 @@ public class BestRouteActivity extends Activity implements
                     Log.e("yxx", "==1=poi===城市：" + poiInfo.city + "名字："
                             + poiInfo.name + "地址：" + poiInfo.address);
                 }
-                adapter = new PoiSearchAdapter(this, listpoiinfo);
-                searchPositionList.setAdapter(adapter);
+
             }
             return;
         }
@@ -405,5 +419,79 @@ public class BestRouteActivity extends Activity implements
         mSuggestionSearch.destroy();
         mGeoCoder.destroy();
         super.onDestroy();
+    }
+    //获取当前位置
+    private void setLocationOption() {
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);
+        option.setCoorType("bd09ll");
+        //option.setPoiExtraInfo(true);
+        if (true) {
+            option.setAddrType("all");
+        }
+        // option.setScanSpan(3000);
+        //  option.setPoiNumber(10);
+        //option.disableCache(true);
+        mLocClient.setLocOption(option);
+    }
+    /**
+     * 所在位置适配器
+     */
+    public class PoiSearchAdapter extends BaseAdapter {
+        private Context context;
+        private List<SuggestionResult.SuggestionInfo> list;
+        private ViewHolder holder;
+
+
+        public PoiSearchAdapter(Context context, List<SuggestionResult.SuggestionInfo> appGroup) {
+            this.context = context;
+            this.list = appGroup;
+        }
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public Object getItem(int location) {
+            return list.get(location);
+        }
+
+        @Override
+        public long getItemId(int arg0) {
+            return arg0;
+        }
+
+        public void addObject(List<SuggestionResult.SuggestionInfo> mAppGroup) {
+            this.list = mAppGroup;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                holder = new ViewHolder();
+                convertView = LayoutInflater.from(context).inflate(
+                        R.layout.item_activity_poi_search, null);
+                holder.mpoi_name = (TextView) convertView
+                        .findViewById(R.id.mpoiNameT);
+                holder.mpoi_address = (TextView) convertView
+                        .findViewById(R.id.mpoiAddressT);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            holder.mpoi_name.setText(list.get(position).key);
+            holder.mpoi_address.setText(list.get(position).city+list.get(position).district);
+
+            return convertView;
+        }
+
+        public class ViewHolder {
+            public TextView mpoi_name;// 名称
+            public TextView mpoi_address;// 地址
+        }
     }
 }

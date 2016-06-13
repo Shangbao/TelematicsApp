@@ -115,7 +115,7 @@
         </activity>
 
         <activity android:name="com.hangon.home.activity.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.NoTitleBar">
 
         </activity>
 

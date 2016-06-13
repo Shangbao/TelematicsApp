@@ -48,6 +48,7 @@ import java.util.TimerTask;
  * Created by Administrator on 2016/4/24.
  */
 public class GasSiteDetailsActivity extends Activity {
+
     //topbar
     private ImageButton topbarLeft;
     private ImageButton topbarRight;
@@ -85,6 +86,7 @@ public class GasSiteDetailsActivity extends Activity {
     String cusName;
     String cusPhone;
     String cusPlatecar;
+
     //预约加油
     Dialog dialog ;
     private Dialog dialog1;
@@ -294,7 +296,7 @@ public class GasSiteDetailsActivity extends Activity {
     private void init() {
         String userId=Constants.USER_ID+"";
         String url = Constants.GET_CAR_INFO_URL+"?userId="+userId;
-        Log.e("asdfg",url);
+        Log.e("asdfg", url);
         VolleyRequest.RequestGet(GasSiteDetailsActivity.this, url, "getData", new VolleyInterface(GasSiteDetailsActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
@@ -316,6 +318,7 @@ public class GasSiteDetailsActivity extends Activity {
         topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
         topbarRight = (ImageButton) findViewById(R.id.topbar_right);
         topbarTittle = (TextView) findViewById(R.id.topbar_title);
+
         topbarTittle.setText("加油站详情");
         topbarRight.setVisibility(View.GONE);
         topbarLeft.setOnClickListener(new View.OnClickListener() {

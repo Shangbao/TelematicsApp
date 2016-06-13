@@ -130,5 +130,9 @@
             android:divider="#00000000" >
         </ListView>
     </LinearLayout>
+<TextView
+    android:id="@+id/cityaddress"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
 
 </LinearLayout>

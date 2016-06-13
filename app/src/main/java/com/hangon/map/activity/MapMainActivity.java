@@ -31,6 +31,7 @@ import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapPoi;
+import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
@@ -94,6 +95,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
     MyOrientationListener myOrientationListener;
     int mXDirection;
     BitmapDescriptor mCurrentMaker;
+    float mCurren;
     /**
      * 对应类
      */
@@ -178,12 +180,14 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         mLocationListener = new MyLocationListener();
         initView();
         initfindViewById();
-        initOritationListener();
+
         /*
         asyncTask = new AnimAsyncTask(MapMainActivity.this, "正在加载中...");
         asyncTask.execute();*/
 
         if (states == 1) {
+
+            mLocationMode = MyLocationConfiguration.LocationMode.NORMAL;
             navi_daohang.setVisibility(View.VISIBLE);
             mFrameLayout.setVisibility(View.GONE);
             route_search.setVisibility(View.VISIBLE);
@@ -206,9 +210,10 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
 
         }
         if (states == 2) {
+            mLocationMode = MyLocationConfiguration.LocationMode.COMPASS;
             topTittle.setText("周围加油站");
             GasReceiver();
-            navi_daohang.setVisibility(View.VISIBLE);
+            navi_daohang.setVisibility(View.GONE);
             route_search.setVisibility(View.GONE);
         }
     }
@@ -277,6 +282,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         btnOrder.setOnClickListener(this);
         btnGasStation.setOnClickListener(this);
         Listlistener();
+        initOritationListener();
     }
   //初始化方向传感器
     private void initOritationListener(){
@@ -286,6 +292,16 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             public void onOrientationChanged(float x) {
                 mXDirection=(int)x;
                 //构造定位数据
+                MyLocationData locationData=new MyLocationData.Builder()
+                        .accuracy(mCurren)
+                        .direction(mXDirection)
+                        .latitude(mLatitude)
+                        .longitude(mLongtitude)
+                        .build();
+                mBaiduMap.setMyLocationData(locationData);
+                mCurrentMaker=BitmapDescriptorFactory.fromResource(R.drawable.cc);
+                MyLocationConfiguration configuration=new MyLocationConfiguration(mLocationMode,true,mCurrentMaker);
+                mBaiduMap.setMyLocationConfigeration(configuration);
             }
         });
     }
@@ -295,6 +311,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             case R.id.btnOrder:
                 Intent intent = new Intent(MapMainActivity.this, MainOrderActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.btnZwjyz:
                 break;
@@ -316,14 +333,14 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             }
         });
         // 地图初始化
-
+        mLocationMode = MyLocationConfiguration.LocationMode.COMPASS;
         mMapView = (MapView) findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
         mBaiduMap.setTrafficEnabled(false);
         // 地图点击事件处理
         mBaiduMap.setOnMapClickListener(this);
         mBaiduMap.setMyLocationEnabled(true);
-        MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
+        MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(14.0f);
         mBaiduMap.setMapStatus(msu);
         // 初始化搜索模块，注册事件监听
         mGeoCoder = GeoCoder.newInstance();
@@ -334,16 +351,13 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         mBitmapDescriptor = BitmapDescriptorFactory
                 .fromResource(R.drawable.zwjyz_07);
     }
-
     //初始化位置
     private void initLocation() {
-        mLocationMode = MyLocationConfiguration.LocationMode.COMPASS;
+
         mLocationClient = new LocationClient(this);
         mLocationListener = new MyLocationListener();
         mLocationClient.registerLocationListener(mLocationListener);
-
         LocationClientOption option = new LocationClientOption();
-
         option.setNeedDeviceDirect(true);
         option.setLocationMode(com.baidu.location.LocationClientOption.LocationMode.Hight_Accuracy);
         option.setAddrType("all");
@@ -353,11 +367,13 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         option.setOpenGps(true);// 可选，默认false,设置是否使用gps
         option.setLocationNotify(false);// 可选，默认false，设置是否当gps有效时按照1S1次频率输出GPS结果
         mLocationClient.setLocOption(option);
+        mLocationClient.start();
         /**
          * 初始化搜索模块，注册事件监听 线路规划初始化
          */
         mSearch = RoutePlanSearch.newInstance();
         mSearch.setOnGetRoutePlanResultListener(this);
+
     }
 
     //定位
@@ -373,22 +389,18 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                     .longitude(location.getLongitude())//
                     .direction(mXDirection)
                     .build();
+            mCurren=location.getRadius();
             mBaiduMap.setMyLocationData(mMylocationData);
             mLatitude = location.getLatitude();
             mLongtitude = location.getLongitude();
-            mCurrentMaker=BitmapDescriptorFactory.fromResource(R.drawable.navi_map_gps_locked);
-           MyLocationConfiguration configuration=new MyLocationConfiguration(mLocationMode,true,mCurrentMaker);
-           mBaiduMap.setMyLocationConfigeration(configuration);
-
             GasInfoUtil.setLocationlatitude(mLatitude);
             GasInfoUtil.setLocationlongtitude(mLongtitude);
             if (isFirstIn) {
-                LatLng latLng = new LatLng(location.getLatitude(),
+                LatLng ll = new LatLng(location.getLatitude(),
                         location.getLongitude());
-                MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
-                BitmapDescriptor bitmapDescriptor=BitmapDescriptorFactory.fromResource(R.drawable.zwjyz_15);
-                OverlayOptions options=new MarkerOptions().position(latLng).icon(bitmapDescriptor);
-                mBaiduMap.animateMapStatus(msu);
+                MapStatus.Builder builder = new MapStatus.Builder();
+                builder.target(ll).zoom(15.0f);
+                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
                 isFirstIn = false;
             }
         }
@@ -620,18 +632,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
     }
 
     private void Listlistener() {
-        gasListview.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                v=LayoutInflater.from(MapMainActivity.this).inflate(R.layout.item_gaslist,null);
-                TextView gasname = (TextView) v.findViewById(R.id.gaslist_name);
-                TextView gasdistance = (TextView) v.findViewById(R.id.gaslist_distance);
-                TextView gasaddress = (TextView) v.findViewById(R.id.gaslist_address);
-                TextView distancemeter=(TextView)v.findViewById(R.id.distance_meter);
-            }
-        });
-
-
         gasListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -674,9 +674,10 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         }
         // 将地图移到到最后一个经纬度位置
         LatLng latLng2 = new LatLng(mLatitude, mLongtitude);
-        MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng2);
-
-        mBaiduMap.setMapStatus(u);
+        //MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng2);
+        MapStatus.Builder builder=new MapStatus.Builder();
+        builder.target(latLng2).zoom(13.0f);
+        mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
 
     }
 

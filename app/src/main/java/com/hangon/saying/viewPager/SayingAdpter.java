@@ -121,7 +121,11 @@ public class SayingAdpter extends BaseAdapter {
             Log.e("getImg1", list.get(position).getImg1());
 
         }
-
+        if((list.get(position).getImg1()==null&&list.get(position).getImg4().equals(""))){
+            ViewGroup.MarginLayoutParams marginLayoutParams=new ViewGroup.MarginLayoutParams(vh.gridView.getLayoutParams().width,0);
+            marginLayoutParams.setMargins(marginLayoutParams.leftMargin + 50, 5, marginLayoutParams.rightMargin + 50, marginLayoutParams.bottomMargin);
+            vh.gridView.setLayoutParams(new LinearLayout.LayoutParams(marginLayoutParams));
+        }
         if (list.get(position).getImg2() != null && !list.get(position).getImg2().equals("")) {
             mList.add(list.get(position).getImg2());
             Log.e("getImg2", list.get(position).getImg2());
@@ -131,7 +135,11 @@ public class SayingAdpter extends BaseAdapter {
             mList.add(list.get(position).getImg3());
             Log.e("getImg3", list.get(position).getImg3());
         }
-
+        if((list.get(position).getImg4()==null&&list.get(position).getImg4().equals(""))){
+            ViewGroup.MarginLayoutParams marginLayoutParams=new ViewGroup.MarginLayoutParams(vh.gridView.getLayoutParams().width,300);
+            marginLayoutParams.setMargins(marginLayoutParams.leftMargin+50, 5, marginLayoutParams.rightMargin+50, marginLayoutParams.bottomMargin);
+            vh.gridView.setLayoutParams(new LinearLayout.LayoutParams(marginLayoutParams));
+        }
         if (list.get(position).getImg4() != null && !list.get(position).getImg4().equals("")) {
             mList.add(list.get(position).getImg4());
             ViewGroup.MarginLayoutParams marginLayoutParams=new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,620);
@@ -140,7 +148,6 @@ public class SayingAdpter extends BaseAdapter {
         //vh.gridView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,620));
             Log.e("getImg4", list.get(position).getImg4());
         }
-
         if (list.get(position).getImg5() != null && !list.get(position).getImg5().equals("")) {
             mList.add(list.get(position).getImg5());
         }

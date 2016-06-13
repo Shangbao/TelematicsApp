@@ -99,7 +99,7 @@
         android:layout_marginTop="5dp"
         android:id="@+id/userInfoList"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:background="#ffffff"></ListView>
 
     <LinearLayout
@@ -116,7 +116,8 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
@@ -146,7 +147,7 @@
        android:layout_marginRight="10dp"
        />
         <RelativeLayout
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -197,7 +198,7 @@
             <TextView
                 android:id="@+id/btn_share"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:textSize="16sp"
                 android:gravity="center_vertical"
 
@@ -219,7 +220,7 @@
             android:gravity="center_vertical"
             android:id="@+id/btnReturnLogin"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
