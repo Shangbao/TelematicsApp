@@ -12,7 +12,9 @@ import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -88,6 +90,29 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     Intent videoIntent;
 
     private ProgressReceiver progressReceiver;
+
+    public static final int UPDATE_TEXT = 1;
+    public static final int UPDATE_ICON = 2;
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case UPDATE_TEXT:
+                    UserUtil.instance(getActivity());
+                    userInfo = UserUtil.getInstance().getUserInfo4Login();
+                    homeNickName.setText(userInfo.getNickname());
+                    homePhoneNum.setText(userInfo.getUserName());
+                    setUserAdapter();
+                    break;
+                case UPDATE_ICON:
+                    UserUtil.instance(getActivity());
+                    userInfo = UserUtil.getInstance().getUserInfo4Login();
+                    getUserIconFromCookies();
+                    break;
+            }
+        }
+    };
 
     private ServiceConnection znwhConn = new ServiceConnection() {
         @Override
@@ -208,6 +233,38 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         });
         znwhIntent = new Intent(getActivity(), ZnwhService.class);
         videoIntent = new Intent(getActivity(), VideoService.class);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case HomeActivity.INTENT_UPDATEUSER:
+                if (resultCode == UpdateUserActivity.RESULT_UPDATE){
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            Message message = new Message();
+                            message.what = UPDATE_TEXT;
+                            handler.sendMessage(message);
+                        }
+                    }, 500);
+                }
+                break;
+            case HomeActivity.INTENT_USERICON:
+                if (resultCode == getActivity().RESULT_OK){
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            Message message = new Message();
+                            message.what = UPDATE_ICON;
+                            handler.sendMessage(message);
+                        }
+                    }, 500);
+                }
+                break;
+        }
     }
 
     //给用户信息列表设置适配器
