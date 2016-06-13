@@ -129,12 +129,10 @@ public class SayingAdpter extends BaseAdapter {
         }
         if (list.get(position).getImg2() != null && !list.get(position).getImg2().equals("")) {
             mList.add(list.get(position).getImg2());
-            Log.e("getImg2", list.get(position).getImg2());
         }
 
         if (list.get(position).getImg3() != null && !list.get(position).getImg3().equals("")) {
             mList.add(list.get(position).getImg3());
-            Log.e("getImg3", list.get(position).getImg3());
         }
         if((list.get(position).getImg4()==null&&list.get(position).getImg4().equals(""))){
             ViewGroup.MarginLayoutParams marginLayoutParams=new ViewGroup.MarginLayoutParams(vh.gridView.getLayoutParams().width,300);
@@ -147,7 +145,6 @@ public class SayingAdpter extends BaseAdapter {
             marginLayoutParams.setMargins(marginLayoutParams.leftMargin+50, 5, marginLayoutParams.rightMargin+50, marginLayoutParams.bottomMargin);
           vh.gridView.setLayoutParams(new LinearLayout.LayoutParams(marginLayoutParams));
         //vh.gridView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,620));
-            Log.e("getImg4", list.get(position).getImg4());
         }
 
         if (list.get(position).getImg5() != null && !list.get(position).getImg5().equals("")) {
@@ -166,8 +163,9 @@ public class SayingAdpter extends BaseAdapter {
 
                     Intent intent = new Intent(context,
                             ViewPagerTestActivity.class);
-                    intent.putExtra("ID", arg2);
+                       intent.putExtra("ID", arg2);
                     context.startActivity(intent);
+
                 }
             });
         } else {
