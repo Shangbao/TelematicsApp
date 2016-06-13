@@ -168,6 +168,7 @@ public class ZnwhService extends Service {
                     while(flag){
                         getZnwhInfo();
                         updateZnwhInfo();
+                        Thread.yield();
                         try{
                             Thread.sleep(2000);
                         }catch (Exception e){

@@ -83,7 +83,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="Akghpf3XZ9zcUlgEmzrPZhLeDcBwzajY" />
+            android:value="p9qGKsUX0GBEjneBVrhDfTsZhAYvlc2y" />
 
         <!--微信分享回调-->
         <activity

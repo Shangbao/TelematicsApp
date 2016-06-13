@@ -7,6 +7,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,8 +21,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.NetworkImageView;
 import com.example.fd.ourapplication.R;
+import com.hangon.common.Constants;
+import com.hangon.common.MyApplication;
 
 public class ViewPagerTestActivity extends Activity {
 
@@ -40,6 +49,7 @@ public class ViewPagerTestActivity extends Activity {
     }
 
     private void Receiver() {
+
     }
 
     /**
@@ -47,19 +57,31 @@ public class ViewPagerTestActivity extends Activity {
      */
     private void initViewPager() {
         advPager = (ViewPager) findViewById(R.id.adv_pager);
+        Intent intent=getIntent();
+        List<String> list=new ArrayList<String>();
+
+        if(intent!=null){
+            for(int i=0;i<6;i++){
+             String str=   intent.getStringExtra("img" + (i + 1));
+                if(str!=null&&!str.trim().equals("")){
+                    list.add(str);
+                }
+            }
+        }
+
         // 图片列表
         List<View> advPics = new ArrayList<View>();
         // 图片1
 
-        for (int i = 0; i < Data.list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             ImageView img1 = new ImageView(this);
-            img1.setBackgroundResource((Integer) Data.list.get(i));
+            //img1.setBackgroundResource((Integer) Data.list.get(i));
+            loadImg(list.get(i),img1);
             advPics.add(img1);
         }
         // group是R.layou.mainview中的负责包裹小圆点的LinearLayout.
         ViewGroup group = (ViewGroup) findViewById(R.id.viewGroup);
         imageViews = new ImageView[advPics.size()];
-        Intent intent = getIntent();
         int id = intent.getIntExtra("ID", 0);
         for (int i = 0; i < advPics.size(); i++) {
             imageView = new ImageView(this);
@@ -99,6 +121,22 @@ public class ViewPagerTestActivity extends Activity {
                 return false;
             }
         });
+    }
+
+    private void loadImg(String path, final ImageView img) {
+        String url = Constants.LOAD_SAYING_IMG_URL + path;
+        ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap bitmap) {
+                img.setImageBitmap(bitmap);
+            }
+        }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(ViewPagerTestActivity.this, "说说图片加载失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+        MyApplication.getHttpQueues().add(request);
     }
 
     /**

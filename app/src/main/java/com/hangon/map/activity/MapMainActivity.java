@@ -702,7 +702,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         LatLng pt3 = new LatLng(endLatutude, endLongtitude);
         // 构建 导航参数
         if ("我的位置".equals(start)) {
-            // Toast.makeText(MapMain.this, , duration)
             para = new NaviParaOption().startPoint(pt1).endPoint(pt2);
         } else if ("我的位置".equals(end)) {
             para = new NaviParaOption().startPoint(pt2).endPoint(pt1);

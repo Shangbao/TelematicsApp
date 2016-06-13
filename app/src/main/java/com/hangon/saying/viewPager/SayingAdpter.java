@@ -161,6 +161,7 @@ public class SayingAdpter extends BaseAdapter {
    }
         if (mList != null && mList.size() != 0) {
             vh.gridView.setAdapter(new GradAdapter(context, mList));
+            /*
             vh.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                         long arg3) {
@@ -177,7 +178,7 @@ public class SayingAdpter extends BaseAdapter {
                     context.startActivity(intent);
 
                 }
-            });
+            });*/
         } else {
             vh.gridView.setVisibility(View.GONE);
         }

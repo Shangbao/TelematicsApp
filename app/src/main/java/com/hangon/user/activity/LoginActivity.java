@@ -136,7 +136,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             dialog.show();
             //url="http://10.163.0.194:8080/wind/UserLogin?userName=13166837709&userPass=123456";
             String url = Constants.LOGIN_URL;
-            Log.e("yyy", url);
             MyStringRequest request = new MyStringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String userInfo) {
@@ -144,7 +143,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     try {
                         JSONObject jsonObject = new JSONObject(userInfo);
                         message = jsonObject.getString("message");
-                        Log.e("yyy", message);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -161,7 +159,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         timer.schedule(new wait(), 2000);
                         Toast.makeText(LoginActivity.this, "账号或者密码错误,请重新输入.", Toast.LENGTH_SHORT).show();
                     }
-                    Log.e("xxx", userInfo);
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -191,12 +188,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         //保存用户信息到文件里
         if (!userInfo.getUserName().equals(UserUtil.getInstance().getStringConfig("userName"))) {
             String s = userInfo.getUserIconUrl().trim();
-            Log.e("aa1", "111111");
             if (s != null && !s.isEmpty()) {
-                Log.e("aa2", "222222");
                 loadUserIcon(s);
             } else {
-                Log.e("aa3", "333333");
                 UserUtil.instance(LoginActivity.this);
                 UserUtil.getInstance().saveStringConfig("userIconContent", "");
             }
@@ -218,7 +212,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     //   //读取图片并且加载链接
     private void loadUserIcon(String s) {
-        Log.e("loadUserIcon",s);
         String url = Constants.LOAD_USER_ICON_URL + s;
         ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
             @Override

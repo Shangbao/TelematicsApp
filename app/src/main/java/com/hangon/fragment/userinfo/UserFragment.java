@@ -209,7 +209,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 if(isChecked){
                     judgeCarExist(true);
                 }else {
-                    judgeCarExist(false);
+                   judgeCarExist(false);
+                    znwhBinder.off();
                 }
 
             }
@@ -319,19 +320,19 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 oks.disableSSOWhenAuthorize();
 
                 // title标题：微信、QQ（新浪微博不需要标题）
-                oks.setTitle("车联网分享");  //最多30个字符
+                oks.setTitle("推荐车联网移动应用");  //最多30个字符
 
                 // text是分享文本：所有平台都需要这个字段
-                oks.setText("我正在使用车联网，大家一起来用吧！");  //最多40个字符
+                oks.setText("我正在使用车联网，大家一起来用吧！"+"http://10.163.200.124:8080/wind/img/background/ccut_znlsj.apk");  //最多40个字符
 
                 //网络图片的url：所有平台
-                oks.setImageUrl("http://7sby7r.com1.z0.glb.clouddn.com/CYSJ_02.jpg");//网络图片rul
+                oks.setImageUrl("http://10.163.200.124:8080/wind/img/background/shareapp.png");//网络图片rul
 
                 // url：仅在微信（包括好友和朋友圈）中使用
-                oks.setUrl("http://sharesdk.cn");   //网友点进链接后，可以看到分享的详情
+                oks.setUrl("http://10.163.200.124:8080/wind/img/background/ccut_znlsj.apk");   //网友点进链接后，可以看到分享的详情
 
                 // Url：仅在QQ空间使用
-                oks.setTitleUrl("http://www.baidu.com");  //网友点进链接后，可以看到分享的详情
+                oks.setTitleUrl("http://10.163.200.124:8080/wind/img/background/ccut_znlsj.apk");  //网友点进链接后，可以看到分享的详情
 
                 // 启动分享GUI
                 oks.show(getActivity());
@@ -402,13 +403,15 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             public void onMySuccess(String result) {
                 if (result.equals("exist")) {
                    if(flag==true){
+                       aSwitch.setChecked(true);
                        getActivity().bindService(znwhIntent, znwhConn, Service.BIND_AUTO_CREATE);
                        znwhBinder.on();
                    }else if(flag ==false){
-                       getActivity().unbindService(znwhConn);
+                       aSwitch.setChecked(false);
                        znwhBinder.off();
+                       getActivity().unbindService(znwhConn);
+                       getActivity().stopService(znwhIntent);
                    }
-                   // aSwitch.setChecked(true);
                 } else if (result.equals("noexist")) {
                     aSwitch.setChecked(false);
                     Toast.makeText(getActivity(), "无默认车辆,请设置默认车辆", Toast.LENGTH_SHORT).show();
