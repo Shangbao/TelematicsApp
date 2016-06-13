@@ -164,6 +164,13 @@ public class SayingAdpter extends BaseAdapter {
                     Intent intent = new Intent(context,
                             ViewPagerTestActivity.class);
                        intent.putExtra("ID", arg2);
+                    for(int i=0;i<6;i++){
+                        if(i<list.size()){
+                            intent.putExtra("img"+(i+1),mList.get(i));
+                        }else {
+                            intent.putExtra("img"+(i+1),"");
+                        }
+                    }
                     context.startActivity(intent);
 
                 }
