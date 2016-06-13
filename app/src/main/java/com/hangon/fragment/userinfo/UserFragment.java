@@ -35,7 +35,6 @@ import com.hangon.bean.user.UserInfo;
 import com.hangon.common.Constants;
 import com.hangon.common.DialogTool;
 import com.hangon.common.ImageUtil;
-import com.hangon.common.MySwitchs;
 import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;

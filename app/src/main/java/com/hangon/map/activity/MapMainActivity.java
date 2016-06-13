@@ -68,6 +68,7 @@ import com.hangon.map.util.AnimAsyncTask;
 import com.hangon.map.util.GasInfoUtil;
 import com.hangon.map.util.IOExceptionHandle;
 import com.hangon.map.util.JudgeNet;
+import com.hangon.map.util.MyOrientationListener;
 import com.hangon.order.activity.MainOrderActivity;
 import com.hangon.saying.viewPager.MainActivity;
 
@@ -85,8 +86,14 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
     private ImageButton topLeft;
     private ImageButton topRight;
     private TextView topTittle;
-    int position = 0;//对应的覆盖物点击标识
+    //导航
+    TextView navi_daohang;
 
+    int position = 0;//对应的覆盖物点击标识
+ //方向传感器
+    MyOrientationListener myOrientationListener;
+    int mXDirection;
+    BitmapDescriptor mCurrentMaker;
     /**
      * 对应类
      */
@@ -171,11 +178,13 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         mLocationListener = new MyLocationListener();
         initView();
         initfindViewById();
+        initOritationListener();
         /*
         asyncTask = new AnimAsyncTask(MapMainActivity.this, "正在加载中...");
         asyncTask.execute();*/
 
         if (states == 1) {
+            navi_daohang.setVisibility(View.VISIBLE);
             mFrameLayout.setVisibility(View.GONE);
             route_search.setVisibility(View.VISIBLE);
            show_hideText.setText("  开始        ");
@@ -199,6 +208,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         if (states == 2) {
             topTittle.setText("周围加油站");
             GasReceiver();
+            navi_daohang.setVisibility(View.VISIBLE);
             route_search.setVisibility(View.GONE);
         }
     }
@@ -248,6 +258,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
 
     //初始化组件
     private void initfindViewById() {
+        navi_daohang=(TextView)findViewById(R.id.daohang);
         mFrameLayout=(FrameLayout)findViewById(R.id.fragmentlayout);
         show_hideText=(TextView)findViewById(R.id.show_hide_listtext);
         road_condition = (Button) findViewById(R.id.road_cond);
@@ -256,6 +267,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         DisplayListButton = (LinearLayout) findViewById(R.id.show_hide);
         route_search = (ImageView) findViewById(R.id.route_search);
         Maplistener maplistener = new Maplistener();
+        navi_daohang.setOnClickListener(maplistener);
         road_condition.setOnClickListener(maplistener);
         location_position.setOnClickListener(maplistener);
         DisplayListButton.setOnClickListener(maplistener);
@@ -266,7 +278,17 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         btnGasStation.setOnClickListener(this);
         Listlistener();
     }
-
+  //初始化方向传感器
+    private void initOritationListener(){
+        myOrientationListener=new MyOrientationListener(MapMainActivity.this);
+        myOrientationListener.setOnOrientationListener(new MyOrientationListener.OnOrientationListener() {
+            @Override
+            public void onOrientationChanged(float x) {
+                mXDirection=(int)x;
+                //构造定位数据
+            }
+        });
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -282,6 +304,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
     //初始化画面
     private void initView() {
         //topbar组件
+
         topLeft=(ImageButton)findViewById(R.id.topbar_left);
         topRight=(ImageButton)findViewById(R.id.topbar_right);
         topTittle=(TextView)findViewById(R.id.topbar_title);
@@ -293,6 +316,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             }
         });
         // 地图初始化
+
         mMapView = (MapView) findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
         mBaiduMap.setTrafficEnabled(false);
@@ -313,7 +337,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
 
     //初始化位置
     private void initLocation() {
-        mLocationMode = MyLocationConfiguration.LocationMode.NORMAL;
+        mLocationMode = MyLocationConfiguration.LocationMode.COMPASS;
         mLocationClient = new LocationClient(this);
         mLocationListener = new MyLocationListener();
         mLocationClient.registerLocationListener(mLocationListener);
@@ -347,12 +371,14 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                     .accuracy(location.getRadius())//
                     .latitude(location.getLatitude())//
                     .longitude(location.getLongitude())//
+                    .direction(mXDirection)
                     .build();
             mBaiduMap.setMyLocationData(mMylocationData);
             mLatitude = location.getLatitude();
             mLongtitude = location.getLongitude();
-
-
+            mCurrentMaker=BitmapDescriptorFactory.fromResource(R.drawable.navi_map_gps_locked);
+           MyLocationConfiguration configuration=new MyLocationConfiguration(mLocationMode,true,mCurrentMaker);
+           mBaiduMap.setMyLocationConfigeration(configuration);
 
             GasInfoUtil.setLocationlatitude(mLatitude);
             GasInfoUtil.setLocationlongtitude(mLongtitude);
@@ -729,10 +755,13 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                 case R.id.location_position:
                     centerToMyLocation();
                     break;
+                case R.id.daohang:
+                    startNavi();
+                    break;
                 case R.id.show_hide:
                     try {
                         if ((show_hideText.getText().toString()).equals("  开始")) {
-                            startNavi();
+
                         } else {
                             gasShowlist();
                             if (gasListview.getVisibility() == View.GONE) {
@@ -763,6 +792,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         if (!mLocationClient.isStarted())
             mLocationClient.start();
         // 开启方向传感器
+        myOrientationListener.start();
     }
 
     @Override
@@ -785,6 +815,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         mBaiduMap.setMyLocationEnabled(false);
         mLocationClient.stop();
         // 停止方向传感器
+       myOrientationListener.stop();
     }
 
     @Override

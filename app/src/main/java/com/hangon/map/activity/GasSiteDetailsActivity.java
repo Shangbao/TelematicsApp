@@ -35,9 +35,7 @@ import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.map.util.GasInfoUtil;
 import com.hangon.map.util.JudgeNet;
-import com.hangon.order.activity.MainOrderActivity;
 import com.hangon.order.activity.PersonalInformationData;
-import com.hangon.order.activity.Success;
 
 import java.math.BigDecimal;
 import java.util.HashMap;

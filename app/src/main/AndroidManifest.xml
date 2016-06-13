@@ -184,7 +184,6 @@
 
         </activity>
         <activity android:name="com.hangon.order.activity.EditOrder"/>
-        <activity android:name="com.hangon.order.activity.Success"/>
 
         <activity android:name="com.hangon.weather.WeatherActivity">
         </activity>

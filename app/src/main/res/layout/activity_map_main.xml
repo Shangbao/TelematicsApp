@@ -138,7 +138,18 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="56dp"
         android:src="@drawable/maproute" />
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_alignParentBottom="true"
+    android:text="开始导航"
+    android:textSize="16sp"
+    android:textColor="#019b79"
+    android:background="#ffffff"
+    android:gravity="center"
+    android:id="@+id/daohang"
+    android:visibility="gone"
+    />
         <ImageView
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="60dp"
