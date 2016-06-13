@@ -154,13 +154,16 @@ public class SayingAdpter extends BaseAdapter {
         if (list.get(position).getImg6() != null && !list.get(position).getImg6().equals("")) {
             mList.add(list.get(position).getImg6());
         }
-
+   if(mList!=null&&mList.size()<=3){
+       ViewGroup.MarginLayoutParams marginLayoutParams=new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,300);
+       marginLayoutParams.setMargins(marginLayoutParams.leftMargin+50, 5, marginLayoutParams.rightMargin+50, marginLayoutParams.bottomMargin);
+       vh.gridView.setLayoutParams(new LinearLayout.LayoutParams(marginLayoutParams));
+   }
         if (mList != null && mList.size() != 0) {
             vh.gridView.setAdapter(new GradAdapter(context, mList));
             vh.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                         long arg3) {
-
                     Intent intent = new Intent(context,
                             ViewPagerTestActivity.class);
                        intent.putExtra("ID", arg2);

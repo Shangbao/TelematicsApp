@@ -66,6 +66,7 @@ public class TestPicActivity extends Activity {
 		topTittle.setText("相册");
 		topLeft.setVisibility(View.GONE);
 		cancel_image_bucket=(ImageButton)findViewById(R.id.topbar_right);
+		cancel_image_bucket.setBackgroundResource(R.drawable.grzx_041);
 		cancel_image_bucket.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -78,7 +78,7 @@ public class EditOrder extends Activity {
         topbarTittle=(TextView)findViewById(R.id.topbar_title);
         topbarTittle.setText("编辑订单");
        topbarLeft.setVisibility(View.GONE);
-        topbarRight.setImageResource(R.drawable.zc_13);
+        topbarRight.setBackgroundResource(R.drawable.grzx_041 );
         topbarRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,8 +123,10 @@ public class EditOrder extends Activity {
             public void onClick(View v) {
 
                final  ArrayList list = new ArrayList<Bean>();
-                if(arrayList==null||arrayList.size()==0)return;
-                Toast.makeText(getApplicationContext(), arrayList.size() + "", Toast.LENGTH_SHORT).show();
+                if(arrayList==null||arrayList.size()==0){
+                    Toast.makeText(EditOrder.this,"请选择要删除的订单",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 for (int i = 0; i < arrayList.size(); i++) {
                     if (arrayList.get(i).get("flag").equals("true")) {
                         Bean bean = new Bean("id" + i, orderList.get(i).getOrderId() + "");
@@ -188,15 +190,12 @@ public class EditOrder extends Activity {
 
     //装载数据
     public void getData() {
-        Toast.makeText(getApplicationContext(), "ALLPRDERGETGETDATA", Toast.LENGTH_SHORT).show();
        String userId=Constants.USER_ID+"";
         String url = Constants.GET_ORDER_INFOS_URL+"?userId="+userId;
         VolleyRequest.RequestGet(getApplicationContext(), url, "getData", new VolleyInterface(getApplicationContext(), VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
                 Gson gson = new Gson();
-                Log.e("aaaa", result);
-                Toast.makeText(getApplicationContext(), "ALLPRDERGETDATA", Toast.LENGTH_SHORT).show();
                 orderList = gson.fromJson(result, new TypeToken<List<OrderData>>() {
                 }.getType());
                 List<OrderData> orderList1 = gson.fromJson(result, new TypeToken<List<OrderData>>() {
@@ -214,12 +213,10 @@ public class EditOrder extends Activity {
     }
 
     private void InidData(List<OrderData> orderList) {
-        Toast.makeText(getApplicationContext(), "ssssssss", Toast.LENGTH_SHORT).show();
         if (orderList == null || orderList.size() == 0) {
             return;
         } else {
             for (int i = 0; i < orderList.size(); i++) {
-                Toast.makeText(getApplicationContext(), "bbbbbb" + orderList.get(0).getOrderState(), Toast.LENGTH_SHORT).show();
                 HashMap<String, String> map = new HashMap<String, String>();
                 map.put("flag", "false");
                 map.put("gasname", orderList.get(i).getGasStationName());
@@ -247,10 +244,8 @@ public class EditOrder extends Activity {
 
     public class EditOrderAdapter extends BaseAdapter {
         ArrayList<HashMap<String, String>> list;
-
         public EditOrderAdapter(ArrayList<HashMap<String, String>> list1) {
             this.list = list1;
-            Toast.makeText(getApplicationContext(), "aaaaaaa", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -262,7 +257,6 @@ public class EditOrder extends Activity {
         public Object getItem(int position) {
             return list.get(position);
         }
-
         @Override
         public long getItemId(int position) {
             return position;
@@ -294,7 +288,6 @@ public class EditOrder extends Activity {
             viewHolder.item_cb.setChecked(list.get(position).get("flag").equals("true"));
             if (viewHolder.item_cb.isChecked()) {
                 notifyDataSetChanged();
-
             }
             if (!viewHolder.item_cb.isChecked()) {
             }
@@ -318,7 +311,6 @@ public class EditOrder extends Activity {
                 dialog1.show();
                 Timer timer=new Timer();
                 timer.schedule(new wait(), 2000);
-
                 checkNum = 0;
                 DataChange();
 

@@ -114,17 +114,12 @@ public class PublishedActivity extends Activity {
         activity_selectimg_send.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
-                List<String> list = new ArrayList<String>();
-
-                for (int i = 0; i < Bimp.drr.size(); i++) {
-                    String Str = Bimp.drr.get(i).substring(
-                            Bimp.drr.get(i).lastIndexOf("/") + 1,
-                            Bimp.drr.get(i).lastIndexOf("."));
-                    list.add(FileUtils.SDPATH + Str + ".JPEG");
-                }
-
+            if(publishContent.getText().toString().trim().equals("")&&Bimp.bmp == null){
+                Toast.makeText(PublishedActivity.this,"请输入发表内容",Toast.LENGTH_SHORT).show();
+                return;
+            }else{
                 PostSaying();
-            }
+            }}
         });
         if(Constants.SAYING_TYPE!=null&&!Constants.SAYING_TYPE.equals("")){
             if(Constants.SAYING_TYPE.equals("2")){
@@ -165,9 +160,9 @@ public class PublishedActivity extends Activity {
                 Bimp.max=0;
                 Bimp.drr.clear();
                 FileUtils.deleteDir();
-                Intent intent = new Intent();
-                intent.setClass(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.setClass(getApplicationContext(), MainActivity.class);
+//                startActivity(intent);
                 finish();
             }
 

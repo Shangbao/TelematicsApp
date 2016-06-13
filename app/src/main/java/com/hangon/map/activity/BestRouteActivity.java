@@ -90,9 +90,6 @@ public class BestRouteActivity extends Activity implements
 
     private SuggestionSearch mSuggestionSearch = null;//检索建议
     List<SuggestionResult.SuggestionInfo> suggestionsInfoList=null;
-    String flag="";
-    String endAdd;
-    String startAdd;
 
     private String gasaddress;//接受加油站地址
 
@@ -116,7 +113,6 @@ public class BestRouteActivity extends Activity implements
         ((Location) getApplication()).mTv =cityAddress;
         setLocationOption();
         mLocClient.start();
-
         mReceiver = new NetReceiver();
         mFilter = new IntentFilter();
         mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
@@ -150,7 +146,6 @@ public class BestRouteActivity extends Activity implements
             endPosition.setText(gasaddress);
         }
     }
-
     //初始化组件
     private void init() {
         cityAddress=(TextView)findViewById(R.id.cityaddress);
@@ -173,7 +168,6 @@ public class BestRouteActivity extends Activity implements
         searchPositionList.setOnItemClickListener(liststart);
         queryStart();
     }
-
     private void queryStart() {
         topTittle.setText("最优路线");
         topLeft.setOnClickListener(new View.OnClickListener() {
@@ -194,16 +188,15 @@ public class BestRouteActivity extends Activity implements
                         Toast.makeText(BestRouteActivity.this, "请输入起始点",
                                 Toast.LENGTH_SHORT).show();
                     } else {
-
                         new Thread(new Runnable() {
 
                             @Override
                             public void run() {
-                                try {
-                                    Thread.sleep(1300);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
+//                                try {
+//                                    Thread.sleep(1300);
+//                                } catch (InterruptedException e) {
+//                                    e.printStackTrace();
+//                                }
                                 Bundle addressdata = new Bundle();
                                 addressdata.putString("start_position",
                                         startPosition.getText().toString().trim());
@@ -235,21 +228,16 @@ public class BestRouteActivity extends Activity implements
     public class PoiSearchListenerStart implements TextWatcher {
         @Override
         public void afterTextChanged(Editable s) {
-
         }
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count,
                                       int after) {
         }
-
         @Override
         public void onTextChanged(CharSequence s, int start, int before,
                                   int count) {
             if(s.length()<=0) return;
             mSuggestionSearch.requestSuggestion((new SuggestionSearchOption()).keyword(s.toString()).city(cityAddress.getText().toString()));
-
-          ////////////////
-
 //            mPoiSearch.searchInCity((new PoiCitySearchOption()).city(cityAddress.getText().toString())
 //                    .keyword(startPosition.getText().toString())
 //                    .pageNum(load_Index));
@@ -363,9 +351,6 @@ public class BestRouteActivity extends Activity implements
             Toast.makeText(BestRouteActivity.this, "抱歉，未找到结果", Toast.LENGTH_SHORT)
                     .show();
         } else {
-            Log.i("yxx",
-                    "==2=poi===" + poiDetailResult.getName() + ": "
-                            + poiDetailResult.getAddress());
         }
     }
 
@@ -381,8 +366,7 @@ public class BestRouteActivity extends Activity implements
             listpoiinfo = poiResult.getAllPoi();
             if (listpoiinfo != null && listpoiinfo.size() != 0) {
                 for (PoiInfo poiInfo : listpoiinfo) {
-                    Log.e("yxx", "==1=poi===城市：" + poiInfo.city + "名字："
-                            + poiInfo.name + "地址：" + poiInfo.address);
+
                 }
 
             }
@@ -396,9 +380,6 @@ public class BestRouteActivity extends Activity implements
                 strInfo += cityInfo.city;
                 strInfo += ",";
             }
-            strInfo += "找到结果";
-            // Toast.makeText(RouteQuery.this, strInfo, Toast.LENGTH_LONG)
-            // .show();
         }
     }
 

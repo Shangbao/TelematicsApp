@@ -446,12 +446,9 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             mSearch.drivingSearch((new DrivingRoutePlanOption()).from(mypositionNode)
                     .to(endNode));
         } else if ("我的位置".equals(end_position)) {
-            // end_position = myLocationPosition;
             mSearch.drivingSearch((new DrivingRoutePlanOption()).from(endNode)
                     .to(mypositionNode));
         } else if ("我的位置".equals(start_position)) {
-            // start_position = myLocationPosition;
-
             mSearch.drivingSearch((new DrivingRoutePlanOption()).from(
                     mypositionNode).to(endNode));
         } else {
@@ -475,30 +472,21 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                 result.getLocation().latitude, result.getLocation().longitude);
         endLatutude = result.getLocation().latitude;
         endLongtitude = result.getLocation().longitude;
-
     }
-
     @Override
     public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
-
     }
-
     @Override
     public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
-
     }
-
     @Override
     public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
-
     }
-
     @Override
     public void onGetDrivingRouteResult(DrivingRouteResult result) {
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(MapMainActivity.this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
             show_hideText.setText("");
-
         }
         if (result.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
             return;
@@ -513,13 +501,11 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             overlay.zoomToSpan();
         }
     }
-
     // 定制RouteOverly
     private class MyDrivingRouteOverlay extends DrivingRouteOverlay {
         public MyDrivingRouteOverlay(BaiduMap baiduMap) {
             super(baiduMap);
         }
-
         @Override
         public BitmapDescriptor getStartMarker() {
             if (useDefaultIcon) {
@@ -571,7 +557,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                     adapter.item(gasListview);
                     adapter.notifyDataSetChanged();
                     adapter.item1(gasListview);
-
                 }
                 for (int i = 0; i < GasInfoUtil.infos.size(); i++) {
                     if (info.getLat() == GasInfoUtil.infos.get(i).getLatitude() &&
@@ -636,7 +621,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
                 ListView listView = (ListView) parent;
                 HashMap<String, String> map = (HashMap<String, String>) listView
                         .getItemAtPosition(position);
@@ -732,7 +716,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             IOExceptionHandle.showDialog(MapMainActivity.this);
         }
     }
-
     /**
      * @author Administrator 自定义覆盖物以及覆盖物监听事件
      */
@@ -762,7 +745,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                 case R.id.show_hide:
                     try {
                         if ((show_hideText.getText().toString()).equals("  开始")) {
-
                         } else {
                             gasShowlist();
                             if (gasListview.getVisibility() == View.GONE) {
@@ -773,7 +755,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                                 show_hideText.setText("显示列表");
                             }
                         }
-
                     } catch (Exception e) {
                     }
                     break;
@@ -785,7 +766,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             }
         }
     }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -795,23 +775,19 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         // 开启方向传感器
         myOrientationListener.start();
     }
-
     @Override
     protected void onPause() {
         mMapView.onPause();
         super.onPause();
     }
-
     @Override
     protected void onResume() {
         mMapView.onResume();
         super.onResume();
     }
-
     @Override
     protected void onStop() {
         super.onStop();
-
         // 停止定位
         mBaiduMap.setMyLocationEnabled(false);
         mLocationClient.stop();
@@ -827,6 +803,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         mBitmapDescriptor.recycle();
         BaiduMapRoutePlan.finish(this);
         BaiduMapPoiSearch.finish(this);
+        finish();
     }
 
 }

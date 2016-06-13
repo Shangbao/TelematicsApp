@@ -170,7 +170,6 @@ public class MainOrderActivity extends FragmentActivity {
             public void onClick(View v) {
              JudgeNet judgeNet=new JudgeNet();
                     judgeNet.setStates(2);
-                    Log.e("bbb", judgeNet.getStates() + "");
                     Intent intent=new Intent();
                     intent.setClass(MainOrderActivity.this, MapMainActivity.class);
                     startActivity(intent);

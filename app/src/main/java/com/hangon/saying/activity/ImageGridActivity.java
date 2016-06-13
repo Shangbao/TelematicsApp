@@ -96,6 +96,7 @@ public class ImageGridActivity extends Activity {
 		topTittle=(TextView)findViewById(R.id.topbar_title);
 		topLeft.setVisibility(View.GONE);
 		topTittle.setText("相册");
+		cancel_image_grid.setBackgroundResource(R.drawable.grzx_041);
 		cancel_image_grid.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
