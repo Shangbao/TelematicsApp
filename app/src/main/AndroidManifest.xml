@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fd.ourapplication">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
@@ -15,10 +15,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-feature android:name="android.hardware.camera" />003743开发文档
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
+
     <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -26,20 +28,20 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION"/>
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <!-- 写文件的权限 -->
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!-- 存储卡的权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--添加操作闪光灯的权限-->
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
     <!--添加操作震动器的权限-->
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!--支付宝相关权限-->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -47,7 +49,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
- <!-- carlife-->
+    <!-- carlife-->
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -69,13 +71,14 @@
 
         <activity
             android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <data android:scheme="tencent1105280089" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -91,11 +94,12 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:name="com.hangon.user.activity.WelcomeActivity">
+            android:name="com.hangon.user.activity.WelcomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -109,12 +113,14 @@
 
         </activity>
 
-        <activity android:name="com.hangon.user.activity.LoginActivity"
+        <activity
+            android:name="com.hangon.user.activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
 
-        <activity android:name="com.hangon.home.activity.HomeActivity"
+        <activity
+            android:name="com.hangon.home.activity.HomeActivity"
             android:theme="@android:style/Theme.NoTitleBar">
 
         </activity>
@@ -122,9 +128,9 @@
 
         <activity android:name="com.hangon.fragment.userinfo.ClipImageActivity"></activity>
 
-         <activity android:name="com.hangon.fragment.userinfo.UserIconActivity">
+        <activity android:name="com.hangon.fragment.userinfo.UserIconActivity">
 
-         </activity>
+        </activity>
 
         <activity android:name="com.hangon.fragment.userinfo.UpdateUserActivity">
 
@@ -134,9 +140,9 @@
 
         </activity>
 
-        <activity android:name="com.hangon.map.activity.MapMainActivity"
-            android:launchMode="singleInstance"
-            >
+        <activity
+            android:name="com.hangon.map.activity.MapMainActivity"
+            android:launchMode="singleInstance">
 
         </activity>
 
@@ -153,48 +159,41 @@
         </activity>
 
 
-        <activity android:name="com.hangon.map.activity.BestRouteActivity"
+        <activity
+            android:name="com.hangon.map.activity.BestRouteActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|navigation"
-            android:windowSoftInputMode="adjustPan|stateVisible">
-        </activity>
+            android:windowSoftInputMode="adjustPan|stateVisible"></activity>
 
         <activity android:name="com.hangon.carInfoManage.activity.SetCarInfoActivity">
 
         </activity>
 
-        <activity android:name="com.hangon.weizhang.activity.MainActivity"
-            android:launchMode="singleInstance"
-            >
+        <activity
+            android:name="com.hangon.weizhang.activity.MainActivity"
+            android:launchMode="singleInstance">
 
         </activity>
 
-        <activity android:name="com.hangon.weizhang.activity.ShortNameList" >
-        </activity>
-        <activity android:name="com.hangon.weizhang.activity.ProvinceList" >
-        </activity>
-        <activity android:name="com.hangon.weizhang.activity.CityList" >
-        </activity>
-        <activity android:name="com.hangon.weizhang.activity.WeizhangResult" >
-        </activity>
+        <activity android:name="com.hangon.weizhang.activity.ShortNameList"></activity>
+        <activity android:name="com.hangon.weizhang.activity.ProvinceList"></activity>
+        <activity android:name="com.hangon.weizhang.activity.CityList"></activity>
+        <activity android:name="com.hangon.weizhang.activity.WeizhangResult"></activity>
+
         <service android:name="com.cheshouye.api.client.WeizhangIntentService" />
 
-        <activity android:name="com.hangon.order.activity.MainOrderActivity"
-            android:launchMode="singleInstance"
-            >
+        <activity
+            android:name="com.hangon.order.activity.MainOrderActivity"
+            android:launchMode="singleInstance">
 
         </activity>
-        <activity android:name="com.hangon.order.activity.EditOrder"/>
+        <activity android:name="com.hangon.order.activity.EditOrder" />
 
-        <activity android:name="com.hangon.weather.WeatherActivity">
-        </activity>
-        <activity android:name="com.hangon.weather.SelectCity">
-        </activity>
-        <activity android:name="com.hangon.video.VideoActivity">
-        </activity>
+        <activity android:name="com.hangon.weather.WeatherActivity"></activity>
+        <activity android:name="com.hangon.weather.SelectCity"></activity>
+        <activity android:name="com.hangon.video.VideoActivity"></activity>
 
         <!--支付宝支付页面-->
-        <activity android:name="com.hangon.alipay.PayDemoActivity">
-        </activity>
+        <activity android:name="com.hangon.alipay.PayDemoActivity"></activity>
 
         <!--支付成功-->
         <activity android:name="com.hangon.alipay.PaySuccess"></activity>
@@ -205,48 +204,37 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <!-- alipay sdk end -->
 
         <!--智能老司机朋友圈-->
         <activity
             android:name="com.hangon.saying.activity.TestPicActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
             android:launchMode="singleTask"
-            >
+            android:theme="@android:style/Theme.NoTitleBar">
 
         </activity>
 
         <activity
             android:name="com.hangon.saying.activity.ImageGridActivity"
-            android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity
             android:name="com.hangon.saying.activity.PublishedActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity
             android:name="com.hangon.saying.activity.PhotoActivity"
-            android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>
-        <activity android:name="com.hangon.saying.util.TestSensorActivity"
-            >
-        </activity>
-        <activity
-            android:name="com.hangon.saying.util.ViewPagerTestActivity"
-            >
-        </activity>
-        <activity
-            android:name="com.hangon.saying.viewPager.MainActivity"
-            >
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity android:name="com.hangon.saying.util.TestSensorActivity"></activity>
+        <activity android:name="com.hangon.saying.util.ViewPagerTestActivity"></activity>
+        <activity android:name="com.hangon.saying.viewPager.MainActivity">
 
         </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -256,8 +244,11 @@
         <service android:name="com.hangon.weather.WeatherService"></service>
         <service android:name="com.hangon.video.VideoService"></service>
     </application>
-    <supports-screens android:largeScreens="true"
-        android:normalScreens="true" android:smallScreens="true"
-        android:resizeable="true" android:anyDensity="true"/>
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
 
 </manifest>

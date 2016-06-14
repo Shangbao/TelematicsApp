@@ -91,7 +91,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
     TextView navi_daohang;
 
     int position = 0;//对应的覆盖物点击标识
- //方向传感器
+    //方向传感器
     MyOrientationListener myOrientationListener;
     int mXDirection;
     BitmapDescriptor mCurrentMaker;
@@ -166,8 +166,9 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
      */
     List<Map<String, ?>> mGasList;
     Dialog dialog;
-//底层布局
+    //底层布局
     FrameLayout mFrameLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SDKInitializer.initialize(getApplicationContext());
@@ -190,7 +191,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             navi_daohang.setVisibility(View.VISIBLE);
             mFrameLayout.setVisibility(View.GONE);
             route_search.setVisibility(View.VISIBLE);
-           //show_hideText.setText("  开始        ");
+            //show_hideText.setText("  开始        ");
             topTittle.setText("最优路线");
             receive();
             SearchGeocoder();
@@ -262,9 +263,9 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
 
     //初始化组件
     private void initfindViewById() {
-        navi_daohang=(TextView)findViewById(R.id.daohang);
-        mFrameLayout=(FrameLayout)findViewById(R.id.fragmentlayout);
-        show_hideText=(TextView)findViewById(R.id.show_hide_listtext);
+        navi_daohang = (TextView) findViewById(R.id.daohang);
+        mFrameLayout = (FrameLayout) findViewById(R.id.fragmentlayout);
+        show_hideText = (TextView) findViewById(R.id.show_hide_listtext);
         road_condition = (Button) findViewById(R.id.road_cond);
         location_position = (ImageView) findViewById(R.id.location_position);
         gasListview = (ListView) findViewById(R.id.gaslist);
@@ -283,27 +284,29 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         Listlistener();
         initOritationListener();
     }
-  //初始化方向传感器
-    private void initOritationListener(){
-        myOrientationListener=new MyOrientationListener(MapMainActivity.this);
+
+    //初始化方向传感器
+    private void initOritationListener() {
+        myOrientationListener = new MyOrientationListener(MapMainActivity.this);
         myOrientationListener.setOnOrientationListener(new MyOrientationListener.OnOrientationListener() {
             @Override
             public void onOrientationChanged(float x) {
-                mXDirection=(int)x;
+                mXDirection = (int) x;
                 //构造定位数据
-                MyLocationData locationData=new MyLocationData.Builder()
+                MyLocationData locationData = new MyLocationData.Builder()
                         .accuracy(mCurren)
                         .direction(mXDirection)
                         .latitude(mLatitude)
                         .longitude(mLongtitude)
                         .build();
                 mBaiduMap.setMyLocationData(locationData);
-                mCurrentMaker=BitmapDescriptorFactory.fromResource(R.drawable.cc);
-                MyLocationConfiguration configuration=new MyLocationConfiguration(mLocationMode,true,mCurrentMaker);
+                mCurrentMaker = BitmapDescriptorFactory.fromResource(R.drawable.cc);
+                MyLocationConfiguration configuration = new MyLocationConfiguration(mLocationMode, true, mCurrentMaker);
                 mBaiduMap.setMyLocationConfigeration(configuration);
             }
         });
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -321,9 +324,9 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
     private void initView() {
         //topbar组件
 
-        topLeft=(ImageButton)findViewById(R.id.topbar_left);
-        topRight=(ImageButton)findViewById(R.id.topbar_right);
-        topTittle=(TextView)findViewById(R.id.topbar_title);
+        topLeft = (ImageButton) findViewById(R.id.topbar_left);
+        topRight = (ImageButton) findViewById(R.id.topbar_right);
+        topTittle = (TextView) findViewById(R.id.topbar_title);
         topRight.setVisibility(View.GONE);
         topLeft.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -350,6 +353,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         mBitmapDescriptor = BitmapDescriptorFactory
                 .fromResource(R.drawable.zwjyz_07);
     }
+
     //初始化位置
     private void initLocation() {
 
@@ -388,7 +392,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                     .longitude(location.getLongitude())//
                     .direction(mXDirection)
                     .build();
-            mCurren=location.getRadius();
+            mCurren = location.getRadius();
             mBaiduMap.setMyLocationData(mMylocationData);
             mLatitude = location.getLatitude();
             mLongtitude = location.getLongitude();
@@ -440,13 +444,13 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         route = null;
         mBaiduMap.clear();
         if (judgeNet.getAppointRoute() == 1) {
-            start="行车路线";
-            Bundle bundle=this.getIntent().getExtras().getBundle("endaddress");
-            double lon=bundle.getDouble("lon");
-            double lat=bundle.getDouble("lat");
-            endLatutude=bundle.getDouble("lat");
-            endLongtitude=bundle.getDouble("lon");
-            LatLng endRoute=new LatLng(lat,lon);
+            start = "行车路线";
+            Bundle bundle = this.getIntent().getExtras().getBundle("endaddress");
+            double lon = bundle.getDouble("lon");
+            double lat = bundle.getDouble("lat");
+            endLatutude = bundle.getDouble("lat");
+            endLongtitude = bundle.getDouble("lon");
+            LatLng endRoute = new LatLng(lat, lon);
             PlanNode endNode1 = PlanNode.withLocation(endRoute);
             judgeNet.setAppointRoute(0);
 
@@ -480,15 +484,19 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         endLatutude = result.getLocation().latitude;
         endLongtitude = result.getLocation().longitude;
     }
+
     @Override
     public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
     }
+
     @Override
     public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
     }
+
     @Override
     public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
     }
+
     @Override
     public void onGetDrivingRouteResult(DrivingRouteResult result) {
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
@@ -508,11 +516,13 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             overlay.zoomToSpan();
         }
     }
+
     // 定制RouteOverly
     private class MyDrivingRouteOverlay extends DrivingRouteOverlay {
         public MyDrivingRouteOverlay(BaiduMap baiduMap) {
             super(baiduMap);
         }
+
         @Override
         public BitmapDescriptor getStartMarker() {
             if (useDefaultIcon) {
@@ -666,7 +676,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         // 将地图移到到最后一个经纬度位置
         LatLng latLng2 = new LatLng(mLatitude, mLongtitude);
         //MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng2);
-        MapStatus.Builder builder=new MapStatus.Builder();
+        MapStatus.Builder builder = new MapStatus.Builder();
         builder.target(latLng2).zoom(13.0f);
         mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
 
@@ -704,7 +714,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         LatLng pt2 = new LatLng(startLatitude, startLongtutude);
         LatLng pt3 = new LatLng(endLatutude, endLongtitude);
         // 构建 导航参数
-        if(("行车路线").equals(start)){
+        if (("行车路线").equals(start)) {
             para = new NaviParaOption().startPoint(pt1).endPoint(pt3);
         }
         if ("我的位置".equals(start)) {
@@ -714,24 +724,17 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         } else {
             para = new NaviParaOption().startPoint(pt2).endPoint(pt3);
         }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    BaiduMapNavigation.openBaiduMapNavi(para, MapMainActivity.this);
-                } catch (BaiduMapAppNotSupportNaviException e) {
-                    e.printStackTrace();
-                    IOExceptionHandle.showDialog(MapMainActivity.this);
-                }
-            }
-        }).start();
+
+
+        try {
+            BaiduMapNavigation.openBaiduMapNavi(para, MapMainActivity.this);
+        } catch (BaiduMapAppNotSupportNaviException e) {
+            e.printStackTrace();
+            IOExceptionHandle.showDialog(MapMainActivity.this);
+        }
 
     }
+
     /**
      * @author Administrator 自定义覆盖物以及覆盖物监听事件
      */
@@ -782,6 +785,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             }
         }
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -791,16 +795,19 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         // 开启方向传感器
         myOrientationListener.start();
     }
+
     @Override
     protected void onPause() {
         mMapView.onPause();
         super.onPause();
     }
+
     @Override
     protected void onResume() {
         mMapView.onResume();
         super.onResume();
     }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -808,7 +815,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         mBaiduMap.setMyLocationEnabled(false);
         mLocationClient.stop();
         // 停止方向传感器
-       myOrientationListener.stop();
+        myOrientationListener.stop();
     }
 
     @Override
