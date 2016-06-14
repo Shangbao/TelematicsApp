@@ -714,12 +714,23 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         } else {
             para = new NaviParaOption().startPoint(pt2).endPoint(pt3);
         }
-        try {
-            BaiduMapNavigation.openBaiduMapNavi(para, this);
-        } catch (BaiduMapAppNotSupportNaviException e) {
-            e.printStackTrace();
-            IOExceptionHandle.showDialog(MapMainActivity.this);
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    BaiduMapNavigation.openBaiduMapNavi(para, MapMainActivity.this);
+                } catch (BaiduMapAppNotSupportNaviException e) {
+                    e.printStackTrace();
+                    IOExceptionHandle.showDialog(MapMainActivity.this);
+                }
+            }
+        }).start();
+
     }
     /**
      * @author Administrator 自定义覆盖物以及覆盖物监听事件
