@@ -147,10 +147,16 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Intent intent = data;
-        Bundle bundle = intent.getExtras();
-        String result = bundle.getString("result").trim();
-        saoAdd(result);
+        switch (requestCode){
+            case INTEBNT_SAO:
+                if (resultCode == RESULT_OK) {
+                    Intent intent = data;
+                    Bundle bundle = intent.getExtras();
+                    String result = bundle.getString("result").trim();
+                    saoAdd(result);
+                }
+                break;
+        }
     }
 
     private void saoAdd(String aimUrl) {

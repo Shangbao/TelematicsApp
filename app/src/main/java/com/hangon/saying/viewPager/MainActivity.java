@@ -465,9 +465,9 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
             public void onMySuccess(String result) {
                 Toast.makeText(MainActivity.this, "已发出急救", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
-                Intent intent=new Intent();
-                intent.setClass(MainActivity.this,MainActivity.class);
-                startActivity(intent);
+//                Intent intent=new Intent();
+//                intent.setClass(MainActivity.this,MainActivity.class);
+//                startActivity(intent);
 
 //                InitImageView();
 //               InitFragment();
