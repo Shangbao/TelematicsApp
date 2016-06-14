@@ -42,8 +42,7 @@ public class MyOrientationListener implements SensorEventListener
   
     }  
   
-    // ֹͣ���  
-    public void stop()  
+    public void stop()
     {  
         sensorManager.unregisterListener(this);  
     }  

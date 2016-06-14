@@ -826,7 +826,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         mBitmapDescriptor.recycle();
         BaiduMapRoutePlan.finish(this);
         BaiduMapPoiSearch.finish(this);
-        finish();
     }
 
 }

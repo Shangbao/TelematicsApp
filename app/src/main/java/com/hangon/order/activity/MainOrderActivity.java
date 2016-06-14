@@ -143,16 +143,7 @@ public class MainOrderActivity extends FragmentActivity {
         topbarRight=(ImageButton)findViewById(R.id.topbar_right);
         topbarTittle=(TextView)findViewById(R.id.topbar_title);
         topbarTittle.setText("我的订单");
-        topbarLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                JudgeNet judgeNet=new JudgeNet();
-                judgeNet.setStates(2);
-                Intent intent=new Intent();
-                intent.setClass(MainOrderActivity.this, MapMainActivity.class);
-                startActivity(intent);
-            }
-        });
+        topbarLeft.setVisibility(View.GONE);
         topbarRight.setBackgroundResource(R.drawable.grzx_03);
 
         topbarRight.setOnClickListener(new View.OnClickListener() {

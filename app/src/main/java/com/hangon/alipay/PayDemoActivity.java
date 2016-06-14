@@ -132,6 +132,9 @@ public class PayDemoActivity extends FragmentActivity {
         topbarLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(PayDemoActivity.this,MainOrderActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

@@ -208,10 +208,10 @@ public class GasSiteDetailsActivity extends Activity {
                             if (mGasLitre.getText().toString().trim().equals("")) {
                                 mGasmoney.setText("0");
                             } else {
-                                BigDecimal bigDecimal=new BigDecimal(Double.parseDouble((mGasLitre.getText() + " ").toString())
-                                        * (Double.parseDouble(appointGasSingleprice.getText().toString() + " ")) );
+                                BigDecimal bigDecimal=new BigDecimal(Double.parseDouble((mGasLitre.getText() + "").toString())
+                                        * (Double.parseDouble(appointGasSingleprice.getText().toString() + "")) );
                                 double value=bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-                                mGasmoney.setText(value+ " ");
+                                mGasmoney.setText(value+ "");
                             }
                         }
                     }
@@ -231,10 +231,10 @@ public class GasSiteDetailsActivity extends Activity {
                             if (mGasmoney.getText().toString().trim().equals("")) {
                                 mGasLitre.setText("0");
                             } else {
-                                BigDecimal bigDecimal=new BigDecimal((Double.parseDouble((mGasmoney.getText() + " ").toString())
-                                        / (Double.parseDouble(appointGasSingleprice.getText().toString() + " "))) );
-                                double value=bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-                                mGasLitre.setText(value + " ");
+                                BigDecimal bigDecimal=new BigDecimal((Double.parseDouble((mGasmoney.getText() + "").toString().trim())
+                                        / (Double.parseDouble(appointGasSingleprice.getText().toString() + ""))) );
+                                String value=bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue()+"".trim();
+                                mGasLitre.setText(value+"");
                             }
                         }
                     }
@@ -259,10 +259,10 @@ public class GasSiteDetailsActivity extends Activity {
         map.put("gasSinglePrice", appointGasSingleprice.getText().toString());
         map.put("cusPlateNum", cusPlatecar.toString());
         map.put("gasType", appointGastype.getText().toString());
-        BigDecimal bigDecimal=new BigDecimal(a*b);
-        double value=bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-        map.put("gasSumPrice", value+ "");
-        map.put("gasLitre", mGasLitre.getText().toString());
+        //BigDecimal bigDecimal=new BigDecimal(a*b);
+        //double value=bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+        map.put("gasSumPrice",mGasmoney.getText().toString().trim()+"");
+        map.put("gasLitre", mGasLitre.getText().toString().trim()+"");
         VolleyRequest.RequestPost(GasSiteDetailsActivity.this, url, "PostVolley", map, new VolleyInterface(GasSiteDetailsActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
@@ -387,7 +387,6 @@ public class GasSiteDetailsActivity extends Activity {
     private void getData() {
         String userId=Constants.USER_ID+"";
         String url = Constants.GET_CAR_INFO_URL+"?userId="+userId;
-        Log.e("asdfg",url);
         VolleyRequest.RequestGet(GasSiteDetailsActivity.this, url, "getData", new VolleyInterface(GasSiteDetailsActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
