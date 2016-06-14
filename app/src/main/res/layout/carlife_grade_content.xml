@@ -9,5 +9,5 @@
         android:layout_width="107dp"
         android:layout_height="107dp"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_cloudy_day"/>
+        />
 </LinearLayout>

@@ -475,4 +475,9 @@ public class BestRouteActivity extends Activity implements
             public TextView mpoi_address;// 地址
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

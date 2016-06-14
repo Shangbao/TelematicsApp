@@ -54,7 +54,6 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
         payorder = inflater.inflate(R.layout.pay_order, container, false);
         mOrderPayList = (ListView) payorder.findViewById(R.id.pay_order_list);
         context = getActivity();
-        Toast.makeText(getActivity(), Judge.getJudge() + "", Toast.LENGTH_SHORT);
         getData();
         return payorder;
     }
@@ -68,7 +67,6 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
             @Override
             public void onMySuccess(String result) {
                 Gson gson = new Gson();
-                Log.e("PayOrder", result);
                 List<OrderData> list = gson.fromJson(result, new TypeToken<List<OrderData>>() {
                 }.getType());
                 adapter = new Payadapter(list);
@@ -301,6 +299,5 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
     @Override
     public void onResume() {
         super.onResume();
-        Toast.makeText(getActivity(), "PAYORDER", Toast.LENGTH_SHORT).show();
     }
 }

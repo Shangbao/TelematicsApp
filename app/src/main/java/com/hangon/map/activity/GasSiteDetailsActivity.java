@@ -148,7 +148,6 @@ public class GasSiteDetailsActivity extends Activity {
         gasTypeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(final AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(GasSiteDetailsActivity.this, "null" + position, Toast.LENGTH_SHORT).show();
                 getData();
                 //获取弹出框的View以及对应的控件
                 LayoutInflater inflater = getLayoutInflater();
@@ -163,9 +162,7 @@ public class GasSiteDetailsActivity extends Activity {
                 appointGasSingleprice = (TextView) alertView.findViewById(R.id.appoint_gassingleprice);
                 appointGasSingleprice.setText(GasInfoUtil.getGasinfo().get(position1).getGastprice().get(position).getPrice());
                 appointGastype.setText(GasInfoUtil.getGasinfo().get(position1).getGastprice().get(position).getName());
-                Toast.makeText(getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
                 if (personalInformationList == null || personalInformationList.size() == 0) {
-                    Toast.makeText(GasSiteDetailsActivity.this, "null", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 dialog = new Dialog(context);
@@ -296,12 +293,10 @@ public class GasSiteDetailsActivity extends Activity {
     private void init() {
         String userId=Constants.USER_ID+"";
         String url = Constants.GET_CAR_INFO_URL+"?userId="+userId;
-        Log.e("asdfg", url);
         VolleyRequest.RequestGet(GasSiteDetailsActivity.this, url, "getData", new VolleyInterface(GasSiteDetailsActivity.this, VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
             public void onMySuccess(String result) {
                 Gson gson = new Gson();
-                Log.e("aaaa", result);
                 List<PersonalInformationData> mPersonalList = gson.fromJson(result, new TypeToken<List<PersonalInformationData>>() {
                 }.getType());
                 personalInformationList = gson.fromJson(result, new TypeToken<List<PersonalInformationData>>() {
@@ -318,7 +313,6 @@ public class GasSiteDetailsActivity extends Activity {
         topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
         topbarRight = (ImageButton) findViewById(R.id.topbar_right);
         topbarTittle = (TextView) findViewById(R.id.topbar_title);
-
         topbarTittle.setText("加油站详情");
         topbarRight.setVisibility(View.GONE);
         topbarLeft.setOnClickListener(new View.OnClickListener() {
@@ -345,25 +339,17 @@ public class GasSiteDetailsActivity extends Activity {
             switch (v.getId()) {
                 case R.id.GasStartRoute:
                     //发送终点位置到最优路线,用来进行状态判断
-                    judge.setStates(1);
-                    judge.setAppointRoute(1);
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                           judge.setStates(1);
+                           judge.setAppointRoute(1);
                             Bundle bundle = new Bundle();
+                            GasInfoUtil.getGasinfo().get(position1).getLat();
+                            bundle.putDouble("lon", GasInfoUtil.getGasinfo().get(position1).getLon());
+                            bundle.putDouble("lat", GasInfoUtil.getGasinfo().get(position1).getLat());
                             bundle.putString("endaddress", mGasAddressDetails.getText().toString());
                             Intent intent = new Intent();
                             intent.setClass(GasSiteDetailsActivity.this, MapMainActivity.class);
                             intent.putExtra("endaddress", bundle);
                             startActivity(intent);
-                        }
-                    }).start();
-
                     break;
 
             }

@@ -174,7 +174,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_main);
         initLocation();
-
         judgeNet = new JudgeNet();
         states = judgeNet.getStates();
         mLocationListener = new MyLocationListener();
@@ -191,7 +190,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             navi_daohang.setVisibility(View.VISIBLE);
             mFrameLayout.setVisibility(View.GONE);
             route_search.setVisibility(View.VISIBLE);
-           show_hideText.setText("  开始        ");
+           //show_hideText.setText("  开始        ");
             topTittle.setText("最优路线");
             receive();
             SearchGeocoder();
@@ -432,19 +431,27 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
      * 发起路线规划搜索示例
      */
     public void SearchRoutePlan() {
-        LatLng start = new LatLng(startLatitude, startLongtutude);
+        LatLng starts = new LatLng(startLatitude, startLongtutude);
         LatLng end = new LatLng(endLatutude, endLongtitude);
         LatLng myposition = new LatLng(mLatitude, mLongtitude);
-        PlanNode statrNode = PlanNode.withLocation(start);
+        PlanNode statrNode = PlanNode.withLocation(starts);
         PlanNode endNode = PlanNode.withLocation(end);
         PlanNode mypositionNode = PlanNode.withLocation(myposition);
         route = null;
         mBaiduMap.clear();
         if (judgeNet.getAppointRoute() == 1) {
-
+            start="行车路线";
+            Bundle bundle=this.getIntent().getExtras().getBundle("endaddress");
+            double lon=bundle.getDouble("lon");
+            double lat=bundle.getDouble("lat");
+            endLatutude=bundle.getDouble("lat");
+            endLongtitude=bundle.getDouble("lon");
+            LatLng endRoute=new LatLng(lat,lon);
+            PlanNode endNode1 = PlanNode.withLocation(endRoute);
             judgeNet.setAppointRoute(0);
+
             mSearch.drivingSearch((new DrivingRoutePlanOption()).from(mypositionNode)
-                    .to(endNode));
+                    .to(endNode1));
         } else if ("我的位置".equals(end_position)) {
             mSearch.drivingSearch((new DrivingRoutePlanOption()).from(endNode)
                     .to(mypositionNode));
@@ -676,12 +683,8 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
      * 发起搜索
      */
     public void SearchGeocoder() {
-        if (judgeNet.getAppointRoute() == 1) {
-            Bundle bundle = this.getIntent().getBundleExtra("endaddress");
-            String Address = bundle.get("endaddress").toString();
-            mGeoCoder.geocode(new GeoCodeOption().city("")
-                    .address(Address));
-        } else if ("我的位置".equals(start_position)) {
+        if (judgeNet.getAppointRoute() == 1) return;
+        if ("我的位置".equals(start_position)) {
             mGeoCoder.geocode(new GeoCodeOption().city("")
                     .address(end_position));
         } else if ("我的位置".equals(end_position)) {
@@ -701,6 +704,9 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         LatLng pt2 = new LatLng(startLatitude, startLongtutude);
         LatLng pt3 = new LatLng(endLatutude, endLongtitude);
         // 构建 导航参数
+        if(("行车路线").equals(start)){
+            para = new NaviParaOption().startPoint(pt1).endPoint(pt3);
+        }
         if ("我的位置".equals(start)) {
             para = new NaviParaOption().startPoint(pt1).endPoint(pt2);
         } else if ("我的位置".equals(end)) {

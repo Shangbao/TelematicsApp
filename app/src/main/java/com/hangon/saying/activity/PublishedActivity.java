@@ -160,9 +160,9 @@ public class PublishedActivity extends Activity {
                 Bimp.max=0;
                 Bimp.drr.clear();
                 FileUtils.deleteDir();
-//                Intent intent = new Intent();
-//                intent.setClass(getApplicationContext(), MainActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
                 finish();
             }
 
@@ -343,6 +343,7 @@ public class PublishedActivity extends Activity {
                 public void onClick(View v) {
                     photo();
                     dismiss();
+                    finish();
                 }
             });
             bt2.setOnClickListener(new OnClickListener() {
@@ -350,7 +351,9 @@ public class PublishedActivity extends Activity {
                     Intent intent = new Intent(PublishedActivity.this,
                             TestPicActivity.class);
                     startActivity(intent);
+
                     dismiss();
+                    finish();
                 }
             });
             bt3.setOnClickListener(new OnClickListener() {

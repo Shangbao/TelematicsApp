@@ -27,7 +27,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:gravity="center_vertical"
-                    android:text="长春工业大学南湖校区男寝八栋加油站"
+                    android:text=""
                     android:textSize="12sp"
                      android:textColor="#000000"
                     />
@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="20dp"
-                    android:text="E97"
+                    android:text=""
                     android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
@@ -75,7 +75,7 @@
                  android:layout_alignParentTop="true"
                  android:layout_marginLeft="5dp"
                  android:layout_toRightOf="@+id/ordertimetext"
-                 android:text="2016-08-12  12:00"
+                 android:text=""
                  android:textSize="12dp" />
          </LinearLayout>
             <LinearLayout
@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="18"
+                    android:text=""
                     android:textSize="12sp" />
             </LinearLayout>
             <LinearLayout
@@ -121,7 +121,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/list_gastype"
-                    android:text="￥11111"
+                    android:text=""
                     android:textSize="12sp" />
             </LinearLayout>
             <LinearLayout
