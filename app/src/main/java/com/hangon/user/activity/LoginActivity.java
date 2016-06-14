@@ -163,7 +163,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    Toast.makeText(LoginActivity.this, volleyError.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"网络错误", Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Override

@@ -271,9 +271,6 @@ public class EditOrder extends Activity {
                 viewHolder = new ViewHolder();
                 convertView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.orderlist_edit4, null);
                 viewHolder.list_gasname = (TextView) convertView.findViewById(R.id.list_editorder_gasname);
-//                viewHolder.list_gaslitre = (TextView) convertView.findViewById(R.id.list_gaslitre_edit);
-//                viewHolder.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_editorder_status);
-//                viewHolder.list_gassumprice = (TextView) convertView.findViewById(R.id.list_gassumprice_edit);
                 viewHolder.list_gastype = (TextView) convertView.findViewById(R.id.list_gastype_edit);
                 viewHolder.list_ordertime = (TextView) convertView.findViewById(R.id.list_ordertime_edit);
                 viewHolder.item_cb = (CheckBox) convertView.findViewById(R.id.item_cb);
@@ -284,9 +281,7 @@ public class EditOrder extends Activity {
             viewHolder.list_gasname.setText(list.get(position).get("gasname").toString());
             viewHolder.list_gastype.setText(list.get(position).get("gastype").toString());
             viewHolder.list_ordertime.setText(list.get(position).get("gasordertime").toString());
-//            viewHolder.list_gaslitre.setText(list.get(position).get("gasLitre").toString());
-//            viewHolder.list_gasorder_status.setText(list.get(position).get("gasstate").toString());
-//            viewHolder.list_gassumprice.setText(list.get(position).get("gassumprice").toString());
+
             viewHolder.item_cb.setVisibility(View.VISIBLE);
             viewHolder.item_cb.setChecked(list.get(position).get("flag").equals("true"));
             if (viewHolder.item_cb.isChecked()) {

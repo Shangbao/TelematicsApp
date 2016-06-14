@@ -109,6 +109,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:hint="升数"
+        android:inputType="numberDecimal"
+        android:digits="1234567890."
         android:textSize="14sp" />
 </LinearLayout>
                 <LinearLayout
@@ -125,6 +127,8 @@
                         android:gravity="center"
                         />
                     <EditText
+                        android:inputType="numberDecimal"
+                        android:digits="1234567890."
                         android:gravity="center_vertical"
                         android:id="@+id/alert_appoint_gasmoney"
                         android:layout_width="match_parent"

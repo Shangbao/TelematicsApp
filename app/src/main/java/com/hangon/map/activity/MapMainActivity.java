@@ -77,6 +77,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Administrator on 2016/4/23.
@@ -186,7 +188,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         asyncTask.execute();*/
 
         if (states == 1) {
-
             mLocationMode = MyLocationConfiguration.LocationMode.NORMAL;
             navi_daohang.setVisibility(View.VISIBLE);
             mFrameLayout.setVisibility(View.GONE);
@@ -195,18 +196,9 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             topTittle.setText("最优路线");
             receive();
             SearchGeocoder();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(1000);
-                        SearchRoutePlan();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-            judgeNet.setStates(0);
+            Timer timer=new Timer();
+            timer.schedule(new wait(), 1000);
+
 
         }
         if (states == 2) {
@@ -219,45 +211,20 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
     }
 
     private void GasReceiver() {
-        judgeNet.setStates(0);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1500);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 GasInfoUtil.VolleyGet(getApplicationContext());
-                try {
-                    Thread.sleep(1200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                addInfosOverlay(GasInfoUtil.gasinfo);
-                gasShowinfo(GasInfoUtil.gasinfo);
-                if (GasInfoUtil.gasinfo == null) {
-                    //重新加载
-                    View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.netalert, null);
-                    TextView donwload = (TextView) view.findViewById(R.id.donwload);
-                    dialog = new Dialog(getApplicationContext());
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                    builder.setView(view);
-                    dialog = builder.create();
-                    dialog.show();
-                    donwload.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            GasReceiver();
-                            dialog.dismiss();
-
-                        }
-                    });
-                }
-                initMarkerClickEvent();
             }
-
         }).start();
+
+        Timer timer=new Timer();
+        timer.schedule(new wait(), 1500);
     }
 
 
@@ -311,9 +278,8 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnOrder:
-                Intent intent = new Intent(MapMainActivity.this, MainOrderActivity.class);
-                startActivity(intent);
-                finish();
+                Timer timer=new Timer();
+                timer.schedule(new wait3(), 1000);
                 break;
             case R.id.btnZwjyz:
                 break;
@@ -323,17 +289,13 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
     //初始化画面
     private void initView() {
         //topbar组件
-
+        Timer timer=new Timer();
+        timer.schedule(new wait2(), 1000);
         topLeft = (ImageButton) findViewById(R.id.topbar_left);
         topRight = (ImageButton) findViewById(R.id.topbar_right);
         topTittle = (TextView) findViewById(R.id.topbar_title);
         topRight.setVisibility(View.GONE);
-        topLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
         // 地图初始化
         mLocationMode = MyLocationConfiguration.LocationMode.COMPASS;
         mMapView = (MapView) findViewById(R.id.bmapView);
@@ -682,12 +644,6 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
 
     }
 
-    /**
-     * 获取加油站信息
-     */
-    private void ReceiveGas() {
-
-    }
 
     /**
      * 发起搜索
@@ -778,10 +734,9 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
                     }
                     break;
                 case R.id.route_search:
-                    Intent intent = new Intent();
-                    intent.setClass(MapMainActivity.this, BestRouteActivity.class);
-                    startActivity(intent);
-                    finish();
+                    Timer timer=new Timer();
+                    timer.schedule(new wait1(), 1000);
+
             }
         }
     }
@@ -827,5 +782,66 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         BaiduMapRoutePlan.finish(this);
         BaiduMapPoiSearch.finish(this);
     }
+    class wait extends TimerTask {
 
+        @Override
+        public void run() {
+            if(states==1) {
+                SearchRoutePlan();
+                judgeNet.setStates(0);
+            }
+           if(states==2){
+            judgeNet.setStates(0);
+            addInfosOverlay(GasInfoUtil.gasinfo);
+            gasShowinfo(GasInfoUtil.gasinfo);
+            if (GasInfoUtil.gasinfo == null) {
+                //重新加载
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.netalert, null);
+                TextView donwload = (TextView) view.findViewById(R.id.donwload);
+                dialog = new Dialog(getApplicationContext());
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setView(view);
+                dialog = builder.create();
+                dialog.show();
+                donwload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        GasReceiver();
+                        dialog.dismiss();
+
+                    }
+                });
+            }
+            initMarkerClickEvent();
+        }
+    }
+}
+    class wait1 extends TimerTask {
+        @Override
+        public void run() {
+            Intent intent = new Intent();
+            intent.setClass(MapMainActivity.this, BestRouteActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+    class wait2 extends TimerTask {
+        @Override
+        public void run() {
+            topLeft.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
+    }
+    class wait3 extends TimerTask {
+        @Override
+        public void run() {
+            Intent intent = new Intent(MapMainActivity.this, MainOrderActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 }
