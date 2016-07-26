@@ -52,17 +52,17 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
 
     View musicView;
     ListView songList;//歌曲列表List
-   // List<Music> list;//装载歌曲数据
+    List<Music> list;//装载歌曲数据
 
-    List<Mp3> mp3List;
+    //List<Mp3> mp3List;
     SeekBar musicSeekbar;//音乐播放进度条
     RelativeLayout btnPlayModel;
     ImageButton btnPrevious, btnPause, btnNext;
     ImageView playModelImg;//播放模式的图片
     TextView playModelTxt;//播放模式的文字
-   // MusicAdapter musicAdapter;//音乐列表适配器
+    MusicAdapter musicAdapter;//音乐列表适配器
 
-    Mp3Adapter mp3Adapter;
+   // Mp3Adapter mp3Adapter;
     TextView selectedSong, selectedSinger;
     MusicService.MyBinder myBinder;
 
@@ -162,14 +162,13 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
 
     //获取音乐歌曲列表并添加适配器
     private void setMusicAdapter() {
-        mp3List = new ArrayList<Mp3>();
+        list = new ArrayList<Music>();
        // list = MusicUtil.getMusicData(getActivity());
         //musicAdapter = new MusicAdapter(list, getActivity(), currIndex);
         //songList.setAdapter(musicAdapter);
-        mp3List=MusicUtil.getAllSongs(getActivity());
-         mp3Adapter=new Mp3Adapter(mp3List,getActivity(),currIndex);
-        songList.setAdapter(mp3Adapter);
-
+        list=MusicUtil.getMusicData(getActivity());
+         musicAdapter=new MusicAdapter(list,getActivity(),currIndex);
+        songList.setAdapter(musicAdapter);
     }
 
     @Override
@@ -299,12 +298,12 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
             } else if (MusicService.ACTION_UPDATE_CURRENT_MUSIC.equals(action)) {
                 //Retrive the current music and get the title to show on top of the screen.
                 currIndex = intent.getIntExtra(MusicService.ACTION_UPDATE_CURRENT_MUSIC, 0);
-                selectedSong.setText(mp3List.get(currIndex).getName());
-                selectedSinger.setText(mp3List.get(currIndex).getSingerName());
-                totalTime.setText(MusicUtil.toTime((int) mp3List.get(currIndex).getTime()));
-                mp3Adapter.setCurrIndex(currIndex);
+                selectedSong.setText(list.get(currIndex).getName());
+                selectedSinger.setText(list.get(currIndex).getSinger());
+                totalTime.setText(MusicUtil.toTime((int) list.get(currIndex).getTime()));
+                musicAdapter.setCurrIndex(currIndex);
                 skipSelected(currIndex);
-                mp3Adapter.notifyDataSetChanged();
+                musicAdapter.notifyDataSetChanged();
 
             } else if (MusicService.ACTION_UPDATE_DURATION.equals(action)) {
                 //Receive the duration and show under the progress bar

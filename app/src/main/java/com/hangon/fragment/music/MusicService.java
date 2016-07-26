@@ -30,7 +30,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     private int playMode = Constants.SEQUENCE_MODEL;//控制播放模式
     private int currIndex = 0;//当前播放的索引
-    private List<Mp3> list;
+    private List<Music> list;
     private int state = Constants.IDLE;
 
     private MyBinder myBinder = new MyBinder();
@@ -133,7 +133,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     //开始播放
     private void start(int currIndex) {
         if (currIndex < list.size()) {
-            Mp3 m = list.get(currIndex);
+            Music m = list.get(currIndex);
             try {
                 mediaPlayer.reset();// 让播放器回到空闲
                 mediaPlayer.setDataSource(m.getUrl());// 设置文件播放的路径
@@ -271,8 +271,8 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     @Override
     public void onCreate() {
         super.onCreate();
-        list = new ArrayList<Mp3>();
-        list = MusicUtil.getAllSongs(MusicService.this);
+        list = new ArrayList<Music>();
+        list = MusicUtil.getMusicData(MusicService.this);
         Log.e("listsize", list.size() + "");
 
 
