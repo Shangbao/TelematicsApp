@@ -53,6 +53,9 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -99,10 +102,7 @@
         <activity
             android:name="com.hangon.user.activity.WelcomeActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity
@@ -121,7 +121,10 @@
         <activity
             android:name="com.hangon.home.activity.HomeActivity"
             android:theme="@android:style/Theme.NoTitleBar">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
 
@@ -189,7 +192,6 @@
 
         <activity android:name="com.hangon.weather.WeatherActivity"></activity>
         <activity android:name="com.hangon.weather.SelectCity"></activity>
-        <activity android:name="com.hangon.video.VideoActivity"></activity>
 
         <!--支付宝支付页面-->
         <activity android:name="com.hangon.alipay.PayDemoActivity"></activity>

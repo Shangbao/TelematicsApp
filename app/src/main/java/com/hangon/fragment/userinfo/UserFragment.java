@@ -2,12 +2,9 @@ package com.hangon.fragment.userinfo;
 
 import android.app.Fragment;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,7 +39,6 @@ import com.hangon.fragment.music.MusicImage;
 import com.hangon.fragment.order.ZnwhService;
 import com.hangon.home.activity.HomeActivity;
 import com.hangon.user.activity.LoginActivity;
-import com.hangon.video.VideoActivity;
 import com.hangon.video.VideoService;
 import com.kyleduo.switchbutton.SwitchButton;
 
@@ -75,15 +71,12 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     TextView btnReturnLogin;//退出登录
     Button ckBtn;
     ZnwhService.MyBinder znwhBinder;
-    VideoService.VideoBinder videoBinder;
 
     ImageButton topbarLeft, topbarRight;
     TextView topbarTitle;
 
     Intent znwhIntent;
     Intent videoIntent;
-
-    private ProgressReceiver progressReceiver;
 
     public static final int UPDATE_TEXT = 1;
     public static final int UPDATE_ICON = 2;
@@ -120,24 +113,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         }
     };
 
-    private ServiceConnection videoConn = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            videoBinder = (VideoService.VideoBinder) service;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            Toast.makeText(getActivity(), "亲，行车记录暂时无法使用哦！", Toast.LENGTH_SHORT).show();
-        }
-    };
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         userView = inflater.inflate(R.layout.fragment_user, container, false);
         init();
-        registerReceiver();
         UserUtil.instance(getActivity());
         userInfo = UserUtil.getInstance().getUserInfo4Login();
         homeNickName.setText(userInfo.getNickname());
@@ -145,7 +125,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         getUserIconFromCookies();
         setUserAdapter();
         banListViewSlide();
-        getActivity().bindService(videoIntent, videoConn, Service.BIND_AUTO_CREATE);
         getActivity().bindService(znwhIntent, znwhConn, Service.BIND_AUTO_CREATE);
         return userView;
     }
@@ -154,7 +133,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     public void onDestroy() {
         super.onDestroy();
         getActivity().unbindService(znwhConn);
-        getActivity().unbindService(videoConn);
     }
 
     //获取内存里面的图片信息
@@ -219,9 +197,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    videoBinder.record();
+                    Intent intent = new Intent(getActivity(), VideoService.class);
+                    getActivity().startService(intent);
                 } else {
-                    videoBinder.stop();
+                    Intent intent = new Intent(getActivity(), VideoService.class);
+                    getActivity().stopService(intent);
                     Toast.makeText(getActivity(), "行车记录成功，请进入内存设备查看！", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -340,8 +320,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.ck_video:
-                Intent intent = new Intent(getActivity(), VideoActivity.class);
-                startActivity(intent);
+
                 break;
         }
     }
@@ -372,25 +351,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-    private void registerReceiver() {
-        progressReceiver = new ProgressReceiver();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(VideoActivity.ACTION_STOP);
-        getActivity().registerReceiver(progressReceiver, intentFilter);
-    }
-
-    class ProgressReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (VideoActivity.ACTION_STOP.equals(action)) {
-                bSwitch.setChecked(false);
-                videoBinder.stop();
-                Toast.makeText(getActivity(), "行车记录成功，请进入内存设备查看！", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     private void judgeCarExist(final boolean flag) {
         String url = Constants.QUERY_CAR_URL;
