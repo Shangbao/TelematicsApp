@@ -17,7 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.cheshouye.api.client.WeizhangClient;
 import com.cheshouye.api.client.WeizhangIntentService;
+import com.cheshouye.api.client.json.CarInfo;
 import com.cheshouye.api.client.json.CityInfoJson;
 import com.cheshouye.api.client.json.InputConfigJson;
 import com.example.fd.ourapplication.R;
@@ -27,9 +29,6 @@ import com.hangon.common.Constants;
 import com.hangon.common.JsonUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
-import com.hangon.home.activity.HomeActivity;
-import com.hangon.map.activity.MapMainActivity;
-import com.hangon.weizhang.model.CarInfo;
 
 public class MainActivity extends Activity {
 
@@ -58,7 +57,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.csy_activity_main);
-        init();
 //        intent = getIntent();
 //        query_city.setText(intent.getStringExtra("city"));
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.csy_titlebar);
@@ -68,7 +66,6 @@ public class MainActivity extends Activity {
 
         // 返回按钮
         ImageButton btnBack = (ImageButton) findViewById(R.id.topbar_left);
-        btnBack.setVisibility(View.VISIBLE);
         btnBack.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,8 +79,6 @@ public class MainActivity extends Activity {
         ImageButton rightBtn = (ImageButton) findViewById(R.id.topbar_right);
         rightBtn.setVisibility(View.INVISIBLE);
 
-        short_name.setText(defaultChepai);
-
         getWeizhangData(Constants.USER_ID+"");
         // ********************************************************
         Log.d("初始化服务代码", "");
@@ -91,6 +86,8 @@ public class MainActivity extends Activity {
         weizhangIntent.putExtra("appId", 1642);// 您的appId
         weizhangIntent.putExtra("appKey", "5a9963b57060b40910877ff440273d5b");// 您的appKey
         startService(weizhangIntent);
+        init();
+        short_name.setText(defaultChepai);
         // ********************************************************
 
         // 选择省份缩写
@@ -160,6 +157,7 @@ public class MainActivity extends Activity {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("carInfo", car);
                 intent.putExtras(bundle);
+
                 boolean result = checkQueryItem(car);
 
                 if (result) {
@@ -413,5 +411,4 @@ public class MainActivity extends Activity {
             return true;
         }
     }
-
 }

@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera" />003743开发文档
+    <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
@@ -98,11 +98,14 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
+        <activity android:name="com.hangon.video.CkRecode"></activity>
         <activity
             android:name="com.hangon.user.activity.WelcomeActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -121,10 +124,6 @@
         <activity
             android:name="com.hangon.home.activity.HomeActivity"
             android:theme="@android:style/Theme.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
 
@@ -171,8 +170,7 @@
         </activity>
 
         <activity
-            android:name="com.hangon.weizhang.activity.MainActivity"
-            android:launchMode="singleInstance">
+            android:name="com.hangon.weizhang.activity.MainActivity">
 
         </activity>
 

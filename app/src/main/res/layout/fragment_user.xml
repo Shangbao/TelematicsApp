@@ -170,7 +170,7 @@
                 android:layout_toRightOf="@+id/xcjl_tv"
                 android:text="查看记录"
                 android:textColor="#000000"
-                android:visibility="gone"
+
                 />
 
             <com.kyleduo.switchbutton.SwitchButton

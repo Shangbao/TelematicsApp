@@ -9,10 +9,12 @@ import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -39,10 +41,13 @@ import com.hangon.fragment.music.MusicImage;
 import com.hangon.fragment.order.ZnwhService;
 import com.hangon.home.activity.HomeActivity;
 import com.hangon.user.activity.LoginActivity;
+import com.hangon.video.CkRecode;
 import com.hangon.video.VideoService;
 import com.kyleduo.switchbutton.SwitchButton;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,9 +131,14 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         setUserAdapter();
         banListViewSlide();
         getActivity().bindService(znwhIntent, znwhConn, Service.BIND_AUTO_CREATE);
-        return userView;
-    }
 
+        return userView;
+
+    }
+   //判断文件夹是否存在
+    private void judgeFolder(){
+
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -320,6 +330,15 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.ck_video:
+
+                File file=new File( Environment.getExternalStorageDirectory()+"/xinchejilu");
+                if(file.exists()){
+                    Intent intent = new Intent(getActivity(), CkRecode.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getActivity(),"没有行车记录",Toast.LENGTH_SHORT).show();
+                }
+               ;
 
                 break;
         }

@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cheshouye.api.client.WeizhangClient;
 import com.cheshouye.api.client.json.CityInfoJson;
 import com.example.fd.ourapplication.R;
 import com.hangon.weizhang.adapter.ListAdapter;

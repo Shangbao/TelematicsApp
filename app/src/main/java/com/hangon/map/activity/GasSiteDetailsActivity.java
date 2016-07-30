@@ -156,6 +156,93 @@ public class GasSiteDetailsActivity extends Activity {
                 appointGastype = (TextView) alertView.findViewById(R.id.appoint_gastype);
                 mGasLitre = (EditText) alertView.findViewById(R.id.alert_appoint_gaslitre);
                 mGasmoney = (EditText) alertView.findViewById(R.id.alert_appoint_gasmoney);
+                mGasLitre.addTextChangedListener(new TextWatcher() {
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before,
+                                              int count) {
+                        //消除小数点后超过两位的字符​
+                        if (s.toString().contains(".")) {
+                            if (s.length() - 1 - s.toString().indexOf(".") > 2) {
+                                s = s.toString().subSequence(0,
+                                        s.toString().indexOf(".") + 3);
+                                mGasLitre.setText(s);
+                                mGasLitre.setSelection(s.length());
+                            }
+                        }
+                        //输入的第一个字符为小数点时，自动在小数点前面不一个零
+                        if (s.toString().trim().substring(0).equals(".")) {
+                            s = "0" + s;
+                            mGasLitre.setText(s);
+                            mGasLitre.setSelection(2);
+                        }
+                        //如果输入的第一个和第二个字符都为0，则消除第二个0
+                        if (s.toString().startsWith("0")
+                                && s.toString().trim().length() > 1) {
+                            if (!s.toString().substring(1, 2).equals(".")) {
+                                mGasLitre.setText(s.subSequence(0, 1));
+                                mGasLitre.setSelection(1);
+                                return;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count,
+                                                  int after) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+
+                });
+                mGasmoney.addTextChangedListener(new TextWatcher() {
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before,
+                                              int count) {
+                        //消除小数点后超过两位的字符​
+                        if (s.toString().contains(".")) {
+                            if (s.length() - 1 - s.toString().indexOf(".") > 2) {
+                                s = s.toString().subSequence(0,
+                                        s.toString().indexOf(".") + 3);
+                                mGasmoney.setText(s);
+                                mGasmoney.setSelection(s.length());
+                            }
+                        }
+                        //输入的第一个字符为小数点时，自动在小数点前面不一个零
+                        if (s.toString().trim().substring(0).equals(".")) {
+                            s = "0" + s;
+                            mGasmoney.setText(s);
+                            mGasmoney.setSelection(2);
+                        }
+                        //如果输入的第一个和第二个字符都为0，则消除第二个0
+                        if (s.toString().startsWith("0")
+                                && s.toString().trim().length() > 1) {
+                            if (!s.toString().substring(1, 2).equals(".")) {
+                                mGasmoney.setText(s.subSequence(0, 1));
+                                mGasmoney.setSelection(1);
+                                return;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count,
+                                                  int after) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                    }
+
+                });
+
+
                 //Yes or NO
                 ImageView orderYes = (ImageView) alertView.findViewById(R.id.appoint_order_yes);
                 ImageView orderNo = (ImageView) alertView.findViewById(R.id.appoint_order_no);
@@ -216,6 +303,7 @@ public class GasSiteDetailsActivity extends Activity {
                         }
                     }
                 });
+
                 mGasmoney.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

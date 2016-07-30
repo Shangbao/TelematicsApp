@@ -8,17 +8,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cheshouye.api.client.WeizhangClient;
+import com.cheshouye.api.client.json.CarInfo;
 import com.cheshouye.api.client.json.CityInfoJson;
 import com.cheshouye.api.client.json.WeizhangResponseHistoryJson;
 import com.cheshouye.api.client.json.WeizhangResponseJson;
 import com.example.fd.ourapplication.R;
 import com.hangon.weizhang.adapter.WeizhangResponseAdapter;
-import com.hangon.weizhang.model.CarInfo;
 
 import java.util.ArrayList;
 import java.util.List;
