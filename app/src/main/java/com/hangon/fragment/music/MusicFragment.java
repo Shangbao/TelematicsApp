@@ -48,7 +48,7 @@ import java.util.concurrent.Executors;
  * Created by Administrator on 2016/4/4.
  */
 public class MusicFragment extends Fragment implements View.OnClickListener,
-        SeekBar.OnSeekBarChangeListener, AdapterView.OnItemClickListener {
+        SeekBar.OnSeekBarChangeListener, AdapterView.OnItemClickListener{
 
     View musicView;
     ListView songList;//歌曲列表List
@@ -84,6 +84,11 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     int mStartItem;//音乐播放列表窗口可见的第一项
     int mEndItem;//音乐播放列表窗口可见的最后项
 
+    BackClickListener listener;
+    //音乐通信接口
+    public interface BackClickListener{
+        public void backClick(int position);
+    };
 
     private ServiceConnection conn = new ServiceConnection() {
         @Override
@@ -142,11 +147,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         topbarLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = getActivity().getApplicationContext();
-                Intent intent = new Intent(context, HomeActivity.class);
-                intent.putExtra("id", HomeActivity.FragmentIndex);
-                startActivity(intent);
-                getActivity().finish();
+                listener= (BackClickListener) getActivity();
+                listener.backClick(HomeActivity.FragmentIndex);
             }
         });
     }
@@ -282,6 +284,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         getActivity().unregisterReceiver(progressReceiver);
         getActivity().unbindService(conn);
     }
+
+
 
     class ProgressReceiver extends BroadcastReceiver {
 

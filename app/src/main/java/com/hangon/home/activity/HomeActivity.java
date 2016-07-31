@@ -41,7 +41,7 @@ import cn.sharesdk.framework.ShareSDK;
 /**
  * Created by Administrator on 2016/4/1.
  */
-public class HomeActivity extends Activity implements View.OnClickListener {
+public class HomeActivity extends Activity implements View.OnClickListener,MusicFragment.BackClickListener {
 
     //fragment的位置position
     int position;
@@ -75,6 +75,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     public final static int INTENT_UPDATEUSER = 4;
     public final static int INTENT_SAYING= 5;
 
+    //public final static String MUSIC_BACK_ACTION = "com.hangon.home.activity.HomeActivity";   音乐back键
+
     private ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -97,11 +99,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         initView();
         initFragment();
         initClickEvent();
-        Intent intent = getIntent();
-        if (intent != null) {
-            int postion = intent.getIntExtra("id", 0);
-            getTab(postion);
-        }
+
     }
 
     /**
@@ -130,6 +128,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
         //显示第一个Fragment
         transaction.show(carFragment);
+        position=1;
         transaction.commit();
     }
 
@@ -233,6 +232,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         switch (position) {
             case 1:
                 clickTab(carFragment);
+                bottomArea.setVisibility(View.VISIBLE);
                 break;
 
             case 2:
@@ -243,12 +243,14 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             case 3:
                 clickTab(znwhFragment);
                 bottomArea.setBackgroundColor(Color.WHITE);
+                bottomArea.setVisibility(View.VISIBLE);
                 tabTop.setVisibility(View.VISIBLE);
                 break;
 
             case 4:
                 clickTab(userFragment);
                 bottomArea.setBackgroundColor(Color.WHITE);
+                bottomArea.setVisibility(View.VISIBLE);
                 tabTop.setVisibility(View.VISIBLE);
                 break;
         }
@@ -414,5 +416,16 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             finish();
             System.exit(0);
         }
+    }
+
+    @Override
+    //音乐返回键回调接口
+    public void backClick(int position) {
+        if(position!=0){
+            this.position=position;
+            getTab(position);
+        }
+
+
     }
 }

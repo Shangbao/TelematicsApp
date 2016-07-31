@@ -61,6 +61,41 @@
             android:layout_marginTop="45dp">
 
             <ImageView
+                android:id="@+id/img21"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/zc_18" />
+
+            <ImageView
+                android:id="@+id/img22"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img21"
+                android:background="@drawable/zc_10" />
+
+            <com.hangon.common.CleanableEditText
+                android:id="@+id/rUserPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img22"
+                android:drawableRight="@drawable/zc_13"
+                android:hint="请设置6-12位账户密码"
+                android:maxLength="12"
+                android:password="true"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp">
+
+            <ImageView
                 android:id="@+id/img31"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -112,41 +147,6 @@
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff"
                 android:textSize="12sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="45dp">
-
-            <ImageView
-                android:id="@+id/img21"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/zc_18" />
-
-            <ImageView
-                android:id="@+id/img22"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@+id/img21"
-                android:background="@drawable/zc_10" />
-
-            <com.hangon.common.CleanableEditText
-                android:id="@+id/rUserPass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@+id/img22"
-                android:drawableRight="@drawable/zc_13"
-                android:hint="请设置6-12位账户密码"
-                android:maxLength="12"
-                android:password="true"
-                android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
-                android:textSize="14sp" />
         </RelativeLayout>
 
 
