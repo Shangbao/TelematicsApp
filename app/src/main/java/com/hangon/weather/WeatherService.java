@@ -100,26 +100,25 @@ public class WeatherService extends Service implements APICallback {
         api.getSupportedCities(this);
         clearIntent = new Intent(this, HomeActivity.class);
         admain = new NotificationAdmain(this,NOTIFICATION_ID);
-        new Thread() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
             public void run() {
-                while (flag) {
-                    ip = null;
-                    try {
-                        NetworkHelper network = new NetworkHelper();
-                        ArrayList<KVPair<String>> values = new ArrayList<KVPair<String>>();
-                        values.add(new KVPair<String>("ie", "utf-8"));
-                        String resp = network.httpGet("http://pv.sohu.com/cityjson", values, null, null);
-                        resp = resp.replace("var returnCitySN = {", "{").replace("};", "}");
-                        ip = (String) (new Hashon().fromJson(resp).get("cip"));
-                        Weather api = (Weather) MobAPI.getAPI(Weather.NAME);
-                        api.queryByIPAddress(ip, WeatherService.this);
-                        Thread.sleep(1000 * 60 * 5);
-                    } catch (Throwable t) {
-                        t.printStackTrace();
-                    }
+                ip = null;
+                try {
+                    NetworkHelper network = new NetworkHelper();
+                    ArrayList<KVPair<String>> values = new ArrayList<KVPair<String>>();
+                    values.add(new KVPair<String>("ie", "utf-8"));
+                    String resp = network.httpGet("http://pv.sohu.com/cityjson", values, null, null);
+                    resp = resp.replace("var returnCitySN = {", "{").replace("};", "}");
+                    ip = (String) (new Hashon().fromJson(resp).get("cip"));
+                    Weather api = (Weather) MobAPI.getAPI(Weather.NAME);
+                    api.queryByIPAddress(ip, WeatherService.this);
+                } catch (Throwable t) {
+                    t.printStackTrace();
                 }
             }
-        }.start();
+        },0,1000 * 60 * 5);
     }
 
     public void onWeatherDetailsGot(Map<String, Object> result) {

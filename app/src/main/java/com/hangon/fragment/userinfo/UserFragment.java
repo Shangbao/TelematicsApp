@@ -197,8 +197,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 if(isChecked){
                     judgeCarExist(true);
                 }else {
-                   judgeCarExist(false);
-                    znwhBinder.off();
+                    judgeCarExist(false);
                 }
 
             }
@@ -233,7 +232,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                             message.what = UPDATE_TEXT;
                             handler.sendMessage(message);
                         }
-                    }, 500);
+                    }, 200);
                 }
                 break;
             case HomeActivity.INTENT_USERICON:
@@ -383,13 +382,10 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 if (result.equals("exist")) {
                    if(flag==true){
                        aSwitch.setChecked(true);
-                       getActivity().bindService(znwhIntent, znwhConn, Service.BIND_AUTO_CREATE);
                        znwhBinder.on();
                    }else if(flag ==false){
                        aSwitch.setChecked(false);
                        znwhBinder.off();
-                       getActivity().unbindService(znwhConn);
-                       getActivity().stopService(znwhIntent);
                    }
                 } else if (result.equals("noexist")) {
                     aSwitch.setChecked(false);

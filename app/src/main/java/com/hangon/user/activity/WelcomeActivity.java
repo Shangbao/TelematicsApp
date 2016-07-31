@@ -45,6 +45,7 @@ public class WelcomeActivity extends Activity {
             }
             startActivity(toLogin);
             WelcomeActivity.this.finish();
+
         }
     }
 

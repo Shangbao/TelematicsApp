@@ -44,8 +44,6 @@ public class ZnwhService extends Service {
 
     int smallIcon = R.mipmap.ic_launcher;
 
-    private boolean flag = false;
-
     private int isGoodEngine, isGoodTran, isGoodLight;
     private int oldEngine = 1, oldTran = 1, oldLight = 1;
 
@@ -156,28 +154,39 @@ public class ZnwhService extends Service {
 
 
     public class MyBinder extends Binder{
+        Timer timer = null;
         public void off(){
-            flag = false;
+            if (timer != null){
+                timer.cancel();
+                timer = null;
+            }
         }
 
         public void on(){
-            flag = true;
-            thread = new Thread(new Runnable() {
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    while(flag){
-                        getZnwhInfo();
+                    getZnwhInfo();
                         updateZnwhInfo();
-                        Thread.yield();
-                        try{
-                            Thread.sleep(2000);
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-                    }
                 }
-            });
-            thread.start();
+            }, 0, 2000);
+//            thread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    while(flag){
+//                        getZnwhInfo();
+//                        updateZnwhInfo();
+//                        Thread.yield();
+//                        try{
+//                            Thread.sleep(2000);
+//                        }catch (Exception e){
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//            });
+//            thread.start();
         }
     }
 }
