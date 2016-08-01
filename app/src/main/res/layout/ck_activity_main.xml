@@ -42,7 +42,7 @@
                 android:layout_width="50dp"
                 android:layout_height="45dp"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
                 android:gravity="center"
                 android:text="编辑"
@@ -50,7 +50,7 @@
                 android:textSize="16sp" />
 
 
-            <CheckBox
+           <!-- <CheckBox
                 android:visibility="gone"
                 android:id="@+id/edit_lists_allcheckbox"
                 style="@style/edit_list"
@@ -59,7 +59,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/ic_launcher" />-->
 
         </RelativeLayout>
         <RelativeLayout
@@ -71,17 +71,50 @@
                 android:id="@+id/lv_show"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
-            <TextView
-                android:visibility="gone"
-                android:id="@+id/delete_list"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="删除"
-                android:background="#ff0000"
-                android:textSize="20dp"
-                android:gravity="center"
-                android:layout_alignParentBottom="true"
-                />
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/all_selected_list"
+                    android:layout_alignParentRight="true"
+                    android:layout_above="@+id/delete_list"
+                    android:layout_width="80dp"
+                    android:orientation="horizontal"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="全选"
+
+                        android:textSize="18sp"
+                        android:gravity="center"
+
+                        />
+                    <CheckBox
+
+                        android:id="@+id/edit_lists_allcheckbox"
+                        style="@style/edit_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_launcher" />
+
+                </LinearLayout>
+               <TextView
+                   android:visibility="gone"
+                   android:layout_alignParentBottom="true"
+                   android:id="@+id/delete_list"
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:text="删除"
+                   android:background="#ff0000"
+                   android:textSize="20dp"
+                   android:gravity="center"
+                   android:layout_weight="1"
+                   />
+
+
         </RelativeLayout>
     </LinearLayout>
 
