@@ -1,22 +1,88 @@
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
+    tools:context=".CkRecode" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            >
+            <TextView
+                android:id="@+id/back_grzx"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:text="返回"
+                android:textColor="@color/greenlist"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                />
+          <TextView
+              android:textColor="@color/greenlist"
+              android:layout_width="wrap_content"
+              android:layout_height="45dp"
+              android:text="行车记录"
+              android:gravity="center"
+              android:layout_marginLeft="150dp"
+              android:layout_marginTop="5dp"
+              android:textSize="18sp"
+
+              />
+
+            <TextView
+
+                android:textColor="@color/greenlist"
+                android:id="@+id/edit_list"
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="40dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="编辑"
+
+                android:textSize="16sp" />
 
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/topbar"
-        />
+            <CheckBox
+                android:visibility="gone"
+                android:id="@+id/edit_lists_allcheckbox"
+                style="@style/edit_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_launcher" />
 
-    <ListView
-        android:id="@+id/lv_show"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <ListView
+                android:id="@+id/lv_show"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/delete_list"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="删除"
+                android:background="#ff0000"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+    </LinearLayout>
 
-
-
-</LinearLayout>
+</RelativeLayout>
