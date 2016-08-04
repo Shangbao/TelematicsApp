@@ -1,4 +1,4 @@
-package com.hangon.fragment.order;
+package com.hangon.bean.miancar;
 
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
@@ -7,23 +7,34 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
+import com.google.gson.Gson;
+import com.hangon.bean.map.Status;
+import com.hangon.common.MyApplication;
+import com.hangon.common.MyStringRequest;
 import com.hangon.common.Topbar;
+import com.hangon.fragment.order.ZnwhInfoVO;
+import com.hangon.fragment.order.ZnwhService;
 import com.hangon.fragment.userinfo.UserIconActivity;
 import com.hangon.home.activity.HomeActivity;
-import com.hangon.maintenace.CarMiantenance;
+import com.hangon.map.util.JudgeNet;
 import com.hangon.saying.viewPager.MainActivity;
 import com.hangon.weather.WeatherService;
+
+import java.util.Collections;
 
 /**
  * Created by Administrator on 2016/4/4.
@@ -45,8 +56,7 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
     private TextView tvExe;
     private Button btnSaying;
     private RelativeLayout layout;
-    private ImageView carRepair;
-    private ImageView carWash;
+
     ImageButton topbarLeft, topbarRight;
     TextView topbarTitle;
 
@@ -54,31 +64,14 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         znwhView = inflater.inflate(R.layout.fragment_znwh, container, false);
-//        Bundle bundle = getArguments();
+        getJsonDataToXc();
+
         init();
         registerReceiver();
         return znwhView;
     }
 
     public void init() {
-        carRepair=(ImageView)znwhView.findViewById(R.id.img2);
-        carWash=(ImageView)znwhView.findViewById(R.id.img3);
-        carWash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), CarMiantenance.class);
-                intent.putExtra("ids","a");
-                startActivityForResult(intent, HomeActivity.INTENT_SAYING);
-            }
-        });
-        carRepair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), CarMiantenance.class);
-                intent.putExtra("ids","b");
-                startActivityForResult(intent, HomeActivity.INTENT_SAYING);
-            }
-        });
         tvUserId = (TextView) znwhView.findViewById(R.id.znwh_userid);
         tvMil = (TextView) znwhView.findViewById(R.id.znwh_mil);
         tvGas = (TextView) znwhView.findViewById(R.id.znwh_gas);
@@ -98,6 +91,38 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
         topbarTitle.setText("智能生活");
         layout.setOnClickListener(this);
     }
+
+    // 测试获得洗车店维修点的Json数据
+
+    public  void getJsonDataToXc() {
+        try {
+            String url="http://api.map.baidu.com/place/v2/search?query=%E6%B4%97%E8%BD%A6%E5%BA%97%E5%BA%97&page_size=10&page_num=0&scope=1&location=39.915,116.404&radius=2000&output=json&ak=8ZcbE4SeBsjWyfulkiqswRaHOm1mFZV8&mcode=84:62:7A:13:86:10:06:F6:77:86:66:B5:46:E6:58:B1:A7:F4:85:BB;baidumapsdk.demo";
+            MyStringRequest request = new MyStringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        public void onResponse(String response) {
+                            Log.e("aaa", response);
+                            if (response == null || response.isEmpty()) {
+                                return;
+                            } else {
+                                Gson gson = new Gson();
+                                data data = gson.fromJson(response, data.class);
+                                Log.e("xxx",data.getStatus()+"");
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Toast.makeText(getActivity(),"网络错误", Toast.LENGTH_SHORT).show();
+                }
+            });
+            request.setTag("StringReqGet");
+            MyApplication.getHttpQueues().add(request);
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(getActivity(),"网络错误",Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     @Override
     public void onDestroy() {

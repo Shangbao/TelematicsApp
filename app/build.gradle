@@ -27,7 +27,7 @@ repositories{
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
@@ -39,4 +39,15 @@ dependencies {
     compile files('libs/apache-mime4j-0.6.jar')
     compile project(':sharesdk')
     compile 'com.kyleduo.switchbutton:library:1.4.1'
+    compile files('libs/baidumapapi_base_v4_0_0.jar')
+    compile files('libs/baidumapapi_cloud_v4_0_0.jar')
+    compile files('libs/baidumapapi_map_v4_0_0.jar')
+    compile files('libs/baidumapapi_radar_v4_0_0.jar')
+    compile files('libs/baidumapapi_search_v4_0_0.jar')
+    compile files('libs/baidumapapi_util_v4_0_0.jar')
+    compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/IndoorscapeAlbumPlugin.jar')
+    compile files('libs/android-support-v4.jar')
+    compile files('libs/baidumapapi_v2_4_1.jar')
+    compile files('libs/baidumapapi_v3_5_0.jar')
 }

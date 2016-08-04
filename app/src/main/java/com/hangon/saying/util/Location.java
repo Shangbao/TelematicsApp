@@ -1,6 +1,7 @@
 package com.hangon.saying.util;
 
 import com.baidu.location.*;
+import com.baidu.mapapi.model.LatLng;
 import com.hangon.common.MyApplication;
 
 import android.widget.TextView;
@@ -11,6 +12,8 @@ public class Location extends MyApplication {
     private String mData;
     public MyLocationListenner myListener = new MyLocationListenner();
     public TextView mTv;
+    public TextView lat;
+    public  TextView lon;
 
     @Override
     public void onCreate() {
@@ -18,7 +21,18 @@ public class Location extends MyApplication {
         mLocationClient.registerLocationListener(myListener);
         super.onCreate();
     }
-
+    public void logLocation(double lats,double lons){
+       try{
+           if(lat!=null){
+           lat.setText(lats+"");
+           }
+           if(lon!=null){
+               lon.setText(lons+"");
+           }
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+    }
     public void logMsg(String str) {
         try {
             mData = str;
@@ -46,6 +60,8 @@ public class Location extends MyApplication {
             }
 
             logMsg(sb.toString());
+            logLocation(location.getLatitude(),location.getLongitude());
+
         }
 
     }

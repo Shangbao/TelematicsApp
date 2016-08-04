@@ -171,6 +171,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
     //底层布局
     FrameLayout mFrameLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SDKInitializer.initialize(getApplicationContext());
@@ -207,6 +208,9 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             GasReceiver();
             navi_daohang.setVisibility(View.GONE);
             route_search.setVisibility(View.GONE);
+        }
+        if(states!=1&&states!=2){
+
         }
     }
 
