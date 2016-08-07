@@ -63,6 +63,5 @@ public class Location extends MyApplication {
             logLocation(location.getLatitude(),location.getLongitude());
 
         }
-
     }
 }

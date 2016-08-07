@@ -40,9 +40,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * Created by Administrator on 2016/3/31.
@@ -151,6 +156,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         //将用户登录信息的json格式转换成bean对象
                         user = (UserInfo) JsonUtil.jsonToBean(userInfo, UserInfo.class);
                         user.setIsSave(true);
+                        sendPushTag(user.getUserId()+"");
                         Toast.makeText(LoginActivity.this, "输入正确,正在为你加载中.", Toast.LENGTH_SHORT).show();
                         finishedLogin(user);
                         LoginActivity.this.finish();
@@ -236,6 +242,22 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         Log.e("userIconConten",userIconConten);
         UserUtil.instance(LoginActivity.this);
         UserUtil.getInstance().saveStringConfig("userIconContent", userIconConten);
+    }
+
+    //设置并发送pushtag方法
+    private void sendPushTag(String userId){
+        Set<String> tagSet = new HashSet<>();
+        tagSet.add(userId);
+        JPushInterface.setTags(LoginActivity.this, tagSet, new TagAliasCallback() {
+            @Override
+            public void gotResult(int responseCode, String alias, Set<String> tags) {
+                if (responseCode == 0) {
+                    Log.d("设置tag结果", responseCode + "");
+                } else {
+                    Log.d("设置tag错误码", responseCode + "");
+                }
+            }
+        });
     }
     class wait extends TimerTask {
 

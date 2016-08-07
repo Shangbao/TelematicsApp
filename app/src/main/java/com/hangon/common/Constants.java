@@ -5,7 +5,7 @@ package com.hangon.common;
  */
 public class Constants {
     //网络请求URL
-    public static final String HOST_IP = "123.207.136.35";
+    public static final String HOST_IP = "10.163.200.124";
     //关于用户信息的网络请求地址
     public static final String LOGIN_URL = "http://" + HOST_IP + ":8080/wind/UserLogin?";
     public static final String REGISTER_URL = "http://" + HOST_IP + ":8080/wind/UserRegister?";
@@ -50,6 +50,9 @@ public class Constants {
     public static final String GET_CZW_SAYINGS ="http://" + HOST_IP + ":8080/wind/Saying/GetCzwSayings";
     public static final String ADD_SAYING ="http://" + HOST_IP + ":8080/wind/Saying/AddSaying";
     public static final String DELETE_SAYING ="http://" + HOST_IP + ":8080/wind/Saying/DeleteSaying";
+
+    //定时发送用户经纬度
+    public static final String SEND_JWD ="http://" + HOST_IP + ":8080/wind/location/saveUserLocation";
 
     //音乐播放状态
     public static final int IDLE = 0;// 空闲状态

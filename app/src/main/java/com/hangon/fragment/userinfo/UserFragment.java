@@ -199,7 +199,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 }else {
                     judgeCarExist(false);
                 }
-
             }
         });
         bSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
