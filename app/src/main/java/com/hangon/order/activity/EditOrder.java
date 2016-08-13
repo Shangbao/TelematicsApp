@@ -3,10 +3,12 @@ package com.hangon.order.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -364,4 +366,23 @@ public class EditOrder extends Activity {
             finish();
         }
     }
+
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+// 按下键盘上返回按钮
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent=new Intent();
+            intent.setClass(EditOrder.this,MainOrderActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+
+
+
+
 }

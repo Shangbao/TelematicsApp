@@ -3,21 +3,28 @@ package com.hangon.maintenace;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
@@ -33,10 +40,12 @@ import com.example.fd.ourapplication.R;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.hangon.common.MyApplication;
 import com.hangon.map.activity.MapMainActivity;
 import com.hangon.map.util.JudgeNet;
 import com.hangon.saying.activity.PublishedActivity;
 import com.hangon.saying.activity.TestPicActivity;
+import com.hangon.user.activity.LoginActivity;
 
 import java.util.List;
 import java.util.TimerTask;
@@ -51,20 +60,26 @@ public class CarMaindetails extends Activity implements OnGetPoiSearchResultList
     private TextView mCarMianPhone;
     private TextView mCarMianWorktime;
     private LinearLayout linearLayout;
+    private TextView site_number;
+    private ImageView car_over_rall;
+    private ImageView all_picture;
     //关于poi搜索
+    private String uid;
     private PoiSearch mPoiSearch;
     private SuggestionSearch mSuggestionSearch = null;//检索建议
      //topbar
     private ImageButton topLeft;
     private ImageButton topRight;
     private TextView topTittle;
-
+     private String distance;
   //进入map判断
     JudgeNet judge;
     //进去map传值
     private String address;
     private double   lat;
     private double  lon;
+    //评分
+    double score;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,14 +88,13 @@ public class CarMaindetails extends Activity implements OnGetPoiSearchResultList
         init();
         receiveData();
         initOnclick();
-
-
-
+        loadImg();
     }
 
     private void receiveData() {
-        final String uid=this.getIntent().getExtras().getString("uid");
-        Toast.makeText(getApplicationContext(),uid,Toast.LENGTH_SHORT).show();
+        uid=this.getIntent().getExtras().getString("uid");
+        Log.d("loca",uid);
+        distance=this.getIntent().getExtras().getString("distance");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -98,8 +112,13 @@ public class CarMaindetails extends Activity implements OnGetPoiSearchResultList
         mCarMianPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if("暂无信息".equals(mCarMianPhone.getText().toString().trim())){
+                    Toast.makeText(getApplicationContext(),"暂无本店电话信息",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else{
                 new PopupWindows(CarMaindetails.this, linearLayout);
-            }
+            }}
         });
     }
 
@@ -108,22 +127,22 @@ public class CarMaindetails extends Activity implements OnGetPoiSearchResultList
         topLeft=(ImageButton)findViewById(R.id.topbar_left);
         topRight=(ImageButton)findViewById(R.id.topbar_right);
         topTittle=(TextView)findViewById(R.id.topbar_title);
-
+        topLeft.setBackgroundResource(R.drawable.xcd_001);
         topLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        topRight.setImageResource(R.drawable.xcdxq_001);
             topRight.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    judge=new JudgeNet();
+                    judge = new JudgeNet();
                     judge.setStates(1);
                     judge.setAppointRoute(1);
 
-                 //   bundle.putString("endaddress", address);
-                   ;
+                    //   bundle.putString("endaddress", address);
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -144,20 +163,23 @@ public class CarMaindetails extends Activity implements OnGetPoiSearchResultList
 
                 }
             });
-
         linearLayout=(LinearLayout)findViewById(R.id.linearLayout1);
-        mCarMianAddress = (TextView) findViewById(R.id.carmaindetails_address);
-        mCarMianMeters = (TextView) findViewById(R.id.carmaindetails_meters);
-        mCarMianName = (TextView) findViewById(R.id.carmaindetails_name);
-        mCarMianPhone = (TextView) findViewById(R.id.carmaindetails_phone_number);
-        mCarMianWorktime = (TextView) findViewById(R.id.carmaindetails_worktime);
+        mCarMianAddress = (TextView) findViewById(R.id.car_site_address);
+        mCarMianMeters = (TextView) findViewById(R.id.car_site_meter);
+        mCarMianName = (TextView) findViewById(R.id.car_site_name);
+        mCarMianPhone = (TextView) findViewById(R.id.site_phone);
+        mCarMianWorktime = (TextView) findViewById(R.id.car_site_date );
+        site_number=(TextView)findViewById(R.id.car_number_fen);
+        car_over_rall=(ImageView)findViewById(R.id.car_overall_rating);
+        //全景静态图
+        all_picture=(ImageView)findViewById(R.id.all_picture);
         //Poi监听模块初始化
         mPoiSearch = PoiSearch.newInstance().newInstance();
         mSuggestionSearch = SuggestionSearch.newInstance();
         //监听回调结果
         mPoiSearch.setOnGetPoiSearchResultListener(this);
         mSuggestionSearch.setOnGetSuggestionResultListener(this);
-       ;
+
     }
    class  wait extends TimerTask{
 
@@ -170,12 +192,10 @@ public class CarMaindetails extends Activity implements OnGetPoiSearchResultList
     private void sendPoi(String uid) {
         mPoiSearch.searchPoiDetail(new PoiDetailSearchOption().poiUid(uid));
     }
-
     @Override
     public void onGetPoiResult(PoiResult poiResult) {
 
     }
-
     @Override
     public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
         Toast.makeText(getApplicationContext(), poiDetailResult.getShopHours(), Toast.LENGTH_SHORT).show();
@@ -195,16 +215,57 @@ public class CarMaindetails extends Activity implements OnGetPoiSearchResultList
             } else {
                 mCarMianWorktime.setText(poiDetailResult.getShopHours());
             }
-
+            if(poiDetailResult.getTelephone()!=null&&!poiDetailResult.getTelephone().equals("")){
             mCarMianPhone.setText(poiDetailResult.getTelephone());
-            mCarMianMeters.setText(DistanceUtil.getDistance(poiDetailResult.getLocation(), poiDetailResult.getLocation()) + "");
+            }
+            else {
+                mCarMianPhone.setText("暂无信息");
+            }
+            mCarMianMeters.setText(distance+"米");
             mCarMianAddress.setText(poiDetailResult.getAddress());
+            site_number.setText(poiDetailResult.getOverallRating()+"分");
+            score=poiDetailResult.getOverallRating();
+
+            if((int)score==0){
+                car_over_rall.setBackgroundResource(R.drawable.xcd_002);
+            }
+            if((int)score==1) {
+                car_over_rall.setBackgroundResource(R.drawable.xcd_002);
+            }
+            if ((int)score==2){
+                car_over_rall.setBackgroundResource(R.drawable.xcd_003);
+            }
+            if((int)score==3){
+                car_over_rall.setBackgroundResource(R.drawable.xcd_004);
+            }
+            if((int)score==4){
+                car_over_rall.setBackgroundResource(R.drawable.xcd_005);
+            }
+            if((int)score==5){
+                car_over_rall.setBackgroundResource(R.drawable.xcd_006);
+            }
+            Log.d("asas",lat+":asas"+lon);
         }
     }
-
     @Override
     public void onGetSuggestionResult(SuggestionResult suggestionResult) {
 
+    }
+    public void loadImg(){
+
+        String url="http://api.map.baidu.com/panorama/v2?ak=8ZcbE4SeBsjWyfulkiqswRaHOm1mFZV8&mcode=84:62:7A:13:86:10:06:F6:77:86:66:B5:46:E6:58:B1:A7:F4:85:BB;baidumapsdk.demo&width=512&height=512&poiid="+uid+"&fov=180&qq-pf-to=pcqq.c2c";
+        ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap bitmap) {
+                all_picture.setImageBitmap(bitmap);
+            }
+        }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(CarMaindetails.this, "加载失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+        MyApplication.getHttpQueues().add(request);
     }
 
     public class PopupWindows extends PopupWindow {

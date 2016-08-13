@@ -77,6 +77,7 @@ public class CkRecode extends Activity {
 //				Toast.makeText(getApplicationContext(), "handle"+listPictures.size(), 1000).show();
 				adapters = new MyAdapters(listPictures);
 				listViews.setAdapter(adapters);
+				DataChange();
 			}
 		}
 	};
@@ -105,13 +106,16 @@ public class CkRecode extends Activity {
 					editVedio.setText("取消");
 					editListAllCheckbox.setVisibility(View.VISIBLE);
 					listViews = (ListView) findViewById(R.id.lv_show);
+					loadVaule();
 					Message message=new Message();
 					message.what=1;
 					message.obj = mapList;
 					handler.sendMessage(message);
 					init();
+					editListAllCheckbox.setChecked(false);
 					holder.deleteRecode.setFocusableInTouchMode(false);
 					holder.deleteRecode.setFocusable(false);
+
 				}
 				else{
 					all_select_list.setVisibility(View.GONE);
@@ -120,6 +124,7 @@ public class CkRecode extends Activity {
 					editListAllCheckbox.setVisibility(View.GONE);
 					editListAllCheckbox.setChecked(false);
 					loadVaule();
+					DataChange();
 				}
 
 			}

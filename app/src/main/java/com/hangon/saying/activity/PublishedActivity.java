@@ -115,7 +115,7 @@ public class PublishedActivity extends Activity {
             public void onClick(View v) {
 
             if(publishContent.getText().toString().trim().equals("")){
-                Toast.makeText(PublishedActivity.this,"请输入发表内容",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"请输入发表内容",Toast.LENGTH_SHORT).show();
                 return;
             }else{
                 PostSaying();

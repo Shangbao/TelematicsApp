@@ -1,176 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
 
+    android:orientation="vertical"
+    android:background="#f2f2f2"
+    android:layout_height="match_parent">
     <include
         android:id="@+id/topbar"
         layout="@layout/topbar"
         />
+      <LinearLayout
+          android:background="#f2f2f2"
+          android:orientation="horizontal"
+          android:layout_marginLeft="12dp"
+          android:layout_marginRight="12dp"
+          android:layout_width="match_parent"
+          android:layout_height="135dp">
+          <ImageView
 
-    <LinearLayout
-        android:orientation="horizontal"
-    android:layout_weight="3"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ImageView
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:src="@drawable/ic_launcher"
-        />
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+              android:layout_marginTop="10dp"
+              android:layout_width="120dp"
+              android:layout_height="120dp"
+              android:id="@+id/all_picture"
+              />
+           <RelativeLayout
+               android:layout_marginLeft="5dp"
+               android:layout_marginTop="5dp"
+               android:layout_width="230dp"
+               android:layout_height="130dp">
             <TextView
-                android:id="@+id/carmaindetails_name"
-                android:layout_weight="1"
+                android:layout_marginLeft="3dp"
+                android:id="@+id/car_site_name"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
+                android:layout_height="35dp"
+                android:text="长春工业大学南湖维修站"
+                android:textSize="18sp"
                 android:gravity="center_vertical"
                 />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/ic_launcher"/>
-                <ImageView
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/ic_launcher"/>
-                <ImageView
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/ic_launcher"/>
-                <ImageView
-                android:layout_gravity="center_vertical"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/ic_launcher"/>
-                <ImageView
-                android:layout_gravity="center_vertical"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/ic_launcher"/>
 
+              <ImageView
 
-
-
-            </LinearLayout>
-            <LinearLayout
-                      android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:gravity="center_vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:text="营业时间："
-                    android:textSize="12sp"
-                    />
-                <TextView
-                    android:id="@+id/carmaindetails_worktime"
-                    android:gravity="center_vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-
-                    android:textSize="12sp"
-                    />
-
-            </LinearLayout>
-        </LinearLayout>
+                  android:layout_width="83dp"
+                  android:layout_height="13dp"
+                  android:src="@drawable/xcd_002"
+                  android:id="@+id/car_overall_rating"
+                  android:layout_below="@+id/car_site_name"
+                  android:layout_toLeftOf="@+id/car_number_fen"
+                  android:layout_toStartOf="@+id/car_number_fen" />
+               <TextView
+                   android:id="@+id/car_number_fen"
+                   android:layout_width="40dp"
+                   android:layout_height="13dp"
+                   android:text="18分"
+                   android:layout_marginLeft="5dp"
+                   android:gravity="center_vertical"
+                   android:textSize="12sp"
+                   android:layout_alignTop="@+id/car_overall_rating"
+                   android:layout_centerHorizontal="true" />
+               <TextView
+                 android:layout_marginLeft="5dp"
+                   android:layout_marginTop="5dp"
+                   android:layout_width="100dp"
+                   android:layout_height="30dp"
+                   android:text="营业时间:"
+                   android:gravity="center_vertical"
+                   android:textSize="14sp"
+                   android:layout_below="@+id/car_overall_rating"
+                   android:layout_alignParentLeft="true"
+                   android:layout_alignParentStart="true"
+                   android:layout_toLeftOf="@+id/car_site_date"
+                   android:layout_toStartOf="@+id/car_site_date" />
+               <TextView
+                   android:layout_marginTop="5dp"
+                   android:layout_width="150dp"
+                   android:layout_height="30dp"
+                   android:gravity="center_vertical"
+                   android:text="暂无"
+                   android:textSize="14sp"
+                   android:layout_marginRight="10dp"
+                   android:id="@+id/car_site_date"
+                   android:layout_below="@+id/car_overall_rating"
+                   android:layout_alignParentRight="true"
+                   android:layout_alignParentEnd="true" />
+           </RelativeLayout>
+      </LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_marginRight="12dp"
+    android:layout_marginLeft="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="30dp">
+    <TextView
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_weight="1"
+        android:id="@+id/car_site_address"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="长春工业大学南湖校区南湖公园南湖游永远"
+        android:textSize="12sp"/>
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="#cccccc"
+        />
+    <TextView
+        android:id="@+id/car_site_meter"
+        android:layout_weight="4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="1203米"
+        android:layout_marginLeft="5dp"
+        android:textSize="12sp"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        />
 </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:id="@+id/site_phone1"
+            android:src="@drawable/xcd_008"/>
+     <TextView
+         android:layout_marginLeft="10dp"
+         android:gravity="center_vertical"
+         android:layout_gravity="center_vertical"
+         android:text="暂无信息"
+         android:layout_width="300dp"
+         android:layout_height="match_parent"
+         android:id="@+id/site_phone"/>
+
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:orientation="vertical"
-        android:layout_weight="1"
+        android:background="#f2f2f2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-           <LinearLayout
+        android:layout_height="270dp">
 
-               android:layout_marginRight="5dp"
-               android:layout_marginLeft="5dp"
-               android:orientation="horizontal"
-               android:layout_width="match_parent"
-               android:layout_height="50dp">
-               <TextView
-                   android:id="@+id/carmaindetails_address"
-                   android:gravity="center_vertical"
-                   android:layout_weight="1"
-                   android:textSize="10sp"
-
-                   android:layout_width="400dp"
-                   android:layout_height="match_parent" />
-               <View
-                   android:layout_marginLeft="2dp"
-                   android:layout_width="1dp"
-                   android:layout_height="match_parent"
-                   android:background="#cccccc"
-                   android:layout_marginTop="5dp"
-                   android:layout_marginBottom="3dp"
-                   />
-               <LinearLayout
-                   android:orientation="horizontal"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:layout_weight="3"
-                   >
-                   <TextView
-                       android:id="@+id/carmaindetails_meters"
-                       android:layout_weight="1"
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:gravity="center"
-                       android:textSize="10sp"
-                       />
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:layout_weight="2"
-                       android:gravity="center_vertical"
-                       android:text="米"
-                       android:textSize="10sp"
-                       />
-               </LinearLayout>
-           </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp">
-         <ImageView
-             android:layout_width="35dp"
-             android:layout_height="35dp"
-             android:src="@drawable/ic_launcher"
-             android:layout_marginLeft="5dp"
-             android:id="@+id/carmaindetails_phone"
-             />
-            <TextView
-                android:id="@+id/carmaindetails_phone_number"
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/carmaindetails_phone"
-                android:layout_toEndOf="@+id/carmaindetails_phone"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="5dp" />
-        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

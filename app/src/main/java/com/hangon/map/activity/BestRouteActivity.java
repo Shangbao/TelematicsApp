@@ -206,7 +206,6 @@ public class BestRouteActivity extends Activity implements
                                 intent.putExtra("address", addressdata);
                                 intent.setClass(BestRouteActivity.this, MapMainActivity.class);
                                 startActivity(intent);
-                                finish();
                             }
                         }).start();
                     }

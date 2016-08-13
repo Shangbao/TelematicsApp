@@ -225,11 +225,7 @@ public class CarMiantenance extends Activity{
                 viewHorder.main_tainshop_name=(TextView)convertView.findViewById(R.id.main_tainshop_name);
                 viewHorder.maintenanceshop_distance=(TextView)convertView.findViewById(R.id.maintenanceshop_distance);
                 viewHorder.shopscoer=(TextView )convertView.findViewById(R.id.shopscore);
-                viewHorder.main_overall_rating1=(ImageView)convertView.findViewById(R.id.main_overall_rating1);
-                viewHorder.main_overall_rating2=(ImageView)convertView.findViewById(R.id.main_overall_rating2);
-                viewHorder.main_overall_rating3=(ImageView)convertView.findViewById(R.id.main_overall_rating3);
-                viewHorder.main_overall_rating4=(ImageView)convertView.findViewById(R.id.main_overall_rating4);
-                viewHorder.main_overall_rating5=(ImageView)convertView.findViewById(R.id.main_overall_rating5);
+                viewHorder.main_overall_rating=(ImageView)convertView.findViewById(R.id.main_overall_rating);
                 viewHorder.line_detail=(LinearLayout)convertView.findViewById(R.id.line_detail);
                 viewHorder.line_phone=(LinearLayout)convertView.findViewById(R.id.line_phone);
                 viewHorder.line_start_there=(LinearLayout)convertView.findViewById(R.id.line_start_there);
@@ -249,62 +245,23 @@ public class CarMiantenance extends Activity{
             }else{
                 viewHorder.shopscoer.setText("暂无评分");
             }
-
-            if(0==(int)score){
-
+            if((int)score==0){
+             viewHorder.main_overall_rating.setBackgroundResource(R.drawable.xcd_002);
             }
-            if(score>0&&score<1){
-                viewHorder.main_overall_rating1.setImageResource(R.drawable.addgas);
+             if((int)score==1) {
+                 viewHorder.main_overall_rating.setBackgroundResource(R.drawable.xcd_002);
             }
-            if(1==(int)score){
-                viewHorder.main_overall_rating1.setImageResource(R.drawable.addgas);
+            if ((int)score==2){
+                viewHorder.main_overall_rating.setBackgroundResource(R.drawable.xcd_003);
             }
-            if(score>1&&score<2){
-                viewHorder.main_overall_rating1.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating2.setImageResource(R.drawable.addgas);
+            if((int)score==3){
+                viewHorder.main_overall_rating.setBackgroundResource(R.drawable.xcd_004);
             }
-            if(2==(int)score){
-                viewHorder.main_overall_rating1.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating2.setImageResource(R.drawable.addgas);
+            if((int)score==4){
+                viewHorder.main_overall_rating.setBackgroundResource(R.drawable.xcd_005);
             }
-            if(score>2&&score<3){
-                viewHorder.main_overall_rating1.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating2.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating3.setImageResource(R.drawable.addgas);
-
-            }
-            if(3==(int)score){
-                viewHorder.main_overall_rating1.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating2.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating3.setImageResource(R.drawable.addgas);
-
-            }
-            if(score>3&&score<4){
-                viewHorder.main_overall_rating1.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating2.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating3.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating4.setImageResource(R.drawable.addgas);
-
-            }
-            if(4==(int)score){
-                viewHorder.main_overall_rating1.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating2.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating3.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating4.setImageResource(R.drawable.addgas);
-            }
-            if(score>4&&score<5){
-                viewHorder.main_overall_rating1.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating2.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating3.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating4.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating5.setImageResource(R.drawable.addgas);
-            }
-            if(5==(int)score){
-                viewHorder.main_overall_rating1.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating2.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating3.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating4.setImageResource(R.drawable.addgas);
-                viewHorder.main_overall_rating5.setImageResource(R.drawable.addgas);
+            if((int)score==5){
+                viewHorder.main_overall_rating.setBackgroundResource(R.drawable.xcd_006);
             }
             viewHorder.line_start_there.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -319,14 +276,19 @@ public class CarMiantenance extends Activity{
                     Intent intent = new Intent();
                     intent.setClass(getApplicationContext(), MapMainActivity.class);
                     intent.putExtra("endaddress", bundle);
+
                     startActivity(intent);
                 }
             });
             viewHorder.line_phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new PopupWindows(getApplicationContext(), mianTananceList,position);
-
+                    if(mianList.get(position).getTelephone()==null){
+                        Toast.makeText(getApplicationContext(),"暂无本店电话信息",Toast.LENGTH_SHORT).show();
+                        return;
+                    }else {
+                        new PopupWindows(getApplicationContext(), mianTananceList, position);
+                    }
                 }
             });
             viewHorder.line_detail.setOnClickListener(new View.OnClickListener() {
@@ -334,6 +296,7 @@ public class CarMiantenance extends Activity{
                 public void onClick(View v) {
                     Intent intent=new Intent(getApplicationContext(),CarMaindetails.class);
                     intent.putExtra("uid",mianList.get(position).getUid());
+                    intent.putExtra("distance",viewHorder.maintenanceshop_distance.getText().toString().trim());
                     startActivity(intent);
                 }
             });
@@ -347,11 +310,8 @@ public class CarMiantenance extends Activity{
         private TextView maintenanceshop_distance;
         private TextView main_shop_address;
         private TextView shopscoer;
-        private ImageView main_overall_rating1;
-        private ImageView main_overall_rating2;
-        private ImageView main_overall_rating3;
-        private ImageView main_overall_rating4;
-        private ImageView main_overall_rating5;
+        private ImageView main_overall_rating;
+
         private LinearLayout line_start_there;
         private LinearLayout line_phone;
         private LinearLayout line_detail;

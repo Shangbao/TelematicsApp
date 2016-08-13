@@ -68,12 +68,13 @@
             android:layout_height="match_parent"
             >
             <ListView
+                android:background="#f2f2f2"
                 android:id="@+id/lv_show"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
 
                 <LinearLayout
-                    android:visibility="gone"
+                  android:visibility="gone"
                     android:id="@+id/all_selected_list"
                     android:layout_alignParentRight="true"
                     android:layout_above="@+id/delete_list"
@@ -90,15 +91,16 @@
 
                         />
                     <CheckBox
-
                         android:id="@+id/edit_lists_allcheckbox"
                         style="@style/edit_list"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_marginLeft="5dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_launcher" />
+                      />
 
                 </LinearLayout>
                <TextView
