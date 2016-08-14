@@ -17,6 +17,8 @@ import com.hangon.common.Constants;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by Administrator on 2016/3/31.
  */

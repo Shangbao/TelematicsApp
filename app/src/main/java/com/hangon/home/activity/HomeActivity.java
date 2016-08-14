@@ -3,18 +3,13 @@ package com.hangon.home.activity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.app.Notification;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -23,32 +18,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
-import com.hangon.common.VolleyInterface;
-import com.hangon.common.VolleyRequest;
 import com.hangon.fragment.car.CarFragment;
 import com.hangon.fragment.music.MusicFragment;
 import com.hangon.fragment.order.ZnwhFragment;
-import com.hangon.fragment.order.ZnwhService;
-import com.hangon.fragment.userinfo.UpdateUserActivity;
 import com.hangon.fragment.userinfo.UserFragment;
-import com.hangon.order.activity.PersonalInformationData;
 import com.hangon.push.PushService;
-import com.hangon.weather.Weather;
 import com.hangon.weather.WeatherService;
-import com.mob.mobapi.API;
-import com.mob.mobapi.APICallback;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
 import cn.sharesdk.framework.ShareSDK;
 
 /**
@@ -112,6 +94,9 @@ public class HomeActivity extends Activity implements View.OnClickListener,Music
         pushIntent = new Intent(this, PushService.class);
         bindService(weatherIntent, conn, Service.BIND_AUTO_CREATE);
         startService(pushIntent);
+        if(JPushInterface.isPushStopped(HomeActivity.this)){
+            JPushInterface.resumePush(HomeActivity.this);
+        }
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
         initView();
@@ -363,6 +348,7 @@ public class HomeActivity extends Activity implements View.OnClickListener,Music
         binder.stopWeather();
         unbindService(conn);
         stopService(pushIntent);
+        JPushInterface.stopPush(HomeActivity.this);
     }
 
     @Override

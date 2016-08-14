@@ -89,7 +89,6 @@ public class PushService extends Service {
         String url= Constants.SEND_JWD;
         lat = location.getLatitude();
         lon = location.getLongitude();
-        Log.d("唐作鹏", lat+"");
         Map<String, Object> map = new HashMap<>();
         map.put("userId",userId);
         map.put("userLat", lat+"");

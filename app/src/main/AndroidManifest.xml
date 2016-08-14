@@ -151,16 +151,14 @@
         <activity
             android:name="com.hangon.user.activity.WelcomeActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
- <activity android:name="com.hangon.maintenace.CarMiantenance"
-     >
-
- </activity>
-        <activity android:name="com.hangon.maintenace.CarMaindetails">
-
-        </activity>
+        <activity android:name="com.hangon.maintenace.CarMiantenance"></activity>
+        <activity android:name="com.hangon.maintenace.CarMaindetails"></activity>
         <activity
             android:name="com.hangon.user.activity.RegisterActivity"
             android:label="@string/app_name"
@@ -176,11 +174,8 @@
 
         <activity
             android:name="com.hangon.home.activity.HomeActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:launchMode="singleTask">
         </activity>
 
 
@@ -370,6 +365,27 @@
             android:exported="false" />
         <!-- Required Push SDK核心功能 -->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
+
+        <!--自定义接收器-->
+        <!-- User defined.  For test only  用户自定义的广播接收器-->
+        <receiver
+            android:name="com.hangon.push.PushReceiver"
+            android:exported="false"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!--Required  用户注册SDK的intent-->
+                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!--Required  用户接收SDK消息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!--Required  用户接收SDK通知栏信息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!--Required  用户打开自定义通知栏的intent-->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" /> <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.example.fd.ourapplication" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name="com.hangon.push.PushActivity"></activity>
+
 
         <!-- Required. Enable it you can get statistics data with channel -->
         <meta-data
