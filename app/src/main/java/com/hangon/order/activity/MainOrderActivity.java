@@ -143,7 +143,12 @@ public class MainOrderActivity extends FragmentActivity {
         topbarRight=(ImageView)findViewById(R.id.topbar_right);
         topbarTittle=(TextView)findViewById(R.id.topbar_title);
         topbarTittle.setText("我的订单");
-        topbarLeft.setVisibility(View.GONE);
+        topbarLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         topbarRight.setImageResource(R.drawable.lj_gr_001);
 
         topbarRight.setOnClickListener(new View.OnClickListener() {

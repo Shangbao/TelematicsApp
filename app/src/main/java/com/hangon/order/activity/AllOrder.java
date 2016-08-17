@@ -91,7 +91,7 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
 
     public class AllOrderadapter extends BaseAdapter {
         List<OrderData> allOrderList;
-
+        private TextView qrSweepText;
         AllOrderadapter(List<OrderData> list) {
             this.allOrderList = list;
         }
@@ -113,6 +113,7 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+
             if (convertView == null) {
                 vh = new ViewHolder();
                 convertView = LayoutInflater.from(context).inflate(R.layout.orderlist, null);
@@ -121,10 +122,12 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                 vh.list_gaslitre = (TextView) convertView.findViewById(R.id.list_gaslitre);
                 vh.list_gastype = (TextView) convertView.findViewById(R.id.list_gastype);
                 vh.list_ordertime = (TextView) convertView.findViewById(R.id.list_ordertime);
-               // vh.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_gasorder_status);
+                // vh.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_gasorder_status);
                 vh.gaslist_cancel_order = (RelativeLayout) convertView.findViewById(R.id.gaslist_cancel_order);
                 vh.gaslist_payment_order = (RelativeLayout) convertView.findViewById(R.id.gaslist_payment_order);
                 vh.qrSweep = (RelativeLayout) convertView.findViewById(R.id.list_sweep_code);
+
+                vh.qrSweepText=(TextView)vh.qrSweep.findViewById(R.id.list_sweep_code_text);
                 convertView.setTag(vh);
             } else {
                 vh = (ViewHolder) convertView.getTag();
@@ -139,22 +142,27 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
             vh.list_ordertime.setText(allOrderList.get(position).getStrTime());
             vh.list_gastype.setText(allOrderList.get(position).getGasType());
             if (allOrderList.get(position).getOrderState() == 2) {
-               // vh.list_gasorder_status.setText("已加油");
-                vh.gaslist_cancel_order.setVisibility(View.VISIBLE);
+                // vh.list_gasorder_status.setText("已加油");
+                Toast.makeText(getActivity(),"aaaaa",Toast.LENGTH_SHORT).show();
+                vh.gaslist_cancel_order.setVisibility(View.GONE);
                 vh.gaslist_payment_order.setVisibility(View.GONE);
-                vh.qrSweep.setVisibility(View.GONE);
+
+                vh.qrSweep.setVisibility(View.VISIBLE);
+                vh.qrSweepText.setText("删除订单");
+
             } else if (allOrderList.get(position).getOrderState() == 1) {
-               // vh.list_gasorder_status.setText("已支付未加油");
+                // vh.list_gasorder_status.setText("已支付未加油");
                 vh.gaslist_cancel_order.setVisibility(View.GONE);
                 vh.gaslist_payment_order.setVisibility(View.GONE);
                 vh.qrSweep.setVisibility(View.VISIBLE);
+                vh.qrSweepText.setText("扫码加油");
             } else if (allOrderList.get(position).getOrderState() == 0) {
-              //  vh.list_gasorder_status.setText("未支付");
+                //  vh.list_gasorder_status.setText("未支付");
                 vh.gaslist_cancel_order.setVisibility(View.VISIBLE);
                 vh.gaslist_payment_order.setVisibility(View.VISIBLE);
                 vh.qrSweep.setVisibility(View.VISIBLE);
+                vh.qrSweepText.setText("扫码加油");
             }
-
             notifyDataSetChanged();
             return convertView;
         }
@@ -170,12 +178,11 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.gaslist_cancel_order:
-
                         View cancelView=LayoutInflater.from(getActivity()).inflate(R.layout.order_alert,null);
                         ImageView cancelYes=(ImageView)cancelView.findViewById(R.id.calcel_order_yes);
                         ImageView cancelNo=(ImageView)cancelView.findViewById(R.id.calcel_order_no);
                         TextView alertContent=(TextView)cancelView.findViewById(R.id.alert_content);
-                         dialog=new Dialog(getActivity());
+                        dialog=new Dialog(getActivity());
                         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
                         builder.setView(cancelView);
                         dialog=builder.create();
@@ -192,7 +199,6 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                                         allOrderList.remove(position);
                                         getData();
                                     }
-
                                     @Override
                                     public void onMyError(VolleyError error) {
                                         Toast.makeText(context, "网络错误", Toast.LENGTH_LONG).show();
@@ -200,15 +206,14 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                                 });
                             }
                         });
-                       cancelNo.setOnClickListener(new View.OnClickListener() {
-                           @Override
-                           public void onClick(View v) {
-                               dialog.dismiss();
-                           }
-                       });
+                        cancelNo.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
                         break;
                     case R.id.gaslist_payment_order:
-
                         if (allOrderList.get(position).getOrderState() == 0) {
                             Intent intent = new Intent(getActivity(), PayDemoActivity.class);
                             Bundle bundle = new Bundle();
@@ -216,6 +221,37 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                             intent.putExtras(bundle);
                             startActivity(intent);
                         } else if (allOrderList.get(position).getOrderState() == 2) {
+
+                        }
+                        else if(allOrderList.get(position).getOrderState() == 1){
+                            View view = LayoutInflater.from(getContext()).inflate(R.layout.qrcode, null);
+                            TextView cusname = (TextView) view.findViewById(R.id.qr_cusname);
+                            TextView gastype = (TextView) view.findViewById(R.id.qr_gastype);
+                            TextView gasSumPrice = (TextView) view.findViewById(R.id.qr_gassumprice);
+                            TextView gasState = (TextView) view.findViewById(R.id.qr_state);
+                            String tradState = "";
+                            if (allOrderList.get(position).getOrderState() == 2) {
+                                tradState = "已加油";
+                            } else if (allOrderList.get(position).getOrderState() == 1) {
+                                tradState = "已支付未加油";
+                            } else if (allOrderList.get(position).getOrderState() == 0) {
+                                tradState = "未支付";
+                            }
+                            gasState.setText(tradState);
+                            String URL = "htttp://" + Constants.HOST_IP + ":8080/wind/UserLogin?orderId=" + allOrderList.get(position).getOrderId() + "&orderState=" + allOrderList.get(position).getOrderState();
+                            Bitmap QRcode = EncodingUtils.createQRCode(URL, 500, 500, null);
+                            cusname.setText(allOrderList.get(position).getCusName());
+                            gastype.setText(allOrderList.get(position).getGasType());
+                            gasSumPrice.setText(allOrderList.get(position).getGasSumPrice());
+                            ImageView QR = (ImageView) view.findViewById(R.id.qrcode_img);
+                            QR.setImageBitmap(QRcode);
+                            AlertDialog.Builder builder2 = new AlertDialog.Builder(getActivity());
+                            builder2.setView(view);
+                            builder2.create().show();
+                        }
+                        break;
+                    case R.id.list_sweep_code:
+                        if(allOrderList.get(position).getOrderState() == 2){
                             View cancelView1=LayoutInflater.from(getActivity()).inflate(R.layout.order_alert,null);
                             ImageView cancelYes1=(ImageView)cancelView1.findViewById(R.id.calcel_order_yes);
                             ImageView cancelNo1=(ImageView)cancelView1.findViewById(R.id.calcel_order_no);
@@ -253,7 +289,7 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                                 }
                             });
                         }
-                        else if(allOrderList.get(position).getOrderState() == 1){
+                        else{
                             View view = LayoutInflater.from(getContext()).inflate(R.layout.qrcode, null);
                             TextView cusname = (TextView) view.findViewById(R.id.qr_cusname);
                             TextView gastype = (TextView) view.findViewById(R.id.qr_gastype);
@@ -279,33 +315,7 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                             builder2.setView(view);
                             builder2.create().show();
                         }
-                        break;
-                    case R.id.list_sweep_code:
-                        View view = LayoutInflater.from(getContext()).inflate(R.layout.qrcode, null);
-                        TextView cusname = (TextView) view.findViewById(R.id.qr_cusname);
-                        TextView gastype = (TextView) view.findViewById(R.id.qr_gastype);
-                        TextView gasSumPrice = (TextView) view.findViewById(R.id.qr_gassumprice);
-                        TextView gasState = (TextView) view.findViewById(R.id.qr_state);
-                        String tradState = "";
-                        if (allOrderList.get(position).getOrderState() == 2) {
-                            tradState = "已加油";
-                        } else if (allOrderList.get(position).getOrderState() == 1) {
-                            tradState = "已支付未加油";
-                        } else if (allOrderList.get(position).getOrderState() == 0) {
-                            tradState = "未支付";
-                        }
-                        gasState.setText(tradState);
 
-                        String URL = "htttp://" + Constants.HOST_IP + ":8080/wind/UserLogin?orderId=" + allOrderList.get(position).getOrderId() + "&orderState=" + allOrderList.get(position).getOrderState();
-                        Bitmap QRcode = EncodingUtils.createQRCode(URL, 500, 500, null);
-                        cusname.setText(allOrderList.get(position).getCusName());
-                        gastype.setText(allOrderList.get(position).getGasType());
-                        gasSumPrice.setText(allOrderList.get(position).getGasSumPrice());
-                        ImageView QR = (ImageView) view.findViewById(R.id.qrcode_img);
-                        QR.setImageBitmap(QRcode);
-                        AlertDialog.Builder builder2 = new AlertDialog.Builder(getActivity());
-                        builder2.setView(view);
-                        builder2.create().show();
                         break;
 
                 }
@@ -350,6 +360,7 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
 
         //扫码加油
         RelativeLayout qrSweep;
+        TextView qrSweepText;
     }
 
 }

@@ -79,7 +79,7 @@ public class EditOrder extends Activity {
         topbarRight=(ImageView)findViewById(R.id.topbar_right);
         topbarTittle=(TextView)findViewById(R.id.topbar_title);
         topbarTittle.setText("编辑订单");
-       topbarLeft.setVisibility(View.GONE);
+        topbarLeft.setVisibility(View.GONE);
         topbarRight.setImageResource(R.drawable.lj_bj_001 );
         topbarRight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +87,7 @@ public class EditOrder extends Activity {
                 Intent intent=new Intent();
                 intent.setClass(EditOrder.this,MainOrderActivity.class);
                 startActivity(intent);
-               finish();
+                finish();
             }
         });
         deleteEdit = (TextView) findViewById(R.id.delete_order_edit);
@@ -127,7 +127,7 @@ public class EditOrder extends Activity {
             @Override
             public void onClick(View v) {
 
-               final  ArrayList list = new ArrayList<Bean>();
+                final  ArrayList list = new ArrayList<Bean>();
                 if(arrayList==null||arrayList.size()==0){
                     Toast.makeText(EditOrder.this,"请选择要删除的订单",Toast.LENGTH_SHORT).show();
                     return;
@@ -163,21 +163,24 @@ public class EditOrder extends Activity {
                         }
                     });
 
-                Iterator<HashMap<String, String>> iterator = arrayList.iterator();
-                while (iterator.hasNext()) {
-                    int i = 0;
-                    HashMap<String, String> temp = iterator.next();
-                    if (temp.get("flag").equals("true")) {
-                        iterator.remove();
+                    Iterator<HashMap<String, String>> iterator = arrayList.iterator();
+                    while (iterator.hasNext()) {
+                        int i = 0;
+                        HashMap<String, String> temp = iterator.next();
+                        if (temp.get("flag").equals("true")) {
+                            iterator.remove();
+                        }
                     }
-                }
 
-            }}
+                }}
         });
         editOrderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //取得ViewHorder对象，
+                if(allOrderSelected.isChecked()){
+                    allOrderSelected.setChecked(false);
+                }
                 ViewHolder holder = (ViewHolder) view.getTag();
 
                 holder.item_cb.toggle();
@@ -195,7 +198,7 @@ public class EditOrder extends Activity {
 
     //装载数据
     public void getData() {
-       String userId=Constants.USER_ID+"";
+        String userId=Constants.USER_ID+"";
         String url = Constants.GET_ORDER_INFOS_URL+"?userId="+userId;
         VolleyRequest.RequestGet(getApplicationContext(), url, "getData", new VolleyInterface(getApplicationContext(), VolleyInterface.mListener, VolleyInterface.mErrorListener) {
             @Override
@@ -332,7 +335,7 @@ public class EditOrder extends Activity {
         /**
          * 支付状态
          */
-      //  TextView list_gasorder_status;
+        //  TextView list_gasorder_status;
         /**
          * 订单时间
          */
@@ -340,15 +343,15 @@ public class EditOrder extends Activity {
         /**
          * 加油类型
          */
-       TextView list_gastype;
+        TextView list_gastype;
         /**
          * 加油升数
          */
-       // TextView list_gaslitre;
+        // TextView list_gaslitre;
         /**
          * 总金额
          */
-       // TextView list_gassumprice;
+        // TextView list_gassumprice;
         /**
          * 复选框
          */

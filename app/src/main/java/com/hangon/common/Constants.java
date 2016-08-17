@@ -50,16 +50,16 @@ public class Constants {
     //说说图片地址
     public static final String LOAD_SAYING_IMG_URL="http://" + HOST_IP + HOST_PORT+"/wind/img/saying_img";
 
-    public static final String SHARE_APP_URL="http://" + HOST_IP + ":8080/wind/img/background/ccut_znlsj.apk";
+    public static final String SHARE_APP_URL="http://" + HOST_IP + HOST_PORT+"/wind/img/background/ccut_znlsj.apk";
 
     //关于车友圈说说的地址
-    public static final String GET_QZ_SAYINGS ="http://" + HOST_IP + ":8080/wind/Saying/GetQzSayings";
-    public static final String GET_CZW_SAYINGS ="http://" + HOST_IP + ":8080/wind/Saying/GetCzwSayings";
-    public static final String ADD_SAYING ="http://" + HOST_IP + ":8080/wind/Saying/AddSaying";
-    public static final String DELETE_SAYING ="http://" + HOST_IP + ":8080/wind/Saying/DeleteSaying";
+    public static final String GET_QZ_SAYINGS ="http://" + HOST_IP + HOST_PORT+"/wind/Saying/GetQzSayings";
+    public static final String GET_CZW_SAYINGS ="http://" + HOST_IP + HOST_PORT+"/wind/Saying/GetCzwSayings";
+    public static final String ADD_SAYING ="http://" + HOST_IP + HOST_PORT+"/wind/Saying/AddSaying";
+    public static final String DELETE_SAYING ="http://" + HOST_IP + HOST_PORT+"/wind/Saying/DeleteSaying";
 
     //定时发送用户经纬度
-    public static final String SEND_JWD ="http://" + HOST_IP + ":8080/wind/location/saveUserLocation";
+    public static final String SEND_JWD ="http://" + HOST_IP + HOST_PORT+"/wind/location/saveUserLocation";
 
     //音乐播放状态
     public static final int IDLE = 0;// 空闲状态

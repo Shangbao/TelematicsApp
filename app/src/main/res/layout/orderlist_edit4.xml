@@ -20,6 +20,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="center">
         <CheckBox
+            android:focusable="false"
+            android:enabled="false"
+            android:clickable="false"
             style="@style/CustomCheckboxTheme"
             android:layout_gravity="center"
             android:gravity="center"

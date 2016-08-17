@@ -25,6 +25,9 @@
             android:layout_centerVertical="true"/>
 
         <CheckBox
+            android:focusable="false"
+            android:clickable="false"
+            android:enabled="false"
             android:visibility="gone"
             android:id="@+id/edit_lists_checkbox"
             android:layout_marginRight="10dp"

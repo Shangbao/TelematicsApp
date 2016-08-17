@@ -30,7 +30,7 @@ public class TestPicActivity extends Activity {
 	//topbar
 	private ImageView topLeft;
 	private TextView topTittle;
-	private ImageButton cancel_image_bucket;
+	private ImageView cancel_image_bucket;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +66,7 @@ public class TestPicActivity extends Activity {
 		topTittle=(TextView)findViewById(R.id.topbar_title);
 		topTittle.setText("相册");
 		topLeft.setVisibility(View.GONE);
-		cancel_image_bucket=(ImageButton)findViewById(R.id.topbar_right);
+		cancel_image_bucket=(ImageView)findViewById(R.id.topbar_right);
 		cancel_image_bucket.setBackgroundResource(R.drawable.grzx_041);
 		cancel_image_bucket.setOnClickListener(new OnClickListener() {
 			@Override

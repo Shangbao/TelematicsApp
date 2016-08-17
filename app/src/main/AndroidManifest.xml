@@ -300,6 +300,7 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
+
         <service android:name="com.hangon.fragment.order.ZnwhService"></service>
         <service android:name="com.hangon.fragment.music.MusicService"></service>
         <service android:name="com.hangon.weather.WeatherService"></service>

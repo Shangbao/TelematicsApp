@@ -78,6 +78,7 @@ public class CkRecode extends Activity {
 				adapters = new MyAdapters(listPictures);
 				listViews.setAdapter(adapters);
 				DataChange();
+
 			}
 		}
 	};
@@ -134,6 +135,7 @@ public class CkRecode extends Activity {
 	private void initData(List<CarRecode> carRecodes){
 		mapList=new ArrayList<HashMap<String,Object>>();
 		if(carRecodes==null||carRecodes.size()==0){
+			editVedio.setVisibility(View.GONE);
 			return;
 		}
 		else{
@@ -147,6 +149,26 @@ public class CkRecode extends Activity {
 		}
 	}
 	private void init() {
+		listViews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Toast.makeText(getApplicationContext(),"cccc",Toast.LENGTH_SHORT).show();
+				//取得ViewHorder对象，
+				ViewHolder holder = (ViewHolder) view.getTag();
+				holder.deleteRecode.toggle();
+				if(editListAllCheckbox.isChecked()){
+					editListAllCheckbox.setChecked(false);
+				}
+				if (holder.deleteRecode.isChecked() == true) {
+					mapList.get(position).put("flag", "true");
+					checkNum++;
+				} else {
+					mapList.get(position).put("flag", "false");
+					checkNum--;
+				}
+				//用TextView 显示
+			}
+		});
 		//全选
 		editListAllCheckbox.setOnClickListener(new OnClickListener() {
 			@Override
@@ -158,16 +180,16 @@ public class CkRecode extends Activity {
 					for(int i=0;i<mapList.size();i++){
 						mapList.get(i).put("flag", "true");
 					}
-					checkNum=mapList.size();
+					//checkNum=mapList.size();
 				}
 				if(!editListAllCheckbox.isChecked()){
 					for(int i=0;i<mapList.size();i++){
 						if(mapList.get(i).get("flag").equals("true")){
 							mapList.get(i).put("flag", "flase");
-							checkNum--;
+							//checkNum--;
 						}
 					}
-					checkNum=mapList.size();
+					//checkNum=mapList.size();
 					judge=1;
 				}
 				judge=0;
@@ -189,13 +211,13 @@ public class CkRecode extends Activity {
 						}
 					}
 
-						editListAllCheckbox.setVisibility(View.GONE);
-						editVedio.setText("编辑");
-						loadVaule();
-						all_select_list.setVisibility(View.GONE);
-						adapters.notifyDataSetChanged();
-						adapter.notifyDataSetChanged();
-					    deleteList.setVisibility(View.GONE);
+					editListAllCheckbox.setVisibility(View.GONE);
+					editVedio.setText("编辑");
+					loadVaule();
+					all_select_list.setVisibility(View.GONE);
+					adapters.notifyDataSetChanged();
+					adapter.notifyDataSetChanged();
+					deleteList.setVisibility(View.GONE);
 
 				}
 			}
@@ -247,21 +269,7 @@ public class CkRecode extends Activity {
 
 				notifyDataSetChanged();
 			}
-			holder.deleteRecode.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if(listPictures.get(position).get("flag").equals("true")){
-						listPictures.get(position).put("flag", "false");
-						holder.deleteRecode.setChecked(false);
-						notifyDataSetChanged();
-					}
-					if(listPictures.get(position).get("flag").equals("false")){
-						holder.deleteRecode.setChecked(true);
-						listPictures.get(position).put("flag", "true");
-						notifyDataSetChanged();
-					}
-				}
-			});
+
 			return view;
 
 		}

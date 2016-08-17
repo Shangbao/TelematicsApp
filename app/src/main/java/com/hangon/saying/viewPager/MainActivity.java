@@ -161,6 +161,7 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
      * 初始化头标
      */
     private void InitTextView() {
+        dialog = new Dialog(MainActivity.this);
         container = (LinearLayout) findViewById(R.id.zhoubian);
         menuData = new ArrayList<String>();
         menuData.add("写心情");
@@ -383,11 +384,12 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
             // 一般在这三个方向的重力加速度达到40就达到了摇晃手机的状态。
             int medumValue = 19;// 三星 i9250怎么晃都不会超过20，没办法，只设置19了
             if (Math.abs(x) > medumValue || Math.abs(y) > medumValue || Math.abs(z) > medumValue) {
+                if(!dialog.isShowing()){
                 vibrator.vibrate(200);
                 Message msg = new Message();
                 msg.what = SENSOR_SHAKE;
                 handler.sendMessage(msg);
-            }
+            }}
         }
 
         @Override
@@ -403,7 +405,6 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
             super.handleMessage(msg);
             switch (msg.what) {
                 case SENSOR_SHAKE:
-                    dialog = new Dialog(MainActivity.this);
                     if (!dialog.isShowing()) {
                         builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setTitle("紧急求救");

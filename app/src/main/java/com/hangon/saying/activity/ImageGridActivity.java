@@ -19,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -29,9 +30,9 @@ public class ImageGridActivity extends Activity {
 	// ArrayList<Entity> dataList;
 	List<ImageItem> dataList;
 	//topbar
-	private ImageButton topLeft;
+	private ImageView topLeft;
 	private TextView topTittle;
-	private ImageButton cancel_image_grid;
+	private ImageView cancel_image_grid;
 	GridView gridView;
 	ImageGridAdapter adapter;
 	AlbumHelper helper;
@@ -53,12 +54,9 @@ public class ImageGridActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.carlife_image_grid);
-
 		helper = AlbumHelper.getHelper();
 		helper.init(getApplicationContext());
-
 		dataList = (List<ImageItem>) getIntent().getSerializableExtra(
 				EXTRA_IMAGE_LIST);
 		initView();
@@ -88,11 +86,9 @@ public class ImageGridActivity extends Activity {
 
 		});
 	}
-
-
 	private void initView() {
-		cancel_image_grid=(ImageButton)findViewById(R.id.topbar_right);
-		topLeft=(ImageButton)findViewById(R.id.topbar_left);
+		cancel_image_grid=(ImageView)findViewById(R.id.topbar_right);
+		topLeft=(ImageView)findViewById(R.id.topbar_left);
 		topTittle=(TextView)findViewById(R.id.topbar_title);
 		topLeft.setVisibility(View.GONE);
 		topTittle.setText("相册");
