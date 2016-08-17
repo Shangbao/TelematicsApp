@@ -12,11 +12,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:background="#ffffff"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
 
         <ImageView
             android:id="@+id/img11"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="70dp"
             android:layout_toLeftOf="@+id/uNickname"
             android:text="昵     称"
             android:textColor="#a3a3a3"
@@ -48,7 +48,7 @@
             android:singleLine="true"
             android:maxLength="10"
             android:textColor="#A3A3A3"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <ProgressBar
             android:layout_width="match_parent"
@@ -60,10 +60,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="50dp"
         android:background="#ffffff"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp" >
 
         <ImageView
             android:id="@+id/img21"
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="70dp"
             android:layout_toLeftOf="@+id/uSex"
             android:text="性     别"
             android:textColor="#a3a3a3"
@@ -95,7 +95,7 @@
             android:maxLength="1"
             android:singleLine="true"
             android:textColor="#A3A3A3"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <ProgressBar
             android:layout_width="match_parent"
@@ -107,10 +107,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="50dp"
         android:background="#ffffff"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
 
         <ImageView
             android:id="@+id/img31"
@@ -125,8 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:maxLength="3"
+            android:layout_marginRight="70dp"
             android:layout_toLeftOf="@+id/uAge"
             android:text="年     龄"
             android:textColor="#a3a3a3"
@@ -143,7 +142,7 @@
             android:maxLength="3"
             android:singleLine="true"
             android:textColor="#A3A3A3"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <ProgressBar
             android:layout_width="match_parent"
@@ -155,10 +154,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="50dp"
         android:background="#ffffff"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
 
         <ImageView
             android:id="@+id/img41"
@@ -173,7 +172,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="60dp"
             android:layout_toLeftOf="@+id/uDriverNum"
             android:text="驾驶证号"
             android:textColor="#a3a3a3"
@@ -190,7 +189,7 @@
             android:maxLength="18"
             android:singleLine="true"
             android:textColor="#A3A3A3"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <ProgressBar
             android:layout_width="match_parent"

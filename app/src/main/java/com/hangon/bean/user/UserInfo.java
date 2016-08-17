@@ -13,6 +13,7 @@ public class UserInfo implements Serializable {
     private String userIconContent;//图片的二进制码
     private boolean isSave;//是否保存
     private String userIconUrl;//用户头像对应的地址
+    private int loginFlag;//0代表没有被登陆过  1代表已经被登陆
 
     public int getUserId() {
         return userId;
@@ -92,5 +93,13 @@ public class UserInfo implements Serializable {
 
     public void setIsSave(boolean isSave) {
         this.isSave = isSave;
+    }
+
+    public int getLoginFlag() {
+        return loginFlag;
+    }
+
+    public void setLoginFlag(int loginFlag) {
+        this.loginFlag = loginFlag;
     }
 }

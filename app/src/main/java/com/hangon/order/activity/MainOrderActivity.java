@@ -38,8 +38,8 @@ import java.util.TimerTask;
 
 public class MainOrderActivity extends FragmentActivity {
     //订单管理标题栏
-    private ImageButton topbarLeft;
-    private ImageButton topbarRight;
+    private ImageView topbarLeft;
+    private ImageView topbarRight;
     private TextView topbarTittle;
 
     //未支付订单
@@ -139,12 +139,12 @@ public class MainOrderActivity extends FragmentActivity {
      */
     private void InitTextView() {
         //topbarID
-        topbarLeft=(ImageButton)findViewById(R.id.topbar_left);
-        topbarRight=(ImageButton)findViewById(R.id.topbar_right);
+        topbarLeft=(ImageView)findViewById(R.id.topbar_left);
+        topbarRight=(ImageView)findViewById(R.id.topbar_right);
         topbarTittle=(TextView)findViewById(R.id.topbar_title);
         topbarTittle.setText("我的订单");
         topbarLeft.setVisibility(View.GONE);
-        topbarRight.setBackgroundResource(R.drawable.grzx_03);
+        topbarRight.setImageResource(R.drawable.lj_gr_001);
 
         topbarRight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -368,8 +368,8 @@ public class MainOrderActivity extends FragmentActivity {
     class wait extends TimerTask {
         public void run() {
             Message msg = new Message();
-            msg.what = 123;
-            mHandler.sendMessage(msg);
+            msg.what = 123;mHandler.sendMessage(msg);
+
         }
     }
 

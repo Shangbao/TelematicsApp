@@ -82,7 +82,7 @@ public class AddCarMessageActivity extends Activity {
     private ArrayAdapter<String> carNameAdapter;
     private ArrayAdapter<String> carTypeAdapter;
 
-    ImageButton topbarLeft, topbarRight;
+    ImageView topbarLeft, topbarRight;
     TextView topbarTitle;
 
     @Override
@@ -141,8 +141,8 @@ public class AddCarMessageActivity extends Activity {
         trans_spinner = (Spinner) findViewById(R.id.trans_is_good);
         light_spinner = (Spinner) findViewById(R.id.light_is_good);
 
-        topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
-        topbarRight = (ImageButton) findViewById(R.id.topbar_right);
+        topbarLeft = (ImageView) findViewById(R.id.topbar_left);
+        topbarRight = (ImageView) findViewById(R.id.topbar_right);
         topbarTitle = (TextView) findViewById(R.id.topbar_title);
         topbarTitle.setText("添加车辆信息");
 

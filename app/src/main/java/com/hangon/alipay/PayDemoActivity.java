@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,8 +47,8 @@ public class PayDemoActivity extends FragmentActivity {
     Dialog dialog;
     //topbar
     //topbar
-    private ImageButton topbarLeft;
-    private ImageButton topbarRight;
+    private ImageView topbarLeft;
+    private ImageView topbarRight;
     private TextView topbarTittle;
     private static final int SDK_PAY_FLAG = 1;
 
@@ -124,8 +125,8 @@ public class PayDemoActivity extends FragmentActivity {
      */
     private void init() {
         //topbarID
-        topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
-        topbarRight = (ImageButton) findViewById(R.id.topbar_right);
+        topbarLeft = (ImageView) findViewById(R.id.topbar_left);
+        topbarRight = (ImageView) findViewById(R.id.topbar_right);
         topbarTittle = (TextView) findViewById(R.id.topbar_title);
         topbarTittle.setText("订单支付");
         topbarRight.setVisibility(View.GONE);

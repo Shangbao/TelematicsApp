@@ -15,6 +15,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +35,7 @@ import com.hangon.bean.user.UserInfo;
 import com.hangon.common.Constants;
 import com.hangon.common.DialogTool;
 import com.hangon.common.ImageUtil;
+import com.hangon.common.JsonUtil;
 import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
@@ -77,7 +79,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     Button ckBtn;
     ZnwhService.MyBinder znwhBinder;
 
-    ImageButton topbarLeft, topbarRight;
+    ImageView topbarLeft, topbarRight;
     TextView topbarTitle;
 
     Intent znwhIntent;
@@ -177,10 +179,10 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         btnReturnLogin.setOnClickListener(this);
         btnShare.setOnClickListener(this);
         toSetHeadIcon.setOnClickListener(this);
-        topbarLeft = (ImageButton) userView.findViewById(R.id.topbar_left);
-        topbarRight = (ImageButton) userView.findViewById(R.id.topbar_right);
+        topbarLeft = (ImageView) userView.findViewById(R.id.topbar_left);
+        topbarRight = (ImageView) userView.findViewById(R.id.topbar_right);
         topbarTitle = (TextView) userView.findViewById(R.id.topbar_title);
-        topbarRight.setBackgroundResource(R.drawable.grzx_03);
+        topbarRight.setImageResource(R.drawable.lj_gr_001);
         topbarLeft.setVisibility(View.GONE);
         topbarRight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -336,8 +338,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 }else{
                     Toast.makeText(getActivity(),"没有行车记录",Toast.LENGTH_SHORT).show();
                 }
-               ;
-
                 break;
         }
     }
@@ -345,11 +345,45 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     //清除存在内存卡里面的登录信息
     private void clearCookies() {
         UserUtil.instance(getActivity());
+        changeLoginFlag(0, UserUtil.getInstance().getIntegerConfig("userId"));
         UserUtil.getInstance().saveBooleanConfig("isSave", false);
         UserUtil.getInstance().saveStringConfig("userPass", "");
         Intent intent = new Intent();
         intent.setClass(getActivity(), LoginActivity.class);
         startActivity(intent);
+    }
+
+
+
+
+    /**
+     * 把登陆状态变为登陆状态
+     */
+    private void changeLoginFlag(int loginFlag,int userId){
+        String url=Constants.CHANGE_LOGINFLAG_URL;
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("loginFlag",loginFlag+"");
+        map.put("userId",userId+"");
+        VolleyRequest.RequestPost(getActivity(), url, "changeLoginFlag1", map, new VolleyInterface(getActivity(),VolleyInterface.mListener,VolleyInterface.mErrorListener) {
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("result",result);
+                Map map=new HashMap();
+                map=JsonUtil.jsonToMap(result);
+                boolean success= (boolean) map.get("success");
+                String msg= (String) map.get("msg");
+                if(success){
+                    Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+
+            }
+        });
     }
 
     //禁止listview滑动

@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.Bundle;
@@ -61,12 +63,13 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     ImageView playModelImg;//播放模式的图片
     TextView playModelTxt;//播放模式的文字
     MusicAdapter musicAdapter;//音乐列表适配器
+    ImageView singerPicture;
 
    // Mp3Adapter mp3Adapter;
     TextView selectedSong, selectedSinger;
     MusicService.MyBinder myBinder;
 
-    ImageButton topbarLeft, topbarRight;
+    ImageView topbarLeft, topbarRight;
     TextView topbarTitle;
     TextView currTime, totalTime;
 
@@ -120,6 +123,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         btnPrevious = (ImageButton) musicView.findViewById(R.id.btnPrevious);
         btnPause = (ImageButton) musicView.findViewById(R.id.btnPause);
         btnNext = (ImageButton) musicView.findViewById(R.id.btnNext);
+        singerPicture= (ImageView) musicView.findViewById(R.id.img2);
+
 
         playModelImg = (ImageView) musicView.findViewById(R.id.playModelImg);
         playModelTxt = (TextView) musicView.findViewById(R.id.playModelTxt);
@@ -136,8 +141,9 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         musicSeekbar.setOnSeekBarChangeListener(this);
         songList.setOnItemClickListener(this);
 
-        topbarLeft = (ImageButton) musicView.findViewById(R.id.topbar_left);
-        topbarRight = (ImageButton) musicView.findViewById(R.id.topbar_right);
+        topbarLeft = (ImageView) musicView.findViewById(R.id.topbar_left);
+
+        topbarRight = (ImageView) musicView.findViewById(R.id.topbar_right);
         topbarTitle = (TextView) musicView.findViewById(R.id.topbar_title);
         topbarRight.setVisibility(View.GONE);
         topbarTitle.setText("我的音乐");
@@ -179,30 +185,30 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         switch (v.getId()) {
             case R.id.btnPlayModel:
                 if (playMode == Constants.SEQUENCE_MODEL) {
-                    playModelImg.setBackgroundResource(R.drawable.wdyy_10);
+                    playModelImg.setImageResource(R.drawable.lj_yy_002);
                     playModelTxt.setText("随机播放");
                     playMode = Constants.RANDOM_MODEL;
                 } else if (playMode == Constants.RANDOM_MODEL) {
-                    playModelImg.setBackgroundResource(R.drawable.wdyy_07);
+                    playModelImg.setImageResource(R.drawable.lj_yy_003);
                     playModelTxt.setText("循环播放");
                     playMode = Constants.CIRCULATION_MODEL;
                     playMode = Constants.CIRCULATION_MODEL;
                 } else if (playMode == Constants.CIRCULATION_MODEL) {
                     playModelTxt.setText("顺序播放");
-                    playModelImg.setBackgroundResource(R.drawable.wdyy_12);
+                    playModelImg.setImageResource(R.drawable.lj_yy_001);
                     playMode = Constants.SEQUENCE_MODEL;
                 }
                 myBinder.setPlayMode(playMode);
                 break;
             case R.id.btnPrevious:
                 myBinder.toPrevious();
-                btnPause.setBackgroundResource(R.drawable.wdyy_28);
+                btnPause.setBackgroundResource(R.drawable.lj_yy_005);
                 isPlaying = false;
                 break;
             case R.id.btnPause:
                 if (isPlaying == true) {
                     myBinder.startPlay(currIndex);
-                    btnPause.setBackgroundResource(R.drawable.wdyy_28);
+                    btnPause.setBackgroundResource(R.drawable.lj_yy_005);
                     isPlaying = false;
                 } else if (isPlaying == false) {
                     btnPause.setBackgroundResource(R.drawable.wdyy_34);
@@ -211,7 +217,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
                 }
                 break;
             case R.id.btnNext:
-                btnPause.setBackgroundResource(R.drawable.wdyy_28);
+                btnPause.setBackgroundResource(R.drawable.lj_yy_005);
                 isPlaying = false;
                 myBinder.toNext();
                 break;
@@ -224,7 +230,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // currIndex = (int)id;
         myBinder.toStart((int) id);
-        btnPause.setBackgroundResource(R.drawable.wdyy_28);
+        btnPause.setBackgroundResource(R.drawable.lj_yy_005);
         isPlaying = false;
     }
 
@@ -302,8 +308,12 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
             } else if (MusicService.ACTION_UPDATE_CURRENT_MUSIC.equals(action)) {
                 //Retrive the current music and get the title to show on top of the screen.
                 currIndex = intent.getIntExtra(MusicService.ACTION_UPDATE_CURRENT_MUSIC, 0);
-                selectedSong.setText(list.get(currIndex).getName());
+                selectedSong.setText(list.get(currIndex).getName().replace(".mp3",""));
                 selectedSinger.setText(list.get(currIndex).getSinger());
+                Bitmap singerPic=list.get(currIndex).getPicture();
+                if(null!=singerPic){
+                    singerPicture.setImageBitmap(list.get(currIndex).getPicture());
+                }
                 totalTime.setText(MusicUtil.toTime((int) list.get(currIndex).getTime()));
                 musicAdapter.setCurrIndex(currIndex);
                 skipSelected(currIndex);

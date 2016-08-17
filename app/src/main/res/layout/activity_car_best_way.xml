@@ -9,13 +9,15 @@
 
  <include
      android:id="@+id/topbar"
-     layout="@layout/topbar"
-     />
+     layout="@layout/topbar" />
 
-    />
+
 
     <LinearLayout
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
         android:layout_marginTop="3dp"
+        android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
@@ -112,9 +114,9 @@
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
                     android:id="@+id/site_swap"
-                    android:layout_width="20dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/zyllhh" />
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:src="@drawable/lj_lx_003" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

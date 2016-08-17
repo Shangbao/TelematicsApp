@@ -3,47 +3,58 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="#e0e0e0"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
     <include
         android:id="@+id/topbar"
         layout="@layout/topbar"></include>
 
-    <ListView
-        android:id="@+id/carInfoList"
-        android:layout_marginTop="5dp"
+
+
+        <ListView
+            android:id="@+id/carInfoList"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:background="#ffffff"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topbar">
+        </ListView>
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:background="#ffffff"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/topbar">
-    </ListView>
+        android:layout_height="match_parent"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        >
+        <ImageView
+            android:id="@+id/btnShou"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/lj_czs_001"
+            android:text="手动添加新车辆"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/btnSao"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            />
 
-    <Button
-        android:id="@+id/btnShou"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:background="@drawable/btn_sztx"
-        android:text="手动添加新车辆"
-        android:layout_marginTop="10dp"
-        android:textSize="16sp"
-        android:textColor="#ffffff"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/btnSao"
-        android:layout_marginBottom="20dp"
-        />
+        <ImageView
+            android:id="@+id/btnSao"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/lj_czs_002"
+            android:layout_marginBottom="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
 
-    <Button
-        android:id="@+id/btnSao"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:background="@drawable/btn_sztx"
-        android:text="扫一扫添加新车辆"
-        android:textSize="16sp"
-        android:textColor="#ffffff"
-        android:layout_marginBottom="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        />
+
 
 
 

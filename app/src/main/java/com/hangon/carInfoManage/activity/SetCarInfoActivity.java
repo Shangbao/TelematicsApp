@@ -3,12 +3,14 @@ package com.hangon.carInfoManage.activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,9 +47,9 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
     ListView listView;//车辆信息列表
     SetCarInfoAdapter adapter;//车辆信息适配器
 
-    Button btnShou;
-    Button btnSao;
-    ImageButton topbarLeft, topbarRight;
+    ImageView btnShou;
+    ImageView btnSao;
+    ImageView topbarLeft, topbarRight;
     TextView topbarTitle;
     List<CarMessageVO> carMessageList;//车辆信息列表数据
     Gson gson;//解析json数据
@@ -62,15 +64,15 @@ public class SetCarInfoActivity extends Activity implements View.OnClickListener
 
     //初始化组件
     private void init() {
-        btnSao = (Button) findViewById(R.id.btnSao);
-        btnShou = (Button) findViewById(R.id.btnShou);
+        btnSao = (ImageView) findViewById(R.id.btnSao);
+        btnShou = (ImageView) findViewById(R.id.btnShou);
 
         btnSao.setOnClickListener(this);
         btnShou.setOnClickListener(this);
         listView = (ListView) findViewById(R.id.carInfoList);
-        topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
+        topbarLeft = (ImageView) findViewById(R.id.topbar_left);
         topbarTitle = (TextView) findViewById(R.id.topbar_title);
-        topbarRight = (ImageButton) findViewById(R.id.topbar_right);
+        topbarRight = (ImageView) findViewById(R.id.topbar_right);
         topbarRight.setVisibility(View.GONE);
         topbarTitle.setText("车辆管理");
         topbarLeft.setOnClickListener(new View.OnClickListener() {

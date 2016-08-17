@@ -13,6 +13,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +66,7 @@ public class MainActivity extends Activity {
         txtTitle.setText("车辆违章查询");
 
         // 返回按钮
-        ImageButton btnBack = (ImageButton) findViewById(R.id.topbar_left);
+        ImageView btnBack = (ImageView) findViewById(R.id.topbar_left);
         btnBack.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +77,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        ImageButton rightBtn = (ImageButton) findViewById(R.id.topbar_right);
+        ImageView rightBtn = (ImageView) findViewById(R.id.topbar_right);
         rightBtn.setVisibility(View.INVISIBLE);
 
         getWeizhangData(Constants.USER_ID+"");

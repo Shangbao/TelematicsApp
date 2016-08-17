@@ -15,6 +15,8 @@
         android:layout_height="45dp"
         android:layout_below="@+id/topbar"
         android:layout_marginTop="5dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
         android:background="#ffffff">
 
         <RelativeLayout
@@ -24,18 +26,17 @@
 
             <ImageView
                 android:id="@+id/playModelImg"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30dp"
-                android:background="@drawable/wdyy_12" />
+                android:src="@drawable/lj_yy_003" />
 
             <TextView
                 android:id="@+id/playModelTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="40dp"
                 android:text="随机播放"
                 android:textColor="#019b79"
                 android:textSize="16sp" />
@@ -46,7 +47,7 @@
     <ListView
         android:id="@+id/songList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/r1"
         android:layout_marginTop="5dp"
         android:background="#ffffff"
@@ -58,8 +59,8 @@
         android:layout_alignParentBottom="true"
         android:background="#019b79"
         android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
         android:paddingTop="5dp">
 
         <ImageView
@@ -68,49 +69,59 @@
             android:layout_height="60dp"
             android:background="@drawable/wdyy_22" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/l1"
-            android:layout_width="140dp"
+            android:layout_width="165dp"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:layout_toRightOf="@+id/img2"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical">
+            android:layout_marginRight="10dp">
 
             <TextView
                 android:id="@+id/selectedSong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="独家记忆"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="#ffffff"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/selectedSinger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:text="陈小春"
                 android:textColor="#ffffff"
-                android:textSize="14sp" />
-
-            <SeekBar
-                android:id="@+id/musicSeekbar"
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="1dp"
-                android:progressDrawable="@drawable/seekbar_style"
-                android:thumb="@drawable/seekbar_thumb"
-                 />
+                android:layout_below="@+id/selectedSong"
+                android:textSize="12sp" />
 
             <RelativeLayout
-                android:layout_marginLeft="20dp"
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_below="@+id/selectedSinger"
+                >
+
+                <SeekBar
+                    android:id="@+id/musicSeekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:progressDrawable="@drawable/seekbar_style"
+                    android:thumb="@drawable/seekbar_thumb"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp">
+                android:layout_below="@+id/relativeLayout"
+                android:layout_marginTop="2dp">
 
                 <TextView
                     android:id="@+id/currTime"
@@ -133,7 +144,7 @@
                     android:textSize="10sp" />
             </RelativeLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -146,14 +157,14 @@
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/wdyy_25" />
+                android:background="@drawable/lj_yy_004" />
 
             <ImageButton
                 android:id="@+id/btnPause"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/wdyy_28" />
+                android:background="@drawable/lj_yy_005" />
 
             <ImageButton
                 android:id="@+id/btnNext"
@@ -161,7 +172,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/wdyy_31" />
+                android:background="@drawable/lj_yy_006" />
         </RelativeLayout>
     </RelativeLayout>
 

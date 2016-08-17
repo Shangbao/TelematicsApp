@@ -60,8 +60,8 @@ public class BestRouteActivity extends Activity implements
     //地址
     private TextView cityAddress;
     //topbar
-    private ImageButton topLeft;
-    private ImageButton topRight;
+    private ImageView topLeft;
+    private ImageView topRight;
     private TextView topTittle;
     AutoCompleteTextView startPosition;//起点
     AutoCompleteTextView endPosition;//终点
@@ -149,10 +149,10 @@ public class BestRouteActivity extends Activity implements
     //初始化组件
     private void init() {
         cityAddress=(TextView)findViewById(R.id.cityaddress);
-        topLeft=(ImageButton)findViewById(R.id.topbar_left);
-        topRight=(ImageButton)findViewById(R.id.topbar_right);
+        topLeft=(ImageView)findViewById(R.id.topbar_left);
+        topRight=(ImageView)findViewById(R.id.topbar_right);
         topTittle=(TextView)findViewById(R.id.topbar_title);
-       topRight.setBackgroundResource(R.drawable.sousuo);
+       topRight.setImageResource(R.drawable.lj_lx_004);
         startPosition = (AutoCompleteTextView) findViewById(R.id.start_position);
         endPosition = (AutoCompleteTextView) findViewById(R.id.end_position);
         siteSwap = (ImageView) findViewById(R.id.site_swap);

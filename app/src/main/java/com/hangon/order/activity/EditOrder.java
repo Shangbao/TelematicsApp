@@ -45,8 +45,8 @@ import java.util.TimerTask;
  */
 public class EditOrder extends Activity {
     //订单编辑标题栏
-    private ImageButton topbarLeft;
-    private ImageButton topbarRight;
+    private ImageView topbarLeft;
+    private ImageView topbarRight;
     private TextView topbarTittle;
     EditOrderAdapter adapter;
     List<OrderData> orderList;
@@ -75,12 +75,12 @@ public class EditOrder extends Activity {
     private void initFindViewById() {
         getData();
         //topbarID
-        topbarLeft=(ImageButton)findViewById(R.id.topbar_left);
-        topbarRight=(ImageButton)findViewById(R.id.topbar_right);
+        topbarLeft=(ImageView)findViewById(R.id.topbar_left);
+        topbarRight=(ImageView)findViewById(R.id.topbar_right);
         topbarTittle=(TextView)findViewById(R.id.topbar_title);
         topbarTittle.setText("编辑订单");
        topbarLeft.setVisibility(View.GONE);
-        topbarRight.setBackgroundResource(R.drawable.grzx_041 );
+        topbarRight.setImageResource(R.drawable.lj_bj_001 );
         topbarRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

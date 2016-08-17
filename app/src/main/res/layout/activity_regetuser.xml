@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#019b79"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:orientation="vertical"
+        android:layout_marginTop="120dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img11"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/lj_zc_001" />
+
+            <ImageView
+                android:id="@+id/img12"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img11"
+                android:background="@drawable/zc_10"/>
+
+            <TextView
+                android:id="@+id/czUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_toRightOf="@+id/img12"
+                android:hint="请输入您要注册的手机号"
+                android:maxLength="11"
+                android:numeric="integer"
+                android:layout_centerInParent="true"
+                android:shadowColor="#ffffff"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp">
+
+            <ImageView
+                android:id="@+id/img21"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/lj_zc_002" />
+
+            <ImageView
+                android:id="@+id/img22"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img21"
+                android:background="@drawable/zc_10" />
+
+            <com.hangon.common.CleanableEditText
+                android:id="@+id/czUserPass1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img22"
+                android:drawableRight="@drawable/zc_13"
+                android:hint="请设置6-12位账户密码"
+                android:layout_centerInParent="true"
+                android:maxLength="12"
+                android:password="true"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp">
+
+            <ImageView
+                android:id="@+id/img31"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/lj_zc_002" />
+
+            <ImageView
+                android:id="@+id/img32"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img31"
+                android:background="@drawable/zc_10" />
+
+            <com.hangon.common.CleanableEditText
+                android:id="@+id/czUserPass2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/img32"
+                android:drawableRight="@drawable/zc_13"
+                android:hint="请设置6-12位账户密码"
+                android:maxLength="12"
+                android:password="true"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/czUserButton"
+            android:layout_marginTop="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/lj_zc_005"/>
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#009a71"
+                android:text="确    定"
+                android:textSize="18sp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

@@ -50,8 +50,8 @@ import java.util.TimerTask;
 public class GasSiteDetailsActivity extends Activity {
 
     //topbar
-    private ImageButton topbarLeft;
-    private ImageButton topbarRight;
+    private ImageView topbarLeft;
+    private ImageView topbarRight;
     private TextView topbarTittle;
     //加油列表
     private ListView gasTypeList;
@@ -398,8 +398,8 @@ public class GasSiteDetailsActivity extends Activity {
             }
         });
         //topbarID
-        topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
-        topbarRight = (ImageButton) findViewById(R.id.topbar_right);
+        topbarLeft = (ImageView) findViewById(R.id.topbar_left);
+        topbarRight = (ImageView) findViewById(R.id.topbar_right);
         topbarTittle = (TextView) findViewById(R.id.topbar_title);
         topbarTittle.setText("加油站详情");
         topbarRight.setVisibility(View.GONE);

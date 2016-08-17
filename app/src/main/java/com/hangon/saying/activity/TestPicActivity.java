@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fd.ourapplication.R;
@@ -27,7 +28,7 @@ public class TestPicActivity extends Activity {
 	public static final String EXTRA_IMAGE_LIST = "imagelist";
 	public static Bitmap bimap;
 	//topbar
-	private ImageButton topLeft;
+	private ImageView topLeft;
 	private TextView topTittle;
 	private ImageButton cancel_image_bucket;
 
@@ -61,7 +62,7 @@ public class TestPicActivity extends Activity {
 	 * 初始化view视图
 	 */
 	private void initView() {
-		topLeft=(ImageButton)findViewById(R.id.topbar_left);
+		topLeft=(ImageView)findViewById(R.id.topbar_left);
 		topTittle=(TextView)findViewById(R.id.topbar_title);
 		topTittle.setText("相册");
 		topLeft.setVisibility(View.GONE);

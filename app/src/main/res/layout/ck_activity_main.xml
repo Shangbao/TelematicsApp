@@ -8,60 +8,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
+
+
         <RelativeLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:background="#ffffff"
             android:layout_height="45dp"
-            >
-            <TextView
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <ImageView
                 android:id="@+id/back_grzx"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:text="返回"
-                android:textColor="@color/greenlist"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:layout_marginLeft="10dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/lj_xcd_001"
+
                 />
-          <TextView
-              android:textColor="@color/greenlist"
-              android:layout_width="wrap_content"
-              android:layout_height="45dp"
-              android:text="行车记录"
-              android:gravity="center"
-              android:layout_marginLeft="150dp"
-              android:layout_marginTop="5dp"
-              android:textSize="18sp"
-
-              />
-
             <TextView
-
-                android:textColor="@color/greenlist"
-                android:id="@+id/edit_list"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:text="编辑"
-
-                android:textSize="16sp" />
-
-
-           <!-- <CheckBox
-                android:visibility="gone"
-                android:id="@+id/edit_lists_allcheckbox"
-                style="@style/edit_list"
+                android:id="@+id/topbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_launcher" />-->
+                android:layout_centerInParent="true"
+                android:textColor="#019b79"
+                android:textSize="20sp"
+                android:text="行车记录"
+                />
 
+            <TextView
+                android:id="@+id/edit_list"
+                android:textColor="#019b79"
+                android:text="编辑"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                />
         </RelativeLayout>
+
         <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

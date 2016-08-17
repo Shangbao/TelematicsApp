@@ -6,17 +6,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp">
+        android:layout_height="35dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
 
         <com.hangon.common.CircleView
             android:id="@+id/item_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
             android:text="01"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="16dp" />
 
 
         <TextView
@@ -24,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="50dp"
             android:text="标题"
             android:textColor="#000000"
             android:textSize="16sp" />
@@ -34,10 +35,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="250dp"
+            android:layout_alignParentRight="true"
             android:text="歌手"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
     </RelativeLayout>
 

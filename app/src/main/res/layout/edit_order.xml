@@ -11,21 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
           <include android:id="@+id/toolbar"
+
               layout="@layout/topbar"/>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_marginTop="45dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+           >
            <LinearLayout
 
                android:background="#cccccc"
                android:layout_width="match_parent"
                android:layout_height="match_parent"
+               android:paddingLeft="12dp"
                android:layout_weight="10">
-                <CheckBox
-                    android:layout_marginLeft="5dp"
+               <CheckBox
            android:id="@+id/all_selected"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -46,7 +48,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
                 <ListView
-                    android:layout_marginLeft="5dp"
                     android:choiceMode="multipleChoice"
                     android:id="@+id/edit_order"
                     android:layout_width="match_parent"

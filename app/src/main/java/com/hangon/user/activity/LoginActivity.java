@@ -14,6 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -33,6 +36,8 @@ import com.hangon.common.JsonUtil;
 import com.hangon.common.MyApplication;
 import com.hangon.common.MyStringRequest;
 import com.hangon.common.UserUtil;
+import com.hangon.common.VolleyInterface;
+import com.hangon.common.VolleyRequest;
 import com.hangon.home.activity.HomeActivity;
 import com.hangon.user.dao.LoginDao;
 
@@ -55,8 +60,9 @@ import cn.jpush.android.api.TagAliasCallback;
 public class LoginActivity extends Activity implements View.OnClickListener {
     private CleanableEditText lUserName;//登录时的用户账号
     private CleanableEditText lUserPass;//登录时的用户密码
-    private ImageButton userLogin;//登录按钮
-    private Button toRegister;//注册按钮
+    private RelativeLayout userLogin;//登录按钮
+    private TextView toRegister;//注册按钮
+    private TextView toRegetUserPass;//忘记密码
    private Dialog dialog;
     public static String autoLogin;//判断是否自动登录
 
@@ -74,10 +80,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private void init() {
         lUserName = (CleanableEditText) findViewById(R.id.lUserName);
         lUserPass = (CleanableEditText) findViewById(R.id.lUserPass);
-        userLogin = (ImageButton) findViewById(R.id.userLogin);
-        toRegister = (Button) findViewById(R.id.userRegister);
+        userLogin = (RelativeLayout) findViewById(R.id.userLogin);
+        toRegister = (TextView) findViewById(R.id.userRegister);
+        toRegetUserPass= (TextView) findViewById(R.id.userRegetUserPass);
         userLogin.setOnClickListener(this);
         toRegister.setOnClickListener(this);
+        toRegetUserPass.setOnClickListener(this);
         //autoLogin=false;
         UserUtil.instance(LoginActivity.this);
     }
@@ -90,8 +98,16 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         if (userInfo.isSave()) {
             lUserName.setText(userInfo.getUserName().trim());
             lUserPass.setText(userInfo.getUserPass().trim());
-            sendUserInfo(userInfo);
-            this.finish();
+            //显示加载框
+            AlertDialog.Builder builder=new AlertDialog.Builder(LoginActivity.this);
+            dialog=new Dialog(LoginActivity.this);
+            builder.setView(LayoutInflater.from(LoginActivity.this).inflate(R.layout.actiity_dialog_tip, null));
+            dialog=builder.create();
+            if (ConnectionUtil.isConn(LoginActivity.this) == false) {
+                ConnectionUtil.setNetworkMethod(LoginActivity.this);
+            } else {
+                login();
+            }
         } else {
             lUserName.setText(userInfo.getUserName().trim());
             lUserPass.setText("");
@@ -120,8 +136,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 Intent toRegister = new Intent();
                 toRegister.setClass(LoginActivity.this, RegisterActivity.class);
                 startActivity(toRegister);
-
                 break;
+            case R.id.userRegetUserPass:
+                Intent toRegetUpass=new Intent();
+                toRegetUpass.setClass(LoginActivity.this,JudgeUserActivity.class);
+                startActivity(toRegetUpass);
+                this.finish();
         }
     }
 
@@ -155,11 +175,16 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         UserInfo user = new UserInfo();
                         //将用户登录信息的json格式转换成bean对象
                         user = (UserInfo) JsonUtil.jsonToBean(userInfo, UserInfo.class);
-                        user.setIsSave(true);
-                        sendPushTag(user.getUserId()+"");
-                        Toast.makeText(LoginActivity.this, "输入正确,正在为你加载中.", Toast.LENGTH_SHORT).show();
-                        finishedLogin(user);
-                        LoginActivity.this.finish();
+                        if(user.getLoginFlag()!=1){
+                            //changeLoginFlag(1,user.getUserId());
+                            user.setIsSave(true);
+                            sendPushTag(user.getUserId()+"");
+                            Toast.makeText(LoginActivity.this, "输入正确,正在为你加载中.", Toast.LENGTH_SHORT).show();
+                            finishedLogin(user);
+                            LoginActivity.this.finish();
+                        }else{
+                            Toast.makeText(LoginActivity.this, "该用户已登陆,若发现非本人,请修改或找回密码", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Timer timer=new Timer();
                         timer.schedule(new wait(), 2000);
@@ -183,6 +208,35 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             request.setTag("StringReqGet");
             MyApplication.getHttpQueues().add(request);
         }
+    }
+
+    /**
+     * 把登陆状态变为登陆状态
+     */
+    private void changeLoginFlag(int loginFlag,int userId){
+     String url=Constants.CHANGE_LOGINFLAG_URL;
+     Map<String,Object> map=new HashMap<String,Object>();
+     map.put("loginFlag",loginFlag+"");
+     map.put("userId",userId+"");
+        VolleyRequest.RequestPost(LoginActivity.this, url, "changeLoginFlag", map, new VolleyInterface(LoginActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
+            @Override
+            public void onMySuccess(String result) {
+                Map map=new HashMap();
+                map=JsonUtil.jsonToMap(result);
+                boolean success= (boolean) map.get("success");
+                String msg= (String) map.get("msg");
+                if(success){
+                    Toast.makeText(LoginActivity.this,msg,Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(LoginActivity.this,msg,Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+
+            }
+        });
     }
 
     /**
@@ -267,4 +321,5 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         }
     }
+
 }

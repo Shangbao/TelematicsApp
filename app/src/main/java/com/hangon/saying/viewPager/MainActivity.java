@@ -58,8 +58,8 @@ import com.hangon.saying.util.OnMenuClick;
  */
 public class MainActivity extends FragmentActivity implements OnMenuClick {
   //topbar
-    private ImageButton topLeft;
-    private ImageButton topRight;
+    private ImageView topLeft;
+    private ImageView topRight;
     private TextView topTittle;
     // 下拉菜单shuju
     private MenuHelper mMenuHelper;
@@ -161,18 +161,16 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
      * 初始化头标
      */
     private void InitTextView() {
-
-        /////
         container = (LinearLayout) findViewById(R.id.zhoubian);
         menuData = new ArrayList<String>();
         menuData.add("写心情");
         menuData.add("周边求助");
         //topbar
-        topLeft=(ImageButton)findViewById(R.id.topbar_left);
-        topRight=(ImageButton)findViewById(R.id.topbar_right);
+        topLeft=(ImageView)findViewById(R.id.topbar_left);
+        topRight=(ImageView)findViewById(R.id.topbar_right);
         topTittle=(TextView)findViewById(R.id.topbar_title);
         topTittle.setText("车生活");
-        topRight.setBackgroundResource(R.drawable.ss_01);
+        topRight.setImageResource(R.drawable.lj_xx_001);
         mMenuHelper = new MenuHelper(this, topRight, this, menuData, container);
         topLeft.setOnClickListener(new OnClickListener() {
             @Override

@@ -92,7 +92,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         txtTitle.setText("扫一扫");
 
         // 返回按钮
-        ImageButton btnBack = (ImageButton) findViewById(R.id.topbar_left);
+        ImageView btnBack = (ImageView) findViewById(R.id.topbar_left);
         btnBack.setVisibility(View.VISIBLE);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +101,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             }
         });
 
-        ImageButton rightBtn = (ImageButton) findViewById(R.id.topbar_right);
+        ImageView rightBtn = (ImageView) findViewById(R.id.topbar_right);
         rightBtn.setVisibility(View.INVISIBLE);
 
         scanPreview = (SurfaceView) findViewById(R.id.capture_preview);

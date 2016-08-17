@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class UpdateUserActivity extends Activity {
     EditText uAge;
     EditText uDriverNum;
 
-    ImageButton topbarLeft, topbarRight;
+    ImageView topbarLeft, topbarRight;
     TextView topbarTitle;
 
 
@@ -58,10 +59,10 @@ public class UpdateUserActivity extends Activity {
         uSex = (EditText) findViewById(R.id.uSex);
         uAge = (EditText) findViewById(R.id.uAge);
         uDriverNum = (EditText) findViewById(R.id.uDriverNum);
-        topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
-        topbarRight = (ImageButton) findViewById(R.id.topbar_right);
+        topbarLeft = (ImageView) findViewById(R.id.topbar_left);
+        topbarRight = (ImageView) findViewById(R.id.topbar_right);
         topbarTitle = (TextView) findViewById(R.id.topbar_title);
-        topbarRight.setBackgroundResource(R.drawable.grzx_04);
+        topbarRight.setImageResource(R.drawable.lj_xcdxq_001);
         topbarTitle.setText("编辑用户信息");
     }
 

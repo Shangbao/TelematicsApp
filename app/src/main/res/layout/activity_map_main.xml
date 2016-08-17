@@ -137,7 +137,8 @@
         android:layout_below="@+id/road_cond"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="56dp"
-        android:src="@drawable/maproute" />
+        android:src="@drawable/lj_lx_002"
+        android:paddingRight="12dp"/>
 <TextView
     android:layout_width="match_parent"
     android:layout_height="50dp"
@@ -158,6 +159,7 @@
             android:layout_height="40dp"
             android:layout_weight="6"
             android:scaleType="fitXY"
-            android:background="@drawable/dw" />
+            android:background="@drawable/lj_lx_001"
+            android:paddingLeft="12dp"/>
 
 </RelativeLayout>

@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,7 +40,7 @@ public class ProvinceList extends Activity {
 		txtTitle.setText("选择查询地-省份");
 
 		//返回按钮
-		ImageButton btnBack = (ImageButton) findViewById(R.id.topbar_left);
+		ImageView btnBack = (ImageView) findViewById(R.id.topbar_left);
 		btnBack.setVisibility(View.VISIBLE);
 		btnBack.setOnClickListener(new OnClickListener() {
 			@Override
@@ -48,7 +49,7 @@ public class ProvinceList extends Activity {
 			}
 		});
 
-		ImageButton rightBtn = (ImageButton) findViewById(R.id.topbar_right);
+		ImageView rightBtn = (ImageView) findViewById(R.id.topbar_right);
 		rightBtn.setVisibility(View.INVISIBLE);
 
 

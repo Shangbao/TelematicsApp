@@ -44,7 +44,7 @@ public class UserIconActivity extends Activity implements OnClickListener {
     public static final String TMP_PATH = "clip_temp.jpg";
     ImageView imageView;
 
-    ImageButton topbarLeft, topbarRight;
+    ImageView topbarLeft, topbarRight;
     TextView topbarTitle;
 
     @Override
@@ -58,8 +58,8 @@ public class UserIconActivity extends Activity implements OnClickListener {
         imageView = (ImageView) findViewById(R.id.imageView);
 
 
-        topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
-        topbarRight = (ImageButton) findViewById(R.id.topbar_right);
+        topbarLeft = (ImageView) findViewById(R.id.topbar_left);
+        topbarRight = (ImageView) findViewById(R.id.topbar_right);
         topbarTitle = (TextView) findViewById(R.id.topbar_title);
         topbarRight.setBackgroundResource(R.drawable.grzx_03);
         topbarTitle.setText("设置头像");

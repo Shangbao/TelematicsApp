@@ -54,7 +54,7 @@ public class ScanCarMessageActivity extends Activity {
 
     private TextView state;
 
-    ImageButton topbarLeft,topbarRight;
+    ImageView topbarLeft,topbarRight;
     TextView topbarTitle;
 
     CarMessageVO carMessageVO;
@@ -88,8 +88,8 @@ public class ScanCarMessageActivity extends Activity {
 
         state = (TextView) findViewById(R.id.state);
 
-        topbarLeft= (ImageButton) findViewById(R.id.topbar_left);
-        topbarRight= (ImageButton) findViewById(R.id.topbar_right);
+        topbarLeft= (ImageView) findViewById(R.id.topbar_left);
+        topbarRight= (ImageView) findViewById(R.id.topbar_right);
         topbarTitle= (TextView) findViewById(R.id.topbar_title);
         topbarTitle.setText("查看车辆信息");
 

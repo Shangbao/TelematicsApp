@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include android:id="@+id/titbar" layout="@layout/topbar" />
+    <include android:id="@+id/topbar" layout="@layout/topbar" />
 
     <TextView
         android:id="@+id/list_tip"

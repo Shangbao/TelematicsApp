@@ -68,8 +68,8 @@ public class CarMaindetails extends Activity implements OnGetPoiSearchResultList
     private PoiSearch mPoiSearch;
     private SuggestionSearch mSuggestionSearch = null;//检索建议
      //topbar
-    private ImageButton topLeft;
-    private ImageButton topRight;
+    private ImageView topLeft;
+    private ImageView topRight;
     private TextView topTittle;
      private String distance;
   //进入map判断
@@ -124,8 +124,8 @@ public class CarMaindetails extends Activity implements OnGetPoiSearchResultList
 
     private void init() {
 
-        topLeft=(ImageButton)findViewById(R.id.topbar_left);
-        topRight=(ImageButton)findViewById(R.id.topbar_right);
+        topLeft=(ImageView)findViewById(R.id.topbar_left);
+        topRight=(ImageView)findViewById(R.id.topbar_right);
         topTittle=(TextView)findViewById(R.id.topbar_title);
         topLeft.setBackgroundResource(R.drawable.xcd_001);
         topLeft.setOnClickListener(new View.OnClickListener() {

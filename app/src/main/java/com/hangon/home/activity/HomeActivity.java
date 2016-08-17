@@ -3,13 +3,18 @@ package com.hangon.home.activity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.Notification;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -18,19 +23,34 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.example.fd.ourapplication.R;
+import com.hangon.common.Constants;
+import com.hangon.common.JsonUtil;
+import com.hangon.common.UserUtil;
+import com.hangon.common.VolleyInterface;
+import com.hangon.common.VolleyRequest;
 import com.hangon.fragment.car.CarFragment;
 import com.hangon.fragment.music.MusicFragment;
 import com.hangon.fragment.order.ZnwhFragment;
+import com.hangon.fragment.order.ZnwhService;
+import com.hangon.fragment.userinfo.UpdateUserActivity;
 import com.hangon.fragment.userinfo.UserFragment;
+import com.hangon.order.activity.PersonalInformationData;
 import com.hangon.push.PushService;
+import com.hangon.weather.Weather;
 import com.hangon.weather.WeatherService;
+import com.mob.mobapi.API;
+import com.mob.mobapi.APICallback;
 
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import cn.sharesdk.framework.ShareSDK;
 
 /**
@@ -344,12 +364,16 @@ public class HomeActivity extends Activity implements View.OnClickListener,Music
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        UserUtil.instance(HomeActivity.this);
+        changeLoginFlag(0,UserUtil.getInstance().getIntegerConfig("userId") );//清除登陆状态
         ShareSDK.stopSDK(this);
         binder.stopWeather();
         unbindService(conn);
         stopService(pushIntent);
         JPushInterface.stopPush(HomeActivity.this);
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -429,6 +453,35 @@ public class HomeActivity extends Activity implements View.OnClickListener,Music
             this.position=position;
             getTab(position);
         }
+    }
+
+    /**
+     * 把登陆状态变为登陆状态
+     */
+    private void changeLoginFlag(int loginFlag,int userId){
+        String url=Constants.CHANGE_LOGINFLAG_URL;
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("loginFlag",loginFlag+"");
+        map.put("userId",userId+"");
+        VolleyRequest.RequestPost(HomeActivity.this, url, "changeLoginFlag", map, new VolleyInterface(HomeActivity.this,VolleyInterface.mListener,VolleyInterface.mErrorListener) {
+            @Override
+            public void onMySuccess(String result) {
+                Map map=new HashMap();
+                map=JsonUtil.jsonToMap(result);
+                boolean success= (boolean) map.get("success");
+                String msg= (String) map.get("msg");
+                if(success){
+                    Toast.makeText(HomeActivity.this,msg,Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(HomeActivity.this,msg,Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+
+            }
+        });
     }
 
 }

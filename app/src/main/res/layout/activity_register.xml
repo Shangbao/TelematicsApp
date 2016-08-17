@@ -11,25 +11,24 @@
         android:id="@+id/topbar"
         layout="@layout/topbar"></include>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp">'
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:layout_marginTop="120dp">'
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/img11"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
-                android:background="@drawable/zc_07" />
+                android:src="@drawable/lj_zc_001" />
 
             <ImageView
                 android:id="@+id/img12"
@@ -65,7 +64,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
-                android:background="@drawable/zc_18" />
+                android:background="@drawable/lj_zc_002" />
 
             <ImageView
                 android:id="@+id/img22"
@@ -100,7 +99,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
-                android:background="@drawable/zc_14" />
+                android:background="@drawable/lj_zc_003" />
 
             <ImageView
                 android:id="@+id/img32"
@@ -108,11 +107,11 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/img31"
-                android:background="@drawable/zc_10" />
+                android:src="@drawable/zc_10" />
 
             <EditText
                 android:id="@+id/cord"
-                android:layout_width="140dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/img32"
@@ -142,22 +141,34 @@
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/now"
-                android:background="@drawable/btn_register"
+                android:background="@drawable/lj_zc_004"
                 android:text="获取验证码"
-                android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
-                android:textSize="12sp" />
+                android:textColor="#009a71"
+                android:textSize="12sp"
+                />
         </RelativeLayout>
 
 
-        <ImageButton
+        <RelativeLayout
             android:id="@+id/saveCord"
-            android:layout_width="120dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/zc_22"
-            android:textSize="20sp" />
+            android:layout_marginTop="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/lj_zc_005"/>
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#009a71"
+                android:text="注    册"
+                android:textSize="18sp"/>
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 

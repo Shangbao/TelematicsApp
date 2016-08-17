@@ -72,7 +72,7 @@ public class PushService extends Service {
             e.printStackTrace();
         }
         if(location!=null){
-            sendLocation();
+            sendLocation(location);
         }
             //监视地理位置变化
         try {
@@ -82,7 +82,7 @@ public class PushService extends Service {
         }
     }
 
-    private void sendLocation(){
+    private void sendLocation(Location location){
         UserUtil.instance(PushService.this);
         String userId= UserUtil.getInstance().getIntegerConfig("userId")+"";
         Log.e("userId",userId);
@@ -129,7 +129,7 @@ public class PushService extends Service {
 
         @Override
         public void onLocationChanged(Location location) {
-            sendLocation();
+            sendLocation(location);
         }
     };
 

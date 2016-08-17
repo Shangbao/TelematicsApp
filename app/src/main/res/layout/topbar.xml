@@ -4,22 +4,25 @@
     android:orientation="vertical" 
     android:layout_width="match_parent"
     android:layout_height="45dp"
-    android:background="#019b79"
     android:id="@+id/topbar">
     
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="#ffffff"
-        android:layout_height="45dp">
-        <ImageButton
+        android:layout_height="45dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <ImageView
             android:id="@+id/topbar_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/zc_03"/>
+            android:layout_alignParentStart="true"
+            android:src="@drawable/lj_xcd_001"
 
+            />
         <TextView
             android:id="@+id/topbar_title"
             android:layout_width="wrap_content"
@@ -30,14 +33,12 @@
             android:text="个人中心"
            />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/topbar_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/grzx_04"
             />
     </RelativeLayout>
 

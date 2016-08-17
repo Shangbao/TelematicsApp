@@ -110,8 +110,8 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
 
 
     //topbar
-    private ImageButton topLeft;
-    private ImageButton topRight;
+    private ImageView topLeft;
+    private ImageView topRight;
     private TextView topTittle;
 
 
@@ -326,8 +326,8 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
         //topbar组件
         Timer timer=new Timer();
         timer.schedule(new wait2(), 1000);
-        topLeft = (ImageButton) findViewById(R.id.topbar_left);
-        topRight = (ImageButton) findViewById(R.id.topbar_right);
+        topLeft = (ImageView) findViewById(R.id.topbar_left);
+        topRight = (ImageView) findViewById(R.id.topbar_right);
         topTittle = (TextView) findViewById(R.id.topbar_title);
         topRight.setVisibility(View.GONE);
 
@@ -949,7 +949,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             default:
                 ;
         }
-            if(distance<50){
+            if(distance<100){
                 Toast.makeText(getApplicationContext(),"距离较近",Toast.LENGTH_SHORT).show();
             }
         if (sNode != null && eNode != null) {

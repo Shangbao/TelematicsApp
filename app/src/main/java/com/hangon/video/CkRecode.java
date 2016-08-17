@@ -52,7 +52,7 @@ public class CkRecode extends Activity {
 	private ViewHolder holder;
 	private TextView editVedio;
 	private int checkNum;
-	private  TextView back_grzx;
+	private  ImageView back_grzx;
 	int judge=1;
 
 	//全选
@@ -86,7 +86,7 @@ public class CkRecode extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ck_activity_main);
 		loadVaule();
-		back_grzx=(TextView)findViewById(R.id.back_grzx);
+		back_grzx=(ImageView)findViewById(R.id.back_grzx);
 		back_grzx.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

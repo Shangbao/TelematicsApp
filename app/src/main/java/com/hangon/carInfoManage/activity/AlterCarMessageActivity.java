@@ -68,7 +68,7 @@ public class AlterCarMessageActivity extends Activity {
     private EditText phone_num;
     private Spinner state;
 
-    private ImageButton topbarLeft, topbarRight;
+    private ImageView topbarLeft, topbarRight;
     private TextView topbarTitle;
 
     CarMessageVO carMessageVO;//获取的指定车辆的信息
@@ -116,8 +116,8 @@ public class AlterCarMessageActivity extends Activity {
         phone_num = (EditText) findViewById(R.id.phone_num);
         state = (Spinner) findViewById(R.id.state);
 
-        topbarLeft = (ImageButton) findViewById(R.id.topbar_left);
-        topbarRight = (ImageButton) findViewById(R.id.topbar_right);
+        topbarLeft = (ImageView) findViewById(R.id.topbar_left);
+        topbarRight = (ImageView) findViewById(R.id.topbar_right);
         topbarTitle = (TextView) findViewById(R.id.topbar_title);
 
     }

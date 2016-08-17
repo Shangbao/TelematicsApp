@@ -65,8 +65,8 @@ public class CarMiantenance extends Activity{
     private  ViewHorder viewHorder;
     private ListView mianTananceList;
     //topbar
-    private ImageButton topleft;
-    private ImageButton topright;
+    private ImageView topleft;
+    private ImageView topright;
     private TextView toptittle;
     //进入map状态判断
     JudgeNet judge;
@@ -88,11 +88,11 @@ public class CarMiantenance extends Activity{
     private void receiveData() {
         String judge=this.getIntent().getExtras().getString("ids");
         if(judge.equals("b")) {
-            toptittle.setText("汽修店");
+            toptittle.setText("周围维修店");
             search="汽修店";
         }
         if(judge.equals("a")){
-            toptittle.setText("洗车店");
+            toptittle.setText("周围洗车店");
             search="洗车店";
 
         }
@@ -104,8 +104,8 @@ public class CarMiantenance extends Activity{
          myLocation1=(TextView)findViewById(R.id.mylocation1);
          myLocation2=(TextView)findViewById(R.id.mylocation2);
          mianTananceList=(ListView)findViewById(R.id.maintanance_list);
-         topleft=(ImageButton)findViewById(R.id.topbar_left);
-         topright=(ImageButton)findViewById(R.id.topbar_right);
+         topleft=(ImageView)findViewById(R.id.topbar_left);
+         topright=(ImageView)findViewById(R.id.topbar_right);
          toptittle=(TextView)findViewById(R.id.topbar_title);
          topleft.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -124,9 +125,9 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                 vh.list_gastype = (TextView) convertView.findViewById(R.id.list_gastype);
                 vh.list_ordertime = (TextView) convertView.findViewById(R.id.list_ordertime);
                // vh.list_gasorder_status = (TextView) convertView.findViewById(R.id.list_gasorder_status);
-                vh.gaslist_cancel_order = (ImageView) convertView.findViewById(R.id.gaslist_cancel_order);
-                vh.gaslist_payment_order = (ImageView) convertView.findViewById(R.id.gaslist_payment_order);
-                vh.qrSweep = (ImageView) convertView.findViewById(R.id.list_sweep_code);
+                vh.gaslist_cancel_order = (RelativeLayout) convertView.findViewById(R.id.gaslist_cancel_order);
+                vh.gaslist_payment_order = (RelativeLayout) convertView.findViewById(R.id.gaslist_payment_order);
+                vh.qrSweep = (RelativeLayout) convertView.findViewById(R.id.list_sweep_code);
                 convertView.setTag(vh);
             } else {
                 vh = (ViewHolder) convertView.getTag();
@@ -143,16 +144,15 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
 
             if ((payOrderList.get(position).getOrderState() == 2)) {
                // vh.list_gasorder_status.setText("已加油");
-                vh.gaslist_cancel_order.setVisibility(View.GONE);
-                vh.gaslist_payment_order.setImageResource(R.drawable.ddgldele);//删除订单
+                vh.gaslist_cancel_order.setVisibility(View.VISIBLE);
+                vh.gaslist_payment_order.setVisibility(View.GONE);//删除订单
                 vh.qrSweep.setVisibility(View.GONE);
             }
             if ((payOrderList.get(position).getOrderState() == 1)) {
                // vh.list_gasorder_status.setText("已支付未加油");
-                vh.gaslist_payment_order.setImageResource(R.drawable.ddgl_03);
                 vh.gaslist_cancel_order.setVisibility(View.GONE);
-                vh.gaslist_payment_order.setVisibility(View.VISIBLE);
-                vh.qrSweep.setVisibility(View.GONE);
+                vh.gaslist_payment_order.setVisibility(View.GONE);
+                vh.qrSweep.setVisibility(View.VISIBLE);
             }
 
             notifyDataSetChanged();
@@ -287,13 +287,13 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
         /**
          * 取消订单
          */
-        ImageView gaslist_cancel_order;
+        RelativeLayout gaslist_cancel_order;
         /**
          * 付款项（当已经完结时，会将其改为删除按钮）
          */
-        ImageView gaslist_payment_order;
+        RelativeLayout gaslist_payment_order;
         //扫码加油
-        ImageView qrSweep;
+        RelativeLayout qrSweep;
     }
 
     @Override

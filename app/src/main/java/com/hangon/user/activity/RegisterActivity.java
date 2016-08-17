@@ -24,6 +24,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,10 +63,10 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     private EditText cord;
     private TextView now;
     private Button getCord;
-    private ImageButton saveCord;
+    private RelativeLayout saveCord;
     private CleanableEditText rUserPass;
 
-    private ImageButton topbarLeft,topbarRight;
+    private ImageView topbarLeft,topbarRight;
     private TextView topbarTitle;
 
     private String iPhone;
@@ -103,10 +105,10 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         now = (TextView) findViewById(R.id.now);
         getCord = (Button) findViewById(R.id.getCord);
 
-        saveCord = (ImageButton) findViewById(R.id.saveCord);
+        saveCord = (RelativeLayout) findViewById(R.id.saveCord);
         rUserPass = (CleanableEditText) findViewById(R.id.rUserPass);
-        topbarLeft= (ImageButton) findViewById(R.id.topbar_left);
-        topbarRight= (ImageButton) findViewById(R.id.topbar_right);
+        topbarLeft= (ImageView) findViewById(R.id.topbar_left);
+        topbarRight= (ImageView) findViewById(R.id.topbar_right);
         topbarTitle= (TextView) findViewById(R.id.topbar_title);
         getCord.setOnClickListener(this);
         saveCord.setOnClickListener(this);

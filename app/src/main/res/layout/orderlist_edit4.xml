@@ -9,7 +9,10 @@
 <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="80dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    >
     <LinearLayout
         android:layout_marginLeft="0dp"
         android:layout_weight="10"

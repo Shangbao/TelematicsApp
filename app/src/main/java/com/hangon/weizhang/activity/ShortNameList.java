@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +42,7 @@ public class ShortNameList extends Activity {
         txtTitle.setText("选择车牌所在地");
 
         // 返回按钮
-        ImageButton btnBack = (ImageButton) findViewById(R.id.topbar_left);
+        ImageView btnBack = (ImageView) findViewById(R.id.topbar_left);
         btnBack.setVisibility(View.VISIBLE);
         btnBack.setOnClickListener(new OnClickListener() {
             @Override
@@ -50,7 +51,7 @@ public class ShortNameList extends Activity {
             }
         });
 
-        ImageButton rightBtn = (ImageButton) findViewById(R.id.topbar_right);
+        ImageView rightBtn = (ImageView) findViewById(R.id.topbar_right);
         rightBtn.setVisibility(View.INVISIBLE);
 
         //省份简称列表

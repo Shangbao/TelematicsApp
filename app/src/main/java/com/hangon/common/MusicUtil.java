@@ -322,7 +322,8 @@ public class MusicUtil {
     /**
      * 通过歌曲id，找到其所对应的专辑图片路径，这个方法把注释去掉就能用
      */
-    public static String getAlbumArt(Context context, int trackId) {// trackId是音乐的id
+    public static String getAlbumArt(Context context, int trackId) {
+        // trackId是音乐的id
         // String mUriTrack = "content://media/external/audio/media/#";
         // String[] projection = new String[] { "album_id" };
         // String selection = "_id = ?";
@@ -464,11 +465,6 @@ public class MusicUtil {
         MusicUtil.al_playlist = al_playlist;
     }
 
-
-
-
-
-
     //查询系统的音频库
     public static List<Music> getMusicData(Context context) {
         int i = 1;
@@ -492,7 +488,9 @@ public class MusicUtil {
             if (name.contains("(")) {
                 name = name.substring(0, name.indexOf("("));
             }
+            music.setId(cursor.getInt(cursor.getColumnIndex(BaseColumns._ID)));
             music.setName(name);
+            music.setPicture(BitmapFactory.decodeFile(getAlbumArt(context, music.getId())));
             String singer = cursor.getString(cursor
                     .getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST));
             if (singer == null || "".equals(singer)

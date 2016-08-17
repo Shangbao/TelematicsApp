@@ -47,14 +47,14 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout layout;
     private ImageView carRepair;
     private ImageView carWash;
-    ImageButton topbarLeft, topbarRight;
+    ImageView topbarLeft, topbarRight;
     TextView topbarTitle;
+    private ImageView btnByxq;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         znwhView = inflater.inflate(R.layout.fragment_znwh, container, false);
-//        Bundle bundle = getArguments();
         init();
         registerReceiver();
         return znwhView;
@@ -89,20 +89,16 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
         tvAir = (TextView) znwhView.findViewById(R.id.znwh_kqzl);
         tvExe = (TextView) znwhView.findViewById(R.id.znwh_ydzs);
         layout= (RelativeLayout) znwhView.findViewById(R.id.btn_saying);
-
-        topbarLeft= (ImageButton) znwhView.findViewById(R.id.topbar_left);
-        topbarRight= (ImageButton) znwhView.findViewById(R.id.topbar_right);
+        btnByxq= (ImageView) znwhView.findViewById(R.id.btn_byxq);
+        topbarLeft= (ImageView) znwhView.findViewById(R.id.topbar_left);
+        topbarRight= (ImageView) znwhView.findViewById(R.id.topbar_right);
         topbarTitle= (TextView) znwhView.findViewById(R.id.topbar_title);
+
         topbarLeft.setVisibility(View.GONE);
         topbarRight.setVisibility(View.GONE);
         topbarTitle.setText("智能生活");
         layout.setOnClickListener(this);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        getActivity().unregisterReceiver(receiver);
+        btnByxq.setOnClickListener(this);
     }
 
     @Override
@@ -112,7 +108,14 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), MainActivity.class);
                 startActivityForResult(intent, HomeActivity.INTENT_SAYING);
+                break;
+            case R.id.btn_byxq:
+                intent=new Intent(getActivity(), ByscActivity.class);
+                startActivityForResult(intent, HomeActivity.INTENT_SAYING);
+                break;
+
         }
+
     }
 
     private void registerReceiver(){
@@ -159,5 +162,11 @@ public class ZnwhFragment extends Fragment implements View.OnClickListener {
                 tvExe.setText(intent.getStringExtra(WeatherService.ACTION_UPDATE_EXE));
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(receiver);
     }
 }

@@ -213,7 +213,7 @@ public class GasInfoUtil implements Serializable {
     public static List<Datas> gasinfo = new ArrayList<Datas>();
     public static void VolleyGet(final Context context) {
         try {
-            String url = "http://apis.juhe.cn/oil/local?key=787c15622433cef327bc543f86862ad0&lon="
+            String url = "http://apis.juhe.cn/oil/local?key=3196d37ad7261ff8f9f7d9c9e168a166&lon="
                     + locationlongtitude
                     + "&lat="
                     + locationlatitude
@@ -233,7 +233,7 @@ public class GasInfoUtil implements Serializable {
                                     gasinfo = status.getResult().getData();
                                     Collections.sort(gasinfo);
                                 } else if (status.getResult() == null) {
-                                    Toast.makeText(context, "抱歉，查找失败",
+                                    Toast.makeText(context, "抱歉，周围加油站查找失败,请重试!",
                                             Toast.LENGTH_LONG).show();
                                 }
                             }
@@ -241,7 +241,7 @@ public class GasInfoUtil implements Serializable {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    Toast.makeText(context,"网络错误", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"网络或者服务器异常,请重试!",Toast.LENGTH_SHORT).show();
                 }
             });
             request.setTag("StringReqGet");
@@ -249,7 +249,7 @@ public class GasInfoUtil implements Serializable {
             return;
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(context,"网络错误",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"网络或者服务器异常,请重试!",Toast.LENGTH_SHORT).show();
         }
     }
     public static List<GasInfoUtil> infos = new ArrayList<GasInfoUtil>();
