@@ -26,6 +26,7 @@ import java.util.List;
 public class ProvinceList extends Activity {
 	private ListView lv_list;
 	private ListAdapter mAdapter;
+	List<ProvinceInfoJson> provinceList = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +85,16 @@ public class ProvinceList extends Activity {
 	private List<ListModel> getData2() {
 
 		List<ListModel> list = new ArrayList<ListModel>();
-		List<ProvinceInfoJson> provinceList = WeizhangClient.getAllProvince();
+		provinceList = WeizhangClient.getAllProvince();
 
 		//开通数量提示
 		TextView txtListTip = (TextView) findViewById(R.id.list_tip);
-		txtListTip.setText("全国已开通"+provinceList.size()+"个省份, 其它省将陆续开放");
+		if(provinceList == null){
+			txtListTip.setText("车首页系统正在维护中，由此带来的不便，请您谅解！");
+		}
+		else{
+			txtListTip.setText("全国已开通"+ provinceList.size() +"个省份, 其它省将陆续开放");
+		}
 
 		for (ProvinceInfoJson provinceInfoJson : provinceList) {
 			String provinceName = provinceInfoJson.getProvinceName();

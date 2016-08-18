@@ -10,6 +10,8 @@
 
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
 
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -133,7 +135,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="wEz6gff00EiMWZgjYdV9mjQyCaISnGlM" />
+            android:value="XYXGcGGAyPYUk6jWkCas3Phr6nFO1LUW" />
                     <!--导航-->
         <activity android:name="com.hangon.map.daohang.BNDemoGuideActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
@@ -176,10 +178,13 @@
         <activity android:name="com.hangon.user.activity.JudgeUserActivity"></activity>
 
         <activity android:name="com.hangon.user.activity.RegetUserActivity"></activity>
+
+        <!--主界面活动-->
         <activity
             android:name="com.hangon.home.activity.HomeActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
-            >
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:launchMode="singleTask">
+
         </activity>
 
 
@@ -305,7 +310,7 @@
         <service android:name="com.hangon.fragment.music.MusicService"></service>
         <service android:name="com.hangon.weather.WeatherService"></service>
         <service android:name="com.hangon.video.VideoService"></service>
-        <service android:name="com.hangon.push.PushService"></service>
+        <service android:name="com.hangon.push.GetLocationService"></service>
 
         <!--Jpush推送-->
         <!-- Required SDK 核心功能-->

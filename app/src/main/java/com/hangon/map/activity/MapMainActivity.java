@@ -854,7 +854,7 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
 
             @Override
             public void run() {
-                Toast.makeText(MapMainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MapMainActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -949,8 +949,8 @@ public class MapMainActivity extends Activity implements View.OnClickListener, B
             default:
                 ;
         }
-            if(distance<100){
-                Toast.makeText(getApplicationContext(),"距离较近",Toast.LENGTH_SHORT).show();
+            if(distance<50){
+                Toast.makeText(getApplicationContext(),"距离较近",Toast.LENGTH_SHORT).show();return;
             }
         if (sNode != null && eNode != null) {
             List<BNRoutePlanNode> list = new ArrayList<BNRoutePlanNode>();

@@ -198,7 +198,6 @@ public class CarMaindetails extends Activity implements OnGetPoiSearchResultList
     }
     @Override
     public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
-        Toast.makeText(getApplicationContext(), poiDetailResult.getShopHours(), Toast.LENGTH_SHORT).show();
         if (poiDetailResult == null
                 || poiDetailResult.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
             Toast.makeText(getApplicationContext(), "未找到结果", Toast.LENGTH_LONG).show();

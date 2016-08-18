@@ -5,8 +5,8 @@ package com.hangon.common;
  */
 public class Constants {
     //网络请求URL 10.163.200.124 10.59.3.167    邱勇腾讯云 123.207.136.35   学校服务器 111.116.20.180
-    public static final String HOST_IP = "111.116.20.180";
-    public static final String HOST_PORT = "";
+    public static final String HOST_IP = "10.163.200.124";
+    public static final String HOST_PORT = ":8080";
 
     //关于用户信息的网络请求地址
     public static final String LOGIN_URL = "http://" + HOST_IP + HOST_PORT+"/wind/UserLogin";

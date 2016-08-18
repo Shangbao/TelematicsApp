@@ -1,10 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/pushMessage"
+    <include android:id="@+id/topbar" layout="@layout/topbar" />
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="60dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:background="@drawable/lj_dl_005"
+        >
+
+        <ImageView
+            android:id="@+id/jjqz_userIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/lj_qz_001"
+            android:layout_centerVertical="true"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/jjqz_userIcon"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp">
+            <TextView
+                android:id="@+id/jjqz_userNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="#ffffff"
+                android:layout_toRightOf="@+id/jjqz_userIcon"
+                android:text="用户:莱奥.罗纳尔多"/>
+
+            <TextView
+                android:id="@+id/jjqz_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/jjqz_userNickname"
+                android:text="内容:I need your help"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+        <TextView
+            android:id="@+id/jjqz_phoneNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:textColor="#5c5959"
+            android:text="联系方式:1316683709"/>
+
+        <ImageView
+            android:id="@+id/jjqz_btnLXfs"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/lj_qz_002"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+        <TextView
+            android:id="@+id/jjqz_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:textColor="#5c5959"
+            android:text="求助人地址:1316683709"/>
+
+        <ImageView
+            android:id="@+id/jjqz_dzq"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/lj_qz_002"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+
 </LinearLayout>

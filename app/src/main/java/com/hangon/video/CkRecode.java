@@ -68,13 +68,11 @@ public class CkRecode extends Activity {
 			super.handleMessage(msg);
 			if (msg.what == 0) {
 				List<CarRecode> listPictures = (List<CarRecode>) msg.obj;
-//				Toast.makeText(getApplicationContext(), "handle"+listPictures.size(), 1000).show();
 				adapter = new MyAdapter(listPictures);
 				listView.setAdapter(adapter);
 			}
 			if (msg.what == 1) {
 				List<HashMap<String, Object>> listPictures = (List<HashMap<String, Object>>) msg.obj;
-//				Toast.makeText(getApplicationContext(), "handle"+listPictures.size(), 1000).show();
 				adapters = new MyAdapters(listPictures);
 				listViews.setAdapter(adapters);
 				DataChange();
@@ -152,7 +150,6 @@ public class CkRecode extends Activity {
 		listViews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(getApplicationContext(),"cccc",Toast.LENGTH_SHORT).show();
 				//取得ViewHorder对象，
 				ViewHolder holder = (ViewHolder) view.getTag();
 				holder.deleteRecode.toggle();
@@ -205,7 +202,6 @@ public class CkRecode extends Activity {
 					for(int i=0;i<mapList.size();i++){
 						if(mapList.get(i).get("flag").equals("true")){
 							state=true;
-							Toast.makeText(getApplicationContext(), mapList.get(i).get("path").toString(), Toast.LENGTH_SHORT).show();
 							File file=new File(mapList.get(i).get("path").toString());
 							file.delete();
 						}
@@ -292,9 +288,6 @@ public class CkRecode extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 									int arg2, long arg3) {
 				playVideo(listPictures.get(arg2).getPath());
-				//loadVaule();
-				Toast.makeText(getApplicationContext(),listPictures.get(arg2).getPath() , Toast.LENGTH_SHORT).show();
-//				Log.e("path", listPictures.get(arg2).getPath());
 			}
 		});
 		Message msg = new Message();

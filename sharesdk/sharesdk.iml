@@ -89,14 +89,14 @@
     <orderEntry type="library" exported="" name="ShareSDK-SinaWeibo-2.7.1" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-Wechat-Favorite-2.7.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.2.1" level="project" />
-    <orderEntry type="library" exported="" name="ShareSDK-Wechat-Moments-2.7.1" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-Wechat-Core-2.7.1" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-Wechat-Moments-2.7.1" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-Core-2.7.1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.2.1" level="project" />
     <orderEntry type="library" exported="" name="animated-vector-drawable-23.2.1" level="project" />
     <orderEntry type="library" exported="" name="support-vector-drawable-23.2.1" level="project" />
-    <orderEntry type="library" exported="" name="ShareSDK-QZone-2.7.1" level="project" />
     <orderEntry type="library" exported="" name="MobTools-2016.0406.1915" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-QZone-2.7.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.2.1" level="project" />
   </component>
 </module>

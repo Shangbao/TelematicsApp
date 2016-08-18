@@ -245,18 +245,24 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                                 }
                             });
                         }else{
+
                             View view = LayoutInflater.from(getContext()).inflate(R.layout.qrcode, null);
                             TextView cusname = (TextView) view.findViewById(R.id.qr_cusname);
                             TextView gastype = (TextView) view.findViewById(R.id.qr_gastype);
                             TextView gasSumPrice = (TextView) view.findViewById(R.id.qr_gassumprice);
                             cusname.setText(payOrderList.get(position).getCusName());
                             gastype.setText(payOrderList.get(position).getGasType());
+                            TextView gasState = (TextView) view.findViewById(R.id.qr_state);
                             gasSumPrice.setText(payOrderList.get(position).getGasSumPrice());
                             ImageView QR = (ImageView) view.findViewById(R.id.qrcode_img);
-                            QR.setImageResource(R.drawable.ic_launcher);
+                            String URL = "htttp://" + Constants.HOST_IP + ":8080/wind/UserLogin?orderId=" + payOrderList.get(position).getOrderId() + "&orderState=" + payOrderList.get(position).getOrderState();
+                            Bitmap QRcode = EncodingUtils.createQRCode(URL, 500, 500, null);
+                            gasState.setText("已付款");
+                            QR.setImageBitmap(QRcode);
                             AlertDialog.Builder builder2 = new AlertDialog.Builder(getActivity());
                             builder2.setView(view);
                             builder2.create().show();
+
                             break;
                         }}
             }

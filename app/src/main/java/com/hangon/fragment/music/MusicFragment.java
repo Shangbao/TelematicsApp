@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,6 +119,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
 
     //初始化组件
     private void init() {
+
         songList = (ListView) musicView.findViewById(R.id.songList);
         btnPlayModel = (RelativeLayout) musicView.findViewById(R.id.btnPlayModel);
         btnPrevious = (ImageButton) musicView.findViewById(R.id.btnPrevious);
@@ -158,6 +160,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
             }
         });
     }
+
+
 
     private void registerReceiver() {
         progressReceiver = new ProgressReceiver();
@@ -329,4 +333,5 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
             }
         }
     }
+
 }

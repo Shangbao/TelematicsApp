@@ -143,7 +143,7 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
             vh.list_gastype.setText(allOrderList.get(position).getGasType());
             if (allOrderList.get(position).getOrderState() == 2) {
                 // vh.list_gasorder_status.setText("已加油");
-                Toast.makeText(getActivity(),"aaaaa",Toast.LENGTH_SHORT).show();
+
                 vh.gaslist_cancel_order.setVisibility(View.GONE);
                 vh.gaslist_payment_order.setVisibility(View.GONE);
 

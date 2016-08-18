@@ -56,8 +56,13 @@ public class ZnwhService extends Service {
     public IBinder onBind(Intent intent) {
         admain = new NotificationAdmain(this,NOTIFICATION_ID);
         znwhIntent = new Intent(this, HomeActivity.class);
+        intent.putExtra("wh", "3");
         myBinder = new MyBinder();
         return myBinder;
+    }
+
+    private boolean isTop(){
+        return false;
     }
 
     public void reflush(ZnwhInfoVO znwhInfoVO){
@@ -170,7 +175,7 @@ public class ZnwhService extends Service {
                     getZnwhInfo();
                         updateZnwhInfo();
                 }
-            }, 0, 2000);
+            }, 0, 5000);
         }
     }
 }
