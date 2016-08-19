@@ -114,7 +114,7 @@ public class PublishedActivity extends Activity {
         activity_selectimg_send.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
-            if(publishContent.getText().toString().trim().equals("")&&Bimp.drr.size()!=0){
+            if(publishContent.getText().toString().trim().equals("")){
                 Toast.makeText(getApplicationContext(),"请输入发表内容",Toast.LENGTH_SHORT).show();
                 return;
             }else{

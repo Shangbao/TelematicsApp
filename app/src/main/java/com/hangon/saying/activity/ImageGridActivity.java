@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.example.fd.ourapplication.R;
+import com.hangon.saying.viewPager.MainActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -96,10 +98,10 @@ public class ImageGridActivity extends Activity {
 		cancel_image_grid.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent=new Intent();
-				intent.setClass(ImageGridActivity.this,TestPicActivity.class);
+				Intent intent = new Intent();
+				intent.setClass(ImageGridActivity.this, TestPicActivity.class);
 				startActivity(intent);
-             finish();				
+				finish();
 			}
 		});
 		gridView = (GridView) findViewById(R.id.gridview);
@@ -117,12 +119,23 @@ public class ImageGridActivity extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+									int position, long id) {
 
 				adapter.notifyDataSetChanged();
 			}
 
 		});
 
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode==KeyEvent.KEYCODE_BACK&&event.getRepeatCount()==0){
+			Intent intent = new Intent();
+			intent.setClass(ImageGridActivity.this, TestPicActivity.class);
+			startActivity(intent);
+			finish();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }
