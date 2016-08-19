@@ -98,7 +98,7 @@ public class HomeActivity extends Activity implements View.OnClickListener,Music
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ShareSDK.initSDK(this);
+        ShareSDK.initSDK(HomeActivity.this);
         weatherIntent = new Intent(this, WeatherService.class);
         pushIntent = new Intent(this, GetLocationService.class);
         bindService(weatherIntent, conn, Service.BIND_AUTO_CREATE);

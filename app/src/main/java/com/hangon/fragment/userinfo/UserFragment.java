@@ -304,7 +304,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.btn_share:
-                ShareSDK.initSDK(getActivity());
                 OnekeyShare oks = new OnekeyShare();
                 //关闭sso授权
                 oks.disableSSOWhenAuthorize();

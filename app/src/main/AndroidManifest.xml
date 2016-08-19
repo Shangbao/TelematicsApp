@@ -10,6 +10,13 @@
 
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
 
+    <!--shareSDK所需权限-->
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <!-- 蓝牙分享所需的权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -118,37 +125,47 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="XYXGcGGAyPYUk6jWkCas3Phr6nFO1LUW" />
+
+        <!--导航-->
+        <activity android:name="com.hangon.map.daohang.BNDemoGuideActivity"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            android:label="@string/title_route_guide_demo">
+        </activity>
+
+        <!--一键分享-->
         <activity
             android:name="com.mob.tools.MobUIShell"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize">
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <!-- QQ和QQ空间分享 QQ登录的回调必须要配置的 -->
             <intent-filter>
-                <data android:scheme="tencent1105280089" />
+                <data android:scheme="tencent100371282" />
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <!-- 新浪微博客户端分享回调必须配置 -->
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="XYXGcGGAyPYUk6jWkCas3Phr6nFO1LUW" />
-                    <!--导航-->
-        <activity android:name="com.hangon.map.daohang.BNDemoGuideActivity"
-            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
-            android:label="@string/title_route_guide_demo"
-            >
-        </activity>
-        <!--微信分享回调-->
+        <!--微信分享回调 -->
         <activity
-            android:name="com.hangon.wxapi.WXEntryActivity"
+            android:name="cn.sharesdk.demo.wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:screenOrientation="portrait" />
+
+
+
         <activity android:name="com.hangon.video.CkRecode"></activity>
         <activity
             android:name="com.hangon.user.activity.WelcomeActivity"
@@ -159,7 +176,7 @@
             </intent-filter>
         </activity>
 
-        
+
         <activity android:name="com.hangon.maintenace.CarMiantenance"></activity>
         <activity android:name="com.hangon.maintenace.CarMaindetails"></activity>
         <activity

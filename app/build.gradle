@@ -35,10 +35,8 @@ dependencies {
     compile name: 'SMSSDK-2.0.2', ext: 'aar'
     compile name: 'SMSSDKGUI-2.0.2', ext: 'aar'
     compile project(':libzxing')
-    compile project(':onekeyshare')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile files('libs/apache-mime4j-0.6.jar')
-    compile project(':sharesdk')
     compile 'com.kyleduo.switchbutton:library:1.4.1'
     compile files('libs/baidumapapi_base_v4_0_0.jar')
     compile files('libs/baidumapapi_cloud_v4_0_0.jar')
