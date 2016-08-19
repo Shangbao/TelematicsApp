@@ -111,7 +111,7 @@
                 android:src="@drawable/zc_10" />
 
             <EditText
-                android:digits="1230456789"
+                android:digits="123045678988x"
                 android:id="@+id/cord"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"

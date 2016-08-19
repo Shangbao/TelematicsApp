@@ -62,6 +62,7 @@
                 android:layout_height="match_parent"/>
 
                 <LinearLayout
+                    android:visibility="gone"
                  android:layout_marginRight="10dp"
                     android:id="@+id/all_selected_list"
                     android:layout_alignParentRight="true"

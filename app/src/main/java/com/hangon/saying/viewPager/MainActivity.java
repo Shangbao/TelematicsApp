@@ -22,6 +22,7 @@ import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -47,6 +48,7 @@ import com.hangon.common.UserUtil;
 import com.hangon.common.VolleyInterface;
 import com.hangon.common.VolleyRequest;
 import com.hangon.order.util.FragmentViewPagerAdapter;
+import com.hangon.saying.activity.Bimp;
 import com.hangon.saying.activity.PublishedActivity;
 import com.hangon.saying.util.Location;
 import com.hangon.saying.util.MenuHelper;
@@ -472,7 +474,17 @@ public class MainActivity extends FragmentActivity implements OnMenuClick {
             }
         });
     }
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK&&event.getRepeatCount()==0){
+            Intent intent = new Intent();
+            intent.putExtra("id", 3);
+            setResult(RESULT_OK, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
     @Override
     protected void onStart() {
         super.onStart();
