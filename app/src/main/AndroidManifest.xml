@@ -304,15 +304,14 @@
         <activity
             android:name="com.hangon.saying.activity.PublishedActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
             android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity
             android:name="com.hangon.saying.activity.PhotoActivity"
             android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity android:name="com.hangon.saying.util.TestSensorActivity"></activity>
         <activity android:name="com.hangon.saying.util.ViewPagerTestActivity"></activity>
-        <activity android:name="com.hangon.saying.viewPager.MainActivity">
-
-        </activity>
+        <activity android:name="com.hangon.saying.viewPager.MainActivity"></activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

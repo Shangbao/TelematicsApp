@@ -110,8 +110,8 @@
     <orderEntry type="library" exported="" name="baidumapapi_v2_4_1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.2.1" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-Wechat-Core-2.7.6" level="project" />
-    <orderEntry type="library" exported="" name="baidumapapi_cloud_v4_0_0" level="project" />
     <orderEntry type="library" exported="" name="baidumapapi_util_v4_0_0" level="project" />
+    <orderEntry type="library" exported="" name="baidumapapi_cloud_v4_0_0" level="project" />
     <orderEntry type="library" exported="" name="BaiduLBS_Android" level="project" />
     <orderEntry type="library" exported="" name="baidumapapi_search_v4_0_0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.2.1" level="project" />
@@ -120,17 +120,17 @@
     <orderEntry type="library" exported="" name="appcompat-v7-23.2.1" level="project" />
     <orderEntry type="library" exported="" name="baidumapapi_v3_5_0" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-QQ-2.7.6" level="project" />
-    <orderEntry type="library" exported="" name="ShareSDK-Wechat-Moments-2.7.6" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-QZone-2.7.6" level="project" />
     <orderEntry type="library" exported="" name="weizhang_sdk" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-Wechat-Moments-2.7.6" level="project" />
     <orderEntry type="library" exported="" name="locSDK_5.2" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-ShortMessage-2.7.6" level="project" />
     <orderEntry type="library" exported="" name="BaiduNaviSDK_3.1.0" level="project" />
     <orderEntry type="library" exported="" name="design-23.2.1" level="project" />
     <orderEntry type="library" exported="" name="SMSSDK-2.0.2-" level="project" />
     <orderEntry type="library" exported="" name="play-services-basement-8.1.0" level="project" />
-    <orderEntry type="library" exported="" name="baidumapapi_radar_v4_0_0" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-SinaWeibo-2.7.6" level="project" />
+    <orderEntry type="library" exported="" name="baidumapapi_radar_v4_0_0" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-Wechat-Favorite-2.7.6" level="project" />
     <orderEntry type="library" exported="" name="baidumapapi_map_v4_0_0" level="project" />
     <orderEntry type="library" exported="" name="apache-mime4j-0.6" level="project" />

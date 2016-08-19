@@ -425,9 +425,13 @@ public class PublishedActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==KeyEvent.KEYCODE_BACK&&event.getRepeatCount()==0){
+
             Intent intent=new Intent();
             intent.setClass(PublishedActivity.this,MainActivity.class);
             startActivity(intent);
+            Bimp.bmp.clear();
+            Bimp.max=0;
+            Bimp.drr.clear();
             finish();
             return true;
         }

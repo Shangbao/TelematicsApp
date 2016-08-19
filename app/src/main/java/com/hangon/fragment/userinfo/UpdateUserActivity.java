@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public class UpdateUserActivity extends Activity {
     EditText uNickname;
-    EditText uSex;
+    TextView uSex;
     EditText uAge;
     EditText uDriverNum;
 
@@ -56,7 +56,19 @@ public class UpdateUserActivity extends Activity {
     //初始化组件
     private void init() {
         uNickname = (EditText) findViewById(R.id.uNickname);
-        uSex = (EditText) findViewById(R.id.uSex);
+        uSex = (TextView) findViewById(R.id.uSex);
+        uSex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(uSex.getText().toString().trim().equals("男")){
+                uSex.setText("女");}
+            else{
+                    uSex.setText("男");
+                }
+
+            }
+
+        });
         uAge = (EditText) findViewById(R.id.uAge);
         uDriverNum = (EditText) findViewById(R.id.uDriverNum);
         topbarLeft = (ImageView) findViewById(R.id.topbar_left);

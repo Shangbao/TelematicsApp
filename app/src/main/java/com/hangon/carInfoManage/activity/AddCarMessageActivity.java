@@ -136,6 +136,49 @@ public class AddCarMessageActivity extends Activity {
         seat_count_edit = (EditText) findViewById(R.id.seat_count);
 
         car_mileage_edit = (EditText) findViewById(R.id.car_mileage);
+        car_mileage_edit.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                //消除小数点后超过两位的字符​
+                if (s.toString().contains(".")) {
+                    if (s.length() - 1 - s.toString().indexOf(".") > 2) {
+                        s = s.toString().subSequence(0,
+                                s.toString().indexOf(".") + 3);
+                        car_mileage_edit.setText(s);
+                        car_mileage_edit.setSelection(s.length());
+                    }
+                }
+                //输入的第一个字符为小数点时，自动在小数点前面不一个零
+                if (s.toString().trim().substring(0).equals(".")) {
+                    s = "0" + s;
+                    car_mileage_edit.setText(s);
+                    car_mileage_edit.setSelection(2);
+                }
+                //如果输入的第一个和第二个字符都为0，则消除第二个0
+                if (s.toString().startsWith("0")
+                        && s.toString().trim().length() > 1) {
+                    if (!s.toString().substring(1, 2).equals(".")) {
+                        car_mileage_edit.setText(s.subSequence(0, 1));
+                        car_mileage_edit.setSelection(1);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+        });
         car_gas_edit = (EditText) findViewById(R.id.car_gas);
         engine_spinner = (Spinner) findViewById(R.id.engine_is_good);
         trans_spinner = (Spinner) findViewById(R.id.trans_is_good);

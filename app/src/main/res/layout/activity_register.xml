@@ -46,6 +46,7 @@
                 android:layout_toRightOf="@+id/img12"
                 android:hint="请输入您要注册的手机号"
                 android:maxLength="11"
+                android:digits="0123456789"
                 android:numeric="integer"
                 android:shadowColor="#ffffff"
                 android:textColor="#ffffff"
@@ -110,6 +111,7 @@
                 android:src="@drawable/zc_10" />
 
             <EditText
+                android:digits="1230456789"
                 android:id="@+id/cord"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
