@@ -244,8 +244,8 @@ public class GasSiteDetailsActivity extends Activity {
 
 
                 //Yes or NO
-                ImageView orderYes = (ImageView) alertView.findViewById(R.id.appoint_order_yes);
-                ImageView orderNo = (ImageView) alertView.findViewById(R.id.appoint_order_no);
+                TextView orderYes = (TextView) alertView.findViewById(R.id.appoint_order_yes);
+                TextView orderNo = (TextView) alertView.findViewById(R.id.appoint_order_no);
                 appointGasSingleprice = (TextView) alertView.findViewById(R.id.appoint_gassingleprice);
                 appointGasSingleprice.setText(GasInfoUtil.getGasinfo().get(position1).getGastprice().get(position).getPrice());
                 appointGastype.setText(GasInfoUtil.getGasinfo().get(position1).getGastprice().get(position).getName());

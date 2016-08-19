@@ -149,6 +149,7 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                 vh.gaslist_payment_order.setVisibility(View.GONE);//删除订单
                 vh.qrSweep.setVisibility(View.VISIBLE);
                 vh.qrSweepText.setText("删除订单");
+                vh.qrSweep.setBackgroundResource(R.drawable.order_list_001);
             }
             if ((payOrderList.get(position).getOrderState() == 1)) {
                 // vh.list_gasorder_status.setText("已支付未加油");
@@ -175,41 +176,41 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                 switch (v.getId()) {
                     case R.id.gaslist_payment_order:
 
-                        if (payOrderList.get(position).getOrderState() == 1) {
-                            String URL = "htttp://" + Constants.HOST_IP + ":8080/wind/UserLogin?orderId=" + payOrderList.get(position).getOrderId() + "&orderState=" + payOrderList.get(position).getOrderState();
-                            Bitmap QRcode = EncodingUtils.createQRCode(URL, 500, 500, null);
-                            View view = LayoutInflater.from(getContext()).inflate(R.layout.qrcode, null);
-                            TextView cusname = (TextView) view.findViewById(R.id.qr_cusname);
-                            TextView gastype = (TextView) view.findViewById(R.id.qr_gastype);
-                            TextView gasSumPrice = (TextView) view.findViewById(R.id.qr_gassumprice);
-                            TextView gasState = (TextView) view.findViewById(R.id.qr_state);
-                            cusname.setText(payOrderList.get(position).getCusName());
-                            gastype.setText(payOrderList.get(position).getGasType());
-                            gasSumPrice.setText(payOrderList.get(position).getGasSumPrice());
-                            ImageView QR = (ImageView) view.findViewById(R.id.qrcode_img);
-
-                            String tradState = "";
-                            if (payOrderList.get(position).getOrderState() == 2) {
-                                tradState = "已加油";
-                            } else if (payOrderList.get(position).getOrderState() == 1) {
-                                tradState = "已支付未加油";
-                            } else if (payOrderList.get(position).getOrderState() == 0) {
-                                tradState = "未支付";
-                            }
-                            gasState.setText(tradState);
-
-                            QR.setImageBitmap(QRcode);
-                            AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                            builder1.setView(view);
-                            builder1.create().show();
-                        }
+//                        if (payOrderList.get(position).getOrderState() == 1) {
+//                            String URL = "htttp://" + Constants.HOST_IP + ":8080/wind/UserLogin?orderId=" + payOrderList.get(position).getOrderId() + "&orderState=" + payOrderList.get(position).getOrderState();
+//                            Bitmap QRcode = EncodingUtils.createQRCode(URL, 500, 500, null);
+//                            View view = LayoutInflater.from(getContext()).inflate(R.layout.qrcode, null);
+//                            TextView cusname = (TextView) view.findViewById(R.id.qr_cusname);
+//                            TextView gastype = (TextView) view.findViewById(R.id.qr_gastype);
+//                            TextView gasSumPrice = (TextView) view.findViewById(R.id.qr_gassumprice);
+//                            TextView gasState = (TextView) view.findViewById(R.id.qr_state);
+//                            cusname.setText(payOrderList.get(position).getCusName());
+//                            gastype.setText(payOrderList.get(position).getGasType());
+//                            gasSumPrice.setText(payOrderList.get(position).getGasSumPrice());
+//                            ImageView QR = (ImageView) view.findViewById(R.id.qrcode_img);
+//
+//                            String tradState = "";
+//                            if (payOrderList.get(position).getOrderState() == 2) {
+//                                tradState = "已加油";
+//                            } else if (payOrderList.get(position).getOrderState() == 1) {
+//                                tradState = "已支付未加油";
+//                            } else if (payOrderList.get(position).getOrderState() == 0) {
+//                                tradState = "未支付";
+//                            }
+//                            gasState.setText(tradState);
+//
+//                            QR.setImageBitmap(QRcode);
+//                            AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+//                            builder1.setView(view);
+//                            builder1.create().show();
+//                        }
                         break;
 
                     case R.id.list_sweep_code:
                         if (payOrderList.get(position).getOrderState() == 2) {
                             View cancelView=LayoutInflater.from(getActivity()).inflate(R.layout.order_alert,null);
-                            ImageView cancelYes=(ImageView)cancelView.findViewById(R.id.calcel_order_yes);
-                            ImageView cancelNo=(ImageView)cancelView.findViewById(R.id.calcel_order_no);
+                            TextView cancelYes=(TextView)cancelView.findViewById(R.id.calcel_order_yes);
+                            TextView cancelNo=(TextView)cancelView.findViewById(R.id.calcel_order_no);
                             TextView alertContent=(TextView)cancelView.findViewById(R.id.alert_content);
 
                             dialog=new Dialog(getActivity());

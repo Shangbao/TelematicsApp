@@ -163,8 +163,8 @@ public class NotPay extends Fragment implements BaseFragmentPagerAdapter.UpdateA
 
                     case R.id.gaslist_cancel_order:
                         View cancelView=LayoutInflater.from(getActivity()).inflate(R.layout.order_alert,null);
-                        ImageView cancelYes=(ImageView)cancelView.findViewById(R.id.calcel_order_yes);
-                        ImageView cancelNo=(ImageView)cancelView.findViewById(R.id.calcel_order_no);
+                        TextView cancelYes=(TextView)cancelView.findViewById(R.id.calcel_order_yes);
+                        TextView cancelNo=(TextView)cancelView.findViewById(R.id.calcel_order_no);
                         TextView alertContent=(TextView)cancelView.findViewById(R.id.alert_content);
                         dialog=new Dialog(getActivity());
                         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());

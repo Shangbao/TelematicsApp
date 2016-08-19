@@ -33,6 +33,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.UpdateAble {
     Dialog dialog;
     //获取订单数据
@@ -149,6 +151,7 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
 
                 vh.qrSweep.setVisibility(View.VISIBLE);
                 vh.qrSweepText.setText("删除订单");
+                vh.qrSweep.setBackgroundResource(R.drawable.order_list_001);
 
             } else if (allOrderList.get(position).getOrderState() == 1) {
                 // vh.list_gasorder_status.setText("已支付未加油");
@@ -179,8 +182,8 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                 switch (v.getId()) {
                     case R.id.gaslist_cancel_order:
                         View cancelView=LayoutInflater.from(getActivity()).inflate(R.layout.order_alert,null);
-                        ImageView cancelYes=(ImageView)cancelView.findViewById(R.id.calcel_order_yes);
-                        ImageView cancelNo=(ImageView)cancelView.findViewById(R.id.calcel_order_no);
+                        TextView cancelYes=(TextView)cancelView.findViewById(R.id.calcel_order_yes);
+                        TextView cancelNo=(TextView)cancelView.findViewById(R.id.calcel_order_no);
                         TextView alertContent=(TextView)cancelView.findViewById(R.id.alert_content);
                         dialog=new Dialog(getActivity());
                         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
@@ -253,8 +256,8 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                     case R.id.list_sweep_code:
                         if(allOrderList.get(position).getOrderState() == 2){
                             View cancelView1=LayoutInflater.from(getActivity()).inflate(R.layout.order_alert,null);
-                            ImageView cancelYes1=(ImageView)cancelView1.findViewById(R.id.calcel_order_yes);
-                            ImageView cancelNo1=(ImageView)cancelView1.findViewById(R.id.calcel_order_no);
+                            TextView cancelYes1=(TextView)cancelView1.findViewById(R.id.calcel_order_yes);
+                            TextView cancelNo1=(TextView)cancelView1.findViewById(R.id.calcel_order_no);
                             TextView alertContent1=(TextView)cancelView1.findViewById(R.id.alert_content);
                             dialog=new Dialog(getActivity());
                             AlertDialog.Builder builder1=new AlertDialog.Builder(getActivity());

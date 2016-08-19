@@ -22,18 +22,27 @@
         android:layout_height="wrap_content"
         android:paddingLeft="60dp"
         android:paddingRight="60dp">
-        <ImageView
+        <TextView
+            android:text="是"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/order_list_001"
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:src="@drawable/ddgl_07"
             android:layout_alignParentLeft="true"
             android:id="@+id/calcel_order_yes"
             />
 
-        <ImageView
+        <TextView
+            android:text="否"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:src="@drawable/ddgl_09"
+
+            android:background="@drawable/order_list_002"
             android:layout_alignParentRight="true"
             android:id="@+id/calcel_order_no"
             />

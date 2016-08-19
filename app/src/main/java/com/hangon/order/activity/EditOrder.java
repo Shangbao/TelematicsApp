@@ -140,8 +140,8 @@ public class EditOrder extends Activity {
                 }
                 if(list!=null||list.size()!=0){
                     View cancelView1=LayoutInflater.from(EditOrder.this).inflate(R.layout.order_alert,null);
-                    ImageView cancelYes1=(ImageView)cancelView1.findViewById(R.id.calcel_order_yes);
-                    ImageView cancelNo1=(ImageView)cancelView1.findViewById(R.id.calcel_order_no);
+                    TextView cancelYes1=(TextView)cancelView1.findViewById(R.id.calcel_order_yes);
+                    TextView cancelNo1=(TextView)cancelView1.findViewById(R.id.calcel_order_no);
                     TextView alertContent1=(TextView)cancelView1.findViewById(R.id.alert_content);
                     dialog=new Dialog(EditOrder.this);
                     AlertDialog.Builder builder=new AlertDialog.Builder(EditOrder.this);
