@@ -159,6 +159,7 @@ public class AllOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                 vh.gaslist_payment_order.setVisibility(View.GONE);
                 vh.qrSweep.setVisibility(View.VISIBLE);
                 vh.qrSweepText.setText("扫码加油");
+                vh.qrSweep.setBackgroundResource(R.drawable.lj_jy_004);
             } else if (allOrderList.get(position).getOrderState() == 0) {
                 //  vh.list_gasorder_status.setText("未支付");
                 vh.gaslist_cancel_order.setVisibility(View.VISIBLE);

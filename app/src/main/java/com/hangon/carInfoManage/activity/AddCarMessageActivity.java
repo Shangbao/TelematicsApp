@@ -145,6 +145,7 @@ public class AddCarMessageActivity extends Activity {
         topbarRight = (ImageView) findViewById(R.id.topbar_right);
         topbarTitle = (TextView) findViewById(R.id.topbar_title);
         topbarTitle.setText("添加车辆信息");
+        topbarRight.setImageResource(R.drawable.xcdxq_001);
 
         topbarLeft.setOnClickListener(new View.OnClickListener() {
             @Override

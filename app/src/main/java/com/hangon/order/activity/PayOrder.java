@@ -157,6 +157,7 @@ public class PayOrder extends Fragment implements BaseFragmentPagerAdapter.Updat
                 vh.gaslist_payment_order.setVisibility(View.GONE);//删除订单
                 vh.qrSweep.setVisibility(View.VISIBLE);
                 vh.qrSweepText.setText("扫码加油");
+                vh.qrSweep.setBackgroundResource(R.drawable.lj_jy_004);
             }
 
             notifyDataSetChanged();

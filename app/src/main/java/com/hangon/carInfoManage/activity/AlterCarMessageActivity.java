@@ -119,6 +119,8 @@ public class AlterCarMessageActivity extends Activity {
         topbarLeft = (ImageView) findViewById(R.id.topbar_left);
         topbarRight = (ImageView) findViewById(R.id.topbar_right);
         topbarTitle = (TextView) findViewById(R.id.topbar_title);
+        topbarRight.setImageResource(R.drawable.xcdxq_001);
+        topbarTitle.setText("修改车辆信息");
 
     }
 
