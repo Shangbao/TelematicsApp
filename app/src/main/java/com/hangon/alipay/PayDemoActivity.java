@@ -19,6 +19,7 @@ import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -354,6 +355,20 @@ public class PayDemoActivity extends FragmentActivity {
                 Toast.makeText(PayDemoActivity.this, "网络异常，请重新支付", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    //返回键监听
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+// 按下键盘上返回按钮
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent=new Intent();
+            intent.setClass(PayDemoActivity.this,MainOrderActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
     class wait extends TimerTask {
 
