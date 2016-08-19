@@ -35,10 +35,12 @@ public class ZnwhService extends Service {
 
     NotificationAdmain admain;
     Intent znwhIntent;
+    Intent tagIntent;
     ZnwhInfoVO znwhInfoVO;//智能维护信息;
     static int NOTIFICATION_ID = 13565400;
 
     public static final String ACTION_UPDATE_ZNWH = "com.hangon.fragment.order.ZnwhService";
+    public static final String ACTION_TAG_CHANGE = "com.hangon.home.activity.HomeActivity";
 
     private Thread thread;
 
@@ -56,13 +58,14 @@ public class ZnwhService extends Service {
     public IBinder onBind(Intent intent) {
         admain = new NotificationAdmain(this,NOTIFICATION_ID);
         znwhIntent = new Intent(this, HomeActivity.class);
-        intent.putExtra("wh", "3");
         myBinder = new MyBinder();
         return myBinder;
     }
 
-    private boolean isTop(){
-        return false;
+    //初始化切换界面intent
+    public void initChangeTag(){
+        tagIntent = new Intent();
+        tagIntent.setAction(ACTION_UPDATE_ZNWH);
     }
 
     public void reflush(ZnwhInfoVO znwhInfoVO){
@@ -173,7 +176,7 @@ public class ZnwhService extends Service {
                 @Override
                 public void run() {
                     getZnwhInfo();
-                        updateZnwhInfo();
+                    updateZnwhInfo();
                 }
             }, 0, 5000);
         }

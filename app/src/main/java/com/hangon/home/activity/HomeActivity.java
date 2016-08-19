@@ -3,9 +3,13 @@ package com.hangon.home.activity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -351,6 +355,12 @@ public class HomeActivity extends Activity implements View.OnClickListener,Music
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        getTab(3);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         UserUtil.instance(HomeActivity.this);
@@ -443,8 +453,7 @@ public class HomeActivity extends Activity implements View.OnClickListener,Music
             getTab(position);
         }
     }
-
-    /**
+        /**
      * 把登陆状态变为登陆状态
      */
     private void changeLoginFlag(int loginFlag,int userId){

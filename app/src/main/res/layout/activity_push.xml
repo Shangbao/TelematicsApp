@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/pushs"
     >
 
     <include android:id="@+id/topbar" layout="@layout/topbar" />
@@ -97,6 +96,11 @@
             android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/pushs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+    </LinearLayout>
 
 </LinearLayout>
