@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/pushs"
+    >
 
     <include android:id="@+id/topbar" layout="@layout/topbar" />
     <RelativeLayout
@@ -65,7 +67,7 @@
             android:id="@+id/jjqz_btnLXfs"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/lj_qz_002"
+            android:src="@drawable/phone"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"/>
 

@@ -1,12 +1,21 @@
 package com.hangon.push;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +53,7 @@ public class PushActivity extends Activity implements View.OnClickListener {
     private String nickName;       //求助人昵称
     private String userIconUrl;   //求助人头像
     private String content;        //求助人求助内容
-
+    private LinearLayout pushs;
    ImageView leftTopbar,rightTopbar;//标题栏的左右按钮
    TextView titleTopbar;//标题栏的内容
 
@@ -92,17 +101,59 @@ public class PushActivity extends Activity implements View.OnClickListener {
             break;
 
             case R.id.jjqz_phoneNum:
-
+                new PopupWindows(PushActivity.this, pushs);
                 break;
 
             case R.id.topbar_left:
                 this.finish();
-                break;
+            break;
         }
     }
 
+    public class PopupWindows extends PopupWindow {
+        public PopupWindows(Context mContext, View parent) {
+            View view = View
+                    .inflate(mContext, R.layout.carmain_detailse_pop, null);
+            view.startAnimation(AnimationUtils.loadAnimation(mContext,
+                    R.anim.fade_ins));
+            LinearLayout ll_popup = (LinearLayout) view
+                    .findViewById(R.id.car_popup);
+            ll_popup.startAnimation(AnimationUtils.loadAnimation(mContext,
+                    R.anim.push_bottom_in_2));
+
+            setWidth(ViewGroup.LayoutParams.FILL_PARENT);
+            setHeight(ViewGroup.LayoutParams.FILL_PARENT);
+            setBackgroundDrawable(new BitmapDrawable());
+            setFocusable(true);
+            setOutsideTouchable(true);
+            setContentView(view);
+            showAtLocation(parent, Gravity.BOTTOM, 0, 0);
+            update();
+
+            Button bt2 = (Button) view
+                    .findViewById(R.id.item_popupwindows_hujio);
+            Button bt3 = (Button) view
+                    .findViewById(R.id.item_popupwindows_cancel);
+
+            bt2.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + jjqzPhoneNum));
+                    startActivity(intent);
+                    dismiss();
+                    finish();
+                }
+            });
+            bt3.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    dismiss();
+                }
+            });
+
+        }
+    }
     //组件初始化
     private void init(){
+        pushs=(LinearLayout)findViewById(R.id.pushs);
         leftTopbar= (ImageView) findViewById(R.id.topbar_left);
         rightTopbar= (ImageView) findViewById(R.id.topbar_right);
         titleTopbar= (TextView) findViewById(R.id.topbar_title);
