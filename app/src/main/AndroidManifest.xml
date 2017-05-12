@@ -127,7 +127,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="XYXGcGGAyPYUk6jWkCas3Phr6nFO1LUW" />
+            android:value="iq9EY5eSU0Hm8sGBZbizDXFKWysfgbyW" />
 
         <!--导航-->
         <activity android:name="com.hangon.map.daohang.BNDemoGuideActivity"
